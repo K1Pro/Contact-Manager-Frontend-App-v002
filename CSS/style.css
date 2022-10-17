@@ -1,0 +1,26 @@
+@media only screen and (min-width: 768px) {
+  .bartkaFullCol {
+    margin-top: -50vh;
+    height: 100vh;
+  }
+  .bartkaHalfCol {
+    height: 50vh;
+  }
+  .calendarHeaderRow {
+    height: 3vh;
+  }
+  .calendarRow {
+    height: 11.75vh;
+  }
+  .calendarSatSunRow {
+    height: 5.875vh;
+  }
+}
+
+.bartkaEmptyCol {
+  height: 0vh;
+}
+
+.day-hover:hover {
+  background-color: #ccffff;
+}
