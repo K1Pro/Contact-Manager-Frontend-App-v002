@@ -1,3 +1,27 @@
+.bartkaEmptyCol {
+  height: 0vh;
+}
+.calendarRow {
+  height: 15vh;
+}
+.calendarSatSunRow {
+  height: 7.5vh;
+}
+.day-hover:hover {
+  background-color: #ccffff;
+}
+* {
+  border-radius: 0 !important;
+}
+.form-control::-moz-placeholder {
+  color: red;
+  opacity: 0.6;
+}
+.form-control::placeholder {
+  color: red;
+  opacity: 0.6;
+}
+
 @media only screen and (min-width: 768px) {
   .bartkaFullCol {
     margin-top: -50vh;
@@ -15,25 +39,4 @@
   .calendarSatSunRow {
     height: 5.875vh;
   }
-}
-
-.bartkaEmptyCol {
-  height: 0vh;
-}
-
-.day-hover:hover {
-  background-color: #ccffff;
-}
-
-* {
-  border-radius: 0 !important;
-}
-
-.form-control::-moz-placeholder {
-  color: red;
-  opacity: 0.6;
-}
-.form-control::placeholder {
-  color: red;
-  opacity: 0.6;
 }
