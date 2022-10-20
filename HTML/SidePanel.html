@@ -74,7 +74,11 @@
 
   <div class="input-group">
     <input type="text" placeholder="City" class="form-control" id="City" />
-    <div w3-include-html="./HTML/Modules/StateDropDown01.html"></div>
+    <select
+      id="State"
+      class="form-select"
+      w3-include-html="./HTML/Modules/StateDropDown01.html"
+    ></select>
     <input type="text" placeholder="Zip" class="form-control" id="Zip" />
     <input type="text" class="form-control" id="EHV" placeholder="EHV" />
   </div>
@@ -86,17 +90,10 @@
 
   <br />
   <div class="input-group">
-    <select id="Policy1Type">
-      <option selected disabled="disabled">Type</option>
-      <option value="Auto">Auto</option>
-      <option value="Home">Home</option>
-      <option value="Cond">Cond</option>
-      <option value="Rent">Rent</option>
-      <option value="Life">Life</option>
-      <option value="Lord">Lord</option>
-      <option value="Moto">Moto</option>
-      <option value="Comm">Comm</option>
-    </select>
+    <select
+      id="Policy1Type"
+      w3-include-html="./HTML/Modules/PolicyTypeDropDown.html"
+    ></select>
     <input
       type="text"
       placeholder="Policy# | Renewal Date --->"
@@ -104,21 +101,11 @@
       id="Policy1Number"
       aria-label="Auto Policy"
     />
-    <select id="Policy1RenewMonth" class="DateBorder">
-      <option selected disabled="disabled">MM</option>
-      <option value="01">Jan</option>
-      <option value="02">Feb</option>
-      <option value="03">Mar</option>
-      <option value="04">Apr</option>
-      <option value="05">May</option>
-      <option value="06">Jun</option>
-      <option value="07">Jul</option>
-      <option value="08">Aug</option>
-      <option value="09">Sep</option>
-      <option value="10">Oct</option>
-      <option value="11">Nov</option>
-      <option value="12">Dec</option>
-    </select>
+    <select
+      id="Policy1RenewMonth"
+      class="DateBorder"
+      w3-include-html="./HTML/Modules/PolicyRenewalMonthDropDown.html"
+    ></select>
     <select id="Policy1RenewDay" class="DateBorder">
       <option selected disabled="disabled">DD</option>
       <option value="01">01</option>
@@ -155,17 +142,10 @@
     </select>
   </div>
   <div class="input-group">
-    <select id="Policy2Type">
-      <option selected disabled="disabled">Type</option>
-      <option value="Auto">Auto</option>
-      <option value="Home">Home</option>
-      <option value="Cond">Cond</option>
-      <option value="Rent">Rent</option>
-      <option value="Life">Life</option>
-      <option value="Lord">Lord</option>
-      <option value="Moto">Moto</option>
-      <option value="Comm">Comm</option>
-    </select>
+    <select
+      id="Policy2Type"
+      w3-include-html="./HTML/Modules/PolicyTypeDropDown.html"
+    ></select>
     <input
       type="text"
       placeholder="Policy# | Renewal Date --->"
@@ -173,21 +153,11 @@
       id="Policy2Number"
       aria-label="Auto Policy"
     />
-    <select id="Policy2RenewMonth" class="DateBorder">
-      <option selected disabled="disabled">MM</option>
-      <option value="01">Jan</option>
-      <option value="02">Feb</option>
-      <option value="03">Mar</option>
-      <option value="04">Apr</option>
-      <option value="05">May</option>
-      <option value="06">Jun</option>
-      <option value="07">Jul</option>
-      <option value="08">Aug</option>
-      <option value="09">Sep</option>
-      <option value="10">Oct</option>
-      <option value="11">Nov</option>
-      <option value="12">Dec</option>
-    </select>
+    <select
+      id="Policy2RenewMonth"
+      class="DateBorder"
+      w3-include-html="./HTML/Modules/PolicyRenewalMonthDropDown.html"
+    ></select>
     <select id="Policy2RenewDay" class="DateBorder">
       <option selected disabled="disabled">DD</option>
       <option value="01">01</option>
@@ -224,17 +194,10 @@
     </select>
   </div>
   <div class="input-group">
-    <select id="Policy3Type">
-      <option selected disabled="disabled">Type</option>
-      <option value="Auto">Auto</option>
-      <option value="Home">Home</option>
-      <option value="Cond">Cond</option>
-      <option value="Rent">Rent</option>
-      <option value="Life">Life</option>
-      <option value="Lord">Lord</option>
-      <option value="Moto">Moto</option>
-      <option value="Comm">Comm</option>
-    </select>
+    <select
+      id="Policy3Type"
+      w3-include-html="./HTML/Modules/PolicyTypeDropDown.html"
+    ></select>
     <input
       type="text"
       placeholder="Policy# | Renewal Date --->"
@@ -242,21 +205,11 @@
       id="Policy3Number"
       aria-label="Auto Policy"
     />
-    <select id="Policy3RenewMonth" class="DateBorder">
-      <option selected disabled="disabled">MM</option>
-      <option value="01">Jan</option>
-      <option value="02">Feb</option>
-      <option value="03">Mar</option>
-      <option value="04">Apr</option>
-      <option value="05">May</option>
-      <option value="06">Jun</option>
-      <option value="07">Jul</option>
-      <option value="08">Aug</option>
-      <option value="09">Sep</option>
-      <option value="10">Oct</option>
-      <option value="11">Nov</option>
-      <option value="12">Dec</option>
-    </select>
+    <select
+      id="Policy3RenewMonth"
+      class="DateBorder"
+      w3-include-html="./HTML/Modules/PolicyRenewalMonthDropDown.html"
+    ></select>
     <select id="Policy3RenewDay" class="DateBorder">
       <option selected disabled="disabled">DD</option>
       <option value="01">01</option>
@@ -293,17 +246,10 @@
     </select>
   </div>
   <div class="input-group">
-    <select id="Policy4Type">
-      <option selected disabled="disabled">Type</option>
-      <option value="Auto">Auto</option>
-      <option value="Home">Home</option>
-      <option value="Cond">Cond</option>
-      <option value="Rent">Rent</option>
-      <option value="Life">Life</option>
-      <option value="Lord">Lord</option>
-      <option value="Moto">Moto</option>
-      <option value="Comm">Comm</option>
-    </select>
+    <select
+      id="Policy4Type"
+      w3-include-html="./HTML/Modules/PolicyTypeDropDown.html"
+    ></select>
     <input
       type="text"
       placeholder="Policy# | Renewal Date --->"
@@ -311,21 +257,11 @@
       id="Policy4Number"
       aria-label="Auto Policy"
     />
-    <select id="Policy4RenewMonth" class="DateBorder">
-      <option selected disabled="disabled">MM</option>
-      <option value="01">Jan</option>
-      <option value="02">Feb</option>
-      <option value="03">Mar</option>
-      <option value="04">Apr</option>
-      <option value="05">May</option>
-      <option value="06">Jun</option>
-      <option value="07">Jul</option>
-      <option value="08">Aug</option>
-      <option value="09">Sep</option>
-      <option value="10">Oct</option>
-      <option value="11">Nov</option>
-      <option value="12">Dec</option>
-    </select>
+    <select
+      id="Policy4RenewMonth"
+      class="DateBorder"
+      w3-include-html="./HTML/Modules/PolicyRenewalMonthDropDown.html"
+    ></select>
     <select id="Policy4RenewDay" class="DateBorder">
       <option selected disabled="disabled">DD</option>
       <option value="01">01</option>
