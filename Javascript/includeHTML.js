@@ -14,6 +14,7 @@ function includeHTML() {
         if (this.readyState == 4) {
           if (this.status == 200) {
             elmnt.innerHTML = this.responseText;
+            // console.log('included 1 Bartka HTML Module');
           }
           if (this.status == 404) {
             elmnt.innerHTML = 'Page not found.';
