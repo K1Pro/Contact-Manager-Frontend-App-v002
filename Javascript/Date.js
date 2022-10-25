@@ -6,13 +6,8 @@ function myTimer() {
     clearInterval(myInterval);
 
     let TodaysDate = new Date();
-    // prettier-ignore
-    const bartsMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',];
-    // prettier-ignore
-    const weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',];
 
     const CalendarHTML_Date = document.getElementById('CalendarDate');
-
     CalendarHTML_Date.innerHTML = TodaysDate.toJSON().slice(0, 10);
     console.log(CalendarHTML_Date.innerHTML);
 
@@ -27,23 +22,8 @@ function myTimer() {
             noOfDaysToPrevMonday /*# of days*/
       );
       console.log(CalendarDates);
-      // targetDate.setDate(BartDate.getDate() - dayCounter + rep);
-      // console.log(targetDate);
-      // console.log(BartDate.getDay());
-      // console.log(dayCounter);
-      // dayCounterTwo = BartDate.getDate() - dayCounter + rep;
-      // console.log(dayCounterTwo);
-      // // console.log(`day${rep}`);
-      // document.getElementById(`day${rep}`).innerHTML = BartDate.toJSON().slice(
-      //   8,
-      //   10
-      // );
-      // .addEventListener('change', function (e) {
-      //   let ContactFieldID = this.id;
-      //   let ContactFieldValue = this.value;
-      //   updateContactInfo(id.value, ContactFieldID, ContactFieldValue);
-      // });
-      // }
+      document.getElementById(`day${rep}`).innerHTML =
+        CalendarDates.toJSON().slice(5, 10);
     }
   }
 }
