@@ -5,18 +5,20 @@ function myTimer() {
     console.log('CalendarDate found');
     clearInterval(myInterval);
 
-    let chosenDate;
+    // vvv Start coding here for Calendar Module vvv
     let daysInWeek = 7;
     let TodaysDate = new Date();
     const CalendarHTML_Date = document.getElementById('CalendarDate');
     const CalendarHTML_PrevBtn = document.getElementById('CalendarPrev');
     const CalendarHTML_NextBtn = document.getElementById('CalendarNext');
 
+    // Previous Week Button in Calendar Module
     CalendarHTML_PrevBtn.addEventListener('click', function () {
       daysInWeek = daysInWeek + 7;
       calendarDatesFillIn(TodaysDate, daysInWeek);
     });
 
+    // Next Week Button in Calendar Module
     CalendarHTML_NextBtn.addEventListener('click', function () {
       daysInWeek = daysInWeek - 7;
       calendarDatesFillIn(TodaysDate, daysInWeek);
@@ -40,7 +42,7 @@ function myTimer() {
               24 /*day*/ *
               noOfDaysToPrevMonday /*# of days*/
         );
-
+        // This highlights the selected date, defaults to today's date
         if (
           CalendarDates.toJSON().slice(0, 10) ==
           chosenDate.toJSON().slice(0, 10)
@@ -49,11 +51,12 @@ function myTimer() {
             .getElementById(`day${rep}`)
             .classList.add('calendarCurrentDay');
         }
-
+        // This fills in the individual calendar date days
         document.getElementById(`day${rep}`).innerHTML =
           CalendarDates.toJSON().slice(5, 10);
       }
     }
     calendarDatesFillIn(TodaysDate, daysInWeek);
   }
+  // ^^^ End coding here for Calendar Module ^^^
 }
