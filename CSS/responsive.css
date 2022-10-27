@@ -15,4 +15,7 @@
   .calendarSatSunRow {
     height: 5.875vh;
   }
+  .responsiveFont {
+    font-size: 1.25vh;
+  }
 }
