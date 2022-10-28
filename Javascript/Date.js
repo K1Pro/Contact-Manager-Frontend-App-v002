@@ -9,10 +9,10 @@ function myTimer() {
 
     const CalendarHTML_Date = document.getElementById('CalendarDate');
     CalendarHTML_Date.innerHTML = TodaysDate.toJSON().slice(0, 10);
-    console.log(CalendarHTML_Date.innerHTML);
 
     for (let rep = 1; rep < 29; rep++) {
       let noOfDaysToPrevMonday = 0 - TodaysDate.getDay() - 7 + rep;
+
       let CalendarDates = new Date(
         Date.now() +
           1000 /*sec*/ *
@@ -21,7 +21,13 @@ function myTimer() {
             24 /*day*/ *
             noOfDaysToPrevMonday /*# of days*/
       );
-      console.log(CalendarDates);
+
+      if (CalendarDates.toString() == TodaysDate.toString()) {
+        document
+          .getElementById(`day${rep}`)
+          .classList.add('calendarCurrentDay');
+      }
+
       document.getElementById(`day${rep}`).innerHTML =
         CalendarDates.toJSON().slice(5, 10);
     }

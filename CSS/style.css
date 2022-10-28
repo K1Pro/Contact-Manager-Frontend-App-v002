@@ -10,6 +10,10 @@
 .day-hover:hover {
   background-color: #ccffff;
 }
+.calendarCurrentDay {
+  background-color: #ccffcc;
+}
+
 * {
   border-radius: 0 !important;
 }
