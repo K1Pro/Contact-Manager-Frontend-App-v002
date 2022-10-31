@@ -1,15 +1,27 @@
 function buttonHandlers() {
   // vvv Start coding here for Calendar Module vvv
 
+  // Previous Month Button in Calendar Module
+  CalendarHTML_PrevMonthBtn.addEventListener('click', function () {
+    daysInWeek = daysInWeek + 28;
+    calendarDatesFillIn(TodaysDate, daysInWeek);
+  });
+
   // Previous Week Button in Calendar Module
-  CalendarHTML_PrevBtn.addEventListener('click', function () {
+  CalendarHTML_PrevWeekBtn.addEventListener('click', function () {
     daysInWeek = daysInWeek + 7;
     calendarDatesFillIn(TodaysDate, daysInWeek);
   });
 
   // Next Week Button in Calendar Module
-  CalendarHTML_NextBtn.addEventListener('click', function () {
+  CalendarHTML_NextWeekBtn.addEventListener('click', function () {
     daysInWeek = daysInWeek - 7;
+    calendarDatesFillIn(TodaysDate, daysInWeek);
+  });
+
+  // Next Month Button in Calendar Module
+  CalendarHTML_NextMonthBtn.addEventListener('click', function () {
+    daysInWeek = daysInWeek - 28;
     calendarDatesFillIn(TodaysDate, daysInWeek);
   });
 

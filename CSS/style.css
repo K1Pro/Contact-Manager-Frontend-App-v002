@@ -31,10 +31,10 @@
   color: red;
   opacity: 0.6;
 }
-#CalendarMorePrev:hover,
-#CalendarPrev:hover,
-#CalendarNext:hover,
-#CalendarMoreNext:hover {
+#LastMonthButton:hover,
+#LastWeekButton:hover,
+#NextWeekButton:hover,
+#NextMonthButton:hover {
   cursor: pointer;
 }
 #calendarHeader img {

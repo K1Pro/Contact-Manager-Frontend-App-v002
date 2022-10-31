@@ -2,8 +2,10 @@ function elementsrequired() {
   // vvv Start coding here for Retrieval Module vvv
 
   CalendarHTML_Date = document.getElementById('CalendarDate');
-  CalendarHTML_PrevBtn = document.getElementById('CalendarPrev');
-  CalendarHTML_NextBtn = document.getElementById('CalendarNext');
+  CalendarHTML_PrevMonthBtn = document.getElementById('LastMonthButton');
+  CalendarHTML_PrevWeekBtn = document.getElementById('LastWeekButton');
+  CalendarHTML_NextWeekBtn = document.getElementById('NextWeekButton');
+  CalendarHTML_NextMonthBtn = document.getElementById('NextMonthButton');
 
   // ^^^ End coding here for Retrieval Module ^^^
   DOMElements = 'Loaded';
