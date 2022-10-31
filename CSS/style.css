@@ -20,7 +20,6 @@
 .responsiveHeaderFont {
   font-size: 3vh;
 }
-
 * {
   border-radius: 0 !important;
 }
@@ -31,4 +30,13 @@
 .form-control::placeholder {
   color: red;
   opacity: 0.6;
+}
+#CalendarMorePrev:hover,
+#CalendarPrev:hover,
+#CalendarNext:hover,
+#CalendarMoreNext:hover {
+  cursor: pointer;
+}
+#calendarHeader img {
+  height: 2.75vh;
 }
