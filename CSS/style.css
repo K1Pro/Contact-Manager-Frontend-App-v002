@@ -17,6 +17,9 @@
 .responsiveFont {
   font-size: 2vh;
 }
+.responsiveHeaderFont {
+  font-size: 3vh;
+}
 
 * {
   border-radius: 0 !important;
@@ -28,20 +31,4 @@
 .form-control::placeholder {
   color: red;
   opacity: 0.6;
-}
-
-#CalendarHTMLModule {
-  display: none;
-}
-#DailyTasksHTMLModule {
-  display: none;
-}
-#SidePanelHTMLModule {
-  display: none;
-}
-#ContactTasksHTMLModule {
-  display: none;
-}
-#EmailHTMLModule {
-  display: none;
 }
