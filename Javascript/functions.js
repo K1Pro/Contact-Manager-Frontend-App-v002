@@ -26,3 +26,17 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
       CalendarDates.toJSON().slice(5, 10);
   }
 }
+
+async function getJSON(url, errorMsg = 'Something went wrong') {
+  try {
+    const response = await fetch(url);
+    const contactData = await response.json();
+    return contactData;
+  } catch (error) {
+    console.log(errorMsg);
+  }
+}
+
+getJSON(ContactsURL).then((data) => {
+  console.log(data.data.contacts);
+});
