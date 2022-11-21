@@ -22,8 +22,12 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
       document.getElementById(`day${rep}`).classList.add('calendarCurrentDay');
     }
     // This fills in the individual calendar date days
-    document.getElementById(`day${rep}`).innerHTML =
-      CalendarDates.toJSON().slice(5, 10);
+    document.getElementById(
+      `day${rep}`
+    ).innerHTML = `${CalendarDates.toJSON().slice(5, 10)}`;
+    document.getElementById(`day${rep}`).addEventListener('click', () => {
+      CalendarHTML_Date.innerHTML = `${CalendarDates.toJSON().slice(0, 10)}`;
+    });
   }
 }
 
