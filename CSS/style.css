@@ -9,6 +9,7 @@
 }
 .day-hover:hover {
   background-color: #ccffff;
+  cursor: pointer;
 }
 .calendarCurrentDay {
   background-color: #ccffcc;
