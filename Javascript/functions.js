@@ -2,6 +2,7 @@ console.log('retrieved all global functions');
 ///////////////////////////////////////////////
 getJSON(ContactsURL).then((data) => {
   console.log(data.data.contacts[0].Policy1RenewDay);
+  return data;
 });
 
 function calendarDatesFillIn(chosenDate, chosenWeek) {
@@ -25,15 +26,28 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
       document.getElementById(`day${rep}`).classList.add('calendarCurrentDay');
     }
     // This fills in the individual calendar date days
-    document.getElementById(
-      `day${rep}`
-    ).innerHTML = `${CalendarDates.toJSON().slice(5, 10)}`;
+    // prettier-ignore
+    document.getElementById(`day${rep}`).innerHTML = `${CalendarDates.toJSON().slice(5, 10)}`;
     document.getElementById(`day${rep}`).addEventListener('click', () => {
       CalendarHTML_Date.innerHTML = `${CalendarDates.toJSON().slice(0, 10)}`;
     });
     // This fills in Calendar Dates with contacts that have a renewal or task scheduled on that day
-    console.log(`${CalendarDates.toJSON().slice(5, 7)} - ${CalendarDates.toJSON().slice(8, 10)}`);
+    console.log(
+      `${CalendarDates.toJSON().slice(5, 7)} - ${CalendarDates.toJSON().slice(
+        8,
+        10
+      )}`
+    );
   }
+  getJSON(ContactsURL).then((data) => {
+    for (let rep = 1; rep < 29; rep++) {
+      let p = document.createElement('div');
+      let b = document.createElement('div');
+      document.getElementById(`day${rep}`).appendChild(p);
+      document.getElementById(`day${rep}`).appendChild(b);
+    }
+    console.log(data.data.contacts);
+  });
 }
 
 async function getJSON(url, errorMsg = 'Something went wrong') {
