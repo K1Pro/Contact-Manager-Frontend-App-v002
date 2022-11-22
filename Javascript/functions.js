@@ -1,6 +1,10 @@
 console.log('retrieved all global functions');
 ///////////////////////////////////////////////
 
+getJSON(ContactsURL).then((data) => {
+  console.log(data.data.contacts);
+});
+
 function calendarDatesFillIn(chosenDate, chosenWeek) {
   for (let rep = 1; rep < 29; rep++) {
     document.getElementById(`day${rep}`).classList.remove('calendarCurrentDay');
@@ -28,6 +32,8 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     document.getElementById(`day${rep}`).addEventListener('click', () => {
       CalendarHTML_Date.innerHTML = `${CalendarDates.toJSON().slice(0, 10)}`;
     });
+    // This fills in Calendar Dates with contacts that have a renewal or task scheduled on that day
+
   }
 }
 
@@ -40,7 +46,3 @@ async function getJSON(url, errorMsg = 'Something went wrong') {
     console.log(errorMsg);
   }
 }
-
-getJSON(ContactsURL).then((data) => {
-  console.log(data.data.contacts);
-});
