@@ -1,8 +1,7 @@
 console.log('retrieved all global functions');
 ///////////////////////////////////////////////
-
 getJSON(ContactsURL).then((data) => {
-  console.log(data.data.contacts);
+  console.log(data.data.contacts[0].Policy1RenewDay);
 });
 
 function calendarDatesFillIn(chosenDate, chosenWeek) {
@@ -33,7 +32,7 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
       CalendarHTML_Date.innerHTML = `${CalendarDates.toJSON().slice(0, 10)}`;
     });
     // This fills in Calendar Dates with contacts that have a renewal or task scheduled on that day
-
+    console.log(`${CalendarDates.toJSON().slice(5, 7)} - ${CalendarDates.toJSON().slice(8, 10)}`);
   }
 }
 
