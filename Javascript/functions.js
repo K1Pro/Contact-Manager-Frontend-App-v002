@@ -40,10 +40,15 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     );
   }
   getJSON(ContactsURL).then((data) => {
-    const propertyNames = Object.keys(data.data.contacts);
     for (const [key, value] of Object.entries(data.data.contacts)) {
       let Policy1RenewDate = `${value.Policy1RenewMonth}-${value.Policy1RenewDay}`;
       console.log(Policy1RenewDate);
+    }
+    let mySpans = document.getElementsByClassName('day-hover');
+    for (let i = 0; i < mySpans.length; i++) {
+      if (mySpans[i].innerHTML == '11-18') {
+        console.log('found it');
+      }
     }
     // for (let rep = 1; rep < 29; rep++) {
     //   let p = document.createElement('div');
