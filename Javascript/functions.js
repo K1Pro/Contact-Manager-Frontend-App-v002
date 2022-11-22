@@ -40,6 +40,9 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     );
   }
   getJSON(ContactsURL).then((data) => {
+    for (let property in data.data.contacts) {
+      console.log(`${property}`);
+    }
     for (let rep = 1; rep < 29; rep++) {
       let p = document.createElement('div');
       let b = document.createElement('div');
