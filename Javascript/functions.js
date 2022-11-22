@@ -40,15 +40,17 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     );
   }
   getJSON(ContactsURL).then((data) => {
-    for (let property in data.data.contacts) {
-      console.log(`${property}`);
+    const propertyNames = Object.keys(data.data.contacts);
+    for (const [key, value] of Object.entries(data.data.contacts)) {
+      let Policy1RenewDate = `${value.Policy1RenewMonth}-${value.Policy1RenewDay}`;
+      console.log(Policy1RenewDate);
     }
-    for (let rep = 1; rep < 29; rep++) {
-      let p = document.createElement('div');
-      let b = document.createElement('div');
-      document.getElementById(`day${rep}`).appendChild(p);
-      document.getElementById(`day${rep}`).appendChild(b);
-    }
+    // for (let rep = 1; rep < 29; rep++) {
+    //   let p = document.createElement('div');
+    //   let b = document.createElement('div');
+    //   document.getElementById(`day${rep}`).appendChild(p);
+    //   document.getElementById(`day${rep}`).appendChild(b);
+    // }
     console.log(data.data.contacts);
   });
 }
