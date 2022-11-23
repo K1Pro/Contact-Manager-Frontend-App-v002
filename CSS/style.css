@@ -1,6 +1,10 @@
 .bartkaEmptyCol {
   height: 0vh;
 }
+#CalendarDate {
+  text-shadow: 0px 0px 2px black;
+  font-weight: bold;
+}
 .calendarRow {
   height: 15vh;
 }
@@ -31,6 +35,10 @@
 .form-control::placeholder {
   color: red;
   opacity: 0.6;
+}
+.form-control {
+  background-color: #dbdcde;
+  border: 0px;
 }
 #LastMonthButton:hover,
 #LastWeekButton:hover,

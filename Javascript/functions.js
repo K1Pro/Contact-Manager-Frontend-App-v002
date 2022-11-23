@@ -51,16 +51,6 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     // let mySpans = document.getElementsByClassName('day-hover');
     // for (let i = 0; i < mySpans.length; i++) {
     //   if (mySpans[i].innerHTML == '11-18') {
-
-    //   }
-    // }
-    // for (let rep = 1; rep < 29; rep++) {
-    //   let p = document.createElement('div');
-    //   let b = document.createElement('div');
-    //   document.getElementById(`day${rep}`).appendChild(p);
-    //   document.getElementById(`day${rep}`).appendChild(b);
-    // }
-    // console.log(data.data.contacts);
   });
 }
 
