@@ -41,3 +41,16 @@
 #calendarHeader img {
   height: 2.75vh;
 }
+
+.notCompleted {
+  background-color: #ff9933;
+  margin-left: -12px;
+  padding-left: 12px;
+  margin-right: -12px;
+  padding-right: 12px;
+  border-radius: 10px !important;
+  border-style: solid;
+  border-color: white;
+  border-width: thin;
+  text-shadow: 0px 0px 2px grey;
+}
