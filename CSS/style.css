@@ -25,9 +25,9 @@
 .responsiveHeaderFont {
   font-size: 3vh;
 }
-* {
+/* * {
   border-radius: 0 !important;
-}
+} */
 .form-control::-moz-placeholder {
   color: red;
   opacity: 0.6;
@@ -36,9 +36,16 @@
   color: red;
   opacity: 0.6;
 }
-.form-control {
+.leftBorderGreen {
+  border: 0px solid green;
+  border-left-width: thick;
+}
+/* .form-control {
   background-color: #dbdcde;
   border: 0px;
+} */
+.searchicon {
+  background-image: url('./icons/.searchicon.png');
 }
 #LastMonthButton:hover,
 #LastWeekButton:hover,
