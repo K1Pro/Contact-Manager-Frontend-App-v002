@@ -25,17 +25,15 @@ function buttonHandlers() {
     calendarDatesFillIn(TodaysDate, daysInWeek);
   });
 
-  ////////// Event Listeners For First Name Search
+  // Contact Search in Side Panel Module
   contactSearch.addEventListener('focusin', function (e) {
-    console.log('hi');
-    mycars.forEach(function (item) {
-      var option = document.createElement('option');
-      option.value = item;
-      contactsList.appendChild(option);
-    });
-
     getJSON(ContactsURL).then((data) => {
-      console.log(data);
+      for (const [key, value] of Object.entries(data.data.contacts)) {
+        let FullName = `${value.FirstName} ${value.LastName}`;
+        let option = document.createElement('option');
+        option.value = FullName;
+        contactsList.appendChild(option);
+      }
     });
   });
 
