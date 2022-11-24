@@ -25,6 +25,20 @@ function buttonHandlers() {
     calendarDatesFillIn(TodaysDate, daysInWeek);
   });
 
+  ////////// Event Listeners For First Name Search
+  contactSearch.addEventListener('focusin', function (e) {
+    console.log('hi');
+    mycars.forEach(function (item) {
+      var option = document.createElement('option');
+      option.value = item;
+      contactsList.appendChild(option);
+    });
+
+    getJSON(ContactsURL).then((data) => {
+      console.log(data);
+    });
+  });
+
   // ^^^ End coding here for Calendar Module ^^^
 }
 

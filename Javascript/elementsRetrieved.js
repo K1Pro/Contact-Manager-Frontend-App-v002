@@ -6,12 +6,19 @@ function elementsrequired() {
   CalendarHTML_PrevWeekBtn = document.getElementById('LastWeekButton');
   CalendarHTML_NextWeekBtn = document.getElementById('NextWeekButton');
   CalendarHTML_NextMonthBtn = document.getElementById('NextMonthButton');
+  contactSearch = document.getElementById('contactSearch');
+  contactsList = document.getElementById('contactsList');
 
   // ^^^ End coding here for Retrieval Module ^^^
   DOMElements = 'Loaded';
 }
 // vvv All retrieved elements should be declared here vvv
-let DOMElements, CalendarHTML_Date, CalendarHTML_PrevBtn, CalendarHTML_NextBtn;
+let DOMElements,
+  CalendarHTML_Date,
+  CalendarHTML_PrevBtn,
+  CalendarHTML_NextBtn,
+  contactSearch,
+  contactsList;
 // ^^^ All retrieved elements should be declared here ^^^
 
 // vvv This scans for all separate HTML Modules vvv

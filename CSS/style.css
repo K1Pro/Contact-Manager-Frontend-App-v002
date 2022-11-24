@@ -25,9 +25,9 @@
 .responsiveHeaderFont {
   font-size: 3vh;
 }
-/* * {
+* {
   border-radius: 0 !important;
-} */
+}
 .form-control::-moz-placeholder {
   color: red;
   opacity: 0.6;
