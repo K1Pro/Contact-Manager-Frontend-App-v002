@@ -1,6 +1,13 @@
 console.log('retrieved all global functions');
 ///////////////////////////////////////////////
 getJSON(ContactsURL).then((data) => {
+  // this populates a dataset into the main search bar
+  for (const [key, value] of Object.entries(data.data.contacts)) {
+    let FullName = `${value.FirstName} ${value.LastName}`;
+    let option = document.createElement('option');
+    option.value = FullName;
+    contactsList.appendChild(option);
+  }
   console.log(data.data.contacts[0].Policy1RenewDay);
   return data;
 });

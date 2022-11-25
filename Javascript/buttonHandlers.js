@@ -27,14 +27,7 @@ function buttonHandlers() {
 
   // Contact Search in Side Panel Module
   contactSearch.addEventListener('focusin', function (e) {
-    getJSON(ContactsURL).then((data) => {
-      for (const [key, value] of Object.entries(data.data.contacts)) {
-        let FullName = `${value.FirstName} ${value.LastName}`;
-        let option = document.createElement('option');
-        option.value = FullName;
-        contactsList.appendChild(option);
-      }
-    });
+    // nothing here for now
   });
 
   // ^^^ End coding here for Calendar Module ^^^
