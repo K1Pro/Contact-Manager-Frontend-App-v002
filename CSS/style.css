@@ -36,6 +36,25 @@
   color: red;
   opacity: 0.6;
 }
+#_id {
+  display: none;
+}
+#contactSearch {
+  margin-top: 15px;
+  height: 36px;
+  border-left: 0px solid black;
+  border-left-width: thick;
+  border-top: 1px solid grey;
+  border-right: 1px solid grey;
+  border-bottom: 1px solid grey;
+  background-color: white;
+}
+.searchicon[type='text'] {
+  background-image: url('../icons/search-icon.png') !important;
+  background-position: 10px 9px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
 .leftBorderGreen {
   border-left: 0px solid green;
   border-left-width: thick;
@@ -95,12 +114,6 @@
   background-color: #dbdcde;
   border: 0px;
 } */
-.searchicon[type='text'] {
-  background-image: url('../icons/search-icon.png') !important;
-  background-position: 10px 20px;
-  background-repeat: no-repeat;
-  padding: 12px 20px 12px 40px;
-}
 #LastMonthButton:hover,
 #LastWeekButton:hover,
 #NextWeekButton:hover,
