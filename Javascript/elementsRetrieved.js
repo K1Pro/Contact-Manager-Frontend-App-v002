@@ -15,8 +15,10 @@ function elementsrequired() {
 // vvv All retrieved elements should be declared here vvv
 let DOMElements,
   CalendarHTML_Date,
-  CalendarHTML_PrevBtn,
-  CalendarHTML_NextBtn,
+  CalendarHTML_PrevMonthBtn,
+  CalendarHTML_PrevWeekBtn,
+  CalendarHTML_NextWeekBtn,
+  CalendarHTML_NextMonthBtn,
   contactSearch,
   contactsList;
 // ^^^ All retrieved elements should be declared here ^^^

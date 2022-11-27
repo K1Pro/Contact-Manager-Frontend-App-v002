@@ -26,8 +26,9 @@ function buttonHandlers() {
   });
 
   // Contact Search in Side Panel Module
-  contactSearch.addEventListener('focusin', function (e) {
-    // nothing here for now
+  contactSearch.addEventListener('change', function (e) {
+    console.log(e.target.value);
+    contactSearch.value = '';
   });
 
   // ^^^ End coding here for Calendar Module ^^^
