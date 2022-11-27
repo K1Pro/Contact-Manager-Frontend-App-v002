@@ -27,7 +27,19 @@ function buttonHandlers() {
 
   // Contact Search in Side Panel Module
   contactSearch.addEventListener('change', function (e) {
-    console.log(e.target.value);
+    ContactsURL = `http://192.168.64.9:8000/api/v2/contacts/${e.target.value}`;
+    getJSON(ContactsURL).then((data) => {
+      for (let rep = 0; rep < ContactFields.length; rep++) {
+        let ContactFieldsIDs = ContactFields[rep].id;
+        if (ContactFieldsIDs) {
+          document.getElementById(`${ContactFieldsIDs}`).value = data.data
+            .contact[ContactFieldsIDs]
+            ? `${data.data.contact[ContactFieldsIDs]}`
+            : '';
+        }
+      }
+      return data;
+    });
     contactSearch.value = '';
   });
 

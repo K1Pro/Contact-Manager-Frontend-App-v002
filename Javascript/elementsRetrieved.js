@@ -8,7 +8,22 @@ function elementsrequired() {
   CalendarHTML_NextMonthBtn = document.getElementById('NextMonthButton');
   contactSearch = document.getElementById('contactSearch');
   contactsList = document.getElementById('contactsList');
-
+  ContactFields = document
+    .getElementById('ContactFields')
+    .querySelectorAll('*');
+  for (let rep = 0; rep < ContactFields.length; rep++) {
+    let ContactFieldsIDs = ContactFields[rep].id;
+    if (ContactFieldsIDs) {
+      // console.log(ContactFieldsIDs);
+      document
+        .getElementById(`${ContactFieldsIDs}`)
+        .addEventListener('change', function (e) {
+          let ContactFieldID = this.id;
+          let ContactFieldValue = this.value;
+          console.log(this.id);
+        });
+    }
+  }
   // ^^^ End coding here for Retrieval Module ^^^
   DOMElements = 'Loaded';
 }
@@ -20,7 +35,8 @@ let DOMElements,
   CalendarHTML_NextWeekBtn,
   CalendarHTML_NextMonthBtn,
   contactSearch,
-  contactsList;
+  contactsList,
+  ContactFields;
 // ^^^ All retrieved elements should be declared here ^^^
 
 // vvv This scans for all separate HTML Modules vvv

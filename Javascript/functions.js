@@ -7,7 +7,7 @@ getJSON(ContactsURL).then((data) => {
     let option = document.createElement('option');
     option.label = FullName;
     option.innerHTML = value._id;
-    // option.style.display = 'none'; This doesnt seem to work at all to get rid of MongoDB IDs from showing in autocomplete dropdown
+    // option.style.display = 'none'; Doesnt get rid of MongoDB IDs from showing in autocomplete dropdown
     contactsList.appendChild(option);
   }
   return data;
