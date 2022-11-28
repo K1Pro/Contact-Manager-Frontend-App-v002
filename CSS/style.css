@@ -29,12 +29,16 @@
   border-radius: 0 !important;
 }
 .form-control::-moz-placeholder {
-  color: red;
-  opacity: 0.6;
+  color: #cccccc;
+  /* opacity: 0.6; */
 }
 .form-control::placeholder {
-  color: red;
-  opacity: 0.6;
+  color: #cccccc;
+  /* opacity: 0.6; */
+}
+.paddingZero {
+  padding-right:0px;
+  padding-left:0px;
 }
 #_id {
   display: none;
