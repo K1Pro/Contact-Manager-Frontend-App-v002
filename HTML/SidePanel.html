@@ -35,11 +35,19 @@
       class="form-control topBottomBorderBlack"
       id="LastName"
     />
-    <input
+    <!-- <input
       type="text"
       placeholder="Birth Date"
       class="form-control topBottomRightBorderBlack"
       id="BirthDate"
+    /> -->
+    <input
+      type="date"
+      id="BirthDate"
+      class="form-control topBottomRightBorderBlack"
+      name="BirthDate"
+      min="1900-01-01"
+      max="2050-12-31"
     />
   </div>
 
@@ -56,11 +64,19 @@
       class="form-control topBottomBorderBlack"
       id="SpouseLastName"
     />
-    <input
+    <!-- <input
       type="text"
       placeholder="Birth Date"
       class="form-control topBottomRightBorderBlack"
       id="SpouseBirthDate"
+    /> -->
+    <input
+      type="date"
+      id="SpouseBirthDate"
+      class="form-control topBottomRightBorderBlack"
+      name="SpouseBirthDate"
+      min="1900-01-01"
+      max="2050-12-31"
     />
   </div>
   <br />
@@ -74,7 +90,7 @@
       id="Address"
       placeholder="Address"
     />
-  <!-- </div>
+    <!-- </div>
   <div class="col-md-4 paddingZero"> -->
     <input
       type="text"
@@ -82,7 +98,7 @@
       id="Address2"
       placeholder="Unit"
     />
-  <!-- </div> -->
+    <!-- </div> -->
   </div>
   <div class="input-group">
     <input
