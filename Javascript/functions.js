@@ -3,10 +3,10 @@ console.log('retrieved all global functions');
 getJSON(ContactsURL).then((data) => {
   // this populates a dataset into the main search bar
   for (const [key, value] of Object.entries(data.data.contacts)) {
-    let FullName = `${value.FirstName} ${value.LastName} - ${value.Phone}`;
+    let FullName = `${value.FirstName} ${value.LastName}`;
     let option = document.createElement('option');
     option.label = FullName;
-    option.innerHTML = value._id;
+    option.innerHTML = value.Phone;
     // option.style.display = 'none'; Doesnt get rid of MongoDB IDs from showing in autocomplete dropdown
     contactsList.appendChild(option);
   }
