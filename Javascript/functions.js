@@ -45,15 +45,16 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
 
   getJSON(ContactsURL).then((data) => {
     for (const [key, value] of Object.entries(data.data.contacts)) {
-      let Policy1RenewDate = `${value.Policy1RenewMonth}-${value.Policy1RenewDay}`;
+      let Policy1RenewDate = `${value.Policy1RenewDate}`;
+      Policy1RenewDate = Policy1RenewDate.slice(5, 10);
       // prettier-ignore
-      if (document.querySelector(`[data-day="${value.Policy1RenewMonth}-${value.Policy1RenewDay}"]`)) {
+      if (document.querySelector(`[data-day="${Policy1RenewDate}"]`)) {
         let p = document.createElement('div');
         p.textContent = `${value.LastName}`;
-        p.classList.add("notCompleted");
-        p.classList.add("text-light");
+        p.classList.add('notCompleted');
+        p.classList.add('text-light');
         // prettier-ignore
-        document.querySelector(`[data-day="${value.Policy1RenewMonth}-${value.Policy1RenewDay}"]`).appendChild(p);
+        document.querySelector(`[data-day="${Policy1RenewDate}"]`).appendChild(p);
       }
     }
     // let mySpans = document.getElementsByClassName('day-hover');

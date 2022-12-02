@@ -25,7 +25,7 @@ function buttonHandlers() {
     calendarDatesFillIn(TodaysDate, daysInWeek);
   });
 
-  // Contact Search in Side Panel Module
+  // This populates the Side Panel Input Fields following a Contact Search
   contactSearch.addEventListener('change', function (e) {
     ContactsURL = `http://192.168.64.9:8000/api/v2/contacts?Phone=${e.target.value}`;
     getJSON(ContactsURL).then((data) => {
