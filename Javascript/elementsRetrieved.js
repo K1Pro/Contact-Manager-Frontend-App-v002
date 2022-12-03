@@ -8,6 +8,7 @@ function elementsrequired() {
   CalendarHTML_NextMonthBtn = document.getElementById('NextMonthButton');
   contactSearch = document.getElementById('contactSearch');
   contactsList = document.getElementById('contactsList');
+  // Retrieves contact inputs from side panel
   ContactFields = document
     .getElementById('ContactFields')
     .querySelectorAll('*');

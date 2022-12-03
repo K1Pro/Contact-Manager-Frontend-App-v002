@@ -1,14 +1,13 @@
 console.log('retrieved all global functions');
 ///////////////////////////////////////////////
 getJSON(ContactsURL).then((data) => {
-  // this populates a dataset into the main search bar
+  // Populates a dataset into the main search bar
   for (const [key, value] of Object.entries(data.data.contacts)) {
     let FullName = `${value.FirstName} ${value.LastName}`;
-    let option = document.createElement('option');
-    option.label = FullName;
-    option.innerHTML = value.Phone;
-    // option.style.display = 'none'; Doesnt get rid of MongoDB IDs from showing in autocomplete dropdown
-    contactsList.appendChild(option);
+    let searchDataSet = document.createElement('option');
+    searchDataSet.label = FullName;
+    searchDataSet.innerHTML = value.Phone;
+    contactsList.appendChild(searchDataSet);
   }
   return data;
 });
@@ -16,9 +15,7 @@ getJSON(ContactsURL).then((data) => {
 function calendarDatesFillIn(chosenDate, chosenWeek) {
   for (let rep = 1; rep < 29; rep++) {
     document.getElementById(`day${rep}`).classList.remove('calendarCurrentDay');
-
     let noOfDaysToPrevMonday = 0 - chosenDate.getDay() - chosenWeek + rep;
-
     let CalendarDates = new Date(
       Date.now() +
         1000 /*sec*/ *
@@ -27,23 +24,21 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
           24 /*day*/ *
           noOfDaysToPrevMonday /*# of days*/
     );
-    // This highlights the selected date, defaults to today's date
-    if (
-      CalendarDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)
-    ) {
-      document.getElementById(`day${rep}`).classList.add('calendarCurrentDay');
-    }
+    // Highlights the selected date, defaults to today's date
+    // prettier-ignore
+    if (CalendarDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`day${rep}`).classList.add('calendarCurrentDay');
     // This fills in the individual calendar date days
     // prettier-ignore
     document.getElementById(`day${rep}`).setAttribute('data-day', `${CalendarDates.toJSON().slice(5, 10)}`);
     // prettier-ignore
     document.getElementById(`day${rep}`).innerHTML = `${CalendarDates.toJSON().slice(5, 10)}`;
-    document.getElementById(`day${rep}`).addEventListener('click', () => {
-      CalendarHTML_Date.innerHTML = `${CalendarDates.toJSON().slice(0, 10)}`;
+    // prettier-ignore
+    document.getElementById(`day${rep}`).addEventListener('click', () => {CalendarHTML_Date.innerHTML = `${CalendarDates.toJSON().slice(0, 10)}`;
     });
   }
 
   getJSON(ContactsURL).then((data) => {
+    // Populates calendar with policies based upon renew date 1
     for (const [key, value] of Object.entries(data.data.contacts)) {
       let Policy1RenewDate = `${value.Policy1RenewDate}`;
       Policy1RenewDate = Policy1RenewDate.slice(5, 10);
@@ -57,9 +52,6 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
         document.querySelector(`[data-day="${Policy1RenewDate}"]`).appendChild(p);
       }
     }
-    // let mySpans = document.getElementsByClassName('day-hover');
-    // for (let i = 0; i < mySpans.length; i++) {
-    //   if (mySpans[i].innerHTML == '11-18') {
   });
 }
 
