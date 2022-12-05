@@ -1,6 +1,5 @@
 function contactTasksModule() {
     // vvv Start coding here for Calendar Module vvv
-    console.log(TodaysDate.toJSON().slice(0, 16))
     createEventTime.value = TodaysDate.toJSON().slice(0, 16)
     // ^^^ End coding here for Calendar Module ^^^
   }

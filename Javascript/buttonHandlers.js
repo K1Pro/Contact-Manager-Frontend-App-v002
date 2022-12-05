@@ -25,10 +25,51 @@ function buttonHandlers() {
     calendarDatesFillIn(TodaysDate, daysInWeek);
   });
 
+  // Create Event Button in ContactTasks Module
+  createEvent.addEventListener('click', function () {
+    if (_id.value && contactTasksTextArea.value) {
+      ContactsURL = `http://192.168.64.9:8000/api/v2/contacts/${_id.value}`;
+      getJSON(ContactsURL).then((data) => {
+        let calendarEventsArray = data.data.contact.CalendarEvents
+          ? data.data.contact.CalendarEvents
+          : [];
+        let obj = {};
+        calendarEventsArray.push(
+          (obj = {
+            id: _id.value,
+            EventID: calendarEventsArray.length + 1,
+            Date: createEventTime.value,
+            Description: contactTasksTextArea.value,
+          })
+        );
+        console.log(calendarEventsArray);
+        console.log(obj);
+        fetch(`${ContactsPatchURL}/${_id.value}`, {
+          method: 'PATCH',
+          body: JSON.stringify({
+            // This creates a key-value pair to be patached, ex: "FirstName": Bart
+            CalendarEvents: calendarEventsArray,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.text())
+          .then(() => {
+            getJSON(ContactsURL).then((data) => {
+              console.log('This is after the create button is pressed');
+            });
+          });
+      });
+    }
+  });
+
   // This populates the Side Panel Input Fields following a Contact Search
   contactSearch.addEventListener('change', function (e) {
     ContactsURL = `http://192.168.64.9:8000/api/v2/contacts?Phone=${e.target.value}`;
     getJSON(ContactsURL).then((data) => {
+      // console.log(data.data.contacts[0].CalendarEvents);
+      // console.log(data.data.contacts[0]._id);
       for (let rep = 0; rep < ContactFields.length; rep++) {
         let ContactFieldsIDs = ContactFields[rep].id;
         if (ContactFieldsIDs) {

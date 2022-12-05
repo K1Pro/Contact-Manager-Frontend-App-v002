@@ -6,7 +6,9 @@ function elementsrequired() {
   CalendarHTML_PrevWeekBtn = document.getElementById('LastWeekButton');
   CalendarHTML_NextWeekBtn = document.getElementById('NextWeekButton');
   CalendarHTML_NextMonthBtn = document.getElementById('NextMonthButton');
+  createEvent = document.getElementById('createEvent');
   createEventTime = document.getElementById('createEventTime');
+  contactTasksTextArea = document.getElementById('contactTasksTextArea');
   contactSearch = document.getElementById('contactSearch');
   contactsList = document.getElementById('contactsList');
   // Retrieves contact inputs from side panel
@@ -24,30 +26,30 @@ function elementsrequired() {
       document
         .getElementById(`${ContactFieldsIDs}`)
         .addEventListener('change', function (e) {
-            if (_id.value) {
-              fetch(`${ContactsPatchURL}/${_id.value}`, {
-                method: 'PATCH',
-                body: JSON.stringify({
-                  // This creates a key-value pair to be patached, ex: "FirstName": Bart
-                  [this.id]: this.value,
-                }),
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              })
-                // .then((response) => response.text())
-                // .then(() => {
-                //   getJSON(ContactsURL).then((data) => {
-                //     console.log(data);
-                //   });
-                // });
-            } else {
-              alert('Please search for and choose a customer.');
-            }
+          if (_id.value) {
+            fetch(`${ContactsPatchURL}/${_id.value}`, {
+              method: 'PATCH',
+              body: JSON.stringify({
+                // This creates a key-value pair to be patached, ex: "FirstName": Bart
+                [this.id]: this.value,
+              }),
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+            // .then((response) => response.text())
+            // .then(() => {
+            //   getJSON(ContactsURL).then((data) => {
+            //     console.log(data);
+            //   });
+            // });
+          } else {
+            alert('Please search for and choose a customer.');
+          }
         });
     }
   }
-    
+
   // ^^^ End coding here for Retrieval Module ^^^
   DOMElements = 'Loaded';
 }
@@ -58,7 +60,9 @@ let DOMElements,
   CalendarHTML_PrevWeekBtn,
   CalendarHTML_NextWeekBtn,
   CalendarHTML_NextMonthBtn,
+  createEvent,
   createEventTime,
+  contactTasksTextArea,
   contactSearch,
   contactsList,
   ContactFields,
