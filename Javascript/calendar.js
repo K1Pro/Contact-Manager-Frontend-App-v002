@@ -1,6 +1,5 @@
 function calendarModule() {
   // vvv Start coding here for Calendar Module vvv
-
   CalendarHTML_Date.innerHTML = TodaysDate.toJSON().slice(0, 10);
   calendarDatesFillIn(TodaysDate, daysInWeek);
 

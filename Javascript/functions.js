@@ -30,22 +30,16 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     // This fills in the individual calendar date days
     // prettier-ignore
     document.getElementById(`day${rep}`).setAttribute('data-day', `${CalendarDates.toJSON().slice(5, 10)}`);
-
     // prettier-ignore
     document.getElementById(`day${rep}`).innerHTML = `${CalendarDates.toJSON().slice(5, 10)}`;
-    // let p = document.createElement('div');
-    // p.classList.add('spinner-grow');
-    // document.getElementById(`day${rep}`).appendChild(p);
-    // <div class="spinner-grow text-dark"></div>
     // prettier-ignore
     document.getElementById(`day${rep}`).addEventListener('click', () => {CalendarHTML_Date.innerHTML = `${CalendarDates.toJSON().slice(0, 10)}`;
     });
   }
-
   getJSON(ContactsURL).then((data) => {
     contactsDB = data.data.contacts;
     let uniqueDailyContacts = new Set();
-    // Populates calendar with policies based upon renew date 1
+    // Populates calendar with policies based upon all renew dates
     for (let contact in contactsDB) {
       for (const [key, value] of Object.entries(contactsDB[contact])) {
         CalendarDates.forEach(function (node) {

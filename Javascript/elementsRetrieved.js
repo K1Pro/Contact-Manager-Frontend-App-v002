@@ -6,6 +6,7 @@ function elementsrequired() {
   CalendarHTML_PrevWeekBtn = document.getElementById('LastWeekButton');
   CalendarHTML_NextWeekBtn = document.getElementById('NextWeekButton');
   CalendarHTML_NextMonthBtn = document.getElementById('NextMonthButton');
+  createEventTime = document.getElementById('createEventTime');
   contactSearch = document.getElementById('contactSearch');
   contactsList = document.getElementById('contactsList');
   // Retrieves contact inputs from side panel
@@ -15,22 +16,38 @@ function elementsrequired() {
   CalendarDates = document
     .getElementById('calendarDates')
     .querySelectorAll('*');
+
   for (let rep = 0; rep < ContactFields.length; rep++) {
+    // Side Panel inputs if changed will update database to these values
     let ContactFieldsIDs = ContactFields[rep].id;
     if (ContactFieldsIDs) {
-      // console.log(ContactFieldsIDs);
       document
         .getElementById(`${ContactFieldsIDs}`)
         .addEventListener('change', function (e) {
-          let ContactFieldID = this.id;
-          let ContactFieldValue = this.value;
-          console.log(this.id);
+            if (_id.value) {
+              fetch(`${ContactsPatchURL}/${_id.value}`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                  // This creates a key-value pair to be patached, ex: "FirstName": Bart
+                  [this.id]: this.value,
+                }),
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              })
+                // .then((response) => response.text())
+                // .then(() => {
+                //   getJSON(ContactsURL).then((data) => {
+                //     console.log(data);
+                //   });
+                // });
+            } else {
+              alert('Please search for and choose a customer.');
+            }
         });
     }
   }
-  // for (let rep = 1; rep < 29; rep++) {
-  //   document.getElementById(`day${rep}`);
-  // }
+    
   // ^^^ End coding here for Retrieval Module ^^^
   DOMElements = 'Loaded';
 }
@@ -41,6 +58,7 @@ let DOMElements,
   CalendarHTML_PrevWeekBtn,
   CalendarHTML_NextWeekBtn,
   CalendarHTML_NextMonthBtn,
+  createEventTime,
   contactSearch,
   contactsList,
   ContactFields,
