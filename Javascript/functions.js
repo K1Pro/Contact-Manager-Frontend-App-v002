@@ -24,12 +24,23 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
           24 /*day*/ *
           noOfDaysToPrevMonday /*# of days*/
     );
+    let RenewalDates = new Date(
+      Date.now() +
+        1000 /*sec*/ *
+          60 /*min*/ *
+          60 /*hour*/ *
+          24 /*day*/ *
+          (noOfDaysToPrevMonday + 28) /*# of days*/
+    );
+    console.log(RenewalDates);
     // Highlights the selected date, defaults to today's date
     // prettier-ignore
     if (CalendarDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`day${rep}`).classList.add('calendarCurrentDay');
     // This fills in the individual calendar date days
     // prettier-ignore
     document.getElementById(`day${rep}`).setAttribute('data-day', `${CalendarDates.toJSON().slice(5, 10)}`);
+    // prettier-ignore
+    document.getElementById(`day${rep}`).setAttribute('data-renewalday', `${RenewalDates.toJSON().slice(5, 10)}`);
     // prettier-ignore
     document.getElementById(`day${rep}`).innerHTML = `${CalendarDates.toJSON().slice(5, 10)}`;
     // prettier-ignore
@@ -42,24 +53,35 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     // Populates calendar with policies based upon all renew dates
     for (let contact in contactsDB) {
       for (const [key, value] of Object.entries(contactsDB[contact])) {
+        // console.log(value); ************CHECK HERE**************************
         CalendarDates.forEach(function (node) {
-          if (node.dataset.day) {
-            if (value.includes(node.dataset.day) && key.includes('RenewDate')) {
+          if (node.dataset.renewalday) {
+            if (
+              value.includes(node.dataset.renewalday) &&
+              key.includes('RenewDate')
+            ) {
               let uniqueDailyContactSet = uniqueDailyContacts.has(
-                `${contactsDB[contact].LastName}-${node.dataset.day}`
+                `${contactsDB[contact].LastName}-${node.dataset.renewalday}`
               );
               uniqueDailyContacts.add(
-                `${contactsDB[contact].LastName}-${node.dataset.day}`
+                `${contactsDB[contact].LastName}-${node.dataset.renewalday}`
               );
               if (!uniqueDailyContactSet) {
                 let p = document.createElement('div');
                 p.textContent = `${contactsDB[contact].LastName}`;
                 p.classList.add('notCompleted');
                 p.classList.add('text-light');
+                // p.classList.add('font-weight-bold');
                 // prettier-ignore
-                document.querySelector(`[data-day="${node.dataset.day}"]`).appendChild(p);
+                document.querySelector(`[data-renewalday="${node.dataset.renewalday}"]`).appendChild(p);
               }
             }
+            // if (
+            //   value.includes(node.dataset.day) &&
+            //   key.includes('CalendarEvents')
+            // ) {
+            //   //work on this here
+            // }
           }
         });
       }

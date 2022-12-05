@@ -37,8 +37,8 @@
   /* opacity: 0.6; */
 }
 .paddingZero {
-  padding-right:0px;
-  padding-left:0px;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 #_id {
   display: none;
@@ -141,5 +141,6 @@
   border-style: solid;
   border-color: white;
   border-width: thin;
+  /* font-weight: bold; */
   text-shadow: 0px 0px 2px grey;
 }
