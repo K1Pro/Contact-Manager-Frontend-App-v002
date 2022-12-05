@@ -38,18 +38,31 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
   }
 
   getJSON(ContactsURL).then((data) => {
+    contactsDB = data.data.contacts;
+    let uniqueDailyContacts = new Set();
     // Populates calendar with policies based upon renew date 1
-    for (const [key, value] of Object.entries(data.data.contacts)) {
-      let Policy1RenewDate = `${value.Policy1RenewDate}`;
-      Policy1RenewDate = Policy1RenewDate.slice(5, 10);
-      // prettier-ignore
-      if (document.querySelector(`[data-day="${Policy1RenewDate}"]`)) {
-        let p = document.createElement('div');
-        p.textContent = `${value.LastName}`;
-        p.classList.add('notCompleted');
-        p.classList.add('text-light');
-        // prettier-ignore
-        document.querySelector(`[data-day="${Policy1RenewDate}"]`).appendChild(p);
+    for (let contact in contactsDB) {
+      for (const [key, value] of Object.entries(contactsDB[contact])) {
+        CalendarDates.forEach(function (node) {
+          if (node.dataset.day) {
+            if (value.includes(node.dataset.day) && key.includes('RenewDate')) {
+              let uniqueDailyContactSet = uniqueDailyContacts.has(
+                `${contactsDB[contact].LastName}-${node.dataset.day}`
+              );
+              uniqueDailyContacts.add(
+                `${contactsDB[contact].LastName}-${node.dataset.day}`
+              );
+              if (!uniqueDailyContactSet) {
+                let p = document.createElement('div');
+                p.textContent = `${contactsDB[contact].LastName}`;
+                p.classList.add('notCompleted');
+                p.classList.add('text-light');
+                // prettier-ignore
+                document.querySelector(`[data-day="${node.dataset.day}"]`).appendChild(p);
+              }
+            }
+          }
+        });
       }
     }
   });

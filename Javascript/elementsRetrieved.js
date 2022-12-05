@@ -12,6 +12,9 @@ function elementsrequired() {
   ContactFields = document
     .getElementById('ContactFields')
     .querySelectorAll('*');
+  CalendarDates = document
+    .getElementById('calendarDates')
+    .querySelectorAll('*');
   for (let rep = 0; rep < ContactFields.length; rep++) {
     let ContactFieldsIDs = ContactFields[rep].id;
     if (ContactFieldsIDs) {
@@ -25,6 +28,9 @@ function elementsrequired() {
         });
     }
   }
+  // for (let rep = 1; rep < 29; rep++) {
+  //   document.getElementById(`day${rep}`);
+  // }
   // ^^^ End coding here for Retrieval Module ^^^
   DOMElements = 'Loaded';
 }
@@ -37,7 +43,8 @@ let DOMElements,
   CalendarHTML_NextMonthBtn,
   contactSearch,
   contactsList,
-  ContactFields;
+  ContactFields,
+  CalendarDates;
 // ^^^ All retrieved elements should be declared here ^^^
 
 // vvv This scans for all separate HTML Modules vvv
