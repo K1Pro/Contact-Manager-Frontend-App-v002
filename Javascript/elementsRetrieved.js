@@ -18,6 +18,7 @@ function elementsrequired() {
   CalendarDates = document
     .getElementById('calendarDates')
     .querySelectorAll('*');
+  UniqueDays = document.getElementsByClassName('uniqueday');
 
   for (let rep = 0; rep < ContactFields.length; rep++) {
     // Side Panel inputs if changed will update database to these values
@@ -66,7 +67,8 @@ let DOMElements,
   contactSearch,
   contactsList,
   ContactFields,
-  CalendarDates;
+  CalendarDates,
+  UniqueDays;
 // ^^^ All retrieved elements should be declared here ^^^
 
 // vvv This scans for all separate HTML Modules vvv
