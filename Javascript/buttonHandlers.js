@@ -42,8 +42,6 @@ function buttonHandlers() {
             Description: contactTasksTextArea.value,
           })
         );
-        console.log(calendarEventsArray);
-        console.log(obj);
         fetch(`${ContactsPatchURL}/${_id.value}`, {
           method: 'PATCH',
           body: JSON.stringify({

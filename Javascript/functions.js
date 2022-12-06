@@ -1,16 +1,5 @@
 console.log('retrieved all global functions');
 ///////////////////////////////////////////////
-getJSON(ContactsURL).then((data) => {
-  // Populates a dataset into the main search bar
-  for (const [key, value] of Object.entries(data.data.contacts)) {
-    let FullName = `${value.FirstName} ${value.LastName}`;
-    let searchDataSet = document.createElement('option');
-    searchDataSet.label = FullName;
-    searchDataSet.innerHTML = value.Phone;
-    contactsList.appendChild(searchDataSet);
-  }
-  return data;
-});
 
 function calendarDatesFillIn(chosenDate, chosenWeek) {
   for (let rep = 1; rep < 29; rep++) {
@@ -63,45 +52,4 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
       }
     );
   }
-  // getJSON(ContactsURL).then((data) => {
-  //   contactsDB = data.data.contacts;
-  //   let uniqueDailyContacts = new Set();
-  //   // Populates calendar with policies based upon all renew dates
-  //   for (let contact in contactsDB) {
-  //     for (const [key, value] of Object.entries(contactsDB[contact])) {
-  //       for (let rep = 0; rep < 28; rep++) {
-  //         if (
-  //           value.includes(UniqueDays[rep].dataset.renewalday) &&
-  //           key.includes('RenewDate')
-  //         ) {
-  //           let uniqueDailyContactSet = uniqueDailyContacts.has(
-  //             `${contactsDB[contact].LastName}-${UniqueDays[rep].dataset.renewalday}`
-  //           );
-  //           uniqueDailyContacts.add(
-  //             `${contactsDB[contact].LastName}-${UniqueDays[rep].dataset.renewalday}`
-  //           );
-  //           if (!uniqueDailyContactSet) {
-  //             let p = document.createElement('div');
-  //             p.textContent = `${contactsDB[contact].LastName}`;
-  //             p.classList.add('notCompleted');
-  //             p.classList.add('text-light');
-  //             // p.classList.add('font-weight-bold');
-  //             // prettier-ignore
-  //             document.querySelector(`[data-renewalday="${UniqueDays[rep].dataset.renewalday}"]`).appendChild(p);
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // });
 }
-
-// async function getJSON(url, errorMsg = 'Something went wrong') {
-//   try {
-//     const response = await fetch(url);
-//     const contactData = await response.json();
-//     return contactData;
-//   } catch (error) {
-//     console.log(errorMsg);
-//   }
-// }

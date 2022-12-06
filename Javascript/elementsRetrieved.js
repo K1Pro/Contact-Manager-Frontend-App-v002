@@ -11,6 +11,7 @@ function elementsrequired() {
   contactTasksTextArea = document.getElementById('contactTasksTextArea');
   contactSearch = document.getElementById('contactSearch');
   contactsList = document.getElementById('contactsList');
+  TaskList = document.getElementById('TaskList');
   // Retrieves contact inputs from side panel
   ContactFields = document
     .getElementById('ContactFields')
@@ -68,7 +69,8 @@ let DOMElements,
   contactsList,
   ContactFields,
   CalendarDates,
-  UniqueDays;
+  UniqueDays,
+  TaskList;
 // ^^^ All retrieved elements should be declared here ^^^
 
 // vvv This scans for all separate HTML Modules vvv
