@@ -21,7 +21,6 @@ function buttonHandlers() {
 
   // Next Month Button in Calendar Module
   CalendarHTML_NextMonthBtn.addEventListener('click', function () {
-    console.log(dbArray);
     daysInWeek = daysInWeek - 28;
     calendarDatesFillIn(TodaysDate, daysInWeek);
   });
