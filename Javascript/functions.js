@@ -1,6 +1,29 @@
 console.log('retrieved all global functions');
 ///////////////////////////////////////////////
 
+function loadSidePanel(e) {
+  // This populates the Side Panel Input Fields following a Contact Search
+  // console.log(`here is the input of ID: ${IDinput.value}`);
+  getJSON(`${PhoneURL}${e.target.value}`).then((data) => {
+    // console.log(data.data.contacts[0].CalendarEvents);
+    // console.log(data.data.contacts[0]._id);
+    for (let rep = 0; rep < ContactFields.length; rep++) {
+      let ContactFieldsIDs = ContactFields[rep].id;
+      if (ContactFieldsIDs) {
+        document.getElementById(`${ContactFieldsIDs}`).value = data.data
+          .contacts[0][ContactFieldsIDs]
+          ? `${data.data.contacts[0][ContactFieldsIDs]}`
+          : '';
+      }
+      if (ContactFieldsIDs == '_id') {
+        let contactID = document.getElementById(`${ContactFieldsIDs}`);
+        loadContactTasks(contactID.value);
+      }
+    }
+    // return data;
+  });
+}
+
 function calendarDatesFillIn(chosenDate, chosenWeek) {
   for (let rep = 1; rep < 29; rep++) {
     // document.getElementById(`day${rep}`).removeEventListener('click', this); remove the event listener so it doesn't trigger other days clicks
@@ -74,6 +97,38 @@ function loadDailyTasks(dailyTask) {
       DailyTask.setAttribute('href', '#');
       DailyTask.innerHTML = DailyTaskFullName;
       TaskList.appendChild(DailyTask);
+    }
+    return data;
+  });
+}
+
+function loadContactTasks(dailyTask) {
+  ContactTaskList.innerHTML = '';
+  getJSON(`${EventsURL}${dailyTask}`).then((data) => {
+    // console.log(data.data.CalendarEvents);
+    for (const [key, value] of Object.entries(data.data.CalendarEvents)) {
+      console.log(value);
+      // Creates a DIV
+      let ContactTaskGroup = document.createElement('div');
+      ContactTaskGroup.setAttribute('class', 'input-group');
+      ContactTaskList.appendChild(ContactTaskGroup);
+      // Creates a datetime-local Input
+      let ContactTaskDate = document.createElement('input');
+      ContactTaskDate.type = 'datetime-local';
+      ContactTaskDate.value = `${value.Date}`;
+      ContactTaskDate.setAttribute('class', 'form-control');
+      ContactTaskGroup.appendChild(ContactTaskDate);
+      // Creates a text input
+      let ContactTaskDescription = document.createElement('input');
+      ContactTaskDescription.type = 'text';
+      ContactTaskDescription.value = `${value.Description}`;
+      ContactTaskDescription.setAttribute('class', 'form-control');
+      ContactTaskGroup.appendChild(ContactTaskDescription);
+      // Creates a checkbox
+      let ContactTaskCheckBox = document.createElement('input');
+      ContactTaskCheckBox.type = 'checkbox';
+      ContactTaskCheckBox.setAttribute('class', 'form-check-input mt-0');
+      ContactTaskGroup.appendChild(ContactTaskCheckBox);
     }
     return data;
   });

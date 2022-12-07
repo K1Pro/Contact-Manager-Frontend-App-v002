@@ -12,6 +12,8 @@ function elementsrequired() {
   contactSearch = document.getElementById('contactSearch');
   contactsList = document.getElementById('contactsList');
   TaskList = document.getElementById('TaskList');
+  ContactTaskList = document.getElementById('ContactTaskList');
+  IDinput = document.getElementById('_id');
   // Retrieves contact inputs from side panel
   ContactFields = document
     .getElementById('ContactFields')
