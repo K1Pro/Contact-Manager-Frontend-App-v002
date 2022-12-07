@@ -36,10 +36,11 @@ function buttonHandlers() {
         let obj = {};
         calendarEventsArray.push(
           (obj = {
-            id: _id.value,
+            // id: _id.value,
             EventID: calendarEventsArray.length + 1,
             Date: createEventTime.value,
             Description: contactTasksTextArea.value,
+            Completed: false,
           })
         );
         fetch(`${ContactsPatchURL}/${_id.value}`, {
