@@ -1,18 +1,7 @@
 function dailyTasksModule() {
   // vvv Start coding here for Daily Tasks Module vvv
-  //   getJSON(`${RenewalURL}${RenewalDates.toJSON().slice(5, 10)}`).then(
-  //     (data) => {
-  //   getJSON(ContactsURL).then((data) => {
-  //     // Populates a dataset into the main search bar
-  //     for (const [key, value] of Object.entries(data.data.contacts)) {
-  //       let FullName = `${value.FirstName} ${value.LastName}`;
-  //       let searchDataSet = document.createElement('option');
-  //       searchDataSet.label = FullName;
-  //       searchDataSet.innerHTML = value.Phone;
-  //       TaskList.appendChild(searchDataSet);
-  //     }
-  //     return data;
-  //   });
+  const initialDailyTask = new Date(Date.now() + 1000 * 60 * 60 * 24 * 28);
+  loadDailyTasks(initialDailyTask.toJSON().slice(5, 10));
   // ^^^ End coding here for Daily Tasks Module ^^^
 }
 
