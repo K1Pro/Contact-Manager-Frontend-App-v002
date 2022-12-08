@@ -37,7 +37,9 @@ function buttonHandlers() {
           (obj = {
             // id: _id.value,
             EventID: calendarEventsArray.length + 1,
-            Date: createEventTime.value,
+            // Date: createEventTime.value,
+            DateYYYYMMDD: createEventTime.value.slice(0, 10),
+            DateHHMMSS: createEventTime.value.slice(10, 16),
             Description: contactTasksTextArea.value,
             Completed: false,
           })

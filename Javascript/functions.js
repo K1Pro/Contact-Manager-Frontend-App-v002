@@ -1,6 +1,10 @@
 console.log('retrieved all global functions');
 ///////////////////////////////////////////////
 
+// getJSON(`${ContactsWithCalEvents}`).then((data) => {
+//   console.log(data.contact);
+// });
+
 function loadSidePanel(e) {
   // This populates the Side Panel Input Fields following a Contact Search
   // console.log(`here is the input of ID: ${IDinput.value}`);
@@ -51,6 +55,9 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     // This fills in the individual calendar date days
     document
       .getElementById(`day${rep}`)
+      .setAttribute('data-fullday', `${CalendarDates.toJSON().slice(0, 10)}`);
+    document
+      .getElementById(`day${rep}`)
       .setAttribute('data-day', `${CalendarDates.toJSON().slice(5, 10)}`);
     document
       .getElementById(`day${rep}`)
@@ -70,7 +77,7 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
           renewalContact.map((x) => {
             let p = document.createElement('div');
             p.textContent = `${x.LastName}`;
-            p.classList.add('notCompleted');
+            p.classList.add('renewal');
             p.classList.add('text-light');
             // p.classList.add('font-weight-bold');
             // prettier-ignore
@@ -79,6 +86,23 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
         }
       }
     );
+    getJSON(
+      `${ContactsWithCalEvents}${CalendarDates.toJSON().slice(0, 10)}`
+    ).then((data) => {
+      let renewalContact;
+      if (data.contacts.length) {
+        renewalContact = data.contacts;
+        renewalContact.map((x) => {
+          let p = document.createElement('div');
+          p.textContent = `${x.LastName}`;
+          p.classList.add('notCompleted');
+          p.classList.add('text-light');
+          // p.classList.add('font-weight-bold');
+          // prettier-ignore
+          document.querySelector(`[data-fullday="${CalendarDates.toJSON().slice(0, 10)}"]`).appendChild(p);
+        });
+      }
+    });
   }
 }
 
@@ -87,18 +111,17 @@ function loadDailyTasks(dailyTask) {
   getJSON(`${RenewalURL}${dailyTask}`).then((data) => {
     // Populates a list of task into the DailyTasks Module
     for (const [key, value] of Object.entries(data.data.contacts)) {
-      console.log(value);
+      // console.log(value);
       let DailyTaskFullName = `${value.FirstName} ${value.LastName}`;
       let DailyTask = document.createElement('div');
-      DailyTask.classList.add('notCompleted');
+      DailyTask.classList.add('renewal');
       DailyTask.classList.add('text-light');
       // DailyTask.setAttribute('href', '#');
       DailyTask.innerHTML = DailyTaskFullName;
       TaskList.appendChild(DailyTask);
-
       // <button type="button" class="btn btn-warning">Warning</button>
     }
-    return data;
+    // return data;
   });
 }
 
@@ -115,7 +138,7 @@ function loadContactTasks(dailyTask) {
       // Creates a datetime-local Input
       let ContactTaskDate = document.createElement('input');
       ContactTaskDate.type = 'datetime-local';
-      ContactTaskDate.value = `${value.Date}`;
+      ContactTaskDate.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
       ContactTaskDate.setAttribute('class', 'form-control');
       ContactTaskGroup.appendChild(ContactTaskDate);
       // Creates a text input
