@@ -4,7 +4,7 @@ console.log('retrieved all global functions');
 function loadSidePanel(e) {
   // This populates the Side Panel Input Fields following a Contact Search
   // console.log(`here is the input of ID: ${IDinput.value}`);
-  getJSON(`${PhoneURL}${e.target.value}`).then((data) => {
+  getJSON(`${PhoneURL}${e}`).then((data) => {
     // console.log(data.data.contacts[0].CalendarEvents);
     // console.log(data.data.contacts[0]._id);
     for (let rep = 0; rep < ContactFields.length; rep++) {
@@ -89,14 +89,14 @@ function loadDailyTasks(dailyTask) {
     for (const [key, value] of Object.entries(data.data.contacts)) {
       console.log(value);
       let DailyTaskFullName = `${value.FirstName} ${value.LastName}`;
-      let DailyTask = document.createElement('a');
-      DailyTask.setAttribute(
-        'class',
-        'list-group-item list-group-item-action list-group-item-warning'
-      );
-      DailyTask.setAttribute('href', '#');
+      let DailyTask = document.createElement('div');
+      DailyTask.classList.add('notCompleted');
+      DailyTask.classList.add('text-light');
+      // DailyTask.setAttribute('href', '#');
       DailyTask.innerHTML = DailyTaskFullName;
       TaskList.appendChild(DailyTask);
+
+      // <button type="button" class="btn btn-warning">Warning</button>
     }
     return data;
   });
