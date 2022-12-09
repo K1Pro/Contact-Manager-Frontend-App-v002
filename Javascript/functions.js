@@ -52,22 +52,10 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     // Highlights the selected date, defaults to today's date
     // prettier-ignore
     if (CalendarDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`day${rep}`).classList.add('calendarCurrentDay');
-    // This fills in the individual calendar date days
-    document
-      .getElementById(`day${rep}`)
-      .setAttribute('data-fullday', `${CalendarDates.toJSON().slice(0, 10)}`);
-    document
-      .getElementById(`day${rep}`)
-      .setAttribute('data-day', `${CalendarDates.toJSON().slice(5, 10)}`);
-    document
-      .getElementById(`day${rep}`)
-      .setAttribute('data-renewalday', `${RenewalDates.toJSON().slice(5, 10)}`);
-    document.getElementById(
-      `day${rep}`
-    ).innerHTML = `${CalendarDates.toJSON().slice(5, 10)}`;
+    // prettier-ignore
+    document.getElementById(`day${rep}`).innerHTML = `${CalendarDates.toJSON().slice(5, 10)}`;
     document.getElementById(`day${rep}`).addEventListener('click', () => {
       CalendarHTML_Date.innerHTML = `${CalendarDates.toJSON().slice(0, 10)}`;
-      loadDailyTasks(`${RenewalDates.toJSON().slice(5, 10)}`);
     });
     getJSON(`${RenewalURL}${RenewalDates.toJSON().slice(5, 10)}`).then(
       (data) => {
@@ -79,9 +67,7 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
             p.textContent = `${x.LastName}`;
             p.classList.add('renewal');
             p.classList.add('text-light');
-            // p.classList.add('font-weight-bold');
-            // prettier-ignore
-            document.querySelector(`[data-renewalday="${RenewalDates.toJSON().slice(5, 10)}"]`).appendChild(p);
+            document.getElementById(`day${rep}`).appendChild(p);
           });
         }
       }
@@ -97,9 +83,7 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
           p.textContent = `${x.LastName}`;
           p.classList.add('notCompleted');
           p.classList.add('text-light');
-          // p.classList.add('font-weight-bold');
-          // prettier-ignore
-          document.querySelector(`[data-fullday="${CalendarDates.toJSON().slice(0, 10)}"]`).appendChild(p);
+          document.getElementById(`day${rep}`).appendChild(p);
         });
       }
     });
