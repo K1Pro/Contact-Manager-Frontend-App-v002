@@ -143,27 +143,63 @@ function loadContactTasks(dailyTask) {
       ContactTaskDate.type = 'datetime-local';
       ContactTaskDate.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
       ContactTaskDate.setAttribute('class', 'form-control');
-      ContactTaskDate.addEventListener('click', (e) => {
-        console.log(e.target.value);
-        console.log(ContactTaskDescription.value);
-        console.log(ContactTaskCheckBox.checked);
+      ContactTaskDate.addEventListener('change', (e) => {
+        fetch(`${UpdateEvent}${value._id}`, {
+          method: 'PATCH',
+          body: JSON.stringify({
+            _id: value._id,
+            DateYYYYMMDD: e.target.value.slice(0, 10),
+            DateHHMMSS: e.target.value.slice(10, 16),
+            Description: ContactTaskDescription.value,
+            Completed: ContactTaskCheckBox.checked,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.text())
+          .then(() => {
+            // console.log(response);
+            PhoneInput = document.getElementById('Phone');
+            contactTasksTextArea.value = '';
+            loadSidePanel(PhoneInput.value);
+          });
       });
 
       // Creates a text input
       ContactTaskDescription.type = 'text';
       ContactTaskDescription.value = `${value.Description}`;
       ContactTaskDescription.setAttribute('class', 'form-control');
-      ContactTaskDescription.addEventListener('click', (e) => {
-        console.log(ContactTaskDate.value);
-        console.log(e.target.value);
-        console.log(ContactTaskCheckBox.checked);
+      ContactTaskDescription.addEventListener('change', (e) => {
+        fetch(`${UpdateEvent}${value._id}`, {
+          method: 'PATCH',
+          body: JSON.stringify({
+            _id: value._id,
+            DateYYYYMMDD: ContactTaskDate.value.slice(0, 10),
+            DateHHMMSS: ContactTaskDate.value.slice(10, 16),
+            Description: e.target.value,
+            Completed: ContactTaskCheckBox.checked,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.text())
+          .then(() => {
+            // console.log(response);
+            PhoneInput = document.getElementById('Phone');
+            contactTasksTextArea.value = '';
+            loadSidePanel(PhoneInput.value);
+          });
       });
 
       // Creates a checkbox
       ContactTaskCheckBox.type = 'checkbox';
       ContactTaskCheckBox.setAttribute('class', 'form-check-input mt-0');
       ContactTaskCheckBox.addEventListener('click', (e) => {
-        console.log(ContactTaskDate.value);
+        console.log(value._id);
+        console.log(ContactTaskDate.value.slice(0, 10));
+        console.log(ContactTaskDate.value.slice(10, 16));
         console.log(ContactTaskDescription.value);
         console.log(e.target.checked);
       });
