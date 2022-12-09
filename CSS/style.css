@@ -181,3 +181,12 @@
   /* font-weight: bold; */
   text-shadow: 0px 0px 2px grey;
 }
+.bartkaCheckbox {
+  width: 41px;
+  height: 41px;
+}
+.bartkaCheckbox:checked {
+  width: 41px;
+  height: 41px;
+  background: red;
+}

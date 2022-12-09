@@ -128,8 +128,20 @@ function loadDailyTasks(dailyTask) {
 function loadContactTasks(dailyTask) {
   ContactTaskList.innerHTML = '';
   getJSON(`${EventsURL}${dailyTask}`).then((data) => {
-    // console.log(data.data.CalendarEvents);
-    for (const [key, value] of Object.entries(data.data.CalendarEvents)) {
+    // sorts the array in reverse chronological order
+    let CalendarEventsArray = data.data.CalendarEvents;
+    function compare(a, b) {
+      if (a.DateYYYYMMDD < b.DateYYYYMMDD) {
+        return 1;
+      }
+      if (a.DateYYYYMMDD > b.DateYYYYMMDD) {
+        return -1;
+      }
+      return 0;
+    }
+    CalendarEventsArray.sort(compare);
+    for (const [key, value] of Object.entries(CalendarEventsArray)) {
+      console.log(value);
       // Creates a DIV
       let ContactTaskGroup = document.createElement('div');
       ContactTaskGroup.setAttribute('class', 'input-group');
@@ -195,7 +207,10 @@ function loadContactTasks(dailyTask) {
 
       // Creates a checkbox
       ContactTaskCheckBox.type = 'checkbox';
-      ContactTaskCheckBox.setAttribute('class', 'form-check-input mt-0');
+      ContactTaskCheckBox.setAttribute(
+        'class',
+        'form-check-input mt-0 bartkaCheckbox'
+      );
       ContactTaskCheckBox.addEventListener('click', (e) => {
         console.log(value._id);
         console.log(ContactTaskDate.value.slice(0, 10));
