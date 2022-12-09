@@ -82,7 +82,19 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
       if (data.contacts.length) {
         renewalContact = data.contacts;
         renewalContact.map((x) => {
+          // console.log(x.CalendarEvents);
+          // x.CalendarEvents.forEach((element) => console.log(element));
           let p = document.createElement('div');
+          const results = x.CalendarEvents.filter((obj) => {
+            return (
+              obj.DateYYYYMMDD === `${CalendarDates.toJSON().slice(0, 10)}`
+            );
+          });
+          if (!results[0].Completed) {
+            p.classList.add('notCompleted');
+          } else {
+            p.classList.add('Completed');
+          }
           p.textContent = `${x.LastName}`;
           p.classList.add('notCompleted');
           p.classList.add('text-light');
@@ -131,7 +143,6 @@ function loadContactTasks(dailyTask) {
     }
     CalendarEventsArray.sort(compare);
     for (const [key, value] of Object.entries(CalendarEventsArray)) {
-      console.log(value);
       // Creates a DIV
       let ContactTaskGroup = document.createElement('div');
       ContactTaskGroup.setAttribute('class', 'input-group');
@@ -188,7 +199,6 @@ function loadContactTasks(dailyTask) {
         })
           .then((response) => response.text())
           .then(() => {
-            // console.log(response);
             PhoneInput = document.getElementById('Phone');
             contactTasksTextArea.value = '';
             loadSidePanel(PhoneInput.value);
@@ -197,16 +207,36 @@ function loadContactTasks(dailyTask) {
 
       // Creates a checkbox
       ContactTaskCheckBox.type = 'checkbox';
+      ContactTaskCheckBox.checked = value.Completed;
       ContactTaskCheckBox.setAttribute(
         'class',
         'form-check-input mt-0 bartkaCheckbox'
       );
       ContactTaskCheckBox.addEventListener('click', (e) => {
-        console.log(value._id);
-        console.log(ContactTaskDate.value.slice(0, 10));
-        console.log(ContactTaskDate.value.slice(10, 16));
-        console.log(ContactTaskDescription.value);
-        console.log(e.target.checked);
+        // console.log(value._id);
+        // console.log(ContactTaskDate.value.slice(0, 10));
+        // console.log(ContactTaskDate.value.slice(10, 16));
+        // console.log(ContactTaskDescription.value);
+        // console.log(e.target.checked);
+        fetch(`${UpdateEvent}${value._id}`, {
+          method: 'PATCH',
+          body: JSON.stringify({
+            _id: value._id,
+            DateYYYYMMDD: ContactTaskDate.value.slice(0, 10),
+            DateHHMMSS: ContactTaskDate.value.slice(10, 16),
+            Description: ContactTaskDescription.value,
+            Completed: e.target.checked,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.text())
+          .then(() => {
+            PhoneInput = document.getElementById('Phone');
+            contactTasksTextArea.value = '';
+            loadSidePanel(PhoneInput.value);
+          });
       });
 
       ContactTaskGroup.appendChild(ContactTaskDate);
