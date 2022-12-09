@@ -67,6 +67,9 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
             p.textContent = `${x.LastName}`;
             p.classList.add('renewal');
             p.classList.add('text-light');
+            p.addEventListener('click', (e) => {
+              loadSidePanel(x.Phone);
+            });
             document.getElementById(`day${rep}`).appendChild(p);
           });
         }
@@ -83,6 +86,9 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
           p.textContent = `${x.LastName}`;
           p.classList.add('notCompleted');
           p.classList.add('text-light');
+          p.addEventListener('click', (e) => {
+            loadSidePanel(x.Phone);
+          });
           document.getElementById(`day${rep}`).appendChild(p);
         });
       }
