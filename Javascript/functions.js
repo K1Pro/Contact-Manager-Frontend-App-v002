@@ -130,27 +130,46 @@ function loadContactTasks(dailyTask) {
   getJSON(`${EventsURL}${dailyTask}`).then((data) => {
     // console.log(data.data.CalendarEvents);
     for (const [key, value] of Object.entries(data.data.CalendarEvents)) {
-      console.log(value);
       // Creates a DIV
       let ContactTaskGroup = document.createElement('div');
       ContactTaskGroup.setAttribute('class', 'input-group');
       ContactTaskList.appendChild(ContactTaskGroup);
-      // Creates a datetime-local Input
+
       let ContactTaskDate = document.createElement('input');
+      let ContactTaskDescription = document.createElement('input');
+      let ContactTaskCheckBox = document.createElement('input');
+
+      // Creates a datetime-local Input
       ContactTaskDate.type = 'datetime-local';
       ContactTaskDate.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
       ContactTaskDate.setAttribute('class', 'form-control');
-      ContactTaskGroup.appendChild(ContactTaskDate);
+      ContactTaskDate.addEventListener('click', (e) => {
+        console.log(e.target.value);
+        console.log(ContactTaskDescription.value);
+        console.log(ContactTaskCheckBox.checked);
+      });
+
       // Creates a text input
-      let ContactTaskDescription = document.createElement('input');
       ContactTaskDescription.type = 'text';
       ContactTaskDescription.value = `${value.Description}`;
       ContactTaskDescription.setAttribute('class', 'form-control');
-      ContactTaskGroup.appendChild(ContactTaskDescription);
+      ContactTaskDescription.addEventListener('click', (e) => {
+        console.log(ContactTaskDate.value);
+        console.log(e.target.value);
+        console.log(ContactTaskCheckBox.checked);
+      });
+
       // Creates a checkbox
-      let ContactTaskCheckBox = document.createElement('input');
       ContactTaskCheckBox.type = 'checkbox';
       ContactTaskCheckBox.setAttribute('class', 'form-check-input mt-0');
+      ContactTaskCheckBox.addEventListener('click', (e) => {
+        console.log(ContactTaskDate.value);
+        console.log(ContactTaskDescription.value);
+        console.log(e.target.checked);
+      });
+
+      ContactTaskGroup.appendChild(ContactTaskDate);
+      ContactTaskGroup.appendChild(ContactTaskDescription);
       ContactTaskGroup.appendChild(ContactTaskCheckBox);
     }
     return data;
