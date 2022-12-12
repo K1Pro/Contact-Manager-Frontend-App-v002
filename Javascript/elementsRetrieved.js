@@ -71,8 +71,8 @@ let DOMElements,
   contactsList,
   ContactFields,
   CalendarDates,
-  UniqueDays,
-  TaskList;
+  UniqueDays;
+// TaskList;
 // ^^^ All retrieved elements should be declared here ^^^
 
 // vvv This scans for all separate HTML Modules vvv
@@ -83,9 +83,9 @@ async function isElementLoaded(selector) {
 }
 isElementLoaded(
   '#CalendarHTMLModule' &&
+    '#ContactTasksHTMLModule' &&
     // '#DailyTasksHTMLModule' &&
     '#SidePanelHTMLModule' &&
-    '#ContactTasksHTMLModule' &&
     '#EmailHTMLModule'
 ).then(() => {
   console.log('retrieved all modules {All DOM elements retrieved}');

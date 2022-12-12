@@ -108,24 +108,24 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
   }
 }
 
-function loadDailyTasks(dailyTask) {
-  TaskList.innerHTML = '';
-  getJSON(`${RenewalURL}${dailyTask}`).then((data) => {
-    // Populates a list of task into the DailyTasks Module
-    for (const [key, value] of Object.entries(data.data.contacts)) {
-      // console.log(value);
-      let DailyTaskFullName = `${value.FirstName} ${value.LastName}`;
-      let DailyTask = document.createElement('div');
-      DailyTask.classList.add('renewal');
-      DailyTask.classList.add('text-light');
-      // DailyTask.setAttribute('href', '#');
-      DailyTask.innerHTML = DailyTaskFullName;
-      TaskList.appendChild(DailyTask);
-      // <button type="button" class="btn btn-warning">Warning</button>
-    }
-    // return data;
-  });
-}
+// function loadDailyTasks(dailyTask) {
+//   // TaskList.innerHTML = '';
+//   getJSON(`${RenewalURL}${dailyTask}`).then((data) => {
+//     // Populates a list of task into the DailyTasks Module
+//     for (const [key, value] of Object.entries(data.data.contacts)) {
+//       // console.log(value);
+//       let DailyTaskFullName = `${value.FirstName} ${value.LastName}`;
+//       let DailyTask = document.createElement('div');
+//       DailyTask.classList.add('renewal');
+//       DailyTask.classList.add('text-light');
+//       // DailyTask.setAttribute('href', '#');
+//       DailyTask.innerHTML = DailyTaskFullName;
+//       TaskList.appendChild(DailyTask);
+//       // <button type="button" class="btn btn-warning">Warning</button>
+//     }
+//     // return data;
+//   });
+// }
 
 function loadContactTasks(dailyTask) {
   ContactTaskList.innerHTML = '';

@@ -11,14 +11,14 @@
     height: 50vh;
   }
   .calendarHeaderRow {
-    height: 3vh;
+    height: 4vh;
   }
   .calendarRow {
-    height: 23.5vh;
+    height: 23vh;
     /* height: 11.75vh; */
   }
   .calendarSatSunRow {
-    height: 11.75vh;
+    height: 11.5vh;
     /* height: 5.875vh; */
   }
   .responsiveFont {
@@ -26,5 +26,8 @@
   }
   .responsiveHeaderFont {
     font-size: 1.875vh;
+  }
+  .calendarFooter {
+    height: 4vh;
   }
 }
