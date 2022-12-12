@@ -11,7 +11,7 @@ function elementsrequired() {
   contactTasksTextArea = document.getElementById('contactTasksTextArea');
   contactSearch = document.getElementById('contactSearch');
   contactsList = document.getElementById('contactsList');
-  TaskList = document.getElementById('TaskList');
+  // TaskList = document.getElementById('TaskList');
   ContactTaskList = document.getElementById('ContactTaskList');
   IDinput = document.getElementById('_id');
   // Retrieves contact inputs from side panel
@@ -83,7 +83,7 @@ async function isElementLoaded(selector) {
 }
 isElementLoaded(
   '#CalendarHTMLModule' &&
-    '#DailyTasksHTMLModule' &&
+    // '#DailyTasksHTMLModule' &&
     '#SidePanelHTMLModule' &&
     '#ContactTasksHTMLModule' &&
     '#EmailHTMLModule'

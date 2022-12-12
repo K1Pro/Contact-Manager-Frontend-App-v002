@@ -1,6 +1,10 @@
 @media only screen and (min-width: 768px) {
   .bartkaFullCol {
-    margin-top: -50vh;
+    margin-top: -100vh;
+    height: 100vh;
+  }
+  .bartkaFullCalCol {
+    /* margin-top: -50vh; */
     height: 100vh;
   }
   .bartkaHalfCol {
@@ -10,13 +14,15 @@
     height: 3vh;
   }
   .calendarRow {
-    height: 11.75vh;
+    height: 23.5vh;
+    /* height: 11.75vh; */
   }
   .calendarSatSunRow {
-    height: 5.875vh;
+    height: 11.75vh;
+    /* height: 5.875vh; */
   }
   .responsiveFont {
-    font-size: 1.25vh;
+    font-size: 1.65vh;
   }
   .responsiveHeaderFont {
     font-size: 1.875vh;
