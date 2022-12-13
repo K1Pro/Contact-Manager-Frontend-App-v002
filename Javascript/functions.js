@@ -59,6 +59,7 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     });
     getJSON(`${RenewalURL}${RenewalDates.toJSON().slice(5, 10)}`).then(
       (data) => {
+        // Populates renewals
         let renewalContact;
         if (data.data.contacts.length) {
           renewalContact = data.data.contacts;
@@ -78,12 +79,11 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     getJSON(
       `${ContactsWithCalEvents}${CalendarDates.toJSON().slice(0, 10)}`
     ).then((data) => {
+      // Populates completed and not completed calendar events
       let renewalContact;
       if (data.contacts.length) {
         renewalContact = data.contacts;
         renewalContact.map((x) => {
-          // console.log(x.CalendarEvents);
-          // x.CalendarEvents.forEach((element) => console.log(element));
           let p = document.createElement('div');
           const results = x.CalendarEvents.filter((obj) => {
             return (
@@ -95,8 +95,8 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
           } else {
             p.classList.add('Completed');
           }
+          p.setAttribute('id', `Event${results[0]._id}`);
           p.textContent = `${x.LastName}`;
-          p.classList.add('notCompleted');
           p.classList.add('text-light');
           p.addEventListener('click', (e) => {
             loadSidePanel(x.Phone);
@@ -107,25 +107,6 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     });
   }
 }
-
-// function loadDailyTasks(dailyTask) {
-//   // TaskList.innerHTML = '';
-//   getJSON(`${RenewalURL}${dailyTask}`).then((data) => {
-//     // Populates a list of task into the DailyTasks Module
-//     for (const [key, value] of Object.entries(data.data.contacts)) {
-//       // console.log(value);
-//       let DailyTaskFullName = `${value.FirstName} ${value.LastName}`;
-//       let DailyTask = document.createElement('div');
-//       DailyTask.classList.add('renewal');
-//       DailyTask.classList.add('text-light');
-//       // DailyTask.setAttribute('href', '#');
-//       DailyTask.innerHTML = DailyTaskFullName;
-//       TaskList.appendChild(DailyTask);
-//       // <button type="button" class="btn btn-warning">Warning</button>
-//     }
-//     // return data;
-//   });
-// }
 
 function loadContactTasks(dailyTask) {
   ContactTaskList.innerHTML = '';
@@ -149,13 +130,13 @@ function loadContactTasks(dailyTask) {
       ContactTaskList.appendChild(ContactTaskGroup);
 
       let ContactTaskDate = document.createElement('input');
-      let ContactTaskDescription = document.createElement('input');
+      let ContactTaskDescription = document.createElement('textarea');
       let ContactTaskCheckBox = document.createElement('input');
 
       // Creates a datetime-local Input
       ContactTaskDate.type = 'datetime-local';
       ContactTaskDate.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
-      ContactTaskDate.setAttribute('class', 'form-control');
+      ContactTaskDate.setAttribute('class', 'form-control eventDates');
       ContactTaskDate.addEventListener('change', (e) => {
         fetch(`${UpdateEvent}${value._id}`, {
           method: 'PATCH',
@@ -180,9 +161,17 @@ function loadContactTasks(dailyTask) {
       });
 
       // Creates a text input
-      ContactTaskDescription.type = 'text';
+      // ContactTaskDescription.type = 'input';
       ContactTaskDescription.value = `${value.Description}`;
-      ContactTaskDescription.setAttribute('class', 'form-control');
+      // console.log(Math.round(ContactTaskDescription.value.length / 100 + 1));
+      // console.log(ContactTaskDescription.value.length / 100 + 1);
+      ContactTaskDescription.rows = Math.round(
+        ContactTaskDescription.value.length / 60 + 1
+      );
+      ContactTaskDescription.setAttribute(
+        'class',
+        'form-control eventDescriptions'
+      );
       ContactTaskDescription.addEventListener('change', (e) => {
         fetch(`${UpdateEvent}${value._id}`, {
           method: 'PATCH',
@@ -233,6 +222,29 @@ function loadContactTasks(dailyTask) {
         })
           .then((response) => response.text())
           .then(() => {
+            let checkCompletion = document.getElementById(`Event${value._id}`);
+            if (checkCompletion) {
+              checkCompletion = checkCompletion.className;
+              if (checkCompletion.includes('notCompleted')) {
+                let checkCompletion = document.getElementById(
+                  `Event${value._id}`
+                );
+                checkCompletion.setAttribute('class', `Completed text-light`);
+              } else {
+                let checkCompletion = document.getElementById(
+                  `Event${value._id}`
+                );
+                checkCompletion.setAttribute(
+                  'class',
+                  `notCompleted text-light`
+                );
+              }
+            }
+
+            // let testName = document.getElementById(
+            //   `Event${value._id}`
+            // ).className;
+
             PhoneInput = document.getElementById('Phone');
             contactTasksTextArea.value = '';
             loadSidePanel(PhoneInput.value);

@@ -232,3 +232,23 @@
   height: 41px;
   background: red;
 }
+
+#createEventTime {
+  width: 10vw !important;
+}
+.eventDates {
+  position: absolute;
+  /* padding-right: 5vw !important;
+  margin-right: -5vw !important; */
+  width: 5vw !important;
+  z-index: 1;
+}
+.eventDescriptions {
+  position: absolute;
+  width: 13vw !important;
+  z-index: 3;
+}
+
+/* ::-webkit-calendar-picker-indicator {
+  margin-left: -125px;
+} */
