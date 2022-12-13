@@ -66,6 +66,10 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
           renewalContact.map((x) => {
             let p = document.createElement('div');
             p.textContent = `${x.LastName}`;
+            p.setAttribute(
+              'id',
+              `renewal${RenewalDates.toJSON().slice(5, 10)}${x._id}`
+            );
             p.classList.add('renewal');
             p.classList.add('text-light');
             p.addEventListener('click', (e) => {

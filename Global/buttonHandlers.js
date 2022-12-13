@@ -25,6 +25,25 @@ function buttonHandlers() {
     calendarDatesFillIn(TodaysDate, daysInWeek);
   });
 
+  renewalsCheckBox.addEventListener('click', function () {
+    renewals = document.getElementsByClassName('renewal');
+    for (key in renewals) {
+      if (renewals[key].className) {
+        console.log(document.getElementById(`${renewals[key].id}`));
+        document.getElementById(`${renewals[key].id}`).style.display = 'none';
+      }
+      // renewals[key].className.style.display = 'none';
+    }
+    // renewals.style.display = 'none';
+    console.log('its working');
+  });
+  completedCheckBox.addEventListener('click', function () {
+    console.log('its working');
+  });
+  notCompletedCheckBox.addEventListener('click', function () {
+    console.log('its working');
+  });
+
   // Create Event Button in ContactTasks Module
   createEvent.addEventListener('click', function () {
     if (_id.value && contactTasksTextArea.value) {

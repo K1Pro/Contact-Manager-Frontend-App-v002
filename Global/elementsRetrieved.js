@@ -20,6 +20,9 @@ function elementsrequired() {
   CalendarHTML_NextWeekBtn = document.getElementById('NextWeekButton');
   CalendarHTML_NextMonthBtn = document.getElementById('NextMonthButton');
   UniqueDays = document.getElementsByClassName('uniqueday');
+  renewalsCheckBox = document.getElementById('renewsCheckBox');
+  completedCheckBox = document.getElementById('completedCheckBox');
+  notCompletedCheckBox = document.getElementById('notCompletedCheckBox');
   CalendarDates = document
     .getElementById('calendarDates')
     .querySelectorAll('*');
@@ -31,16 +34,40 @@ function elementsrequired() {
         .getElementById(`${ContactFieldsIDs}`)
         .addEventListener('change', function (e) {
           if (_id.value) {
-            fetch(`${ContactsPatchURL}/${_id.value}`, {
-              method: 'PATCH',
-              body: JSON.stringify({
-                // This creates a key-value pair to be patached, ex: "FirstName": Bart
-                [this.id]: this.value,
-              }),
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            });
+            if (
+              this.id == 'Policy1RenewDate' ||
+              this.id == 'Policy2RenewDate' ||
+              this.id == 'Policy3RenewDate' ||
+              this.id == 'Policy4RenewDate'
+            ) {
+              let changedInfo = this.value.slice(5, 10);
+              let changedInputMMDD = this.id.replace('Date', 'MMDD');
+              // console.log(changedInput);
+              // console.log(changedInfo);
+              // console.log(`${ContactsPatchURL}/${_id.value}`);
+              fetch(`${ContactsPatchURL}/${_id.value}`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                  // This creates a key-value pair to be patached, ex: "FirstName": Bart
+                  [changedInputMMDD]: changedInfo,
+                }),
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+            } else {
+              fetch(`${ContactsPatchURL}/${_id.value}`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                  // This creates a key-value pair to be patached, ex: "FirstName": Bart
+                  [this.id]: this.value,
+                }),
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+            }
+            // this might be useful in the future dont enable for now until needed
             // .then((response) => response.text())
             // .then(() => {
             //   getJSON(ContactsURL).then((data) => {
@@ -73,7 +100,10 @@ let DOMElements,
   contactsList,
   ContactFields,
   CalendarDates,
-  UniqueDays;
+  UniqueDays,
+  renewalsCheckBox,
+  completedCheckBox,
+  notCompletedCheckBox;
 // TaskList;
 // ^^^ All retrieved elements should be declared here ^^^
 
