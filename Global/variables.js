@@ -9,3 +9,6 @@ let EventsURL = `http://192.168.64.9:8000/api/v2/contacts/events/`;
 let PhoneURL = `http://192.168.64.9:8000/api/v2/contacts?Phone=`;
 let ContactsWithCalEvents = `http://192.168.64.9:8000/api/v2/contacts/ContactsWithEvents/`;
 let UpdateEvent = `http://192.168.64.9:8000/api/v2/contacts/UpdateEvent/`;
+let deleteEmptyField = `http://192.168.64.9:8000/api/v2/contacts/deleteEmptyField/`;
+let randomNumber = `${Math.floor(Math.random() * 100)}${Date.now()}`;
+console.log(randomNumber);

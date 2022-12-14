@@ -68,7 +68,7 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
             p.textContent = `${x.LastName}`;
             p.setAttribute(
               'id',
-              `renewal${RenewalDates.toJSON().slice(5, 10)}${x._id}`
+              `renewal${x._id}${Math.floor(Math.random() * 100)}`
             );
             p.classList.add('renewal');
             p.classList.add('text-light');
