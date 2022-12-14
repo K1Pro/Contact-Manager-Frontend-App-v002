@@ -44,6 +44,21 @@ function buttonHandlers() {
     console.log('its working');
   });
 
+  // Review Button in Side Panel
+  reviewContact.addEventListener('click', function () {
+    if (_id.value) {
+      let reviewDate = TodaysDate.toJSON().slice(0, 10);
+      fetch(`${ContactsPatchURL}/${_id.value}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          LastEditDate: reviewDate,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    }
+  });
   // Create Event Button in ContactTasks Module
   createEvent.addEventListener('click', function () {
     if (_id.value && contactTasksTextArea.value) {

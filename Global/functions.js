@@ -65,12 +65,21 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
           renewalContact = data.data.contacts;
           renewalContact.map((x) => {
             let p = document.createElement('div');
+            let calDateNoDash = `${CalendarDates.toJSON()
+              .slice(0, 10)
+              .replaceAll('-', '')}`;
+            let lastEditDateNoDash = `${x.LastEditDate.replaceAll('-', '')}`;
+            if (lastEditDateNoDash < calDateNoDash) {
+              p.classList.add('renewal');
+            } else {
+              p.classList.add('Completed');
+            }
             p.textContent = `${x.LastName}`;
             p.setAttribute(
               'id',
               `renewal${x._id}${Math.floor(Math.random() * 100)}`
             );
-            p.classList.add('renewal');
+
             p.classList.add('text-light');
             p.addEventListener('click', (e) => {
               loadSidePanel(x.Phone);

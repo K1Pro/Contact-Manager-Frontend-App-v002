@@ -9,10 +9,11 @@ function elementsrequired() {
   // Side Panel Module Elements
   contactSearch = document.getElementById('contactSearch');
   contactsList = document.getElementById('contactsList');
-  IDinput = document.getElementById('_id');
+  // IDinput = document.getElementById('_id'); Delete this sooner or later if it is not needed
   ContactFields = document
     .getElementById('ContactFields')
     .querySelectorAll('*');
+  reviewContact = document.getElementById('reviewContact');
   // Calendar Module Elements
   CalendarHTML_Date = document.getElementById('CalendarDate');
   CalendarHTML_PrevMonthBtn = document.getElementById('LastMonthButton');

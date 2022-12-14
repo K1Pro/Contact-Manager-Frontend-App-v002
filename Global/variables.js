@@ -11,4 +11,3 @@ let ContactsWithCalEvents = `http://192.168.64.9:8000/api/v2/contacts/ContactsWi
 let UpdateEvent = `http://192.168.64.9:8000/api/v2/contacts/UpdateEvent/`;
 let deleteEmptyField = `http://192.168.64.9:8000/api/v2/contacts/deleteEmptyField/`;
 let randomNumber = `${Math.floor(Math.random() * 100)}${Date.now()}`;
-console.log(randomNumber);

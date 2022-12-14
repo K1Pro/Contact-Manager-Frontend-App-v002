@@ -169,12 +169,12 @@
 }
 .renewal:hover {
   background-color: #0066ff;
-  border-radius: 0px !important;
+  /* border-radius: 0px !important;
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
   -o-transition: all 1s ease;
   -ms-transition: all 1s ease;
-  transition: all 1s ease;
+  transition: all 1s ease; */
 }
 
 .notCompleted {
@@ -192,12 +192,12 @@
 }
 .notCompleted:hover {
   background-color: #0066ff;
-  border-radius: 0px !important;
+  /* border-radius: 0px !important;
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
   -o-transition: all 1s ease;
   -ms-transition: all 1s ease;
-  transition: all 1s ease;
+  transition: all 1s ease; */
 }
 
 .Completed {
@@ -216,12 +216,12 @@
 
 .Completed:hover {
   background-color: #0066ff;
-  border-radius: 0px !important;
+  /* border-radius: 0px !important;
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
   -o-transition: all 1s ease;
   -ms-transition: all 1s ease;
-  transition: all 1s ease;
+  transition: all 1s ease; */
 }
 .bartkaCheckbox {
   width: 41px;
