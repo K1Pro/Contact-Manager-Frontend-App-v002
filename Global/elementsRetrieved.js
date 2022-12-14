@@ -34,46 +34,75 @@ function elementsrequired() {
         .getElementById(`${ContactFieldsIDs}`)
         .addEventListener('change', function (e) {
           if (_id.value) {
-            if (
-              this.id == 'Policy1RenewDate' ||
-              this.id == 'Policy2RenewDate' ||
-              this.id == 'Policy3RenewDate' ||
-              this.id == 'Policy4RenewDate'
-            ) {
-              let changedInfo = this.value.slice(5, 10);
-              let changedInputMMDD = this.id.replace('Date', 'MMDD');
-              // console.log(changedInput);
-              // console.log(changedInfo);
-              // console.log(`${ContactsPatchURL}/${_id.value}`);
-              fetch(`${ContactsPatchURL}/${_id.value}`, {
-                method: 'PATCH',
-                body: JSON.stringify({
-                  // This creates a key-value pair to be patached, ex: "FirstName": Bart
-                  [changedInputMMDD]: changedInfo,
-                }),
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              });
+            let checkEmptyFields = this.value;
+            if (!checkEmptyFields.replace(/\s/g, '').length) {
+              console.log(
+                'string only contains whitespace (ie. spaces, tabs or line breaks)'
+              );
+              if (
+                this.id == 'Policy1RenewDate' ||
+                this.id == 'Policy2RenewDate' ||
+                this.id == 'Policy3RenewDate' ||
+                this.id == 'Policy4RenewDate'
+              ) {
+                let changedInputMMDD = this.id.replace('Date', 'MMDD');
+                fetch(`${deleteEmptyField}${_id.value}`, {
+                  method: 'DELETE',
+                  body: JSON.stringify({
+                    [changedInputMMDD]: '',
+                  }),
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                });
+              } else {
+                fetch(`${deleteEmptyField}${_id.value}`, {
+                  method: 'DELETE',
+                  body: JSON.stringify({
+                    [this.id]: '',
+                  }),
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                });
+              }
             } else {
-              fetch(`${ContactsPatchURL}/${_id.value}`, {
-                method: 'PATCH',
-                body: JSON.stringify({
-                  // This creates a key-value pair to be patached, ex: "FirstName": Bart
-                  [this.id]: this.value,
-                }),
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              });
+              if (
+                this.id == 'Policy1RenewDate' ||
+                this.id == 'Policy2RenewDate' ||
+                this.id == 'Policy3RenewDate' ||
+                this.id == 'Policy4RenewDate'
+              ) {
+                let changedInfo = this.value.slice(5, 10);
+                let changedInputMMDD = this.id.replace('Date', 'MMDD');
+                fetch(`${ContactsPatchURL}/${_id.value}`, {
+                  method: 'PATCH',
+                  body: JSON.stringify({
+                    [changedInputMMDD]: changedInfo,
+                  }),
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                });
+              } else {
+                fetch(`${ContactsPatchURL}/${_id.value}`, {
+                  method: 'PATCH',
+                  body: JSON.stringify({
+                    [this.id]: this.value,
+                  }),
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                });
+              }
+              // this might be useful in the future dont enable for now until needed
+              // .then((response) => response.text())
+              // .then(() => {
+              //   getJSON(ContactsURL).then((data) => {
+              //     console.log(data);
+              //   });
+              // });
             }
-            // this might be useful in the future dont enable for now until needed
-            // .then((response) => response.text())
-            // .then(() => {
-            //   getJSON(ContactsURL).then((data) => {
-            //     console.log(data);
-            //   });
-            // });
           } else {
             alert('Please search for and choose a customer.');
           }
