@@ -1,16 +1,18 @@
-<div class="input-group mb-3">
+<div class="input-group">
   <input
     type="datetime-local"
     id="createEventTime"
     min="2000-06-06T00:00"
     max="2050-06-22T00:00"
   />
-  <!-- <label class="input-group-text" for="inputGroupSelect02">Options</label> -->
-  <textarea
-    id="contactTasksTextArea"
-    class="form-control border border-dark"
-    placeholder="Please select your contact and type their today's event here..."
-  ></textarea>
+  <select class="form-select border border-dark" id="EventAuthor">
+    <option selected disabled="disabled">Agent</option>
+    <option value="Hanna">Hanna</option>
+    <option value="Bart">Bart</option>
+    <option value="Kamilla">Kamilla</option>
+    <option value="Piotr">Piotr</option>
+    <option value="Aneta">Aneta</option>
+  </select>
   <button
     class="btn btn-success border border-white"
     type="button"
@@ -18,6 +20,14 @@
   >
     Create Event
   </button>
+  <!-- <label class="input-group-text" for="inputGroupSelect02">Options</label> -->
+</div>
+<div class="input-group">
+  <textarea
+    id="contactTasksTextArea"
+    class="form-control border border-dark"
+    placeholder="Please select your contact and type their today's event here..."
+  ></textarea>
 </div>
 <form id="ContactTaskList"></form>
 <div id="ContactTasksHTMLModule"></div>
