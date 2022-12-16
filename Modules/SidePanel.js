@@ -8,6 +8,14 @@ function sidePanelModule() {
       searchDataSet.label = FullName;
       searchDataSet.innerHTML = value.Phone;
       contactsList.appendChild(searchDataSet);
+      if (value.SpouseName && value.SpouseLastName) {
+        // console.log(`${value.SpouseName} ${value.SpouseLastName}`);
+        let SpouseFullName = `${value.SpouseName} ${value.SpouseLastName}`;
+        let spouseSearchDataSet = document.createElement('option');
+        spouseSearchDataSet.label = SpouseFullName;
+        spouseSearchDataSet.innerHTML = value.Phone;
+        contactsList.appendChild(spouseSearchDataSet);
+      }
     }
     return data;
   });

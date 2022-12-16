@@ -6,6 +6,7 @@ function elementsrequired() {
   contactTasksTextArea = document.getElementById('contactTasksTextArea');
   createEventTime = document.getElementById('createEventTime');
   createEvent = document.getElementById('createEvent');
+  EventAuthor = document.getElementById('EventAuthor');
   // Side Panel Module Elements
   contactSearch = document.getElementById('contactSearch');
   contactsList = document.getElementById('contactsList');
@@ -56,6 +57,7 @@ function elementsrequired() {
                     'Content-Type': 'application/json',
                   },
                 });
+                contactEditDate();
               } else {
                 fetch(`${deleteEmptyField}${_id.value}`, {
                   method: 'DELETE',
@@ -66,6 +68,7 @@ function elementsrequired() {
                     'Content-Type': 'application/json',
                   },
                 });
+                contactEditDate();
               }
             } else {
               if (
@@ -85,6 +88,7 @@ function elementsrequired() {
                     'Content-Type': 'application/json',
                   },
                 });
+                contactEditDate();
               } else {
                 fetch(`${ContactsPatchURL}/${_id.value}`, {
                   method: 'PATCH',
@@ -95,6 +99,7 @@ function elementsrequired() {
                     'Content-Type': 'application/json',
                   },
                 });
+                contactEditDate();
               }
               // this might be useful in the future dont enable for now until needed
               // .then((response) => response.text())

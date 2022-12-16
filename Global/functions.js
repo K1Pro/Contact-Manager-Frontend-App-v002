@@ -4,6 +4,28 @@ console.log('retrieved all global functions');
 // getJSON(`${ContactsWithCalEvents}`).then((data) => {
 //   console.log(data.contact);
 // });
+function initiallyLoadSidePanel() {
+  let initialLoadDate = `${TodaysDate.toJSON().slice(0, 10)}`;
+
+  getJSON(`${lastEdittedContact}${initialLoadDate}`).then((data) => {
+    // console.log(data.data.contacts[0]);
+
+    for (let rep = 0; rep < ContactFields.length; rep++) {
+      let ContactFieldsIDs = ContactFields[rep].id;
+      if (ContactFieldsIDs) {
+        document.getElementById(`${ContactFieldsIDs}`).value = data.data
+          .contacts[0][ContactFieldsIDs]
+          ? `${data.data.contacts[0][ContactFieldsIDs]}`
+          : '';
+      }
+      if (ContactFieldsIDs == '_id') {
+        let contactID = document.getElementById(`${ContactFieldsIDs}`);
+        loadContactTasks(contactID.value);
+      }
+    }
+  });
+}
+initiallyLoadSidePanel();
 
 function loadSidePanel(e) {
   // This populates the Side Panel Input Fields following a Contact Search
@@ -68,8 +90,9 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
             let calDateNoDash = `${CalendarDates.toJSON()
               .slice(0, 10)
               .replaceAll('-', '')}`;
-            let lastEditDateNoDash = `${x.LastEditDate.replaceAll('-', '')}`;
-            if (lastEditDateNoDash < calDateNoDash) {
+            // prettier-ignore
+            let lastReviewDateNoDash = `${x.LastReviewDate.replaceAll('-', '')}`;
+            if (lastReviewDateNoDash < calDateNoDash) {
               p.classList.add('renewal');
             } else {
               p.classList.add('Completed');
@@ -145,6 +168,7 @@ function loadContactTasks(dailyTask) {
       let ContactTaskDate = document.createElement('input');
       let ContactTaskDescription = document.createElement('textarea');
       let ContactTaskCheckBox = document.createElement('input');
+      let ContactTaskAuthor = document.createElement('select');
 
       // Creates a datetime-local Input
       ContactTaskDate.type = 'datetime-local';
@@ -155,6 +179,7 @@ function loadContactTasks(dailyTask) {
           method: 'PATCH',
           body: JSON.stringify({
             _id: value._id,
+            EventAuthor: ContactTaskAuthor.value,
             DateYYYYMMDD: e.target.value.slice(0, 10),
             DateHHMMSS: e.target.value.slice(10, 16),
             Description: ContactTaskDescription.value,
@@ -166,6 +191,7 @@ function loadContactTasks(dailyTask) {
         })
           .then((response) => response.text())
           .then(() => {
+            contactEditDate();
             // console.log(response);
             PhoneInput = document.getElementById('Phone');
             contactTasksTextArea.value = '';
@@ -173,13 +199,14 @@ function loadContactTasks(dailyTask) {
           });
       });
 
-      // Creates a text input
+      // Creates a text input for the description
       // ContactTaskDescription.type = 'input';
       ContactTaskDescription.value = `${value.Description}`;
+      ContactTaskDescription.spellcheck = 'false';
       // console.log(Math.round(ContactTaskDescription.value.length / 100 + 1));
       // console.log(ContactTaskDescription.value.length / 100 + 1);
       ContactTaskDescription.rows = Math.round(
-        ContactTaskDescription.value.length / 60 + 1
+        ContactTaskDescription.value.length / 120 + 1
       );
       ContactTaskDescription.setAttribute(
         'class',
@@ -190,6 +217,7 @@ function loadContactTasks(dailyTask) {
           method: 'PATCH',
           body: JSON.stringify({
             _id: value._id,
+            EventAuthor: ContactTaskAuthor.value,
             DateYYYYMMDD: ContactTaskDate.value.slice(0, 10),
             DateHHMMSS: ContactTaskDate.value.slice(10, 16),
             Description: e.target.value,
@@ -201,6 +229,62 @@ function loadContactTasks(dailyTask) {
         })
           .then((response) => response.text())
           .then(() => {
+            contactEditDate();
+            PhoneInput = document.getElementById('Phone');
+            contactTasksTextArea.value = '';
+            loadSidePanel(PhoneInput.value);
+          });
+      });
+
+      // Create a select input for the Event Author
+      let opt1 = document.createElement('option');
+      let opt2 = document.createElement('option');
+      let opt3 = document.createElement('option');
+      let opt4 = document.createElement('option');
+      let opt5 = document.createElement('option');
+      opt1.value = 'Bart';
+      opt1.innerHTML = 'Bart';
+      if (value.EventAuthor == 'Bart') {
+        opt1.selected = true;
+      }
+      opt2.value = 'Hanna';
+      opt2.innerHTML = 'Hanna';
+      if (value.EventAuthor == 'Hanna') {
+        opt2.selected = true;
+      }
+      opt3.value = 'Kamilla';
+      opt3.innerHTML = 'Kamilla';
+      if (value.EventAuthor == 'Kamilla') {
+        opt3.selected = true;
+      }
+      opt4.value = 'Piotr';
+      opt4.innerHTML = 'Piotr';
+      if (value.EventAuthor == 'Piotr') {
+        opt4.selected = true;
+      }
+      opt5.value = 'Aneta';
+      opt5.innerHTML = 'Aneta';
+      if (value.EventAuthor == 'Aneta') {
+        opt5.selected = true;
+      }
+      ContactTaskAuthor.addEventListener('change', (e) => {
+        fetch(`${UpdateEvent}${value._id}`, {
+          method: 'PATCH',
+          body: JSON.stringify({
+            _id: value._id,
+            EventAuthor: e.target.value,
+            DateYYYYMMDD: ContactTaskDate.value.slice(0, 10),
+            DateHHMMSS: ContactTaskDate.value.slice(10, 16),
+            Description: ContactTaskDescription.value,
+            Completed: ContactTaskCheckBox.checked,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.text())
+          .then(() => {
+            contactEditDate();
             PhoneInput = document.getElementById('Phone');
             contactTasksTextArea.value = '';
             loadSidePanel(PhoneInput.value);
@@ -224,6 +308,7 @@ function loadContactTasks(dailyTask) {
           method: 'PATCH',
           body: JSON.stringify({
             _id: value._id,
+            EventAuthor: ContactTaskAuthor.value,
             DateYYYYMMDD: ContactTaskDate.value.slice(0, 10),
             DateHHMMSS: ContactTaskDate.value.slice(10, 16),
             Description: ContactTaskDescription.value,
@@ -235,6 +320,7 @@ function loadContactTasks(dailyTask) {
         })
           .then((response) => response.text())
           .then(() => {
+            contactEditDate();
             let checkCompletion = document.getElementById(`Event${value._id}`);
             if (checkCompletion) {
               checkCompletion = checkCompletion.className;
@@ -265,9 +351,30 @@ function loadContactTasks(dailyTask) {
       });
 
       ContactTaskGroup.appendChild(ContactTaskDate);
-      ContactTaskGroup.appendChild(ContactTaskDescription);
+      ContactTaskGroup.appendChild(ContactTaskAuthor);
+      ContactTaskAuthor.appendChild(opt1);
+      ContactTaskAuthor.appendChild(opt2);
+      ContactTaskAuthor.appendChild(opt3);
+      ContactTaskAuthor.appendChild(opt4);
+      ContactTaskAuthor.appendChild(opt5);
       ContactTaskGroup.appendChild(ContactTaskCheckBox);
+      ContactTaskList.appendChild(ContactTaskDescription);
     }
     return data;
   });
+}
+
+function contactEditDate() {
+  if (_id.value) {
+    let lastEditDate = TodaysDate.toJSON().slice(0, 10);
+    fetch(`${ContactsPatchURL}/${_id.value}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        LastEditDate: lastEditDate,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }
 }

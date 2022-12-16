@@ -51,7 +51,7 @@ function buttonHandlers() {
       fetch(`${ContactsPatchURL}/${_id.value}`, {
         method: 'PATCH',
         body: JSON.stringify({
-          LastEditDate: reviewDate,
+          LastReviewDate: reviewDate,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -72,6 +72,7 @@ function buttonHandlers() {
             // id: _id.value,
             // EventID: calendarEventsArray.length + 1,
             // Date: createEventTime.value,
+            EventAuthor: EventAuthor.value,
             DateYYYYMMDD: createEventTime.value.slice(0, 10),
             DateHHMMSS: createEventTime.value.slice(10, 16),
             Description: contactTasksTextArea.value,
@@ -90,6 +91,7 @@ function buttonHandlers() {
         })
           .then((response) => response.text())
           .then(() => {
+            contactEditDate();
             PhoneInput = document.getElementById('Phone');
             contactTasksTextArea.value = '';
             loadSidePanel(PhoneInput.value);
