@@ -7,7 +7,7 @@ console.log('retrieved all global functions');
 function initiallyLoadSidePanel() {
   let initialLoadDate = `${TodaysDate.toJSON().slice(0, 10)}`;
 
-  getJSON(`${lastEdittedContact}${initialLoadDate}`).then((data) => {
+  getJSON(`${lastEdittedContact}`).then((data) => {
     // console.log(data.data.contacts[0]);
 
     for (let rep = 0; rep < ContactFields.length; rep++) {
@@ -173,7 +173,10 @@ function loadContactTasks(dailyTask) {
       // Creates a datetime-local Input
       ContactTaskDate.type = 'datetime-local';
       ContactTaskDate.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
-      ContactTaskDate.setAttribute('class', 'form-control eventDates');
+      ContactTaskDate.setAttribute(
+        'class',
+        'form-control eventDates border-bottom-0'
+      );
       ContactTaskDate.addEventListener('change', (e) => {
         fetch(`${UpdateEvent}${value._id}`, {
           method: 'PATCH',
@@ -210,7 +213,7 @@ function loadContactTasks(dailyTask) {
       );
       ContactTaskDescription.setAttribute(
         'class',
-        'form-control eventDescriptions'
+        'form-control eventDescriptions border-top-0'
       );
       ContactTaskDescription.addEventListener('change', (e) => {
         fetch(`${UpdateEvent}${value._id}`, {
@@ -242,9 +245,10 @@ function loadContactTasks(dailyTask) {
       let opt3 = document.createElement('option');
       let opt4 = document.createElement('option');
       let opt5 = document.createElement('option');
-      opt1.value = 'Bart';
-      opt1.innerHTML = 'Bart';
-      if (value.EventAuthor == 'Bart') {
+      let opt6 = document.createElement('option');
+      opt1.value = 'Bartosz';
+      opt1.innerHTML = 'Bartosz';
+      if (value.EventAuthor == 'Bartosz') {
         opt1.selected = true;
       }
       opt2.value = 'Hanna';
@@ -266,6 +270,11 @@ function loadContactTasks(dailyTask) {
       opt5.innerHTML = 'Aneta';
       if (value.EventAuthor == 'Aneta') {
         opt5.selected = true;
+      }
+      opt6.value = 'Yuliya';
+      opt6.innerHTML = 'Yuliya';
+      if (value.EventAuthor == 'Yuliya') {
+        opt6.selected = true;
       }
       ContactTaskAuthor.addEventListener('change', (e) => {
         fetch(`${UpdateEvent}${value._id}`, {
@@ -357,6 +366,7 @@ function loadContactTasks(dailyTask) {
       ContactTaskAuthor.appendChild(opt3);
       ContactTaskAuthor.appendChild(opt4);
       ContactTaskAuthor.appendChild(opt5);
+      ContactTaskAuthor.appendChild(opt6);
       ContactTaskGroup.appendChild(ContactTaskCheckBox);
       ContactTaskList.appendChild(ContactTaskDescription);
     }

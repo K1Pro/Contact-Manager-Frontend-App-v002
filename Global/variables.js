@@ -10,5 +10,5 @@ let PhoneURL = `http://192.168.64.9:8000/api/v2/contacts?Phone=`;
 let ContactsWithCalEvents = `http://192.168.64.9:8000/api/v2/contacts/ContactsWithEvents/`;
 let UpdateEvent = `http://192.168.64.9:8000/api/v2/contacts/UpdateEvent/`;
 let deleteEmptyField = `http://192.168.64.9:8000/api/v2/contacts/deleteEmptyField/`;
-let lastEdittedContact = `http://192.168.64.9:8000/api/v2/contacts?page=1&LastEditDate=`;
+let lastEdittedContact = `http://192.168.64.9:8000/api/v2/contacts?sort=-LastEditDate`;
 let randomNumber = `${Math.floor(Math.random() * 100)}${Date.now()}`;
