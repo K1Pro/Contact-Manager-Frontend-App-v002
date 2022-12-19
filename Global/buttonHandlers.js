@@ -48,7 +48,7 @@ function buttonHandlers() {
   reviewContact.addEventListener('click', function () {
     if (_id.value) {
       let reviewDate = TodaysDate.toJSON().slice(0, 10);
-      fetch(`${ContactsPatchURL}/${_id.value}`, {
+      fetch(`${ContactsPatchURL}${_id.value}`, {
         method: 'PATCH',
         body: JSON.stringify({
           LastReviewDate: reviewDate,
@@ -62,7 +62,7 @@ function buttonHandlers() {
   // Create Event Button in ContactTasks Module
   createEvent.addEventListener('click', function () {
     if (_id.value && contactTasksTextArea.value) {
-      getJSON(`${ContactsPatchURL}/${_id.value}`).then((data) => {
+      getJSON(`${ContactsPatchURL}${_id.value}`).then((data) => {
         let calendarEventsArray = data.data.contact.CalendarEvents
           ? data.data.contact.CalendarEvents
           : [];
@@ -79,7 +79,7 @@ function buttonHandlers() {
             Completed: false,
           })
         );
-        fetch(`${ContactsPatchURL}/${_id.value}`, {
+        fetch(`${ContactsPatchURL}${_id.value}`, {
           method: 'PATCH',
           body: JSON.stringify({
             // This creates a key-value pair to be patached, ex: "FirstName": Bart
