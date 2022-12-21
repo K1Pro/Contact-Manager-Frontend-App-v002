@@ -25,7 +25,6 @@ function initiallyLoadSidePanel() {
     }
   });
 }
-initiallyLoadSidePanel();
 
 function loadSidePanel(e) {
   // This populates the Side Panel Input Fields following a Contact Search
