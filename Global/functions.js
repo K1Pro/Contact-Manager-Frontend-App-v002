@@ -7,7 +7,7 @@ console.log('retrieved all global functions');
 function initiallyLoadSidePanel() {
   let initialLoadDate = `${TodaysDate.toJSON().slice(0, 10)}`;
 
-  getJSON(`${lastEdittedContact}`).then((data) => {
+  getJSON(`${serverURL}${lastEdittedContactPath}`).then((data) => {
     // console.log(data.data.contacts[0]);
 
     for (let rep = 0; rep < ContactFields.length; rep++) {
@@ -30,7 +30,7 @@ initiallyLoadSidePanel();
 function loadSidePanel(e) {
   // This populates the Side Panel Input Fields following a Contact Search
   // console.log(`here is the input of ID: ${IDinput.value}`);
-  getJSON(`${PhoneURL}${e}`).then((data) => {
+  getJSON(`${serverURL}${phonePath}${e}`).then((data) => {
     // console.log(data.data.contacts[0].CalendarEvents);
     // console.log(data.data.contacts[0]._id);
     for (let rep = 0; rep < ContactFields.length; rep++) {
@@ -79,41 +79,44 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     document.getElementById(`day${rep}`).addEventListener('click', () => {
       CalendarHTML_Date.innerHTML = `${CalendarDates.toJSON().slice(0, 10)}`;
     });
-    getJSON(`${RenewalURL}${RenewalDates.toJSON().slice(5, 10)}`).then(
-      (data) => {
-        // Populates renewals
-        let renewalContact;
-        if (data.data.contacts.length) {
-          renewalContact = data.data.contacts;
-          renewalContact.map((x) => {
-            let p = document.createElement('div');
-            let calDateNoDash = `${CalendarDates.toJSON()
-              .slice(0, 10)
-              .replaceAll('-', '')}`;
-            // prettier-ignore
-            let lastReviewDateNoDash = `${x.LastReviewDate.replaceAll('-', '')}`;
-            if (lastReviewDateNoDash < calDateNoDash) {
-              p.classList.add('renewal');
-            } else {
-              p.classList.add('Completed');
-            }
-            p.textContent = `${x.LastName}`;
-            p.setAttribute(
-              'id',
-              `renewal${x._id}${Math.floor(Math.random() * 100)}`
-            );
-
-            p.classList.add('text-light');
-            p.addEventListener('click', (e) => {
-              loadSidePanel(x.Phone);
-            });
-            document.getElementById(`day${rep}`).appendChild(p);
-          });
-        }
-      }
-    );
     getJSON(
-      `${ContactsWithCalEvents}${CalendarDates.toJSON().slice(0, 10)}`
+      `${serverURL}${renewalPath}${RenewalDates.toJSON().slice(5, 10)}`
+    ).then((data) => {
+      // Populates renewals
+      let renewalContact;
+      if (data.data.contacts.length) {
+        renewalContact = data.data.contacts;
+        renewalContact.map((x) => {
+          let p = document.createElement('div');
+          let calDateNoDash = `${CalendarDates.toJSON()
+            .slice(0, 10)
+            .replaceAll('-', '')}`;
+          // prettier-ignore
+          let lastReviewDateNoDash = `${x.LastReviewDate.replaceAll('-', '')}`;
+          if (lastReviewDateNoDash < calDateNoDash) {
+            p.classList.add('renewal');
+          } else {
+            p.classList.add('Completed');
+          }
+          p.textContent = `${x.LastName}`;
+          p.setAttribute(
+            'id',
+            `renewal${x._id}${Math.floor(Math.random() * 100)}`
+          );
+
+          p.classList.add('text-light');
+          p.addEventListener('click', (e) => {
+            loadSidePanel(x.Phone);
+          });
+          document.getElementById(`day${rep}`).appendChild(p);
+        });
+      }
+    });
+    getJSON(
+      `${serverURL}${contactsWithCalEventsPath}${CalendarDates.toJSON().slice(
+        0,
+        10
+      )}`
     ).then((data) => {
       // Populates completed and not completed calendar events
       let renewalContact;
@@ -146,7 +149,7 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
 
 function loadContactTasks(dailyTask) {
   ContactTaskList.innerHTML = '';
-  getJSON(`${EventsURL}${dailyTask}`).then((data) => {
+  getJSON(`${serverURL}${eventsPath}${dailyTask}`).then((data) => {
     // sorts the array in reverse chronological order
     let CalendarEventsArray = data.data.CalendarEvents;
     function compare(a, b) {
@@ -178,7 +181,7 @@ function loadContactTasks(dailyTask) {
         'form-control eventDates border-bottom-0'
       );
       ContactTaskDate.addEventListener('change', (e) => {
-        fetch(`${UpdateEvent}${value._id}`, {
+        fetch(`${serverURL}${updateEventPath}${value._id}`, {
           method: 'PATCH',
           body: JSON.stringify({
             _id: value._id,
@@ -216,7 +219,7 @@ function loadContactTasks(dailyTask) {
         'form-control eventDescriptions border-top-0'
       );
       ContactTaskDescription.addEventListener('change', (e) => {
-        fetch(`${UpdateEvent}${value._id}`, {
+        fetch(`${serverURL}${updateEventPath}${value._id}`, {
           method: 'PATCH',
           body: JSON.stringify({
             _id: value._id,
@@ -277,7 +280,7 @@ function loadContactTasks(dailyTask) {
         opt6.selected = true;
       }
       ContactTaskAuthor.addEventListener('change', (e) => {
-        fetch(`${UpdateEvent}${value._id}`, {
+        fetch(`${serverURL}${updateEventPath}${value._id}`, {
           method: 'PATCH',
           body: JSON.stringify({
             _id: value._id,
@@ -313,7 +316,7 @@ function loadContactTasks(dailyTask) {
         // console.log(ContactTaskDate.value.slice(10, 16));
         // console.log(ContactTaskDescription.value);
         // console.log(e.target.checked);
-        fetch(`${UpdateEvent}${value._id}`, {
+        fetch(`${serverURL}${updateEventPath}${value._id}`, {
           method: 'PATCH',
           body: JSON.stringify({
             _id: value._id,
@@ -377,7 +380,7 @@ function loadContactTasks(dailyTask) {
 function contactEditDate() {
   if (_id.value) {
     let lastEditDate = TodaysDate.toJSON().slice(0, 10);
-    fetch(`${ContactsPatchURL}${_id.value}`, {
+    fetch(`${serverURL}${contactsPatchPath}${_id.value}`, {
       method: 'PATCH',
       body: JSON.stringify({
         LastEditDate: lastEditDate,

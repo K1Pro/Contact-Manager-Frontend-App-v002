@@ -48,7 +48,7 @@ function elementsrequired() {
                 this.id == 'Policy4RenewDate'
               ) {
                 let changedInputMMDD = this.id.replace('Date', 'MMDD');
-                fetch(`${deleteEmptyField}${_id.value}`, {
+                fetch(`${serverURL}${deleteEmptyFieldPath}${_id.value}`, {
                   method: 'DELETE',
                   body: JSON.stringify({
                     [changedInputMMDD]: '',
@@ -59,7 +59,7 @@ function elementsrequired() {
                 });
                 contactEditDate();
               } else {
-                fetch(`${deleteEmptyField}${_id.value}`, {
+                fetch(`${serverURL}${deleteEmptyFieldPath}${_id.value}`, {
                   method: 'DELETE',
                   body: JSON.stringify({
                     [this.id]: '',
@@ -79,7 +79,7 @@ function elementsrequired() {
               ) {
                 let changedInfo = this.value.slice(5, 10);
                 let changedInputMMDD = this.id.replace('Date', 'MMDD');
-                fetch(`${ContactsPatchURL}${_id.value}`, {
+                fetch(`${serverURL}${contactsPatchPath}${_id.value}`, {
                   method: 'PATCH',
                   body: JSON.stringify({
                     [changedInputMMDD]: changedInfo,
@@ -90,7 +90,7 @@ function elementsrequired() {
                 });
                 contactEditDate();
               } else {
-                fetch(`${ContactsPatchURL}${_id.value}`, {
+                fetch(`${serverURL}${contactsPatchPath}${_id.value}`, {
                   method: 'PATCH',
                   body: JSON.stringify({
                     [this.id]: this.value,
