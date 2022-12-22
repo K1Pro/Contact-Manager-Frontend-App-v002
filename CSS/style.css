@@ -66,6 +66,9 @@
 #_id {
   display: none;
 }
+.hiddenContact {
+  display: none;
+}
 #contactsList {
   height: 10px;
 }

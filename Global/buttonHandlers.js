@@ -29,10 +29,20 @@ function buttonHandlers() {
     renewals = document.getElementsByClassName('renewal');
     for (key in renewals) {
       if (renewals[key].className) {
-        console.log(document.getElementById(`${renewals[key].id}`));
-        document.getElementById(`${renewals[key].id}`).style.display = 'none';
+        if (renewals[key].className.includes('hiddenContact')) {
+          // console.log(document.getElementById(`${renewals[key].id}`));
+          // console.log(renewals[key].className.includes('hiddenContact'));
+          // document.getElementById(`${renewals[key].id}`).style.display = 'none';
+          document
+            .getElementById(`${renewals[key].id}`)
+            .classList.remove('hiddenContact');
+        } else {
+          document
+            .getElementById(`${renewals[key].id}`)
+            .classList.add('hiddenContact');
+        }
+        // renewals[key].className.style.display = 'none';
       }
-      // renewals[key].className.style.display = 'none';
     }
     // renewals.style.display = 'none';
     console.log('its working');

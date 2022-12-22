@@ -97,6 +97,8 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
           } else {
             p.classList.add('Completed');
           }
+          p.classList.add(`${x.Status.replace(' ', '')}`);
+          p.classList.add(`${x.Source.replace(' ', '')}`);
           p.textContent = `${x.LastName}`;
           p.setAttribute(
             'id',
