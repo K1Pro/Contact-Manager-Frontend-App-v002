@@ -10,5 +10,5 @@ const phonePath = `?Phone=`;
 const contactsWithCalEventsPath = `/ContactsWithEvents/`;
 const updateEventPath = `/UpdateEvent/`;
 const deleteEmptyFieldPath = `/deleteEmptyField/`;
-const lastEdittedContactPath = `?limit=1&sort=-LastEditDate`;
+const lastEdittedContactPath = `/MostRecentEdittedContact?limit=1&sort=-LastEditDate`;
 let randomNumber = `${Math.floor(Math.random() * 100)}${Date.now()}`;
