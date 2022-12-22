@@ -79,7 +79,7 @@ function elementsrequired() {
               ) {
                 let changedInfo = this.value.slice(5, 10);
                 let changedInputMMDD = this.id.replace('Date', 'MMDD');
-                fetch(`${serverURL}${contactsPatchPath}${_id.value}`, {
+                fetch(`${serverURL}/${_id.value}`, {
                   method: 'PATCH',
                   body: JSON.stringify({
                     [changedInputMMDD]: changedInfo,
@@ -90,7 +90,7 @@ function elementsrequired() {
                 });
                 contactEditDate();
               } else {
-                fetch(`${serverURL}${contactsPatchPath}${_id.value}`, {
+                fetch(`${serverURL}/${_id.value}`, {
                   method: 'PATCH',
                   body: JSON.stringify({
                     [this.id]: this.value,

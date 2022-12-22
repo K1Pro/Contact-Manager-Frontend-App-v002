@@ -379,7 +379,7 @@ function loadContactTasks(dailyTask) {
 function contactEditDate() {
   if (_id.value) {
     let lastEditDate = TodaysDate.toJSON().slice(0, 10);
-    fetch(`${serverURL}${contactsPatchPath}${_id.value}`, {
+    fetch(`${serverURL}/${_id.value}`, {
       method: 'PATCH',
       body: JSON.stringify({
         LastEditDate: lastEditDate,
