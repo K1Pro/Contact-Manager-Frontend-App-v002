@@ -59,6 +59,11 @@
   color: #cccccc;
   /* opacity: 0.6; */
 }
+/* Date time placeholders */
+input[type='date']:invalid::-webkit-datetime-edit {
+  color: #cccccc;
+}
+
 .paddingZero {
   padding-right: 0px;
   padding-left: 0px;
