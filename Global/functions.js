@@ -76,7 +76,7 @@ function calendarDatesFillIn(chosenDate, chosenWeek) {
     // prettier-ignore
     document.getElementById(`day${rep}`).innerHTML = `${CalendarDates.toJSON().slice(5, 10)}`;
     document.getElementById(`day${rep}`).addEventListener('click', () => {
-      CalendarHTML_Date.innerHTML = `${CalendarDates.toJSON().slice(0, 10)}`;
+      CalendarHTML_Date.value = `${CalendarDates.toJSON().slice(0, 10)}`;
     });
     getJSON(
       `${serverURL}${renewalPath}${RenewalDates.toJSON().slice(5, 10)}`

@@ -25,6 +25,10 @@ function buttonHandlers() {
     calendarDatesFillIn(TodaysDate, daysInWeek);
   });
 
+  CalendarHTML_Date.addEventListener('change', function (e) {
+    console.log(e.target.value);
+  });
+
   renewalsCheckBox.addEventListener('click', function () {
     renewals = document.getElementsByClassName('renewal');
     for (key in renewals) {
