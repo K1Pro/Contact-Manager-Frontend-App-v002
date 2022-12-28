@@ -9,8 +9,11 @@ function buttonHandlers() {
 
   // Previous Week Button in Calendar Module
   CalendarHTML_PrevWeekBtn.addEventListener('click', function () {
-    daysInWeek = daysInWeek + 7;
-    calendarDatesFillIn(TodaysDate, daysInWeek);
+    weekTracker = weekTracker - daysInWeek;
+    let oneWeekAgo = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
+    // daysInWeek = daysInWeek + 7;
+    console.log(oneWeekAgo);
+    calendarDatesFillIn(oneWeekAgo, daysInWeek);
   });
 
   // Next Week Button in Calendar Module
@@ -26,7 +29,11 @@ function buttonHandlers() {
   });
 
   CalendarHTML_Date.addEventListener('change', function (e) {
-    console.log(e.target.value);
+    let checktime = new Date(e.target.value);
+    let checktimetwo = checktime.getTime();
+    console.log(checktime);
+    console.log(checktimetwo);
+    calendarDatesFillIn(checktime);
   });
 
   renewalsCheckBox.addEventListener('click', function () {
