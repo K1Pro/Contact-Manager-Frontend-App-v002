@@ -48,119 +48,110 @@ function loadSidePanel(e) {
     // return data;
   });
 }
+function changeCalendarHTML_Date(chosenDate) {
+  console.log('We are choosing the date');
+  CalendarHTML_Date.value = `${chosenDate.toJSON().slice(0, 10)}`;
+}
 
-function calendarDatesFillIn(chosenDate, chosenWeek) {
-  console.log(Date.now());
-  console.log(chosenDate.getDay());
-  let tempBKDate = 0 - chosenDate.getDay() - daysInWeek;
-  for (let rept = 1; rept < 29; rept++) {
-    let tempDate = new Date(
+function calendarDatesFillIn(chosenDate) {
+  let prevMondayLastWeek = 0 - chosenDate.getDay() - daysInWeek;
+  for (let rep = 1; rep < 29; rep++) {
+    document.getElementById(`day${rep}`).classList.remove('calendarCurrentDay');
+    let CalendarDates = new Date(
       chosenDate.getTime() +
         1000 /*sec*/ *
           60 /*min*/ *
           60 /*hour*/ *
           24 /*day*/ *
-          (tempBKDate + rept) /*# of days*/
+          (prevMondayLastWeek + rep) /*# of days*/
     );
-    console.log(tempDate.toJSON().slice(0, 10));
+    let RenewalDates = new Date(
+      chosenDate.getTime() +
+        1000 /*sec*/ *
+          60 /*min*/ *
+          60 /*hour*/ *
+          24 /*day*/ *
+          (prevMondayLastWeek + rep + 28) /*# of days*/
+    );
+    // Highlights the selected date, defaults to today's date
+    // prettier-ignore
+    if (CalendarDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`day${rep}`).classList.add('calendarCurrentDay');
+    // prettier-ignore
+    document.getElementById(`day${rep}`).innerHTML = `${CalendarDates.toJSON().slice(5, 10)}`;
+    // document.getElementById(`day${rep}`).removeEventListener('click', () => {
+    //   changeCalendarHTML_Date(CalendarDates);
+    // });
+    document.getElementById(`day${rep}`).addEventListener('click', () => {
+      changeCalendarHTML_Date(CalendarDates);
+    });
+    getJSON(
+      `${serverURL}${renewalPath}${RenewalDates.toJSON().slice(5, 10)}`
+    ).then((data) => {
+      // Populates renewals
+      let renewalContact;
+      if (data.data.contacts.length) {
+        renewalContact = data.data.contacts;
+        renewalContact.map((x) => {
+          let p = document.createElement('div');
+          let calDateNoDash = `${CalendarDates.toJSON()
+            .slice(0, 10)
+            .replaceAll('-', '')}`;
+          // prettier-ignore
+          let lastReviewDateNoDash = `${x.LastReviewDate.replaceAll('-', '')}`;
+          if (lastReviewDateNoDash < calDateNoDash) {
+            p.classList.add('renewal');
+          } else {
+            p.classList.add('Completed');
+          }
+          p.classList.add(`${x.Status.replace(' ', '')}`);
+          p.classList.add(`${x.Source.replace(' ', '')}`);
+          p.textContent = `${x.LastName}`;
+          p.setAttribute(
+            'id',
+            `renewal${x._id}${Math.floor(Math.random() * 100)}`
+          );
+
+          p.classList.add('text-light');
+          p.addEventListener('click', (e) => {
+            loadSidePanel(x.Phone);
+          });
+          document.getElementById(`day${rep}`).appendChild(p);
+        });
+      }
+    });
+    getJSON(
+      `${serverURL}${contactsWithCalEventsPath}${CalendarDates.toJSON().slice(
+        0,
+        10
+      )}`
+    ).then((data) => {
+      // Populates completed and not completed calendar events
+      let renewalContact;
+      if (data.contacts.length) {
+        renewalContact = data.contacts;
+        renewalContact.map((x) => {
+          let p = document.createElement('div');
+          const results = x.CalendarEvents.filter((obj) => {
+            return (
+              obj.DateYYYYMMDD === `${CalendarDates.toJSON().slice(0, 10)}`
+            );
+          });
+          if (!results[0].Completed) {
+            p.classList.add('notCompleted');
+          } else {
+            p.classList.add('Completed');
+          }
+          p.setAttribute('id', `Event${results[0]._id}`);
+          p.textContent = `${x.LastName}`;
+          p.classList.add('text-light');
+          p.addEventListener('click', (e) => {
+            loadSidePanel(x.Phone);
+          });
+          document.getElementById(`day${rep}`).appendChild(p);
+        });
+      }
+    });
   }
-
-  // for (let rep = 1; rep < 29; rep++) {
-  //   // document.getElementById(`day${rep}`).removeEventListener('click', this); remove the event listener so it doesn't trigger other days clicks
-  //   document.getElementById(`day${rep}`).classList.remove('calendarCurrentDay');
-  //   let noOfDaysToPrevMonday = 0 - chosenDate.getDay() - chosenWeek + rep;
-  //   let CalendarDates = new Date(
-  //     Date.now() +
-  //       1000 /*sec*/ *
-  //         60 /*min*/ *
-  //         60 /*hour*/ *
-  //         24 /*day*/ *
-  //         noOfDaysToPrevMonday /*# of days*/
-  //   );
-  //   let RenewalDates = new Date(
-  //     Date.now() +
-  //       1000 /*sec*/ *
-  //         60 /*min*/ *
-  //         60 /*hour*/ *
-  //         24 /*day*/ *
-  //         (noOfDaysToPrevMonday + 28) /*# of days*/
-  //   );
-  //   // Highlights the selected date, defaults to today's date
-  //   // prettier-ignore
-  //   if (CalendarDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`day${rep}`).classList.add('calendarCurrentDay');
-  //   // prettier-ignore
-  //   document.getElementById(`day${rep}`).innerHTML = `${CalendarDates.toJSON().slice(5, 10)}`;
-  //   document.getElementById(`day${rep}`).addEventListener('click', () => {
-  //     CalendarHTML_Date.value = `${CalendarDates.toJSON().slice(0, 10)}`;
-  //   });
-  //   getJSON(
-  //     `${serverURL}${renewalPath}${RenewalDates.toJSON().slice(5, 10)}`
-  //   ).then((data) => {
-  //     // Populates renewals
-  //     let renewalContact;
-  //     if (data.data.contacts.length) {
-  //       renewalContact = data.data.contacts;
-  //       renewalContact.map((x) => {
-  //         let p = document.createElement('div');
-  //         let calDateNoDash = `${CalendarDates.toJSON()
-  //           .slice(0, 10)
-  //           .replaceAll('-', '')}`;
-  //         // prettier-ignore
-  //         let lastReviewDateNoDash = `${x.LastReviewDate.replaceAll('-', '')}`;
-  //         if (lastReviewDateNoDash < calDateNoDash) {
-  //           p.classList.add('renewal');
-  //         } else {
-  //           p.classList.add('Completed');
-  //         }
-  //         p.classList.add(`${x.Status.replace(' ', '')}`);
-  //         p.classList.add(`${x.Source.replace(' ', '')}`);
-  //         p.textContent = `${x.LastName}`;
-  //         p.setAttribute(
-  //           'id',
-  //           `renewal${x._id}${Math.floor(Math.random() * 100)}`
-  //         );
-
-  //         p.classList.add('text-light');
-  //         p.addEventListener('click', (e) => {
-  //           loadSidePanel(x.Phone);
-  //         });
-  //         document.getElementById(`day${rep}`).appendChild(p);
-  //       });
-  //     }
-  //   });
-  //   getJSON(
-  //     `${serverURL}${contactsWithCalEventsPath}${CalendarDates.toJSON().slice(
-  //       0,
-  //       10
-  //     )}`
-  //   ).then((data) => {
-  //     // Populates completed and not completed calendar events
-  //     let renewalContact;
-  //     if (data.contacts.length) {
-  //       renewalContact = data.contacts;
-  //       renewalContact.map((x) => {
-  //         let p = document.createElement('div');
-  //         const results = x.CalendarEvents.filter((obj) => {
-  //           return (
-  //             obj.DateYYYYMMDD === `${CalendarDates.toJSON().slice(0, 10)}`
-  //           );
-  //         });
-  //         if (!results[0].Completed) {
-  //           p.classList.add('notCompleted');
-  //         } else {
-  //           p.classList.add('Completed');
-  //         }
-  //         p.setAttribute('id', `Event${results[0]._id}`);
-  //         p.textContent = `${x.LastName}`;
-  //         p.classList.add('text-light');
-  //         p.addEventListener('click', (e) => {
-  //           loadSidePanel(x.Phone);
-  //         });
-  //         document.getElementById(`day${rep}`).appendChild(p);
-  //       });
-  //     }
-  //   });
-  // }
 }
 
 function loadContactTasks(dailyTask) {

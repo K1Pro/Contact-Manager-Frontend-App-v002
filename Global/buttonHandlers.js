@@ -3,36 +3,41 @@ function buttonHandlers() {
 
   // Previous Month Button in Calendar Module
   CalendarHTML_PrevMonthBtn.addEventListener('click', function () {
-    daysInWeek = daysInWeek + 28;
-    calendarDatesFillIn(TodaysDate, daysInWeek);
+    weekTracker = weekTracker - 28;
+    let prevMonth = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
+    changeCalendarHTML_Date(prevMonth);
+    calendarDatesFillIn(prevMonth);
   });
 
   // Previous Week Button in Calendar Module
   CalendarHTML_PrevWeekBtn.addEventListener('click', function () {
     weekTracker = weekTracker - daysInWeek;
-    let oneWeekAgo = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
+    let prevWeek = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
     // daysInWeek = daysInWeek + 7;
-    console.log(oneWeekAgo);
-    calendarDatesFillIn(oneWeekAgo, daysInWeek);
+    changeCalendarHTML_Date(prevWeek);
+    calendarDatesFillIn(prevWeek);
   });
 
   // Next Week Button in Calendar Module
   CalendarHTML_NextWeekBtn.addEventListener('click', function () {
-    daysInWeek = daysInWeek - 7;
-    calendarDatesFillIn(TodaysDate, daysInWeek);
+    weekTracker = weekTracker + daysInWeek;
+    let nextWeek = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
+    changeCalendarHTML_Date(nextWeek);
+    calendarDatesFillIn(nextWeek);
+    // daysInWeek = daysInWeek - 7;
+    // calendarDatesFillIn(TodaysDate, daysInWeek);
   });
 
   // Next Month Button in Calendar Module
   CalendarHTML_NextMonthBtn.addEventListener('click', function () {
-    daysInWeek = daysInWeek - 28;
-    calendarDatesFillIn(TodaysDate, daysInWeek);
+    weekTracker = weekTracker + 28;
+    let nextMonth = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
+    changeCalendarHTML_Date(nextMonth);
+    calendarDatesFillIn(nextMonth);
   });
 
-  CalendarHTML_Date.addEventListener('change', function (e) {
+  CalendarHTML_Date.addEventListener('focusout', function (e) {
     let checktime = new Date(e.target.value);
-    let checktimetwo = checktime.getTime();
-    console.log(checktime);
-    console.log(checktimetwo);
     calendarDatesFillIn(checktime);
   });
 
