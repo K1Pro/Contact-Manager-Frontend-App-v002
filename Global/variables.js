@@ -15,3 +15,12 @@ const lastEdittedContactPath = `/MostRecentEdittedContact?limit=1&sort=-LastEdit
 let randomNumber = `${Math.floor(Math.random() * 100)}${Date.now()}`;
 let tempNo;
 let weekTracker = 0;
+const staffMembers = [
+  'Bartosz',
+  'Hanna',
+  'Kamilla',
+  'Piotr',
+  'Aneta',
+  'Yuliya',
+];
+staffMembers.forEach((element) => console.log(element));
