@@ -211,6 +211,7 @@ function loadContactTasks(dailyTask) {
             loadSidePanel(PhoneInput.value);
           });
       });
+      ContactTaskGroup.appendChild(ContactTaskDate);
 
       // Creates a text input for the description
       // ContactTaskDescription.type = 'input';
@@ -250,42 +251,6 @@ function loadContactTasks(dailyTask) {
       });
 
       // Create a select input for the Event Author
-      let opt1 = document.createElement('option');
-      let opt2 = document.createElement('option');
-      let opt3 = document.createElement('option');
-      let opt4 = document.createElement('option');
-      let opt5 = document.createElement('option');
-      let opt6 = document.createElement('option');
-      opt1.value = 'Bartosz';
-      opt1.innerHTML = 'Bartosz';
-      if (value.EventAuthor == 'Bartosz') {
-        opt1.selected = true;
-      }
-      opt2.value = 'Hanna';
-      opt2.innerHTML = 'Hanna';
-      if (value.EventAuthor == 'Hanna') {
-        opt2.selected = true;
-      }
-      opt3.value = 'Kamilla';
-      opt3.innerHTML = 'Kamilla';
-      if (value.EventAuthor == 'Kamilla') {
-        opt3.selected = true;
-      }
-      opt4.value = 'Piotr';
-      opt4.innerHTML = 'Piotr';
-      if (value.EventAuthor == 'Piotr') {
-        opt4.selected = true;
-      }
-      opt5.value = 'Aneta';
-      opt5.innerHTML = 'Aneta';
-      if (value.EventAuthor == 'Aneta') {
-        opt5.selected = true;
-      }
-      opt6.value = 'Yuliya';
-      opt6.innerHTML = 'Yuliya';
-      if (value.EventAuthor == 'Yuliya') {
-        opt6.selected = true;
-      }
       ContactTaskAuthor.addEventListener('change', (e) => {
         fetch(`${serverURL}${updateEventPath}${value._id}`, {
           method: 'PATCH',
@@ -308,6 +273,17 @@ function loadContactTasks(dailyTask) {
             contactTasksTextArea.value = '';
             loadSidePanel(PhoneInput.value);
           });
+      });
+      ContactTaskGroup.appendChild(ContactTaskAuthor);
+
+      staffMembers.forEach((staffMember) => {
+        let ContactTaskAuthors = document.createElement('option');
+        ContactTaskAuthors.value = staffMember;
+        ContactTaskAuthors.innerHTML = staffMember;
+        if (value.EventAuthor == staffMember) {
+          ContactTaskAuthors.selected = true;
+        }
+        ContactTaskAuthor.appendChild(ContactTaskAuthors);
       });
 
       // Creates a checkbox
@@ -369,14 +345,6 @@ function loadContactTasks(dailyTask) {
           });
       });
 
-      ContactTaskGroup.appendChild(ContactTaskDate);
-      ContactTaskGroup.appendChild(ContactTaskAuthor);
-      ContactTaskAuthor.appendChild(opt1);
-      ContactTaskAuthor.appendChild(opt2);
-      ContactTaskAuthor.appendChild(opt3);
-      ContactTaskAuthor.appendChild(opt4);
-      ContactTaskAuthor.appendChild(opt5);
-      ContactTaskAuthor.appendChild(opt6);
       ContactTaskGroup.appendChild(ContactTaskCheckBox);
       ContactTaskList.appendChild(ContactTaskDescription);
     }

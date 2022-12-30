@@ -2,7 +2,6 @@ function elementsrequired() {
   // vvv Start coding here for Retrieval Module vvv
 
   // Contact Task Module Elements
-  testDIV = document.getElementById('testDIV');
   ContactTaskList = document.getElementById('ContactTaskList');
   contactTasksTextArea = document.getElementById('contactTasksTextArea');
   createEventTime = document.getElementById('createEventTime');
@@ -139,8 +138,7 @@ let DOMElements,
   UniqueDays,
   renewalsCheckBox,
   completedCheckBox,
-  notCompletedCheckBox,
-  testDIV;
+  notCompletedCheckBox;
 // TaskList;
 // ^^^ All retrieved elements should be declared here ^^^
 
