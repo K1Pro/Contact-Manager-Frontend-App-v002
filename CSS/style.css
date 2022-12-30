@@ -29,7 +29,11 @@
   font-weight: bold; */
   border: 0;
   background: #8f9194;
-  /* color: white; */
+  color: white;
+}
+
+input[type='date']:invalid::-webkit-datetime-edit {
+  color: #cccccc;
 }
 .calendarRow {
   height: 15vh;
