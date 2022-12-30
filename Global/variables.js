@@ -23,4 +23,3 @@ const staffMembers = [
   'Aneta',
   'Yuliya',
 ];
-staffMembers.forEach((element) => console.log(element));
