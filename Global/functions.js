@@ -4,6 +4,7 @@ console.log('retrieved all global functions');
 // getJSON(`${ContactsWithCalEvents}`).then((data) => {
 //   console.log(data.contact);
 // });
+
 function initiallyLoadSidePanel() {
   let initialLoadDate = `${TodaysDate.toJSON().slice(0, 10)}`;
 
@@ -154,6 +155,36 @@ function calendarDatesFillIn(chosenDate) {
   }
 }
 
+function updateContactTasks(
+  EventID,
+  TaskDate,
+  TaskDescription,
+  TaskCheckBox,
+  TaskAuthor
+) {
+  fetch(`${serverURL}${updateEventPath}${EventID}`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      _id: EventID,
+      EventAuthor: TaskAuthor.value,
+      DateYYYYMMDD: TaskDate.value.slice(0, 10),
+      DateHHMMSS: TaskDate.value.slice(10, 16),
+      Description: TaskDescription.value,
+      Completed: TaskCheckBox.checked,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.text())
+    .then(() => {
+      contactEditDate();
+      PhoneInput = document.getElementById('Phone');
+      contactTasksTextArea.value = '';
+      loadSidePanel(PhoneInput.value);
+    });
+}
+
 function loadContactTasks(dailyTask) {
   ContactTaskList.innerHTML = '';
   getJSON(`${serverURL}${eventsPath}${dailyTask}`).then((data) => {
@@ -187,38 +218,20 @@ function loadContactTasks(dailyTask) {
         'class',
         'form-control eventDates border-bottom-0'
       );
-      ContactTaskDate.addEventListener('change', (e) => {
-        fetch(`${serverURL}${updateEventPath}${value._id}`, {
-          method: 'PATCH',
-          body: JSON.stringify({
-            _id: value._id,
-            EventAuthor: ContactTaskAuthor.value,
-            DateYYYYMMDD: e.target.value.slice(0, 10),
-            DateHHMMSS: e.target.value.slice(10, 16),
-            Description: ContactTaskDescription.value,
-            Completed: ContactTaskCheckBox.checked,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-          .then((response) => response.text())
-          .then(() => {
-            contactEditDate();
-            // console.log(response);
-            PhoneInput = document.getElementById('Phone');
-            contactTasksTextArea.value = '';
-            loadSidePanel(PhoneInput.value);
-          });
+      ContactTaskDate.addEventListener('focusout', () => {
+        updateContactTasks(
+          value._id,
+          ContactTaskDate,
+          ContactTaskDescription,
+          ContactTaskCheckBox,
+          ContactTaskAuthor
+        );
       });
       ContactTaskGroup.appendChild(ContactTaskDate);
 
       // Creates a text input for the description
-      // ContactTaskDescription.type = 'input';
       ContactTaskDescription.value = `${value.Description}`;
       ContactTaskDescription.spellcheck = 'false';
-      // console.log(Math.round(ContactTaskDescription.value.length / 100 + 1));
-      // console.log(ContactTaskDescription.value.length / 100 + 1);
       ContactTaskDescription.rows = Math.round(
         ContactTaskDescription.value.length / 120 + 1
       );
@@ -226,53 +239,25 @@ function loadContactTasks(dailyTask) {
         'class',
         'form-control eventDescriptions border-top-0'
       );
-      ContactTaskDescription.addEventListener('change', (e) => {
-        fetch(`${serverURL}${updateEventPath}${value._id}`, {
-          method: 'PATCH',
-          body: JSON.stringify({
-            _id: value._id,
-            EventAuthor: ContactTaskAuthor.value,
-            DateYYYYMMDD: ContactTaskDate.value.slice(0, 10),
-            DateHHMMSS: ContactTaskDate.value.slice(10, 16),
-            Description: e.target.value,
-            Completed: ContactTaskCheckBox.checked,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-          .then((response) => response.text())
-          .then(() => {
-            contactEditDate();
-            PhoneInput = document.getElementById('Phone');
-            contactTasksTextArea.value = '';
-            loadSidePanel(PhoneInput.value);
-          });
+      ContactTaskDescription.addEventListener('change', () => {
+        updateContactTasks(
+          value._id,
+          ContactTaskDate,
+          ContactTaskDescription,
+          ContactTaskCheckBox,
+          ContactTaskAuthor
+        );
       });
 
       // Create a select input for the Event Author
-      ContactTaskAuthor.addEventListener('change', (e) => {
-        fetch(`${serverURL}${updateEventPath}${value._id}`, {
-          method: 'PATCH',
-          body: JSON.stringify({
-            _id: value._id,
-            EventAuthor: e.target.value,
-            DateYYYYMMDD: ContactTaskDate.value.slice(0, 10),
-            DateHHMMSS: ContactTaskDate.value.slice(10, 16),
-            Description: ContactTaskDescription.value,
-            Completed: ContactTaskCheckBox.checked,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-          .then((response) => response.text())
-          .then(() => {
-            contactEditDate();
-            PhoneInput = document.getElementById('Phone');
-            contactTasksTextArea.value = '';
-            loadSidePanel(PhoneInput.value);
-          });
+      ContactTaskAuthor.addEventListener('change', () => {
+        updateContactTasks(
+          value._id,
+          ContactTaskDate,
+          ContactTaskDescription,
+          ContactTaskCheckBox,
+          ContactTaskAuthor
+        );
       });
       ContactTaskGroup.appendChild(ContactTaskAuthor);
 
@@ -294,11 +279,6 @@ function loadContactTasks(dailyTask) {
         'form-check-input mt-0 bartkaCheckbox'
       );
       ContactTaskCheckBox.addEventListener('click', (e) => {
-        // console.log(value._id);
-        // console.log(ContactTaskDate.value.slice(0, 10));
-        // console.log(ContactTaskDate.value.slice(10, 16));
-        // console.log(ContactTaskDescription.value);
-        // console.log(e.target.checked);
         fetch(`${serverURL}${updateEventPath}${value._id}`, {
           method: 'PATCH',
           body: JSON.stringify({
@@ -307,7 +287,7 @@ function loadContactTasks(dailyTask) {
             DateYYYYMMDD: ContactTaskDate.value.slice(0, 10),
             DateHHMMSS: ContactTaskDate.value.slice(10, 16),
             Description: ContactTaskDescription.value,
-            Completed: e.target.checked,
+            Completed: ContactTaskCheckBox.checked,
           }),
           headers: {
             'Content-Type': 'application/json',
@@ -334,10 +314,6 @@ function loadContactTasks(dailyTask) {
                 );
               }
             }
-
-            // let testName = document.getElementById(
-            //   `Event${value._id}`
-            // ).className;
 
             PhoneInput = document.getElementById('Phone');
             contactTasksTextArea.value = '';
