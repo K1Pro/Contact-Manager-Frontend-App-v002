@@ -1,5 +1,11 @@
 console.log('retrieved all global functions');
 ///////////////////////////////////////////////
+// vvv This scans for all separate HTML Modules vvv
+async function isElementLoaded(selector) {
+  while (document.querySelector(selector) === null) {
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+  }
+}
 
 // getJSON(`${ContactsWithCalEvents}`).then((data) => {
 //   console.log(data.contact);
@@ -160,7 +166,8 @@ function updateContactTasks(
   TaskDate,
   TaskDescription,
   TaskCheckBox,
-  TaskAuthor
+  TaskAuthor,
+  contactTask
 ) {
   fetch(`${serverURL}${updateEventPath}${EventID}`, {
     method: 'PATCH',
@@ -206,6 +213,12 @@ function loadContactTasks(dailyTask) {
       ContactTaskGroup.setAttribute('class', 'input-group');
       ContactTaskList.appendChild(ContactTaskGroup);
 
+      let contactTask = {
+        Date: document.createElement('input'),
+        Description: document.createElement('textarea'),
+        CheckBox: document.createElement('input'),
+        Author: document.createElement('select'),
+      };
       let ContactTaskDate = document.createElement('input');
       let ContactTaskDescription = document.createElement('textarea');
       let ContactTaskCheckBox = document.createElement('input');
@@ -224,7 +237,8 @@ function loadContactTasks(dailyTask) {
           ContactTaskDate,
           ContactTaskDescription,
           ContactTaskCheckBox,
-          ContactTaskAuthor
+          ContactTaskAuthor,
+          contactTask
         );
       });
       ContactTaskGroup.appendChild(ContactTaskDate);
@@ -248,7 +262,6 @@ function loadContactTasks(dailyTask) {
           ContactTaskAuthor
         );
       });
-
       // Create a select input for the Event Author
       ContactTaskAuthor.addEventListener('change', () => {
         updateContactTasks(
@@ -323,6 +336,7 @@ function loadContactTasks(dailyTask) {
 
       ContactTaskGroup.appendChild(ContactTaskCheckBox);
       ContactTaskList.appendChild(ContactTaskDescription);
+      console.log(contactTask.Description.value);
     }
     return data;
   });

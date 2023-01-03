@@ -1,4 +1,4 @@
-function elementsrequired() {
+function elementsRequired() {
   // vvv Start coding here for Retrieval Module vvv
 
   // Contact Task Module Elements
@@ -133,18 +133,14 @@ let DOMElements,
 // ^^^ All retrieved elements should be declared here ^^^
 
 // vvv This scans for all separate HTML Modules vvv
-
-async function isElementLoaded(selector) {
-  while (document.querySelector(selector) === null) {
-    await new Promise((resolve) => requestAnimationFrame(resolve));
-  }
-}
 isElementLoaded('#CalendarHTMLModule').then(() => {
   isElementLoaded('#ContactTasksHTMLModule').then(() => {
     isElementLoaded('#EmailHTMLModule').then(() => {
       isElementLoaded('#SidePanelHTMLModule').then(() => {
-        console.log('retrieved all modules {All DOM elements retrieved}');
-        elementsrequired();
+        console.log(
+          'retrieved all DOM elements {for elements retrieved module}'
+        );
+        elementsRequired();
       });
     });
   });
