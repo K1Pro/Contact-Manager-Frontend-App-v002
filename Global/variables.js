@@ -23,3 +23,9 @@ const staffMembers = [
   'Aneta',
   'Yuliya',
 ];
+const renewDateKeys = [
+  'Policy1RenewDate',
+  'Policy2RenewDate',
+  'Policy3RenewDate',
+  'Policy4RenewDate',
+];

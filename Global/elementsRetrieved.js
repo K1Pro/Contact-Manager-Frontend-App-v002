@@ -41,12 +41,7 @@ function elementsrequired() {
               console.log(
                 'string only contains whitespace (ie. spaces, tabs or line breaks)'
               );
-              if (
-                this.id == 'Policy1RenewDate' ||
-                this.id == 'Policy2RenewDate' ||
-                this.id == 'Policy3RenewDate' ||
-                this.id == 'Policy4RenewDate'
-              ) {
+              if (renewDateKeys.includes(this.id)) {
                 let changedInputMMDD = this.id.replace('Date', 'MMDD');
                 fetch(`${serverURL}${deleteEmptyFieldPath}${_id.value}`, {
                   method: 'DELETE',
@@ -71,12 +66,7 @@ function elementsrequired() {
                 contactEditDate();
               }
             } else {
-              if (
-                this.id == 'Policy1RenewDate' ||
-                this.id == 'Policy2RenewDate' ||
-                this.id == 'Policy3RenewDate' ||
-                this.id == 'Policy4RenewDate'
-              ) {
+              if (renewDateKeys.includes(this.id)) {
                 let changedInfo = this.value.slice(5, 10);
                 let changedInputMMDD = this.id.replace('Date', 'MMDD');
                 fetch(`${serverURL}/${_id.value}`, {
