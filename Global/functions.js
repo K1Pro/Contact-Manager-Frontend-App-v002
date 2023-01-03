@@ -161,23 +161,16 @@ function calendarDatesFillIn(chosenDate) {
   }
 }
 
-function updateContactTasks(
-  EventID,
-  TaskDate,
-  TaskDescription,
-  TaskCheckBox,
-  TaskAuthor,
-  contactTask
-) {
+function updateContactTasks(EventID, contactTask) {
   fetch(`${serverURL}${updateEventPath}${EventID}`, {
     method: 'PATCH',
     body: JSON.stringify({
       _id: EventID,
-      EventAuthor: TaskAuthor.value,
-      DateYYYYMMDD: TaskDate.value.slice(0, 10),
-      DateHHMMSS: TaskDate.value.slice(10, 16),
-      Description: TaskDescription.value,
-      Completed: TaskCheckBox.checked,
+      EventAuthor: contactTask.Author.value,
+      DateYYYYMMDD: contactTask.Dated.value.slice(0, 10),
+      DateHHMMSS: contactTask.Dated.value.slice(10, 16),
+      Description: contactTask.Description.value,
+      Completed: contactTask.CheckBox.checked,
     }),
     headers: {
       'Content-Type': 'application/json',
@@ -214,65 +207,42 @@ function loadContactTasks(dailyTask) {
       ContactTaskList.appendChild(ContactTaskGroup);
 
       let contactTask = {
-        Date: document.createElement('input'),
+        Dated: document.createElement('input'),
         Description: document.createElement('textarea'),
         CheckBox: document.createElement('input'),
         Author: document.createElement('select'),
       };
-      let ContactTaskDate = document.createElement('input');
-      let ContactTaskDescription = document.createElement('textarea');
-      let ContactTaskCheckBox = document.createElement('input');
-      let ContactTaskAuthor = document.createElement('select');
 
       // Creates a datetime-local Input
-      ContactTaskDate.type = 'datetime-local';
-      ContactTaskDate.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
-      ContactTaskDate.setAttribute(
+      contactTask.Dated.type = 'datetime-local';
+      contactTask.Dated.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
+      contactTask.Dated.setAttribute(
         'class',
         'form-control eventDates border-bottom-0'
       );
-      ContactTaskDate.addEventListener('focusout', () => {
-        updateContactTasks(
-          value._id,
-          ContactTaskDate,
-          ContactTaskDescription,
-          ContactTaskCheckBox,
-          ContactTaskAuthor,
-          contactTask
-        );
+      contactTask.Dated.addEventListener('focusout', () => {
+        updateContactTasks(value._id, contactTask);
       });
-      ContactTaskGroup.appendChild(ContactTaskDate);
+      ContactTaskGroup.appendChild(contactTask.Dated);
 
       // Creates a text input for the description
-      ContactTaskDescription.value = `${value.Description}`;
-      ContactTaskDescription.spellcheck = 'false';
-      ContactTaskDescription.rows = Math.round(
-        ContactTaskDescription.value.length / 120 + 1
+      contactTask.Description.value = `${value.Description}`;
+      contactTask.Description.spellcheck = 'false';
+      contactTask.Description.rows = Math.round(
+        contactTask.Description.value.length / 120 + 1
       );
-      ContactTaskDescription.setAttribute(
+      contactTask.Description.setAttribute(
         'class',
         'form-control eventDescriptions border-top-0'
       );
-      ContactTaskDescription.addEventListener('change', () => {
-        updateContactTasks(
-          value._id,
-          ContactTaskDate,
-          ContactTaskDescription,
-          ContactTaskCheckBox,
-          ContactTaskAuthor
-        );
+      contactTask.Description.addEventListener('change', () => {
+        updateContactTasks(value._id, contactTask);
       });
       // Create a select input for the Event Author
-      ContactTaskAuthor.addEventListener('change', () => {
-        updateContactTasks(
-          value._id,
-          ContactTaskDate,
-          ContactTaskDescription,
-          ContactTaskCheckBox,
-          ContactTaskAuthor
-        );
+      contactTask.Author.addEventListener('change', () => {
+        updateContactTasks(value._id, contactTask);
       });
-      ContactTaskGroup.appendChild(ContactTaskAuthor);
+      ContactTaskGroup.appendChild(contactTask.Author);
 
       staffMembers.forEach((staffMember) => {
         let ContactTaskAuthors = document.createElement('option');
@@ -281,26 +251,26 @@ function loadContactTasks(dailyTask) {
         if (value.EventAuthor == staffMember) {
           ContactTaskAuthors.selected = true;
         }
-        ContactTaskAuthor.appendChild(ContactTaskAuthors);
+        contactTask.Author.appendChild(ContactTaskAuthors);
       });
 
       // Creates a checkbox
-      ContactTaskCheckBox.type = 'checkbox';
-      ContactTaskCheckBox.checked = value.Completed;
-      ContactTaskCheckBox.setAttribute(
+      contactTask.CheckBox.type = 'checkbox';
+      contactTask.CheckBox.checked = value.Completed;
+      contactTask.CheckBox.setAttribute(
         'class',
         'form-check-input mt-0 bartkaCheckbox'
       );
-      ContactTaskCheckBox.addEventListener('click', (e) => {
+      contactTask.CheckBox.addEventListener('click', (e) => {
         fetch(`${serverURL}${updateEventPath}${value._id}`, {
           method: 'PATCH',
           body: JSON.stringify({
             _id: value._id,
-            EventAuthor: ContactTaskAuthor.value,
-            DateYYYYMMDD: ContactTaskDate.value.slice(0, 10),
-            DateHHMMSS: ContactTaskDate.value.slice(10, 16),
-            Description: ContactTaskDescription.value,
-            Completed: ContactTaskCheckBox.checked,
+            EventAuthor: contactTask.Author.value,
+            DateYYYYMMDD: contactTask.Dated.value.slice(0, 10),
+            DateHHMMSS: contactTask.Dated.value.slice(10, 16),
+            Description: contactTask.Description.value,
+            Completed: contactTask.CheckBox.checked,
           }),
           headers: {
             'Content-Type': 'application/json',
@@ -334,9 +304,8 @@ function loadContactTasks(dailyTask) {
           });
       });
 
-      ContactTaskGroup.appendChild(ContactTaskCheckBox);
-      ContactTaskList.appendChild(ContactTaskDescription);
-      console.log(contactTask.Description.value);
+      ContactTaskGroup.appendChild(contactTask.CheckBox);
+      ContactTaskList.appendChild(contactTask.Description);
     }
     return data;
   });
