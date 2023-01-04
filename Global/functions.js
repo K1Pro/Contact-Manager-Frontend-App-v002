@@ -161,11 +161,11 @@ function calendarDatesFillIn(chosenDate) {
   }
 }
 
-function updateContactTasks(EventID, contactTask) {
-  fetch(`${serverURL}${updateEventPath}${EventID}`, {
+function updateContactTasks(contactTask) {
+  fetch(`${serverURL}${updateEventPath}${contactTask.UID}`, {
     method: 'PATCH',
     body: JSON.stringify({
-      _id: EventID,
+      _id: contactTask.UID,
       EventAuthor: contactTask.Author.value,
       DateYYYYMMDD: contactTask.Dated.value.slice(0, 10),
       DateHHMMSS: contactTask.Dated.value.slice(10, 16),
@@ -207,6 +207,7 @@ function loadContactTasks(dailyTask) {
       ContactTaskList.appendChild(ContactTaskGroup);
 
       let contactTask = {
+        UID: value._id,
         Dated: document.createElement('input'),
         Description: document.createElement('textarea'),
         CheckBox: document.createElement('input'),
@@ -221,7 +222,7 @@ function loadContactTasks(dailyTask) {
         'form-control eventDates border-bottom-0'
       );
       contactTask.Dated.addEventListener('focusout', () => {
-        updateContactTasks(value._id, contactTask);
+        updateContactTasks(contactTask);
       });
       ContactTaskGroup.appendChild(contactTask.Dated);
 
@@ -236,11 +237,11 @@ function loadContactTasks(dailyTask) {
         'form-control eventDescriptions border-top-0'
       );
       contactTask.Description.addEventListener('change', () => {
-        updateContactTasks(value._id, contactTask);
+        updateContactTasks(contactTask);
       });
       // Create a select input for the Event Author
       contactTask.Author.addEventListener('change', () => {
-        updateContactTasks(value._id, contactTask);
+        updateContactTasks(contactTask);
       });
       ContactTaskGroup.appendChild(contactTask.Author);
 
