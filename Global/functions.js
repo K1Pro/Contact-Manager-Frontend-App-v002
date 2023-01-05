@@ -316,7 +316,7 @@ function loadContactTasks(dailyTask) {
 
 function contactEditDate() {
   if (_id.value) {
-    let lastEditDate = TodaysDate.toJSON().slice(0, 10);
+    let lastEditDate = TodaysDate.toJSON().slice(0, 16);
     fetch(`${serverURL}/${_id.value}`, {
       method: 'PATCH',
       body: JSON.stringify({
