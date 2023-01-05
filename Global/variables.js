@@ -12,8 +12,7 @@ const contactsWithCalEventsPath = `/ContactsWithEvents/`;
 const updateEventPath = `/UpdateEvent/`;
 const deleteEmptyFieldPath = `/deleteEmptyField/`;
 const lastEdittedContactPath = `/MostRecentEdittedContact?limit=1&sort=-LastEditDate`;
-let randomNumber = `${Math.floor(Math.random() * 100)}${Date.now()}`;
-let tempNo;
+// let randomNumber = `${Math.floor(Math.random() * 100)}${Date.now()}`;
 let weekTracker = 0;
 const staffMembers = [
   'Bartosz',

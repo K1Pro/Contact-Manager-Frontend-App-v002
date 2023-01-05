@@ -33,6 +33,16 @@ function initiallyLoadSidePanel() {
   });
 }
 
+function compare(a, b) {
+  if (a.DateYYYYMMDD < b.DateYYYYMMDD) {
+    return 1;
+  }
+  if (a.DateYYYYMMDD > b.DateYYYYMMDD) {
+    return -1;
+  }
+  return 0;
+}
+
 function loadSidePanel(e) {
   // This populates the Side Panel Input Fields following a Contact Search
   // console.log(`here is the input of ID: ${IDinput.value}`);
@@ -190,15 +200,7 @@ function loadContactTasks(dailyTask) {
   getJSON(`${serverURL}${eventsPath}${dailyTask}`).then((data) => {
     // sorts the array in reverse chronological order
     let CalendarEventsArray = data.data.CalendarEvents;
-    function compare(a, b) {
-      if (a.DateYYYYMMDD < b.DateYYYYMMDD) {
-        return 1;
-      }
-      if (a.DateYYYYMMDD > b.DateYYYYMMDD) {
-        return -1;
-      }
-      return 0;
-    }
+
     CalendarEventsArray.sort(compare);
     for (const [key, value] of Object.entries(CalendarEventsArray)) {
       // Creates a DIV
