@@ -109,12 +109,13 @@ function calendarDatesFillIn(chosenDate) {
           let calDateNoDash = `${CalendarDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
           // prettier-ignore
           let lastReviewDateNoDash = `${renewalContact.LastReviewDate.replaceAll('-', '')}`;
-          if (renewalContact._id == _id.value) {
-            calCntct.classList.add('active');
-          } else if (lastReviewDateNoDash < calDateNoDash) {
+          if (lastReviewDateNoDash < calDateNoDash) {
             calCntct.classList.add('renewal');
           } else {
             calCntct.classList.add('Completed');
+          }
+          if (renewalContact._id == _id.value) {
+            calCntct.classList.add('active');
           }
           calCntct.classList.add(`${renewalContact.Status.replace(' ', '')}`);
           calCntct.classList.add(`${renewalContact.Source.replace(' ', '')}`);
@@ -126,16 +127,8 @@ function calendarDatesFillIn(chosenDate) {
 
           calCntct.classList.add('text-light');
           calCntct.addEventListener('click', () => {
-            let highlightedItems = document
-              .getElementById('calendarDates')
-              .querySelectorAll('*');
-
-            highlightedItems.forEach((userItem) => {
-              console.log(userItem);
-              userItem.classList.remove('active');
-            });
+            removeActiveCalCntct();
             loadSidePanel(renewalContact.Phone);
-
             calCntct.classList.add('active');
           });
           document.getElementById(`day${rep}`).appendChild(calCntct);
@@ -159,19 +152,20 @@ function calendarDatesFillIn(chosenDate) {
               obj.DateYYYYMMDD === `${CalendarDates.toJSON().slice(0, 10)}`
             );
           });
-          if (renewalContact._id == _id.value) {
-            calCntct.classList.add('active');
-          } else if (!results[0].Completed) {
+          if (!results[0].Completed) {
             calCntct.classList.add('notCompleted');
           } else {
             calCntct.classList.add('Completed');
+          }
+          if (renewalContact._id == _id.value) {
+            calCntct.classList.add('active');
           }
           calCntct.setAttribute('id', `Event${results[0]._id}`);
           calCntct.textContent = `${renewalContact.LastName}`;
           calCntct.classList.add('text-light');
           calCntct.addEventListener('click', () => {
+            removeActiveCalCntct();
             loadSidePanel(renewalContact.Phone);
-            console.log('hi');
             calCntct.classList.add('active');
           });
           document.getElementById(`day${rep}`).appendChild(calCntct);
@@ -316,11 +310,18 @@ function loadContactTasks(dailyTask) {
             loadSidePanel(PhoneInput.value);
           });
       });
-
       ContactTaskGroup.appendChild(contactTask.CheckBox);
       ContactTaskList.appendChild(contactTask.Description);
     }
     return data;
+  });
+}
+function removeActiveCalCntct() {
+  let highlightedItems = document
+    .getElementById('calendarDates')
+    .querySelectorAll('*');
+  highlightedItems.forEach((userItem) => {
+    userItem.classList.remove('active');
   });
 }
 
