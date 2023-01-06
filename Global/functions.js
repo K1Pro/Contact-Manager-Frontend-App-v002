@@ -43,12 +43,9 @@ function compare(a, b) {
   return 0;
 }
 
-function loadSidePanel(e) {
+function loadSidePanel(phoneNo) {
   // This populates the Side Panel Input Fields following a Contact Search
-  // console.log(`here is the input of ID: ${IDinput.value}`);
-  getJSON(`${serverURL}${phonePath}${e}`).then((data) => {
-    // console.log(data.data.contacts[0].CalendarEvents);
-    // console.log(data.data.contacts[0]._id);
+  getJSON(`${serverURL}${phonePath}${phoneNo}`).then((data) => {
     for (let rep = 0; rep < ContactFields.length; rep++) {
       let ContactFieldsIDs = ContactFields[rep].id;
       if (ContactFieldsIDs) {
@@ -62,11 +59,9 @@ function loadSidePanel(e) {
         loadContactTasks(contactID.value);
       }
     }
-    // return data;
   });
 }
 function changeCalendarHTML_Date(chosenDate) {
-  console.log('We are choosing the date');
   CalendarHTML_Date.value = `${chosenDate.toJSON().slice(0, 10)}`;
 }
 
@@ -110,12 +105,13 @@ function calendarDatesFillIn(chosenDate) {
         renewalContacts = data.data.contacts;
         renewalContacts.map((renewalContact) => {
           let p = document.createElement('div');
-          let calDateNoDash = `${CalendarDates.toJSON()
-            .slice(0, 10)
-            .replaceAll('-', '')}`;
+          // prettier-ignore
+          let calDateNoDash = `${CalendarDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
           // prettier-ignore
           let lastReviewDateNoDash = `${renewalContact.LastReviewDate.replaceAll('-', '')}`;
-          if (lastReviewDateNoDash < calDateNoDash) {
+          if (renewalContact._id == _id.value) {
+            p.classList.add('active');
+          } else if (lastReviewDateNoDash < calDateNoDash) {
             p.classList.add('renewal');
           } else {
             p.classList.add('Completed');
@@ -200,8 +196,8 @@ function loadContactTasks(dailyTask) {
   getJSON(`${serverURL}${eventsPath}${dailyTask}`).then((data) => {
     // sorts the array in reverse chronological order
     let CalendarEventsArray = data.data.CalendarEvents;
-
     CalendarEventsArray.sort(compare);
+
     for (const [key, value] of Object.entries(CalendarEventsArray)) {
       // Creates a DIV
       let ContactTaskGroup = document.createElement('div');
