@@ -105,32 +105,32 @@ function calendarDatesFillIn(chosenDate) {
       `${serverURL}${renewalPath}${RenewalDates.toJSON().slice(5, 10)}`
     ).then((data) => {
       // Populates renewals
-      let renewalContact;
+      let renewalContacts;
       if (data.data.contacts.length) {
-        renewalContact = data.data.contacts;
-        renewalContact.map((x) => {
+        renewalContacts = data.data.contacts;
+        renewalContacts.map((renewalContact) => {
           let p = document.createElement('div');
           let calDateNoDash = `${CalendarDates.toJSON()
             .slice(0, 10)
             .replaceAll('-', '')}`;
           // prettier-ignore
-          let lastReviewDateNoDash = `${x.LastReviewDate.replaceAll('-', '')}`;
+          let lastReviewDateNoDash = `${renewalContact.LastReviewDate.replaceAll('-', '')}`;
           if (lastReviewDateNoDash < calDateNoDash) {
             p.classList.add('renewal');
           } else {
             p.classList.add('Completed');
           }
-          p.classList.add(`${x.Status.replace(' ', '')}`);
-          p.classList.add(`${x.Source.replace(' ', '')}`);
-          p.textContent = `${x.LastName}`;
+          p.classList.add(`${renewalContact.Status.replace(' ', '')}`);
+          p.classList.add(`${renewalContact.Source.replace(' ', '')}`);
+          p.textContent = `${renewalContact.LastName}`;
           p.setAttribute(
             'id',
-            `renewal${x._id}${Math.floor(Math.random() * 100)}`
+            `renewal${renewalContact._id}${Math.floor(Math.random() * 100)}`
           );
 
           p.classList.add('text-light');
-          p.addEventListener('click', (e) => {
-            loadSidePanel(x.Phone);
+          p.addEventListener('click', () => {
+            loadSidePanel(renewalContact.Phone);
           });
           document.getElementById(`day${rep}`).appendChild(p);
         });
@@ -143,12 +143,12 @@ function calendarDatesFillIn(chosenDate) {
       )}`
     ).then((data) => {
       // Populates completed and not completed calendar events
-      let renewalContact;
+      let renewalContacts;
       if (data.contacts.length) {
-        renewalContact = data.contacts;
-        renewalContact.map((x) => {
+        renewalContacts = data.contacts;
+        renewalContacts.map((renewalContact) => {
           let p = document.createElement('div');
-          const results = x.CalendarEvents.filter((obj) => {
+          const results = renewalContact.CalendarEvents.filter((obj) => {
             return (
               obj.DateYYYYMMDD === `${CalendarDates.toJSON().slice(0, 10)}`
             );
@@ -159,10 +159,10 @@ function calendarDatesFillIn(chosenDate) {
             p.classList.add('Completed');
           }
           p.setAttribute('id', `Event${results[0]._id}`);
-          p.textContent = `${x.LastName}`;
+          p.textContent = `${renewalContact.LastName}`;
           p.classList.add('text-light');
-          p.addEventListener('click', (e) => {
-            loadSidePanel(x.Phone);
+          p.addEventListener('click', () => {
+            loadSidePanel(renewalContact.Phone);
           });
           document.getElementById(`day${rep}`).appendChild(p);
         });
@@ -264,7 +264,7 @@ function loadContactTasks(dailyTask) {
         'class',
         'form-check-input mt-0 bartkaCheckbox'
       );
-      contactTask.CheckBox.addEventListener('click', (e) => {
+      contactTask.CheckBox.addEventListener('click', () => {
         fetch(`${serverURL}${updateEventPath}${value._id}`, {
           method: 'PATCH',
           body: JSON.stringify({
