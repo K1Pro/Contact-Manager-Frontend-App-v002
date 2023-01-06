@@ -104,31 +104,41 @@ function calendarDatesFillIn(chosenDate) {
       if (data.data.contacts.length) {
         renewalContacts = data.data.contacts;
         renewalContacts.map((renewalContact) => {
-          let p = document.createElement('div');
+          let calCntct = document.createElement('div');
           // prettier-ignore
           let calDateNoDash = `${CalendarDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
           // prettier-ignore
           let lastReviewDateNoDash = `${renewalContact.LastReviewDate.replaceAll('-', '')}`;
           if (renewalContact._id == _id.value) {
-            p.classList.add('active');
+            calCntct.classList.add('active');
           } else if (lastReviewDateNoDash < calDateNoDash) {
-            p.classList.add('renewal');
+            calCntct.classList.add('renewal');
           } else {
-            p.classList.add('Completed');
+            calCntct.classList.add('Completed');
           }
-          p.classList.add(`${renewalContact.Status.replace(' ', '')}`);
-          p.classList.add(`${renewalContact.Source.replace(' ', '')}`);
-          p.textContent = `${renewalContact.LastName}`;
-          p.setAttribute(
+          calCntct.classList.add(`${renewalContact.Status.replace(' ', '')}`);
+          calCntct.classList.add(`${renewalContact.Source.replace(' ', '')}`);
+          calCntct.textContent = `${renewalContact.LastName}`;
+          calCntct.setAttribute(
             'id',
             `renewal${renewalContact._id}${Math.floor(Math.random() * 100)}`
           );
 
-          p.classList.add('text-light');
-          p.addEventListener('click', () => {
+          calCntct.classList.add('text-light');
+          calCntct.addEventListener('click', () => {
+            let highlightedItems = document
+              .getElementById('calendarDates')
+              .querySelectorAll('*');
+
+            highlightedItems.forEach((userItem) => {
+              console.log(userItem);
+              userItem.classList.remove('active');
+            });
             loadSidePanel(renewalContact.Phone);
+
+            calCntct.classList.add('active');
           });
-          document.getElementById(`day${rep}`).appendChild(p);
+          document.getElementById(`day${rep}`).appendChild(calCntct);
         });
       }
     });
@@ -143,24 +153,28 @@ function calendarDatesFillIn(chosenDate) {
       if (data.contacts.length) {
         renewalContacts = data.contacts;
         renewalContacts.map((renewalContact) => {
-          let p = document.createElement('div');
+          let calCntct = document.createElement('div');
           const results = renewalContact.CalendarEvents.filter((obj) => {
             return (
               obj.DateYYYYMMDD === `${CalendarDates.toJSON().slice(0, 10)}`
             );
           });
-          if (!results[0].Completed) {
-            p.classList.add('notCompleted');
+          if (renewalContact._id == _id.value) {
+            calCntct.classList.add('active');
+          } else if (!results[0].Completed) {
+            calCntct.classList.add('notCompleted');
           } else {
-            p.classList.add('Completed');
+            calCntct.classList.add('Completed');
           }
-          p.setAttribute('id', `Event${results[0]._id}`);
-          p.textContent = `${renewalContact.LastName}`;
-          p.classList.add('text-light');
-          p.addEventListener('click', () => {
+          calCntct.setAttribute('id', `Event${results[0]._id}`);
+          calCntct.textContent = `${renewalContact.LastName}`;
+          calCntct.classList.add('text-light');
+          calCntct.addEventListener('click', () => {
             loadSidePanel(renewalContact.Phone);
+            console.log('hi');
+            calCntct.classList.add('active');
           });
-          document.getElementById(`day${rep}`).appendChild(p);
+          document.getElementById(`day${rep}`).appendChild(calCntct);
         });
       }
     });
@@ -312,7 +326,7 @@ function loadContactTasks(dailyTask) {
 
 function contactEditDate() {
   if (_id.value) {
-    let lastEditDate = TodaysDate.toJSON().slice(0, 16);
+    let lastEditDate = TodaysDate.toJSON(); //.slice(0, 16);
     fetch(`${serverURL}/${_id.value}`, {
       method: 'PATCH',
       body: JSON.stringify({
