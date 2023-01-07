@@ -79,6 +79,10 @@ function elementsRequired() {
                   },
                 });
                 contactEditDate();
+              } else if (phoneKey == this.id) {
+                console.log(
+                  'this is a phone number it has to be checked first'
+                );
               } else {
                 fetch(`${serverURL}/${_id.value}`, {
                   method: 'PATCH',

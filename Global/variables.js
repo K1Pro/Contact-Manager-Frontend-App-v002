@@ -29,3 +29,4 @@ const renewDateKeys = [
   'Policy3RenewDate',
   'Policy4RenewDate',
 ];
+const phoneKey = 'Phone';
