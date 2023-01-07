@@ -43,26 +43,22 @@ function elementsRequired() {
               );
               if (renewDateKeys.includes(this.id)) {
                 let changedInputMMDD = this.id.replace('Date', 'MMDD');
-                fetch(`${serverURL}${deleteEmptyFieldPath}${_id.value}`, {
-                  method: 'DELETE',
-                  body: JSON.stringify({
-                    [changedInputMMDD]: '',
-                  }),
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                });
+                let updateThis = {
+                  updateURL: `${serverURL}${deleteEmptyFieldPath}${_id.value}`,
+                  fetchMethod: 'DELETE',
+                  key: changedInputMMDD,
+                  value: '',
+                };
+                updateDB(updateThis);
                 contactEditDate();
               } else {
-                fetch(`${serverURL}${deleteEmptyFieldPath}${_id.value}`, {
-                  method: 'DELETE',
-                  body: JSON.stringify({
-                    [this.id]: '',
-                  }),
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                });
+                let updateThis = {
+                  updateURL: `${serverURL}${deleteEmptyFieldPath}${_id.value}`,
+                  fetchMethod: 'DELETE',
+                  key: this.id,
+                  value: '',
+                };
+                updateDB(updateThis);
                 contactEditDate();
               }
             } else {
@@ -70,17 +66,19 @@ function elementsRequired() {
                 let changedInputMMDD = this.id.replace('Date', 'MMDD');
                 let MMDD = this.value.slice(5, 10);
                 let updateThis = {
+                  updateURL: `${serverURL}/${_id.value}`,
+                  fetchMethod: 'PATCH',
                   key: changedInputMMDD,
                   value: MMDD,
-                  fetchMethod: 'PATCH',
                 };
                 updateDB(updateThis);
                 contactEditDate();
               } else {
                 let updateThis = {
+                  updateURL: `${serverURL}/${_id.value}`,
+                  fetchMethod: 'PATCH',
                   key: this.id,
                   value: this.value,
-                  fetchMethod: 'PATCH',
                 };
                 updateDB(updateThis);
                 contactEditDate();

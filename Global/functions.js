@@ -327,7 +327,7 @@ function removeActiveCalCntct() {
 
 function contactEditDate() {
   if (_id.value) {
-    let lastEditDate = TodaysDate.toJSON(); //.slice(0, 16);
+    lastEditDate = new Date().toJSON(); //.slice(0, 16);
     fetch(`${serverURL}/${_id.value}`, {
       method: 'PATCH',
       body: JSON.stringify({
@@ -341,8 +341,7 @@ function contactEditDate() {
 }
 
 function updateDB(input) {
-  console.log('Test again');
-  fetch(`${serverURL}/${_id.value}`, {
+  fetch(input.updateURL, {
     method: input.fetchMethod,
     body: JSON.stringify({
       [input.key]: input.value,
