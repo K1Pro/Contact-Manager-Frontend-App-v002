@@ -339,3 +339,20 @@ function contactEditDate() {
     });
   }
 }
+
+function updateDB(input) {
+  console.log('Test again');
+  fetch(`${serverURL}/${_id.value}`, {
+    method: input.fetchMethod,
+    body: JSON.stringify({
+      [input.key]: input.value,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      alert('Please enter a unique phone number');
+    });
+}

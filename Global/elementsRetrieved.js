@@ -67,41 +67,24 @@ function elementsRequired() {
               }
             } else {
               if (renewDateKeys.includes(this.id)) {
-                let changedInfo = this.value.slice(5, 10);
                 let changedInputMMDD = this.id.replace('Date', 'MMDD');
-                fetch(`${serverURL}/${_id.value}`, {
-                  method: 'PATCH',
-                  body: JSON.stringify({
-                    [changedInputMMDD]: changedInfo,
-                  }),
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                });
+                let MMDD = this.value.slice(5, 10);
+                let updateThis = {
+                  key: changedInputMMDD,
+                  value: MMDD,
+                  fetchMethod: 'PATCH',
+                };
+                updateDB(updateThis);
                 contactEditDate();
-              } else if (phoneKey == this.id) {
-                console.log(
-                  'this is a phone number it has to be checked first'
-                );
               } else {
-                fetch(`${serverURL}/${_id.value}`, {
-                  method: 'PATCH',
-                  body: JSON.stringify({
-                    [this.id]: this.value,
-                  }),
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                });
+                let updateThis = {
+                  key: this.id,
+                  value: this.value,
+                  fetchMethod: 'PATCH',
+                };
+                updateDB(updateThis);
                 contactEditDate();
               }
-              // this might be useful in the future dont enable for now until needed
-              // .then((response) => response.text())
-              // .then(() => {
-              //   getJSON(ContactsURL).then((data) => {
-              //     console.log(data);
-              //   });
-              // });
             }
           } else {
             alert('Please search for and choose a customer.');
