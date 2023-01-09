@@ -1,6 +1,6 @@
 function sidePanelModule() {
   // vvv Start coding here for SidePanel Module vvv
-  initiallyLoadSidePanel();
+  loadSidePanel(`${serverURL}${lastEdittedContactPath}`);
   getJSON(`${serverURL}${sortedContactsPath}`).then((data) => {
     // Populates a dataset into the main search bar
     for (const [key, value] of Object.entries(data.data.contacts)) {

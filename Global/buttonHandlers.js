@@ -120,7 +120,7 @@ function buttonHandlers() {
             contactEditDate();
             PhoneInput = document.getElementById('Phone');
             contactTasksTextArea.value = '';
-            loadSidePanel(PhoneInput.value);
+            loadSidePanel(`${serverURL}${phonePath}${PhoneInput.value}`);
             // You can possibly use this in the future
             // getJSON(ContactsURL).then((data) => {
             //   console.log('This is after the create button is pressed');
@@ -132,7 +132,7 @@ function buttonHandlers() {
 
   // This populates the Side Panel Input Fields following a Contact Search
   contactSearch.addEventListener('change', function (e) {
-    loadSidePanel(e.target.value);
+    loadSidePanel(`${serverURL}${phonePath}${e.target.value}`);
     contactSearch.value = '';
   });
 

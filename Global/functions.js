@@ -7,16 +7,9 @@ async function isElementLoaded(selector) {
   }
 }
 
-// getJSON(`${ContactsWithCalEvents}`).then((data) => {
-//   console.log(data.contact);
-// });
-
-function initiallyLoadSidePanel() {
-  let initialLoadDate = `${TodaysDate.toJSON().slice(0, 10)}`;
-
-  getJSON(`${serverURL}${lastEdittedContactPath}`).then((data) => {
-    // console.log(data.data.contacts[0]);
-
+function loadSidePanel(getJSONURL) {
+  // This populates the Side Panel Input Fields following certain actions
+  getJSON(getJSONURL).then((data) => {
     for (let rep = 0; rep < ContactFields.length; rep++) {
       let ContactFieldsIDs = ContactFields[rep].id;
       if (ContactFieldsIDs) {
@@ -28,6 +21,9 @@ function initiallyLoadSidePanel() {
       if (ContactFieldsIDs == '_id') {
         let contactID = document.getElementById(`${ContactFieldsIDs}`);
         loadContactTasks(contactID.value);
+        let calEvnts = data.data.contacts[0].CalendarEvents;
+        console.log(calEvnts);
+        console.log('everything refactored');
       }
     }
   });
@@ -43,24 +39,6 @@ function compare(a, b) {
   return 0;
 }
 
-function loadSidePanel(phoneNo) {
-  // This populates the Side Panel Input Fields following a Contact Search
-  getJSON(`${serverURL}${phonePath}${phoneNo}`).then((data) => {
-    for (let rep = 0; rep < ContactFields.length; rep++) {
-      let ContactFieldsIDs = ContactFields[rep].id;
-      if (ContactFieldsIDs) {
-        document.getElementById(`${ContactFieldsIDs}`).value = data.data
-          .contacts[0][ContactFieldsIDs]
-          ? `${data.data.contacts[0][ContactFieldsIDs]}`
-          : '';
-      }
-      if (ContactFieldsIDs == '_id') {
-        let contactID = document.getElementById(`${ContactFieldsIDs}`);
-        loadContactTasks(contactID.value);
-      }
-    }
-  });
-}
 function changeCalendarHTML_Date(chosenDate) {
   CalendarHTML_Date.value = `${chosenDate.toJSON().slice(0, 10)}`;
 }
@@ -128,7 +106,7 @@ function calendarDatesFillIn(chosenDate) {
           calCntct.classList.add('text-light');
           calCntct.addEventListener('click', () => {
             removeActiveCalCntct();
-            loadSidePanel(renewalContact.Phone);
+            loadSidePanel(`${serverURL}${phonePath}${renewalContact.Phone}`);
             calCntct.classList.add('active');
           });
           document.getElementById(`day${rep}`).appendChild(calCntct);
@@ -165,7 +143,7 @@ function calendarDatesFillIn(chosenDate) {
           calCntct.classList.add('text-light');
           calCntct.addEventListener('click', () => {
             removeActiveCalCntct();
-            loadSidePanel(renewalContact.Phone);
+            loadSidePanel(`${serverURL}${phonePath}${renewalContact.Phone}`);
             calCntct.classList.add('active');
           });
           document.getElementById(`day${rep}`).appendChild(calCntct);
@@ -195,7 +173,7 @@ function updateContactTasks(contactTask) {
       contactEditDate();
       PhoneInput = document.getElementById('Phone');
       contactTasksTextArea.value = '';
-      loadSidePanel(PhoneInput.value);
+      loadSidePanel(`${serverURL}${phonePath}${PhoneInput.value}`);
     });
 }
 
@@ -307,7 +285,7 @@ function loadContactTasks(dailyTask) {
 
             PhoneInput = document.getElementById('Phone');
             contactTasksTextArea.value = '';
-            loadSidePanel(PhoneInput.value);
+            loadSidePanel(`${serverURL}${phonePath}${PhoneInput.value}`);
           });
       });
       ContactTaskGroup.appendChild(contactTask.CheckBox);

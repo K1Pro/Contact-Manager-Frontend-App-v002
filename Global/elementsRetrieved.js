@@ -38,48 +38,37 @@ function elementsRequired() {
           if (_id.value) {
             let checkEmptyFields = this.value;
             if (!checkEmptyFields.replace(/\s/g, '').length) {
-              console.log(
-                'string only contains whitespace (ie. spaces, tabs or line breaks)'
-              );
+              console.log('string only contains spaces, tabs or line breaks');
+              let updateThis = {
+                updateURL: `${serverURL}${deleteEmptyFieldPath}${_id.value}`,
+                fetchMethod: 'DELETE',
+                value: '',
+              };
               if (renewDateKeys.includes(this.id)) {
                 let changedInputMMDD = this.id.replace('Date', 'MMDD');
-                let updateThis = {
-                  updateURL: `${serverURL}${deleteEmptyFieldPath}${_id.value}`,
-                  fetchMethod: 'DELETE',
-                  key: changedInputMMDD,
-                  value: '',
-                };
+                updateThis.key = changedInputMMDD;
                 updateDB(updateThis);
                 contactEditDate();
               } else {
-                let updateThis = {
-                  updateURL: `${serverURL}${deleteEmptyFieldPath}${_id.value}`,
-                  fetchMethod: 'DELETE',
-                  key: this.id,
-                  value: '',
-                };
+                updateThis.key = this.id;
                 updateDB(updateThis);
                 contactEditDate();
               }
             } else {
+              let updateThis = {
+                updateURL: `${serverURL}/${_id.value}`,
+                fetchMethod: 'PATCH',
+              };
               if (renewDateKeys.includes(this.id)) {
                 let changedInputMMDD = this.id.replace('Date', 'MMDD');
                 let MMDD = this.value.slice(5, 10);
-                let updateThis = {
-                  updateURL: `${serverURL}/${_id.value}`,
-                  fetchMethod: 'PATCH',
-                  key: changedInputMMDD,
-                  value: MMDD,
-                };
+                updateThis.key = changedInputMMDD;
+                updateThis.value = MMDD;
                 updateDB(updateThis);
                 contactEditDate();
               } else {
-                let updateThis = {
-                  updateURL: `${serverURL}/${_id.value}`,
-                  fetchMethod: 'PATCH',
-                  key: this.id,
-                  value: this.value,
-                };
+                updateThis.key = this.id;
+                updateThis.value = this.value;
                 updateDB(updateThis);
                 contactEditDate();
               }
