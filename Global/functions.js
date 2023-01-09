@@ -21,6 +21,14 @@ function loadSidePanel(URL) {
       if (ContactFieldsIDs == '_id') {
         let contactID = document.getElementById(`${ContactFieldsIDs}`);
         loadContactTasks(contactID.value);
+        // Highlights each renewal and event active in the calendar
+        calID = data.data.contacts[0]._id;
+        for (let rep = 0; rep < 31; rep++) {
+          let cntctCalRnwl = document.getElementById(`renewal${calID}${rep}`);
+          if (cntctCalRnwl) {
+            cntctCalRnwl.classList.add('active');
+          }
+        }
         calEvnts = data.data.contacts[0].CalendarEvents;
         calEvnts.forEach((calEvent) => {
           let cntctCalEvnt = document.getElementById(`Event${calEvent._id}`);
@@ -103,11 +111,7 @@ function calendarDatesFillIn(chosenDate) {
           calCntct.classList.add(`${renewalContact.Status.replace(' ', '')}`);
           calCntct.classList.add(`${renewalContact.Source.replace(' ', '')}`);
           calCntct.textContent = `${renewalContact.LastName}`;
-          calCntct.setAttribute(
-            'id',
-            `renewal${renewalContact._id}${Math.floor(Math.random() * 100)}`
-          );
-
+          calCntct.setAttribute('id', `renewal${renewalContact._id}${rep + 1}`);
           calCntct.classList.add('text-light');
           calCntct.addEventListener('click', () => {
             removeActiveCalCntct();
@@ -143,9 +147,6 @@ function calendarDatesFillIn(chosenDate) {
           if (renewalContact._id == _id.value) {
             calCntct.classList.add('active');
           }
-          // calEvnts.forEach((element) => {
-          //   console.log(element);
-          // });
           calCntct.setAttribute('id', `Event${results[0]._id}`);
           calCntct.textContent = `${renewalContact.LastName}`;
           calCntct.classList.add('text-light');
