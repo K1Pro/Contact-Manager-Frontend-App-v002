@@ -1,5 +1,6 @@
 function sidePanelModule() {
   // vvv Start coding here for SidePanel Module vvv
+  addStaffMembers(LastEditedBy);
   loadSidePanel(`${srvrURL}${lastEdittedContactPath}`);
   getJSON(`${srvrURL}${sortedContactsPath}`).then((data) => {
     // Populates a dataset into the main search bar
@@ -18,7 +19,7 @@ function sidePanelModule() {
         contactsList.appendChild(spouseSearchDataSet);
       }
     }
-    return data;
+    // return data;
   });
   // ^^^ End coding here for SidePanel Module ^^^
 }

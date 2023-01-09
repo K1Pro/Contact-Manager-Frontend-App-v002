@@ -25,6 +25,10 @@ function elementsRequired() {
   renewalsCheckBox = document.getElementById('renewsCheckBox');
   completedCheckBox = document.getElementById('completedCheckBox');
   notCompletedCheckBox = document.getElementById('notCompletedCheckBox');
+  StatusDropDown = document.getElementById('StatusDropDown');
+  SourceDropDown = document.getElementById('SourceDropDown');
+  StaffMemberDropDown = document.getElementById('StaffMemberDropDown');
+  TasksDropDown = document.getElementById('TasksDropDown');
   CalendarDates = document
     .getElementById('calendarDates')
     .querySelectorAll('*');

@@ -281,7 +281,23 @@
     />
     <label class="form-check-label" for="inlineCheckbox1">Renewals</label>
   </div>
-  <div class="form-check form-check-inline responsiveHeaderFont">
+  <select id="StatusDropDown">
+    <option selected disabled="disabled">Disable</option>
+  </select>
+  <select id="SourceDropDown">
+    <option selected disabled="disabled">Disabled</option>
+  </select>
+  <select id="StaffMemberDropDown">
+    <option selected disabled="disabled">Agent</option>
+  </select>
+  <select id="TasksDropDown">
+    <option selected disabled="disabled">Tasks</option>
+    <option value="Completed">Completed</option>
+    <option value="NotCompleted">Pending</option>
+    <option value="Enabled">Enabled</option>
+    <option value="Disabled">Disabled</option>
+  </select>
+  <!-- <div class="form-check form-check-inline responsiveHeaderFont">
     <input
       class="form-check-input"
       type="checkbox"
@@ -320,6 +336,6 @@
       checked
     />
     <label class="form-check-label" for="inlineCheckbox5">Not Completed</label>
-  </div>
+  </div> -->
 </div>
 <div id="CalendarHTMLModule"></div>

@@ -309,6 +309,15 @@ function removeActiveCalCntct() {
   });
 }
 
+function addStaffMembers(element) {
+  staffMembers.forEach((staffMember) => {
+    let staffOption = document.createElement('option');
+    staffOption.value = staffMember;
+    staffOption.innerHTML = staffMember;
+    element.appendChild(staffOption);
+  });
+}
+
 function contactEditDate() {
   if (_id.value) {
     lastEditDate = new Date().toJSON(); //.slice(0, 16);

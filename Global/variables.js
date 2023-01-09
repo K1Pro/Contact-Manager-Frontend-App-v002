@@ -24,6 +24,20 @@ const staffMembers = [
   'Yuliya',
   'Eliza',
 ];
+const Status = [
+  'Customer',
+  'Former Customer',
+  'Prospect',
+  'Hot Lead',
+  'Cold Lead',
+];
+const Source = [
+  'Allstate',
+  'Assurance',
+  'Live Transfer Lead',
+  'Online Lead',
+  'Referral',
+];
 const renewDateKeys = [
   'Policy1RenewDate',
   'Policy2RenewDate',
