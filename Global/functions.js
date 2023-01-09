@@ -7,9 +7,9 @@ async function isElementLoaded(selector) {
   }
 }
 
-function loadSidePanel(getJSONURL) {
+function loadSidePanel(URL) {
   // This populates the Side Panel Input Fields following certain actions
-  getJSON(getJSONURL).then((data) => {
+  getJSON(URL).then((data) => {
     for (let rep = 0; rep < ContactFields.length; rep++) {
       let ContactFieldsIDs = ContactFields[rep].id;
       if (ContactFieldsIDs) {
@@ -21,12 +21,17 @@ function loadSidePanel(getJSONURL) {
       if (ContactFieldsIDs == '_id') {
         let contactID = document.getElementById(`${ContactFieldsIDs}`);
         loadContactTasks(contactID.value);
-        let calEvnts = data.data.contacts[0].CalendarEvents;
-        console.log(calEvnts);
-        console.log('everything refactored');
+        calEvnts = data.data.contacts[0].CalendarEvents;
+        calEvnts.forEach((calEvent) => {
+          let cntctCalEvnt = document.getElementById(`Event${calEvent._id}`);
+          if (cntctCalEvnt) {
+            cntctCalEvnt.classList.add('active');
+          }
+        });
       }
     }
   });
+  return calEvnts;
 }
 
 function compare(a, b) {
@@ -138,6 +143,9 @@ function calendarDatesFillIn(chosenDate) {
           if (renewalContact._id == _id.value) {
             calCntct.classList.add('active');
           }
+          // calEvnts.forEach((element) => {
+          //   console.log(element);
+          // });
           calCntct.setAttribute('id', `Event${results[0]._id}`);
           calCntct.textContent = `${renewalContact.LastName}`;
           calCntct.classList.add('text-light');

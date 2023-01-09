@@ -2,7 +2,7 @@ console.log('retrieved all global variables');
 ///////////////////////////////////////////////
 let TodaysDate = new Date();
 let TodaysDateJSON = new Date();
-let lastEditDate;
+let lastEditDate, calEvnts;
 let daysInWeek = 7;
 const serverURL = `http://192.168.64.9:8000/api/v2/contacts`;
 const sortedContactsPath = `/sorted`;
