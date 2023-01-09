@@ -40,7 +40,7 @@ function elementsRequired() {
             if (!checkEmptyFields.replace(/\s/g, '').length) {
               console.log('string only contains spaces, tabs or line breaks');
               let updateThis = {
-                updateURL: `${serverURL}${deleteEmptyFieldPath}${_id.value}`,
+                updateURL: `${srvrURL}${deleteEmptyFieldPath}${_id.value}`,
                 fetchMethod: 'DELETE',
                 value: '',
               };
@@ -56,7 +56,7 @@ function elementsRequired() {
               }
             } else {
               let updateThis = {
-                updateURL: `${serverURL}/${_id.value}`,
+                updateURL: `${srvrURL}/${_id.value}`,
                 fetchMethod: 'PATCH',
               };
               if (renewDateKeys.includes(this.id)) {

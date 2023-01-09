@@ -46,9 +46,6 @@ function buttonHandlers() {
     for (key in renewals) {
       if (renewals[key].className) {
         if (renewals[key].className.includes('hiddenContact')) {
-          // console.log(document.getElementById(`${renewals[key].id}`));
-          // console.log(renewals[key].className.includes('hiddenContact'));
-          // document.getElementById(`${renewals[key].id}`).style.display = 'none';
           document
             .getElementById(`${renewals[key].id}`)
             .classList.remove('hiddenContact');
@@ -57,16 +54,44 @@ function buttonHandlers() {
             .getElementById(`${renewals[key].id}`)
             .classList.add('hiddenContact');
         }
-        // renewals[key].className.style.display = 'none';
       }
     }
-    // renewals.style.display = 'none';
     console.log('its working');
   });
+
   completedCheckBox.addEventListener('click', function () {
+    completed = document.getElementsByClassName('Completed');
+    for (key in completed) {
+      if (completed[key].className) {
+        if (completed[key].className.includes('hiddenContact')) {
+          document
+            .getElementById(`${completed[key].id}`)
+            .classList.remove('hiddenContact');
+        } else {
+          document
+            .getElementById(`${completed[key].id}`)
+            .classList.add('hiddenContact');
+        }
+      }
+    }
     console.log('its working');
   });
+
   notCompletedCheckBox.addEventListener('click', function () {
+    notCompleted = document.getElementsByClassName('notCompleted');
+    for (key in notCompleted) {
+      if (notCompleted[key].className) {
+        if (notCompleted[key].className.includes('hiddenContact')) {
+          document
+            .getElementById(`${notCompleted[key].id}`)
+            .classList.remove('hiddenContact');
+        } else {
+          document
+            .getElementById(`${notCompleted[key].id}`)
+            .classList.add('hiddenContact');
+        }
+      }
+    }
     console.log('its working');
   });
 
@@ -74,7 +99,7 @@ function buttonHandlers() {
   reviewContact.addEventListener('click', function () {
     if (_id.value) {
       let reviewDate = TodaysDate.toJSON().slice(0, 10);
-      fetch(`${serverURL}/${_id.value}`, {
+      fetch(`${srvrURL}/${_id.value}`, {
         method: 'PATCH',
         body: JSON.stringify({
           LastReviewDate: reviewDate,
@@ -88,7 +113,7 @@ function buttonHandlers() {
   // Create Event Button in ContactTasks Module
   createEvent.addEventListener('click', function () {
     if (_id.value && contactTasksTextArea.value) {
-      getJSON(`${serverURL}/${_id.value}`).then((data) => {
+      getJSON(`${srvrURL}/${_id.value}`).then((data) => {
         let calendarEventsArray = data.data.contact.CalendarEvents
           ? data.data.contact.CalendarEvents
           : [];
@@ -105,7 +130,7 @@ function buttonHandlers() {
             Completed: false,
           })
         );
-        fetch(`${serverURL}/${_id.value}`, {
+        fetch(`${srvrURL}/${_id.value}`, {
           method: 'PATCH',
           body: JSON.stringify({
             // This creates a key-value pair to be patached, ex: "FirstName": Bart
@@ -120,7 +145,7 @@ function buttonHandlers() {
             contactEditDate();
             PhoneInput = document.getElementById('Phone');
             contactTasksTextArea.value = '';
-            loadSidePanel(`${serverURL}${phonePath}${PhoneInput.value}`);
+            loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
             // You can possibly use this in the future
             // getJSON(ContactsURL).then((data) => {
             //   console.log('This is after the create button is pressed');
@@ -132,7 +157,7 @@ function buttonHandlers() {
 
   // This populates the Side Panel Input Fields following a Contact Search
   contactSearch.addEventListener('change', function (e) {
-    loadSidePanel(`${serverURL}${phonePath}${e.target.value}`);
+    loadSidePanel(`${srvrURL}${phonePath}${e.target.value}`);
     contactSearch.value = '';
   });
 
