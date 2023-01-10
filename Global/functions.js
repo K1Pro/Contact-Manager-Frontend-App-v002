@@ -85,6 +85,7 @@ function calendarDatesFillIn(chosenDate) {
     // });
     document.getElementById(`day${rep}`).addEventListener('click', () => {
       changeCalendarHTML_Date(calDates);
+      createEventTime.value = `${calDates.toJSON().slice(0, 16)}`;
     });
     getJSON(`${srvrURL}${rnwlPath}${rnwlDates.toJSON().slice(5, 10)}`).then(
       (data) => {
@@ -244,13 +245,11 @@ function loadContactTasks(dailyTask) {
       ContactTaskGroup.appendChild(contactTask.Author);
 
       staffMembers.forEach((staffMember) => {
-        let ContactTaskAuthors = document.createElement('option');
-        ContactTaskAuthors.value = staffMember;
-        ContactTaskAuthors.innerHTML = staffMember;
-        if (value.EventAuthor == staffMember) {
-          ContactTaskAuthors.selected = true;
-        }
-        contactTask.Author.appendChild(ContactTaskAuthors);
+        let CntctTskAuthors = document.createElement('option');
+        CntctTskAuthors.value = staffMember;
+        CntctTskAuthors.innerHTML = staffMember;
+        if (value.EventAuthor == staffMember) CntctTskAuthors.selected = true;
+        contactTask.Author.appendChild(CntctTskAuthors);
       });
 
       // Creates a checkbox
@@ -327,21 +326,6 @@ function populateSelect(calArray, SelectElement) {
   });
 }
 
-function contactEditDate() {
-  if (_id.value) {
-    lastEditDate = new Date().toJSON(); //.slice(0, 16);
-    fetch(`${srvrURL}/${_id.value}`, {
-      method: 'PATCH',
-      body: JSON.stringify({
-        LastEditDate: lastEditDate,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  }
-}
-
 function calendarFilter(chosenFilter) {
   renewals = document.getElementsByClassName('calTask');
   for (key in renewals) {
@@ -361,6 +345,21 @@ function calendarFilter(chosenFilter) {
         }
       }
     }
+  }
+}
+
+function contactEditDate() {
+  if (_id.value) {
+    lastEditDate = new Date().toJSON(); //.slice(0, 16);
+    fetch(`${srvrURL}/${_id.value}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        LastEditDate: lastEditDate,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 }
 
