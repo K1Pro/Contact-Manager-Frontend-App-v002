@@ -56,7 +56,6 @@ function changeCalendarHTML_Date(chosenDate) {
 }
 
 function calendarDatesFillIn(chosenDate) {
-  console.log(StaffMemberDropDown.value);
   let prevMondayLastWeek = 0 - chosenDate.getDay() - daysInWeek;
   for (let rep = 1; rep < 29; rep++) {
     document.getElementById(`day${rep}`).classList.remove('calendarCurrentDay');
@@ -109,6 +108,9 @@ function calendarDatesFillIn(chosenDate) {
             if (renewalContact._id == _id.value) {
               calCntct.classList.add('active');
             }
+            // if (StaffMemberDropDown) {
+            //   console.log(StaffMemberDropDown);
+            // }
             calCntct.classList.add(`${renewalContact.Status.replace(' ', '')}`);
             calCntct.classList.add(`${renewalContact.Source.replace(' ', '')}`);
             calCntct.textContent = `${renewalContact.LastName}`;
@@ -120,6 +122,19 @@ function calendarDatesFillIn(chosenDate) {
               `renewal${renewalContact._id}${rep + 1}`
             );
             calCntct.classList.add('text-light');
+            console.log(StaffMemberDropDown.value);
+            if (
+              StaffMemberDropDown.value &&
+              renewalContact.LastEditedBy != StaffMemberDropDown.value
+            ) {
+              calCntct.classList.add('hiddenContact');
+            }
+            if (
+              TasksDropDown.value == 'completed' ||
+              TasksDropDown.value == 'notCompleted'
+            ) {
+              calCntct.classList.add('hiddenContact');
+            }
             calCntct.addEventListener('click', () => {
               removeActiveCalCntct();
               loadSidePanel(`${srvrURL}${phonePath}${renewalContact.Phone}`);
@@ -328,21 +343,23 @@ function populateSelect(calArray, SelectElement) {
 }
 
 function calendarFilter(chosenFilter) {
-  renewals = document.getElementsByClassName('calTask');
-  for (key in renewals) {
-    if (renewals[key].className) {
-      if (chosenFilter.target.value == 'All') {
-        document
-          .getElementById(`${renewals[key].id}`)
-          .classList.remove('hiddenContact');
-      } else {
-        document
-          .getElementById(`${renewals[key].id}`)
-          .classList.add('hiddenContact');
-        if (renewals[key].className.includes(chosenFilter.target.value)) {
+  if (chosenFilter) {
+    renewals = document.getElementsByClassName('calTask');
+    for (key in renewals) {
+      if (renewals[key].className) {
+        if (chosenFilter.target.value == 'All') {
           document
             .getElementById(`${renewals[key].id}`)
             .classList.remove('hiddenContact');
+        } else {
+          document
+            .getElementById(`${renewals[key].id}`)
+            .classList.add('hiddenContact');
+          if (renewals[key].className.includes(chosenFilter.target.value)) {
+            document
+              .getElementById(`${renewals[key].id}`)
+              .classList.remove('hiddenContact');
+          }
         }
       }
     }
