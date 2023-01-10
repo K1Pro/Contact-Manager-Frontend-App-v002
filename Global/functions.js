@@ -56,6 +56,7 @@ function changeCalendarHTML_Date(chosenDate) {
 }
 
 function calendarDatesFillIn(chosenDate) {
+  console.log(StaffMemberDropDown.value);
   let prevMondayLastWeek = 0 - chosenDate.getDay() - daysInWeek;
   for (let rep = 1; rep < 29; rep++) {
     document.getElementById(`day${rep}`).classList.remove('calendarCurrentDay');
