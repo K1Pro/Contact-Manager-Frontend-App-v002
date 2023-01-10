@@ -342,6 +342,28 @@ function contactEditDate() {
   }
 }
 
+function calendarFilter(chosenFilter) {
+  renewals = document.getElementsByClassName('calTask');
+  for (key in renewals) {
+    if (renewals[key].className) {
+      if (chosenFilter.target.value == 'All') {
+        document
+          .getElementById(`${renewals[key].id}`)
+          .classList.remove('hiddenContact');
+      } else {
+        document
+          .getElementById(`${renewals[key].id}`)
+          .classList.add('hiddenContact');
+        if (renewals[key].className.includes(chosenFilter.target.value)) {
+          document
+            .getElementById(`${renewals[key].id}`)
+            .classList.remove('hiddenContact');
+        }
+      }
+    }
+  }
+}
+
 function updateDB(input) {
   fetch(input.updateURL, {
     method: input.fetchMethod,

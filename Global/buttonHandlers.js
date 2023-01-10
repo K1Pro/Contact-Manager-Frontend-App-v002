@@ -41,97 +41,17 @@ function buttonHandlers() {
     calendarDatesFillIn(checktime);
   });
 
-  StatusDropDown.addEventListener('change', function (e) {
-    console.log(e.target.value);
-    renewals = document.getElementsByClassName('calTask');
-    for (key in renewals) {
-      if (renewals[key].className) {
-        if (e.target.value == 'All') {
-          document
-            .getElementById(`${renewals[key].id}`)
-            .classList.remove('hiddenContact');
-        } else {
-          document
-            .getElementById(`${renewals[key].id}`)
-            .classList.add('hiddenContact');
-          if (renewals[key].className.includes(e.target.value)) {
-            document
-              .getElementById(`${renewals[key].id}`)
-              .classList.remove('hiddenContact');
-          }
-        }
-      }
-    }
-    console.log('its working');
+  StatusDropDown.addEventListener('change', function (chosenFilter) {
+    calendarFilter(chosenFilter);
   });
-  SourceDropDown.addEventListener('change', function (e) {
-    console.log(e.target.value);
-    renewals = document.getElementsByClassName('calTask');
-    for (key in renewals) {
-      if (renewals[key].className) {
-        if (e.target.value == 'All') {
-          document
-            .getElementById(`${renewals[key].id}`)
-            .classList.remove('hiddenContact');
-        } else {
-          document
-            .getElementById(`${renewals[key].id}`)
-            .classList.add('hiddenContact');
-          if (renewals[key].className.includes(e.target.value)) {
-            document
-              .getElementById(`${renewals[key].id}`)
-              .classList.remove('hiddenContact');
-          }
-        }
-      }
-    }
-    console.log('its working');
+  SourceDropDown.addEventListener('change', function (chosenFilter) {
+    calendarFilter(chosenFilter);
   });
-  StaffMemberDropDown.addEventListener('change', function (e) {
-    console.log(e.target.value);
-    renewals = document.getElementsByClassName('calTask');
-    for (key in renewals) {
-      if (renewals[key].className) {
-        if (e.target.value == 'All') {
-          document
-            .getElementById(`${renewals[key].id}`)
-            .classList.remove('hiddenContact');
-        } else {
-          document
-            .getElementById(`${renewals[key].id}`)
-            .classList.add('hiddenContact');
-          if (renewals[key].className.includes(e.target.value)) {
-            document
-              .getElementById(`${renewals[key].id}`)
-              .classList.remove('hiddenContact');
-          }
-        }
-      }
-    }
-    console.log('its working');
+  StaffMemberDropDown.addEventListener('change', function (chosenFilter) {
+    calendarFilter(chosenFilter);
   });
-  TasksDropDown.addEventListener('change', function (e) {
-    console.log(e.target.value);
-    renewals = document.getElementsByClassName('calTask');
-    for (key in renewals) {
-      if (renewals[key].className) {
-        if (e.target.value == 'All') {
-          document
-            .getElementById(`${renewals[key].id}`)
-            .classList.remove('hiddenContact');
-        } else {
-          document
-            .getElementById(`${renewals[key].id}`)
-            .classList.add('hiddenContact');
-          if (renewals[key].className.includes(e.target.value)) {
-            document
-              .getElementById(`${renewals[key].id}`)
-              .classList.remove('hiddenContact');
-          }
-        }
-      }
-    }
-    console.log('its working');
+  TasksDropDown.addEventListener('change', function (chosenFilter) {
+    calendarFilter(chosenFilter);
   });
 
   // Review Button in Side Panel
