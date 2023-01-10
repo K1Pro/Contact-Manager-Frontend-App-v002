@@ -41,11 +41,12 @@ function buttonHandlers() {
     calendarDatesFillIn(checktime);
   });
 
-  renewalsCheckBox.addEventListener('click', function () {
-    renewals = document.getElementsByClassName('renewal');
+  StatusDropDown.addEventListener('change', function (e) {
+    console.log(e.target.value);
+    renewals = document.getElementsByClassName('calTask');
     for (key in renewals) {
       if (renewals[key].className) {
-        if (renewals[key].className.includes('hiddenContact')) {
+        if (e.target.value == 'All') {
           document
             .getElementById(`${renewals[key].id}`)
             .classList.remove('hiddenContact');
@@ -53,47 +54,85 @@ function buttonHandlers() {
           document
             .getElementById(`${renewals[key].id}`)
             .classList.add('hiddenContact');
+          if (renewals[key].className.includes(e.target.value)) {
+            document
+              .getElementById(`${renewals[key].id}`)
+              .classList.remove('hiddenContact');
+          }
         }
       }
     }
     console.log('its working');
   });
-
-  // completedCheckBox.addEventListener('click', function () {
-  //   completed = document.getElementsByClassName('Completed');
-  //   for (key in completed) {
-  //     if (completed[key].className) {
-  //       if (completed[key].className.includes('hiddenContact')) {
-  //         document
-  //           .getElementById(`${completed[key].id}`)
-  //           .classList.remove('hiddenContact');
-  //       } else {
-  //         document
-  //           .getElementById(`${completed[key].id}`)
-  //           .classList.add('hiddenContact');
-  //       }
-  //     }
-  //   }
-  //   console.log('its working');
-  // });
-
-  // notCompletedCheckBox.addEventListener('click', function () {
-  //   notCompleted = document.getElementsByClassName('notCompleted');
-  //   for (key in notCompleted) {
-  //     if (notCompleted[key].className) {
-  //       if (notCompleted[key].className.includes('hiddenContact')) {
-  //         document
-  //           .getElementById(`${notCompleted[key].id}`)
-  //           .classList.remove('hiddenContact');
-  //       } else {
-  //         document
-  //           .getElementById(`${notCompleted[key].id}`)
-  //           .classList.add('hiddenContact');
-  //       }
-  //     }
-  //   }
-  //   console.log('its working');
-  // });
+  SourceDropDown.addEventListener('change', function (e) {
+    console.log(e.target.value);
+    renewals = document.getElementsByClassName('calTask');
+    for (key in renewals) {
+      if (renewals[key].className) {
+        if (e.target.value == 'All') {
+          document
+            .getElementById(`${renewals[key].id}`)
+            .classList.remove('hiddenContact');
+        } else {
+          document
+            .getElementById(`${renewals[key].id}`)
+            .classList.add('hiddenContact');
+          if (renewals[key].className.includes(e.target.value)) {
+            document
+              .getElementById(`${renewals[key].id}`)
+              .classList.remove('hiddenContact');
+          }
+        }
+      }
+    }
+    console.log('its working');
+  });
+  StaffMemberDropDown.addEventListener('change', function (e) {
+    console.log(e.target.value);
+    renewals = document.getElementsByClassName('calTask');
+    for (key in renewals) {
+      if (renewals[key].className) {
+        if (e.target.value == 'All') {
+          document
+            .getElementById(`${renewals[key].id}`)
+            .classList.remove('hiddenContact');
+        } else {
+          document
+            .getElementById(`${renewals[key].id}`)
+            .classList.add('hiddenContact');
+          if (renewals[key].className.includes(e.target.value)) {
+            document
+              .getElementById(`${renewals[key].id}`)
+              .classList.remove('hiddenContact');
+          }
+        }
+      }
+    }
+    console.log('its working');
+  });
+  TasksDropDown.addEventListener('change', function (e) {
+    console.log(e.target.value);
+    renewals = document.getElementsByClassName('calTask');
+    for (key in renewals) {
+      if (renewals[key].className) {
+        if (e.target.value == 'All') {
+          document
+            .getElementById(`${renewals[key].id}`)
+            .classList.remove('hiddenContact');
+        } else {
+          document
+            .getElementById(`${renewals[key].id}`)
+            .classList.add('hiddenContact');
+          if (renewals[key].className.includes(e.target.value)) {
+            document
+              .getElementById(`${renewals[key].id}`)
+              .classList.remove('hiddenContact');
+          }
+        }
+      }
+    }
+    console.log('its working');
+  });
 
   // Review Button in Side Panel
   reviewContact.addEventListener('click', function () {

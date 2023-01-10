@@ -194,7 +194,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
 }
 
 .notCompleted {
-  background-color: #00cc66;
+  background-color: #009966;
   margin-left: -12px;
   padding-left: 12px;
   margin-right: -12px;
@@ -216,7 +216,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
   transition: all 1s ease; */
 }
 
-.Completed {
+.completed {
   background-color: #ff3366;
   margin-left: -12px;
   padding-left: 12px;
@@ -230,7 +230,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
   text-shadow: 0px 0px 2px grey;
 }
 
-.Completed:hover {
+.completed:hover {
   background-color: #cf33ff;
   /* border-radius: 0px !important;
   -webkit-transition: all 1s ease;
@@ -251,6 +251,9 @@ input[type='date']:invalid::-webkit-datetime-edit {
   border-width: thin;
   /* font-weight: bold; */
   text-shadow: 0px 0px 2px grey;
+}
+.active:hover {
+  background-color: #0066ff;
 }
 .bartkaCheckbox {
   width: 41px;

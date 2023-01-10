@@ -22,9 +22,6 @@ function elementsRequired() {
   CalendarHTML_NextWeekBtn = document.getElementById('NextWeekButton');
   CalendarHTML_NextMonthBtn = document.getElementById('NextMonthButton');
   UniqueDays = document.getElementsByClassName('uniqueday');
-  renewalsCheckBox = document.getElementById('renewsCheckBox');
-  completedCheckBox = document.getElementById('completedCheckBox');
-  notCompletedCheckBox = document.getElementById('notCompletedCheckBox');
   StatusDropDown = document.getElementById('StatusDropDown');
   SourceDropDown = document.getElementById('SourceDropDown');
   StaffMemberDropDown = document.getElementById('StaffMemberDropDown');

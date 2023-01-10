@@ -98,10 +98,11 @@ function calendarDatesFillIn(chosenDate) {
             let calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
             // prettier-ignore
             let lastReviewDateNoDash = `${renewalContact.LastReviewDate.replaceAll('-', '')}`;
+            calCntct.classList.add('calTask');
             if (lastReviewDateNoDash < calDateNoDash) {
               calCntct.classList.add('renewal');
             } else {
-              calCntct.classList.add('Completed');
+              calCntct.classList.add('completed');
             }
             if (renewalContact._id == _id.value) {
               calCntct.classList.add('active');
@@ -109,6 +110,9 @@ function calendarDatesFillIn(chosenDate) {
             calCntct.classList.add(`${renewalContact.Status.replace(' ', '')}`);
             calCntct.classList.add(`${renewalContact.Source.replace(' ', '')}`);
             calCntct.textContent = `${renewalContact.LastName}`;
+            calCntct.classList.add(renewalContact.Status);
+            calCntct.classList.add(renewalContact.Source);
+            calCntct.classList.add(renewalContact.LastEditedBy);
             calCntct.setAttribute(
               'id',
               `renewal${renewalContact._id}${rep + 1}`
@@ -133,19 +137,23 @@ function calendarDatesFillIn(chosenDate) {
         rnwlCntcts = data.contacts;
         rnwlCntcts.map((renewalContact) => {
           let calCntct = document.createElement('div');
+          calCntct.classList.add('calTask');
           const results = renewalContact.CalendarEvents.filter((obj) => {
             return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
           });
           if (!results[0].Completed) {
             calCntct.classList.add('notCompleted');
           } else {
-            calCntct.classList.add('Completed');
+            calCntct.classList.add('completed');
           }
           if (renewalContact._id == _id.value) {
             calCntct.classList.add('active');
           }
           calCntct.setAttribute('id', `Event${results[0]._id}`);
           calCntct.textContent = `${renewalContact.LastName}`;
+          calCntct.classList.add(renewalContact.Status);
+          calCntct.classList.add(renewalContact.Source);
+          calCntct.classList.add(results[0].EventAuthor);
           calCntct.classList.add('text-light');
           calCntct.addEventListener('click', () => {
             removeActiveCalCntct();
@@ -277,7 +285,7 @@ function loadContactTasks(dailyTask) {
                 let checkCompletion = document.getElementById(
                   `Event${value._id}`
                 );
-                checkCompletion.setAttribute('class', `Completed text-light`);
+                checkCompletion.setAttribute('class', `completed text-light`);
               } else {
                 let checkCompletion = document.getElementById(
                   `Event${value._id}`
@@ -300,6 +308,7 @@ function loadContactTasks(dailyTask) {
     return data;
   });
 }
+
 function removeActiveCalCntct() {
   let highlightedItems = document
     .getElementById('calendarDates')
@@ -309,12 +318,12 @@ function removeActiveCalCntct() {
   });
 }
 
-function addStaffMembers(element) {
-  staffMembers.forEach((staffMember) => {
-    let staffOption = document.createElement('option');
-    staffOption.value = staffMember;
-    staffOption.innerHTML = staffMember;
-    element.appendChild(staffOption);
+function populateSelect(calArray, SelectElement) {
+  calArray.forEach((calArrayItems) => {
+    let calOption = document.createElement('option');
+    calOption.value = calArrayItems;
+    calOption.innerHTML = calArrayItems;
+    SelectElement.appendChild(calOption);
   });
 }
 

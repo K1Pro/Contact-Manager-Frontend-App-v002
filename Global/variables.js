@@ -24,18 +24,19 @@ const staffMembers = [
   'Yuliya',
   'Eliza',
 ];
-const Status = [
+const Statuses = [
   'Customer',
-  'Former Customer',
+  'Former-Customer',
   'Prospect',
-  'Hot Lead',
-  'Cold Lead',
+  'Hot-Lead',
+  'Cold-Lead',
 ];
-const Source = [
+const Sources = [
+  'Erie',
   'Allstate',
   'Assurance',
-  'Live Transfer Lead',
-  'Online Lead',
+  'Live-Transfer-Lead',
+  'Online-Lead',
   'Referral',
 ];
 const renewDateKeys = [

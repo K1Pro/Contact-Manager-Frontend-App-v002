@@ -2,7 +2,9 @@ function calendarModule() {
   // vvv Start coding here for Calendar Module vvv
   CalendarHTML_Date.value = TodaysDate.toJSON().slice(0, 10);
   calendarDatesFillIn(TodaysDate);
-  addStaffMembers(StaffMemberDropDown);
+  populateSelect(staffMembers, StaffMemberDropDown);
+  populateSelect(Statuses, StatusDropDown);
+  populateSelect(Sources, SourceDropDown);
   // ^^^ End coding here for Calendar Module ^^^
 }
 
