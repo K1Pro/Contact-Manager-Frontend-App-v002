@@ -16,6 +16,7 @@ function elementsRequired() {
     .querySelectorAll('*');
   reviewContact = document.getElementById('reviewContact');
   callContact = document.getElementById('callContact');
+  sendEmail = document.getElementById('sendEmail');
   // Calendar Module Elements
   CalendarHTML_Date = document.getElementById('CalendarDate');
   CalendarHTML_PrevMonthBtn = document.getElementById('LastMonthButton');
