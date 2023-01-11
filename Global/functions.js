@@ -122,7 +122,6 @@ function calendarDatesFillIn(chosenDate) {
               `renewal${renewalContact._id}${rep + 1}`
             );
             calCntct.classList.add('text-light');
-            console.log(StaffMemberDropDown.value);
             if (
               StaffMemberDropDown.value &&
               renewalContact.LastEditedBy != StaffMemberDropDown.value
