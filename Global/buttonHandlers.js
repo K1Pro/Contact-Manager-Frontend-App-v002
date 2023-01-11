@@ -69,6 +69,13 @@ function buttonHandlers() {
       });
     }
   });
+  callContact.addEventListener('click', function () {
+    if (Phone.value) {
+      console.log(Phone.value);
+      window.open(`tel:${Phone.value}`);
+      //<a href="tel:630-202-3773">CLICK TO CALL</a>
+    }
+  });
   // Create Event Button in ContactTasks Module
   createEvent.addEventListener('click', function () {
     if (_id.value && contactTasksTextArea.value) {

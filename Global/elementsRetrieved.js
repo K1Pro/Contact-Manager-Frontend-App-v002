@@ -15,6 +15,7 @@ function elementsRequired() {
     .getElementById('ContactFields')
     .querySelectorAll('*');
   reviewContact = document.getElementById('reviewContact');
+  callContact = document.getElementById('callContact');
   // Calendar Module Elements
   CalendarHTML_Date = document.getElementById('CalendarDate');
   CalendarHTML_PrevMonthBtn = document.getElementById('LastMonthButton');
