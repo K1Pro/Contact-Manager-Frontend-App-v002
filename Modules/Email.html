@@ -2,16 +2,16 @@ Send an Email or Fax
 <div class="input-group">
   <select
     class="form-select"
-    id="inputGroupSelect04"
+    id="emailSubject"
     aria-label="Example select with button addon"
   >
     <option selected>Choose Email Template</option>
-    <option value="1">Car Quote</option>
-    <option value="2">Home Quote</option>
-    <option value="3">Renewal Notice</option>
-    <option value="4">Welcome Letter</option>
-    <option value="5">Post Sale</option>
-    <option value="6">Life Quote</option>
+    <option value="Car Quote">Car Quote</option>
+    <option value="Home Quote">Home Quote</option>
+    <option value="Renewal Notice">Renewal Notice</option>
+    <option value="Welcome Letter">Welcome Letter</option>
+    <option value="Post Sale">Post Sale</option>
+    <option value="Life Quote">Life Quote</option>
   </select>
   <button class="btn btn-primary border-white" type="button" id="sendEmail">
     Send Email
@@ -21,11 +21,7 @@ Send an Email or Fax
   <label for="exampleFormControlTextarea1" class="form-label"
     >Email or Fax Body</label
   >
-  <textarea
-    class="form-control"
-    id="exampleFormControlTextarea1"
-    rows="5"
-  ></textarea>
+  <textarea class="form-control" id="emailBody" rows="5"></textarea>
 </div>
 
 <div class="input-group">
@@ -33,8 +29,8 @@ Send an Email or Fax
     type="file"
     class="form-control"
     id="inputGroupFile04"
-    aria-describedby="inputGroupFileAddon04"
     aria-label="Upload"
   />
+  <!-- aria-describedby="inputGroupFileAddon04" this was above the aria-label-->
 </div>
 <div id="EmailHTMLModule"></div>

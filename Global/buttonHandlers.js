@@ -71,9 +71,25 @@ function buttonHandlers() {
   });
   callContact.addEventListener('click', function () {
     if (Phone.value) {
-      console.log(Phone.value);
       window.open(`tel:${Phone.value}`);
       //<a href="tel:630-202-3773">CLICK TO CALL</a>
+    }
+  });
+  sendEmail.addEventListener('click', function () {
+    let cntctEmail = document.getElementById('Email');
+    let emailSubject = document.getElementById('emailSubject');
+    let emailBody = document.getElementById('emailBody');
+    if (cntctEmail.value) {
+      console.log(cntctEmail.value);
+      console.log(emailSubject.value);
+      console.log(emailBody.value);
+      Email.send({
+        SecureToken: 'd4941a43-1e89-4be9-9ad7-7902f096bbbb',
+        To: cntctEmail.value,
+        From: 'bart@bundle-insurance.com',
+        Subject: emailSubject.value,
+        Body: emailBody.value,
+      }).then(() => alert(`Email successfully sent to:${cntctEmail.value}`));
     }
   });
   // Create Event Button in ContactTasks Module
