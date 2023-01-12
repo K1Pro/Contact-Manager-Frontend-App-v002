@@ -81,10 +81,12 @@ function buttonHandlers() {
       console.log(cntctEmail.value);
       console.log(emailSubject.value);
       console.log(emailBody.value);
+      console.log(SMTP[LastEditedBy.value]);
+      console.log(`${LastEditedBy.value.toLowerCase()}@bundle-insurance.com`);
       Email.send({
-        SecureToken: '90179d43-ff9d-4b1b-b61c-29461889becc',
+        SecureToken: SMTP[LastEditedBy.value],
         To: cntctEmail.value,
-        From: 'hanna@bundle-insurance.com',
+        From: `${LastEditedBy.value.toLowerCase()}@bundle-insurance.com`,
         Subject: emailSubject.value,
         Body: emailBody.value,
       }).then(() => alert(`Email successfully sent to: ${cntctEmail.value}`));

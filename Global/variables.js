@@ -46,3 +46,8 @@ const renewDateKeys = [
   'Policy4RenewDate',
 ];
 const phoneKey = 'Phone';
+
+const SMTP = {
+  Bartosz: 'aaacfed7-a5d2-4922-803e-d06977b51760',
+  Hanna: '90179d43-ff9d-4b1b-b61c-29461889becc',
+};
