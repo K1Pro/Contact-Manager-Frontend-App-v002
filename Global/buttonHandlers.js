@@ -87,13 +87,13 @@ function buttonHandlers() {
         From: 'hanna@bundle-insurance.com',
         Subject: emailSubject.value,
         Body: emailBody.value,
-      }).then(() => alert(`Email successfully sent to:${cntctEmail.value}`));
+      }).then(() => alert(`Email successfully sent to: ${cntctEmail.value}`));
     }
   });
 
   emailSubject.addEventListener('change', function (selected) {
-    console.log(selected.target.value);
-    emailBody.value = emailTemplates[selected.target.value];
+    emailBody.value = `Hi ${FirstName.value}
+    ${emailTemplates[selected.target.value]}`;
   });
   // Create Event Button in ContactTasks Module
   createEvent.addEventListener('click', function () {
