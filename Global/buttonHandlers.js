@@ -77,20 +77,23 @@ function buttonHandlers() {
   });
   sendEmail.addEventListener('click', function () {
     let cntctEmail = document.getElementById('Email');
-    let emailSubject = document.getElementById('emailSubject');
-    let emailBody = document.getElementById('emailBody');
     if (cntctEmail.value) {
       console.log(cntctEmail.value);
       console.log(emailSubject.value);
       console.log(emailBody.value);
       Email.send({
-        SecureToken: 'd4941a43-1e89-4be9-9ad7-7902f096bbbb',
+        SecureToken: '90179d43-ff9d-4b1b-b61c-29461889becc',
         To: cntctEmail.value,
-        From: 'bart@bundle-insurance.com',
+        From: 'hanna@bundle-insurance.com',
         Subject: emailSubject.value,
         Body: emailBody.value,
       }).then(() => alert(`Email successfully sent to:${cntctEmail.value}`));
     }
+  });
+
+  emailSubject.addEventListener('change', function (selected) {
+    console.log(selected.target.value);
+    emailBody.value = emailTemplates[selected.target.value];
   });
   // Create Event Button in ContactTasks Module
   createEvent.addEventListener('click', function () {

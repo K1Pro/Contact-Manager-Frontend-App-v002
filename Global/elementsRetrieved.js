@@ -17,6 +17,8 @@ function elementsRequired() {
   reviewContact = document.getElementById('reviewContact');
   callContact = document.getElementById('callContact');
   sendEmail = document.getElementById('sendEmail');
+  emailSubject = document.getElementById('emailSubject');
+  emailBody = document.getElementById('emailBody');
   // Calendar Module Elements
   CalendarHTML_Date = document.getElementById('CalendarDate');
   CalendarHTML_PrevMonthBtn = document.getElementById('LastMonthButton');
@@ -105,7 +107,9 @@ let DOMElements,
   UniqueDays,
   renewalsCheckBox,
   completedCheckBox,
-  notCompletedCheckBox;
+  notCompletedCheckBox,
+  emailSubject,
+  emailBody;
 // TaskList;
 // ^^^ All retrieved elements should be declared here ^^^
 
