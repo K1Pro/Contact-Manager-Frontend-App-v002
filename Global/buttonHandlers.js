@@ -92,7 +92,7 @@ function buttonHandlers() {
   });
 
   emailSubject.addEventListener('change', function (selected) {
-    emailBody.value = `Hi ${FirstName.value}
+    emailBody.value = `Hi <strong>${FirstName.value}</strong>,<br><br>
     ${emailTemplates[selected.target.value]}`;
   });
   // Create Event Button in ContactTasks Module
