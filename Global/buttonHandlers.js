@@ -78,15 +78,10 @@ function buttonHandlers() {
   sendEmail.addEventListener('click', function () {
     let cntctEmail = document.getElementById('Email');
     if (cntctEmail.value) {
-      console.log(cntctEmail.value);
-      console.log(emailSubject.value);
-      console.log(emailBody.value);
-      console.log(SMTP[LastEditedBy.value]);
-      console.log(`${LastEditedBy.value.toLowerCase()}@bundle-insurance.com`);
       Email.send({
-        SecureToken: SMTP[LastEditedBy.value],
+        SecureToken: SMTP[LastEditedBy.value][0],
         To: cntctEmail.value,
-        From: `${LastEditedBy.value.toLowerCase()}@bundle-insurance.com`,
+        From: SMTP[LastEditedBy.value][1],
         Subject: emailSubject.value,
         Body: emailBody.value,
       }).then(() => alert(`Email successfully sent to: ${cntctEmail.value}`));
