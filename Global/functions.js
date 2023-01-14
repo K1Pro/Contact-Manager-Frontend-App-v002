@@ -93,38 +93,31 @@ function calendarDatesFillIn(chosenDate) {
         let rnwlCntcts;
         if (data.data.contacts.length) {
           rnwlCntcts = data.data.contacts;
-          rnwlCntcts.map((renewalContact) => {
+          rnwlCntcts.map((rnwlCntct) => {
             let calCntct = document.createElement('div');
             // prettier-ignore
             let calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
             // prettier-ignore
-            let lastReviewDateNoDash = `${renewalContact.LastReviewDate.replaceAll('-', '')}`;
+            let lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
             calCntct.classList.add('calTask');
-            if (lastReviewDateNoDash < calDateNoDash) {
-              calCntct.classList.add('renewal');
-            } else {
-              calCntct.classList.add('completed');
-            }
-            if (renewalContact._id == _id.value) {
-              calCntct.classList.add('active');
-            }
+            lastReviewDateNoDash < calDateNoDash
+              ? calCntct.classList.add('renewal')
+              : calCntct.classList.add('completed');
+            if (rnwlCntct._id == _id.value) calCntct.classList.add('active');
             // if (StaffMemberDropDown) {
             //   console.log(StaffMemberDropDown);
             // }
-            calCntct.classList.add(`${renewalContact.Status.replace(' ', '')}`);
-            calCntct.classList.add(`${renewalContact.Source.replace(' ', '')}`);
-            calCntct.textContent = `${renewalContact.LastName}`;
-            calCntct.classList.add(renewalContact.Status);
-            calCntct.classList.add(renewalContact.Source);
-            calCntct.classList.add(renewalContact.LastEditedBy);
-            calCntct.setAttribute(
-              'id',
-              `renewal${renewalContact._id}${rep + 1}`
-            );
+            calCntct.classList.add(`${rnwlCntct.Status.replace(' ', '')}`);
+            calCntct.classList.add(`${rnwlCntct.Source.replace(' ', '')}`);
+            calCntct.textContent = `${rnwlCntct.LastName}`;
+            calCntct.classList.add(rnwlCntct.Status);
+            calCntct.classList.add(rnwlCntct.Source);
+            calCntct.classList.add(rnwlCntct.LastEditedBy);
+            calCntct.setAttribute('id', `renewal${rnwlCntct._id}${rep + 1}`);
             calCntct.classList.add('text-light');
             if (
               StaffMemberDropDown.value &&
-              renewalContact.LastEditedBy != StaffMemberDropDown.value
+              rnwlCntct.LastEditedBy != StaffMemberDropDown.value
             ) {
               calCntct.classList.add('hiddenContact');
             }
@@ -136,7 +129,7 @@ function calendarDatesFillIn(chosenDate) {
             }
             calCntct.addEventListener('click', () => {
               removeActiveCalCntct();
-              loadSidePanel(`${srvrURL}${phonePath}${renewalContact.Phone}`);
+              loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`);
               calCntct.classList.add('active');
             });
             document.getElementById(`day${rep}`).appendChild(calCntct);
@@ -151,29 +144,25 @@ function calendarDatesFillIn(chosenDate) {
       let rnwlCntcts;
       if (data.contacts.length) {
         rnwlCntcts = data.contacts;
-        rnwlCntcts.map((renewalContact) => {
+        rnwlCntcts.map((rnwlCntct) => {
           let calCntct = document.createElement('div');
           calCntct.classList.add('calTask');
-          const results = renewalContact.CalendarEvents.filter((obj) => {
+          const results = rnwlCntct.CalendarEvents.filter((obj) => {
             return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
           });
-          if (!results[0].Completed) {
-            calCntct.classList.add('notCompleted');
-          } else {
-            calCntct.classList.add('completed');
-          }
-          if (renewalContact._id == _id.value) {
-            calCntct.classList.add('active');
-          }
+          !results[0].Completed
+            ? calCntct.classList.add('notCompleted')
+            : calCntct.classList.add('completed');
+          if (rnwlCntct._id == _id.value) calCntct.classList.add('active');
           calCntct.setAttribute('id', `Event${results[0]._id}`);
-          calCntct.textContent = `${renewalContact.LastName}`;
-          calCntct.classList.add(renewalContact.Status);
-          calCntct.classList.add(renewalContact.Source);
+          calCntct.textContent = `${rnwlCntct.LastName}`;
+          calCntct.classList.add(rnwlCntct.Status);
+          calCntct.classList.add(rnwlCntct.Source);
           calCntct.classList.add(results[0].EventAuthor);
           calCntct.classList.add('text-light');
           calCntct.addEventListener('click', () => {
             removeActiveCalCntct();
-            loadSidePanel(`${srvrURL}${phonePath}${renewalContact.Phone}`);
+            loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`);
             calCntct.classList.add('active');
           });
           document.getElementById(`day${rep}`).appendChild(calCntct);
