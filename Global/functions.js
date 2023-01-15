@@ -110,17 +110,11 @@ function calendarDatesFillIn(chosenDate) {
             calCntct.classList.add(rnwlCntct.Source);
             calCntct.classList.add(rnwlCntct.LastEditedBy);
             if (
-              StaffMemberDropDown.value &&
-              rnwlCntct.LastEditedBy != StaffMemberDropDown.value
-            )
-              calCntct.classList.add('hiddenContact');
-            if (
               TasksDropDown.value == 'event' ||
               TasksDropDown.value == 'eCompleted' ||
               TasksDropDown.value == 'eNotCompleted'
             )
               calCntct.classList.add('hiddenContact');
-            //space
             if (
               TasksDropDown.value == 'rCompleted' &&
               lastReviewDateNoDash < calDateNoDash
@@ -137,7 +131,17 @@ function calendarDatesFillIn(chosenDate) {
               StatusDropDown.value != rnwlCntct.Status
             )
               calCntct.classList.add('hiddenContact');
-            //space
+            if (
+              SourceDropDown.value != '' &&
+              SourceDropDown.value != 'All' &&
+              SourceDropDown.value != rnwlCntct.Source
+            )
+              calCntct.classList.add('hiddenContact');
+            if (
+              StaffMemberDropDown.value &&
+              StaffMemberDropDown.value != rnwlCntct.LastEditedBy
+            )
+              calCntct.classList.add('hiddenContact');
             calCntct.textContent = `${rnwlCntct.LastName}`;
             calCntct.setAttribute('id', `renewal${rnwlCntct._id}${rep + 1}`);
             calCntct.addEventListener('click', () => {
@@ -192,6 +196,17 @@ function calendarDatesFillIn(chosenDate) {
             StatusDropDown.value != '' &&
             StatusDropDown.value != 'All' &&
             StatusDropDown.value != rnwlCntct.Status
+          )
+            calCntct.classList.add('hiddenContact');
+          if (
+            SourceDropDown.value != '' &&
+            SourceDropDown.value != 'All' &&
+            SourceDropDown.value != rnwlCntct.Source
+          )
+            calCntct.classList.add('hiddenContact');
+          if (
+            StaffMemberDropDown.value &&
+            StaffMemberDropDown.value != sortedCalEvents[0].EventAuthor
           )
             calCntct.classList.add('hiddenContact');
           calCntct.textContent = `${rnwlCntct.LastName}`;
