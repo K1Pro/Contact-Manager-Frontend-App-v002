@@ -143,13 +143,13 @@ function buttonHandlers() {
     removeActiveCalCntct();
     contactSearch.value = '';
   });
+
   Status.addEventListener('change', function (e) {
     getJSON(`${srvrURL}/${_id.value}`).then((data) => {
       if (data.data.contact.CalendarEvents) {
         calEvnts = data.data.contact.CalendarEvents;
         calEvnts.forEach((calEvent) => {
           let cntctEvents = document.getElementById(`Event${calEvent._id}`);
-          // DO RENEWALS NEXT
           Statuses.forEach((CntctStatus) => {
             cntctEvents.classList.remove(CntctStatus);
             cntctEvents.classList.add(Status.value);
@@ -167,17 +167,33 @@ function buttonHandlers() {
       }
     });
 
-    // let checkCompletion = document.getElementById(`Event${value._id}`);
-    // if (checkCompletion) {
-    //   checkCompletion = checkCompletion.className;
-    //   if (checkCompletion.includes('eNotCompleted')) {
-    //     let checkCompletion = document.getElementById(`Event${value._id}`);
-    //     checkCompletion.setAttribute('class', `eCompleted text-light`);
-    //   } else {
-    //     let checkCompletion = document.getElementById(`Event${value._id}`);
-    //     checkCompletion.setAttribute('class', `eNotCompleted text-light`);
-    //   }
-    // }
+    if (
+      StatusDropDown.value == '' ||
+      StatusDropDown.value == 'All' ||
+      StatusDropDown.value == Status.value
+    ) {
+      for (let rep = 0; rep < 31; rep++) {
+        let cntctCalRnwl = document.getElementById(`renewal${_id.value}${rep}`);
+        if (cntctCalRnwl) {
+          cntctCalRnwl.classList.remove('hiddenContact');
+          Statuses.forEach((prevStatus) => {
+            cntctCalRnwl.classList.remove(prevStatus);
+          });
+          cntctCalRnwl.classList.add(Status.value);
+        }
+      }
+    } else {
+      for (let rep = 0; rep < 31; rep++) {
+        let cntctCalRnwl = document.getElementById(`renewal${_id.value}${rep}`);
+        if (cntctCalRnwl) {
+          cntctCalRnwl.classList.add('hiddenContact');
+          Statuses.forEach((prevStatus) => {
+            cntctCalRnwl.classList.remove(prevStatus);
+          });
+          cntctCalRnwl.classList.add(Status.value);
+        }
+      }
+    }
   });
 
   // ^^^ End coding here for Calendar Module ^^^
