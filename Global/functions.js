@@ -131,6 +131,11 @@ function calendarDatesFillIn(chosenDate) {
               lastReviewDateNoDash >= calDateNoDash
             )
               calCntct.classList.add('hiddenContact');
+            if (StatusDropDown.value != '' && StatusDropDown.value != 'All') {
+              if (StatusDropDown.value != rnwlCntct.Status) {
+                calCntct.classList.add('hiddenContact');
+              }
+            }
             //space
             calCntct.textContent = `${rnwlCntct.LastName}`;
             calCntct.setAttribute('id', `renewal${rnwlCntct._id}${rep + 1}`);
@@ -182,6 +187,11 @@ function calendarDatesFillIn(chosenDate) {
             sortedCalEvents[0].Completed
           )
             calCntct.classList.add('hiddenContact');
+          if (StatusDropDown.value != '' && StatusDropDown.value != 'All') {
+            if (StatusDropDown.value != rnwlCntct.Status) {
+              calCntct.classList.add('hiddenContact');
+            }
+          }
           calCntct.textContent = `${rnwlCntct.LastName}`;
           calCntct.setAttribute('id', `Event${sortedCalEvents[0]._id}`);
           calCntct.addEventListener('click', () => {

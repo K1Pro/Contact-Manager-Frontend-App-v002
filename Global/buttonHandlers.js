@@ -149,13 +149,18 @@ function buttonHandlers() {
         calEvnts = data.data.contact.CalendarEvents;
         calEvnts.forEach((calEvent) => {
           let cntctEvents = document.getElementById(`Event${calEvent._id}`);
+          // DO RENEWALS NEXT
           Statuses.forEach((CntctStatus) => {
             cntctEvents.classList.remove(CntctStatus);
             cntctEvents.classList.add(Status.value);
-            if (StatusDropDown && StatusDropDown.value != Status.value) {
-              cntctEvents.classList.add('hiddenContact');
-            } else {
+            if (
+              StatusDropDown.value == '' ||
+              StatusDropDown.value == 'All' ||
+              StatusDropDown.value == Status.value
+            ) {
               cntctEvents.classList.remove('hiddenContact');
+            } else {
+              cntctEvents.classList.add('hiddenContact');
             }
           });
         });
