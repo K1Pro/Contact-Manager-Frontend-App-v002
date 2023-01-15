@@ -143,6 +143,37 @@ function buttonHandlers() {
     removeActiveCalCntct();
     contactSearch.value = '';
   });
+  Status.addEventListener('change', function (e) {
+    getJSON(`${srvrURL}/${_id.value}`).then((data) => {
+      if (data.data.contact.CalendarEvents) {
+        calEvnts = data.data.contact.CalendarEvents;
+        calEvnts.forEach((calEvent) => {
+          let cntctEvents = document.getElementById(`Event${calEvent._id}`);
+          Statuses.forEach((CntctStatus) => {
+            cntctEvents.classList.remove(CntctStatus);
+            cntctEvents.classList.add(Status.value);
+            if (StatusDropDown && StatusDropDown.value != Status.value) {
+              cntctEvents.classList.add('hiddenContact');
+            } else {
+              cntctEvents.classList.remove('hiddenContact');
+            }
+          });
+        });
+      }
+    });
+
+    // let checkCompletion = document.getElementById(`Event${value._id}`);
+    // if (checkCompletion) {
+    //   checkCompletion = checkCompletion.className;
+    //   if (checkCompletion.includes('eNotCompleted')) {
+    //     let checkCompletion = document.getElementById(`Event${value._id}`);
+    //     checkCompletion.setAttribute('class', `eCompleted text-light`);
+    //   } else {
+    //     let checkCompletion = document.getElementById(`Event${value._id}`);
+    //     checkCompletion.setAttribute('class', `eNotCompleted text-light`);
+    //   }
+    // }
+  });
 
   // ^^^ End coding here for Calendar Module ^^^
 }

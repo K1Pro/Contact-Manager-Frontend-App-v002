@@ -102,8 +102,9 @@ function calendarDatesFillIn(chosenDate) {
             calCntct.classList.add('text-light');
             calCntct.classList.add('calTask');
             calCntct.classList.add('renewal');
-            if (lastReviewDateNoDash >= calDateNoDash)
-              calCntct.classList.add('rCompleted');
+            lastReviewDateNoDash >= calDateNoDash
+              ? calCntct.classList.add('rCompleted')
+              : calCntct.classList.add('rNotCompleted');
             if (rnwlCntct._id == _id.value) calCntct.classList.add('active');
             calCntct.classList.add(rnwlCntct.Status);
             calCntct.classList.add(rnwlCntct.Source);
@@ -114,10 +115,23 @@ function calendarDatesFillIn(chosenDate) {
             )
               calCntct.classList.add('hiddenContact');
             if (
-              TasksDropDown.value == 'completed' ||
-              TasksDropDown.value == 'notCompleted'
+              TasksDropDown.value == 'event' ||
+              TasksDropDown.value == 'eCompleted' ||
+              TasksDropDown.value == 'eNotCompleted'
             )
               calCntct.classList.add('hiddenContact');
+            //space
+            if (
+              TasksDropDown.value == 'rCompleted' &&
+              lastReviewDateNoDash < calDateNoDash
+            )
+              calCntct.classList.add('hiddenContact');
+            if (
+              TasksDropDown.value == 'rNotCompleted' &&
+              lastReviewDateNoDash >= calDateNoDash
+            )
+              calCntct.classList.add('hiddenContact');
+            //space
             calCntct.textContent = `${rnwlCntct.LastName}`;
             calCntct.setAttribute('id', `renewal${rnwlCntct._id}${rep + 1}`);
             calCntct.addEventListener('click', () => {
@@ -152,6 +166,22 @@ function calendarDatesFillIn(chosenDate) {
           calCntct.classList.add(rnwlCntct.Status);
           calCntct.classList.add(rnwlCntct.Source);
           calCntct.classList.add(sortedCalEvents[0].EventAuthor);
+          if (
+            TasksDropDown.value == 'renewal' ||
+            TasksDropDown.value == 'rCompleted' ||
+            TasksDropDown.value == 'rNotCompleted'
+          )
+            calCntct.classList.add('hiddenContact');
+          if (
+            TasksDropDown.value == 'eCompleted' &&
+            !sortedCalEvents[0].Completed
+          )
+            calCntct.classList.add('hiddenContact');
+          if (
+            TasksDropDown.value == 'eNotCompleted' &&
+            sortedCalEvents[0].Completed
+          )
+            calCntct.classList.add('hiddenContact');
           calCntct.textContent = `${rnwlCntct.LastName}`;
           calCntct.setAttribute('id', `Event${sortedCalEvents[0]._id}`);
           calCntct.addEventListener('click', () => {
@@ -278,18 +308,18 @@ function loadContactTasks(dailyTask) {
             let checkCompletion = document.getElementById(`Event${value._id}`);
             if (checkCompletion) {
               checkCompletion = checkCompletion.className;
-              if (checkCompletion.includes('notCompleted')) {
+              if (checkCompletion.includes('eNotCompleted')) {
                 let checkCompletion = document.getElementById(
                   `Event${value._id}`
                 );
-                checkCompletion.setAttribute('class', `completed text-light`);
+                checkCompletion.setAttribute('class', `eCompleted text-light`);
               } else {
                 let checkCompletion = document.getElementById(
                   `Event${value._id}`
                 );
                 checkCompletion.setAttribute(
                   'class',
-                  `notCompleted text-light`
+                  `eNotCompleted text-light`
                 );
               }
             }
