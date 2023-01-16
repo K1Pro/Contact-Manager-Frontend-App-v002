@@ -148,7 +148,7 @@ function buttonHandlers() {
   document.querySelectorAll('.eventTemplates').forEach((dynamicEvent) => {
     dynamicEvent.addEventListener('click', function (e) {
       e.preventDefault();
-      console.log(e.target.id);
+      contactTasksTextArea.value = e.target.id.replaceAll('-', ' ');
     });
   });
 
