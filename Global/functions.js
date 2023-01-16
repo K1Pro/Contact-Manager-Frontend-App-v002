@@ -126,20 +126,21 @@ function calendarDatesFillIn(chosenDate) {
             )
               calCntct.classList.add('hiddenContact');
             if (
-              StatusDropDown.value != '' &&
-              StatusDropDown.value != 'All' &&
-              StatusDropDown.value != rnwlCntct.Status
+              StatusSelect.value != '' &&
+              StatusSelect.value != 'All' &&
+              StatusSelect.value != rnwlCntct.Status
             )
               calCntct.classList.add('hiddenContact');
             if (
-              SourceDropDown.value != '' &&
-              SourceDropDown.value != 'All' &&
-              SourceDropDown.value != rnwlCntct.Source
+              SourceSelect.value != '' &&
+              SourceSelect.value != 'All' &&
+              SourceSelect.value != rnwlCntct.Source
             )
               calCntct.classList.add('hiddenContact');
             if (
-              StaffMemberDropDown.value &&
-              StaffMemberDropDown.value != rnwlCntct.LastEditedBy
+              LastEditedBySelect.value != '' &&
+              LastEditedBySelect.value != 'All' &&
+              LastEditedBySelect.value != rnwlCntct.LastEditedBy
             )
               calCntct.classList.add('hiddenContact');
             calCntct.textContent = `${rnwlCntct.LastName}`;
@@ -193,20 +194,21 @@ function calendarDatesFillIn(chosenDate) {
           )
             calCntct.classList.add('hiddenContact');
           if (
-            StatusDropDown.value != '' &&
-            StatusDropDown.value != 'All' &&
-            StatusDropDown.value != rnwlCntct.Status
+            StatusSelect.value != '' &&
+            StatusSelect.value != 'All' &&
+            StatusSelect.value != rnwlCntct.Status
           )
             calCntct.classList.add('hiddenContact');
           if (
-            SourceDropDown.value != '' &&
-            SourceDropDown.value != 'All' &&
-            SourceDropDown.value != rnwlCntct.Source
+            SourceSelect.value != '' &&
+            SourceSelect.value != 'All' &&
+            SourceSelect.value != rnwlCntct.Source
           )
             calCntct.classList.add('hiddenContact');
           if (
-            StaffMemberDropDown.value &&
-            StaffMemberDropDown.value != sortedCalEvents[0].EventAuthor
+            LastEditedBySelect.value != '' &&
+            LastEditedBySelect.value != 'All' &&
+            LastEditedBySelect.value != sortedCalEvents[0].EventAuthor
           )
             calCntct.classList.add('hiddenContact');
           calCntct.textContent = `${rnwlCntct.LastName}`;
@@ -299,7 +301,7 @@ function loadContactTasks(dailyTask) {
       });
       ContactTaskGroup.appendChild(contactTask.Author);
 
-      staffMembers.forEach((staffMember) => {
+      LastEditedByS.forEach((staffMember) => {
         let CntctTskAuthors = document.createElement('option');
         CntctTskAuthors.value = staffMember;
         CntctTskAuthors.innerHTML = staffMember;

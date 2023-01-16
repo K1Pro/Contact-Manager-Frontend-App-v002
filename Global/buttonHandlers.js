@@ -41,13 +41,13 @@ function buttonHandlers() {
     calendarDatesFillIn(checktime);
   });
 
-  StatusDropDown.addEventListener('change', function (chosenFilter) {
+  StatusSelect.addEventListener('change', function (chosenFilter) {
     calendarFilter(chosenFilter);
   });
-  SourceDropDown.addEventListener('change', function (chosenFilter) {
+  SourceSelect.addEventListener('change', function (chosenFilter) {
     calendarFilter(chosenFilter);
   });
-  StaffMemberDropDown.addEventListener('change', function (chosenFilter) {
+  LastEditedBySelect.addEventListener('change', function (chosenFilter) {
     calendarFilter(chosenFilter);
   });
   TasksDropDown.addEventListener('change', function (chosenFilter) {
@@ -69,12 +69,12 @@ function buttonHandlers() {
       });
     }
   });
-  callContact.addEventListener('click', function () {
-    if (Phone.value) {
-      window.open(`tel:${Phone.value}`);
-      //<a href="tel:630-202-3773">CLICK TO CALL</a>
-    }
-  });
+  // callContact.addEventListener('click', function () {
+  //   if (Phone.value) {
+  //     window.open(`tel:${Phone.value}`);
+  //     //<a href="tel:630-202-3773">CLICK TO CALL</a>
+  //   }
+  // });
   sendEmail.addEventListener('click', function () {
     let cntctEmail = document.getElementById('Email');
     if (cntctEmail.value) {
@@ -144,57 +144,73 @@ function buttonHandlers() {
     contactSearch.value = '';
   });
 
-  Status.addEventListener('change', function (e) {
-    getJSON(`${srvrURL}/${_id.value}`).then((data) => {
-      if (data.data.contact.CalendarEvents) {
-        calEvnts = data.data.contact.CalendarEvents;
-        calEvnts.forEach((calEvent) => {
-          let cntctEvents = document.getElementById(`Event${calEvent._id}`);
-          Statuses.forEach((CntctStatus) => {
-            cntctEvents.classList.remove(CntctStatus);
-            cntctEvents.classList.add(Status.value);
-            if (
-              StatusDropDown.value == '' ||
-              StatusDropDown.value == 'All' ||
-              StatusDropDown.value == Status.value
-            ) {
-              cntctEvents.classList.remove('hiddenContact');
-            } else {
-              cntctEvents.classList.add('hiddenContact');
-            }
+  document.querySelectorAll('.dynamicInputs').forEach((dynamicInput) => {
+    dynamicInput.addEventListener('change', function (e) {
+      getJSON(`${srvrURL}/${_id.value}`).then((data) => {
+        if (data.data.contact.CalendarEvents) {
+          calEvnts = data.data.contact.CalendarEvents;
+          calEvnts.forEach((calEvent) => {
+            let cntctEvents = document.getElementById(`Event${calEvent._id}`);
+            const dynamicInputVals = [...dynamicInput].map((el) => el.value);
+            dynamicInputVals.forEach((CntctStatus) => {
+              cntctEvents.classList.remove(CntctStatus);
+              cntctEvents.classList.add(e.target.value);
+              if (
+                StatusSelect.value == '' ||
+                StatusSelect.value == 'All' ||
+                StatusSelect.value == e.target.value ||
+                SourceSelect.value == '' ||
+                SourceSelect.value == 'All' ||
+                SourceSelect.value == e.target.value ||
+                LastEditedBySelect.value == '' ||
+                LastEditedBySelect.value == 'All' ||
+                LastEditedBySelect.value == e.target.value
+              ) {
+                cntctEvents.classList.remove('hiddenContact');
+              } else {
+                cntctEvents.classList.add('hiddenContact');
+              }
+            });
           });
-        });
-      }
+        }
+      });
+      // this is working, work on this tomorrow
+      // if (
+      //   StatusDropDown.value == '' ||
+      //   StatusDropDown.value == 'All' ||
+      //   StatusDropDown.value == Status.value
+      // ) {
+      //   for (let rep = 0; rep < 31; rep++) {
+      //     let cntctCalRnwl = document.getElementById(`renewal${_id.value}${rep}`);
+      //     if (cntctCalRnwl) {
+      //       cntctCalRnwl.classList.remove('hiddenContact');
+      //       StatusS.forEach((prevStatus) => {
+      //         cntctCalRnwl.classList.remove(prevStatus);
+      //       });
+      //       cntctCalRnwl.classList.add(Status.value);
+      //     }
+      //   }
+      // } else {
+      //   for (let rep = 0; rep < 31; rep++) {
+      //     let cntctCalRnwl = document.getElementById(`renewal${_id.value}${rep}`);
+      //     if (cntctCalRnwl) {
+      //       cntctCalRnwl.classList.add('hiddenContact');
+      //       StatusS.forEach((prevStatus) => {
+      //         cntctCalRnwl.classList.remove(prevStatus);
+      //       });
+      //       cntctCalRnwl.classList.add(Status.value);
+      //     }
+      //   }
+      // }
     });
-
-    if (
-      StatusDropDown.value == '' ||
-      StatusDropDown.value == 'All' ||
-      StatusDropDown.value == Status.value
-    ) {
-      for (let rep = 0; rep < 31; rep++) {
-        let cntctCalRnwl = document.getElementById(`renewal${_id.value}${rep}`);
-        if (cntctCalRnwl) {
-          cntctCalRnwl.classList.remove('hiddenContact');
-          Statuses.forEach((prevStatus) => {
-            cntctCalRnwl.classList.remove(prevStatus);
-          });
-          cntctCalRnwl.classList.add(Status.value);
-        }
-      }
-    } else {
-      for (let rep = 0; rep < 31; rep++) {
-        let cntctCalRnwl = document.getElementById(`renewal${_id.value}${rep}`);
-        if (cntctCalRnwl) {
-          cntctCalRnwl.classList.add('hiddenContact');
-          Statuses.forEach((prevStatus) => {
-            cntctCalRnwl.classList.remove(prevStatus);
-          });
-          cntctCalRnwl.classList.add(Status.value);
-        }
-      }
-    }
   });
+
+  // Source.addEventListener('change', function (e) {
+  //   console.log(e.target.value);
+  // });
+  // LastEditedBy.addEventListener('change', function (e) {
+  //   console.log(e.target.value);
+  // });
 
   // ^^^ End coding here for Calendar Module ^^^
 }

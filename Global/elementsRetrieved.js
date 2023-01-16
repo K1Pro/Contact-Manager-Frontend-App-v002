@@ -26,9 +26,9 @@ function elementsRequired() {
   CalendarHTML_NextWeekBtn = document.getElementById('NextWeekButton');
   CalendarHTML_NextMonthBtn = document.getElementById('NextMonthButton');
   UniqueDays = document.getElementsByClassName('uniqueday');
-  StatusDropDown = document.getElementById('StatusDropDown');
-  SourceDropDown = document.getElementById('SourceDropDown');
-  StaffMemberDropDown = document.getElementById('StaffMemberDropDown');
+  StatusSelect = document.getElementById('StatusSelect');
+  SourceSelect = document.getElementById('SourceSelect');
+  LastEditedBySelect = document.getElementById('LastEditedBySelect');
   TasksDropDown = document.getElementById('TasksDropDown');
   CalendarDates = document
     .getElementById('calendarDates')
@@ -109,7 +109,10 @@ let DOMElements,
   completedCheckBox,
   notCompletedCheckBox,
   emailSubject,
-  emailBody;
+  emailBody,
+  StatusSelect,
+  SourceSelect,
+  LastEditedBySelect;
 // TaskList;
 // ^^^ All retrieved elements should be declared here ^^^
 

@@ -1,8 +1,8 @@
 function sidePanelModule() {
   // vvv Start coding here for SidePanel Module vvv
-  populateSelect(staffMembers, LastEditedBy);
-  populateSelect(Statuses, Status);
-  populateSelect(Sources, Source);
+  populateSelect(LastEditedByS, LastEditedBy);
+  populateSelect(StatusS, Status);
+  populateSelect(SourceS, Source);
   loadSidePanel(`${srvrURL}${lastEdittedContactPath}`);
   getJSON(`${srvrURL}${sortedContactsPath}`).then((data) => {
     // Populates a dataset into the main search bar
