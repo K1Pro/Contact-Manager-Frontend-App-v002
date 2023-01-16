@@ -145,6 +145,13 @@ function buttonHandlers() {
     contactSearch.value = '';
   });
 
+  document.querySelectorAll('.eventTemplates').forEach((dynamicEvent) => {
+    dynamicEvent.addEventListener('click', function (e) {
+      e.preventDefault();
+      console.log(e.target.id);
+    });
+  });
+
   document.querySelectorAll('.dynamicInputs').forEach((dynamicInput) => {
     dynamicInput.addEventListener('change', function (e) {
       getJSON(`${srvrURL}/${_id.value}`).then((data) => {
