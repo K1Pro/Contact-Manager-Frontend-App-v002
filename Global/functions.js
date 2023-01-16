@@ -146,6 +146,8 @@ function calendarDatesFillIn(chosenDate) {
             calCntct.textContent = `${rnwlCntct.LastName}`;
             calCntct.setAttribute('id', `renewal${rnwlCntct._id}${rep + 1}`);
             calCntct.addEventListener('click', () => {
+              emailBody.value = '';
+              emailSubject.value = 'choose-email-template';
               removeActiveCalCntct();
               loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`);
               calCntct.classList.add('active');
@@ -214,6 +216,7 @@ function calendarDatesFillIn(chosenDate) {
           calCntct.textContent = `${rnwlCntct.LastName}`;
           calCntct.setAttribute('id', `Event${sortedCalEvents[0]._id}`);
           calCntct.addEventListener('click', () => {
+            emailBody.value = '';
             removeActiveCalCntct();
             loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`);
             calCntct.classList.add('active');

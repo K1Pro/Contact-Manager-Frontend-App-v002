@@ -94,6 +94,7 @@ function buttonHandlers() {
     emailBody.value = `Hi <strong>${FirstName.value}</strong>,<br><br>
     ${emailTemplates[selected.target.value]}`;
   });
+
   // Create Event Button in ContactTasks Module
   createEvent.addEventListener('click', function () {
     if (_id.value && contactTasksTextArea.value) {
@@ -149,31 +150,27 @@ function buttonHandlers() {
   document.querySelectorAll('.eventTemplates').forEach((dynamicEvent) => {
     dynamicEvent.addEventListener('click', function (e) {
       e.preventDefault();
-      contactTasksTextArea.value = e.target.id.replaceAll('-', ' ');
+      contactTasksTextArea.value = `${e.target.id.replaceAll('-', ' ')}, `;
     });
   });
 
   document.querySelectorAll('.dynamicInputs').forEach((dynamicInput) => {
     dynamicInput.addEventListener('change', function (e) {
+      const dynamicInputVals = [...dynamicInput].map((el) => el.value);
+      let dynamicSelect = document.getElementById(`${dynamicInput.id}Select`);
+      // this changes events that are viewable after filtering
       getJSON(`${srvrURL}/${_id.value}`).then((data) => {
         if (data.data.contact.CalendarEvents) {
           calEvnts = data.data.contact.CalendarEvents;
           calEvnts.forEach((calEvent) => {
             let cntctEvents = document.getElementById(`Event${calEvent._id}`);
-            const dynamicInputVals = [...dynamicInput].map((el) => el.value);
             dynamicInputVals.forEach((CntctStatus) => {
               cntctEvents.classList.remove(CntctStatus);
               cntctEvents.classList.add(e.target.value);
               if (
-                StatusSelect.value == '' ||
-                StatusSelect.value == 'All' ||
-                StatusSelect.value == e.target.value ||
-                SourceSelect.value == '' ||
-                SourceSelect.value == 'All' ||
-                SourceSelect.value == e.target.value ||
-                LastEditedBySelect.value == '' ||
-                LastEditedBySelect.value == 'All' ||
-                LastEditedBySelect.value == e.target.value
+                dynamicSelect.value == '' ||
+                dynamicSelect.value == 'All' ||
+                dynamicSelect.value == e.target.value
               ) {
                 cntctEvents.classList.remove('hiddenContact');
               } else {
@@ -183,34 +180,38 @@ function buttonHandlers() {
           });
         }
       });
-      // this is working, work on this tomorrow
-      // if (
-      //   StatusDropDown.value == '' ||
-      //   StatusDropDown.value == 'All' ||
-      //   StatusDropDown.value == Status.value
-      // ) {
-      //   for (let rep = 0; rep < 31; rep++) {
-      //     let cntctCalRnwl = document.getElementById(`renewal${_id.value}${rep}`);
-      //     if (cntctCalRnwl) {
-      //       cntctCalRnwl.classList.remove('hiddenContact');
-      //       StatusS.forEach((prevStatus) => {
-      //         cntctCalRnwl.classList.remove(prevStatus);
-      //       });
-      //       cntctCalRnwl.classList.add(Status.value);
-      //     }
-      //   }
-      // } else {
-      //   for (let rep = 0; rep < 31; rep++) {
-      //     let cntctCalRnwl = document.getElementById(`renewal${_id.value}${rep}`);
-      //     if (cntctCalRnwl) {
-      //       cntctCalRnwl.classList.add('hiddenContact');
-      //       StatusS.forEach((prevStatus) => {
-      //         cntctCalRnwl.classList.remove(prevStatus);
-      //       });
-      //       cntctCalRnwl.classList.add(Status.value);
-      //     }
-      //   }
-      // }
+      // this changes renewals that are viewable after filtering
+      if (
+        dynamicSelect.value == '' ||
+        dynamicSelect.value == 'All' ||
+        dynamicSelect.value == this.value
+      ) {
+        for (let rep = 0; rep < 31; rep++) {
+          let cntctCalRnwl = document.getElementById(
+            `renewal${_id.value}${rep}`
+          );
+          if (cntctCalRnwl) {
+            cntctCalRnwl.classList.remove('hiddenContact');
+            dynamicInputVals.forEach((prevStatus) => {
+              cntctCalRnwl.classList.remove(prevStatus);
+            });
+            cntctCalRnwl.classList.add(Status.value);
+          }
+        }
+      } else {
+        for (let rep = 0; rep < 31; rep++) {
+          let cntctCalRnwl = document.getElementById(
+            `renewal${_id.value}${rep}`
+          );
+          if (cntctCalRnwl) {
+            cntctCalRnwl.classList.add('hiddenContact');
+            dynamicInputVals.forEach((prevStatus) => {
+              cntctCalRnwl.classList.remove(prevStatus);
+            });
+            cntctCalRnwl.classList.add(Status.value);
+          }
+        }
+      }
     });
   });
 

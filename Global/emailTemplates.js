@@ -34,8 +34,17 @@ PH: (331) 330-8430<br>
 FAX: (773) 853-2980<br>
 `,
     RenewalEmail: `
-Your ${Policy1Type.value.toLowerCase()} renewal is coming up on: ${
+Your ${Policy1Type.value.toLowerCase()} policy renewal is coming up on: ${
       Policy1RenewDate.value
+    }<br>
+Your ${Policy2Type.value.toLowerCase()} policy renewal is coming up on: ${
+      Policy2RenewDate.value
+    }<br>
+Your ${Policy3Type.value.toLowerCase()} policy renewal is coming up on: ${
+      Policy3RenewDate.value
+    }<br>
+Your ${Policy4Type.value.toLowerCase()} policy renewal is coming up on: ${
+      Policy4RenewDate.value
     }<br><br>
 
 
