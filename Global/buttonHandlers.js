@@ -69,12 +69,13 @@ function buttonHandlers() {
       });
     }
   });
-  // callContact.addEventListener('click', function () {
-  //   if (Phone.value) {
-  //     window.open(`tel:${Phone.value}`);
-  //     //<a href="tel:630-202-3773">CLICK TO CALL</a>
-  //   }
-  // });
+  callContact.addEventListener('mousedown', function () {
+    callContact.setAttribute('href', `tel:${Phone.value}`);
+    // if (Phone.value) {
+    //   window.open(`tel:${Phone.value}`);
+    //   //<a href="tel:630-202-3773">CLICK TO CALL</a>
+    // }
+  });
   sendEmail.addEventListener('click', function () {
     let cntctEmail = document.getElementById('Email');
     if (cntctEmail.value) {
