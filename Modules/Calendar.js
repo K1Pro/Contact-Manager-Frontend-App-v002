@@ -1,7 +1,7 @@
 function calendarModule() {
   // vvv Start coding here for Calendar Module vvv
   CalendarHTML_Date.value = TodaysDate.toJSON().slice(0, 10);
-  // calendarDatesFillIn(TodaysDate);
+  calendarDatesFillIn(TodaysDate);
   populateSelect(LastEditedByS, LastEditedBySelect);
   populateSelect(StatusS, StatusSelect);
   populateSelect(SourceS, SourceSelect);

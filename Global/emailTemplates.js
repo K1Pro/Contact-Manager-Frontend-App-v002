@@ -1,7 +1,8 @@
-console.log('retrieved all email templates');
-///////////////////////////////////////////////
-let emailTemplates = {
-  WelcomeEmail: `
+function emailTemplateHandler() {
+  // vvv Start coding here for Calendar Module vvv
+
+  emailTemplates = {
+    WelcomeEmail: `
 It was a pleasure speaking with you and we appreciate you giving Erie the opportunity to improve your financial wellness! Now that your policy is issued, there are a few housekeeping items to remind you of:<br><br>
 
 
@@ -16,7 +17,7 @@ Hanna@Bundle-Insurance.com<br>
 PH: (331) 330-8430<br>
 FAX: (773) 853-2980<br>
 `,
-  ThankYouEmail: `
+    ThankYouEmail: `
 It was a pleasure speaking with you today and we appreciate you calling the Bundle Insurance Agency.<br><br>
 
 
@@ -32,7 +33,12 @@ Hanna@Bundle-Insurance.com<br>
 PH: (331) 330-8430<br>
 FAX: (773) 853-2980<br>
 `,
-  RenewalEmail: `
+    RenewalEmail: `
+Your ${Policy1Type.value.toLowerCase()} renewal is coming up on: ${
+      Policy1RenewDate.value
+    }<br><br>
+
+
 Please reach out to the service department if you have any questions or if any updates need to be made on your policy.
 Let me know if you have any additional questions. Thank you for your business.<br><br>
 
@@ -42,4 +48,17 @@ Hanna@Bundle-Insurance.com<br>
 PH: (331) 330-8430<br>
 FAX: (773) 853-2980<br>
 `,
+  };
+  // ^^^ End coding here for Calendar Module ^^^
+}
+
+// vvv This scans if all DOM Elements have been retrieved vvv
+const isEmailTemplateHandlerElementLoaded = async () => {
+  while (DOMElements === undefined) {
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+  }
 };
+isEmailTemplateHandlerElementLoaded().then(() => {
+  console.log('retrieved all email templates');
+  emailTemplateHandler();
+});

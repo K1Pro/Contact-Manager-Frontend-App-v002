@@ -90,6 +90,7 @@ function buttonHandlers() {
   });
 
   emailSubject.addEventListener('change', function (selected) {
+    emailTemplateHandler();
     emailBody.value = `Hi <strong>${FirstName.value}</strong>,<br><br>
     ${emailTemplates[selected.target.value]}`;
   });
