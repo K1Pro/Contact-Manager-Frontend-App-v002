@@ -127,19 +127,19 @@ function calendarDatesFillIn(chosenDate) {
               calCntct.classList.add('hiddenContact');
             if (
               StatusSelect.value != '' &&
-              StatusSelect.value != 'All' &&
+              StatusSelect.value != 'calTask' &&
               StatusSelect.value != rnwlCntct.Status
             )
               calCntct.classList.add('hiddenContact');
             if (
               SourceSelect.value != '' &&
-              SourceSelect.value != 'All' &&
+              SourceSelect.value != 'calTask' &&
               SourceSelect.value != rnwlCntct.Source
             )
               calCntct.classList.add('hiddenContact');
             if (
               LastEditedBySelect.value != '' &&
-              LastEditedBySelect.value != 'All' &&
+              LastEditedBySelect.value != 'calTask' &&
               LastEditedBySelect.value != rnwlCntct.LastEditedBy
             )
               calCntct.classList.add('hiddenContact');
@@ -197,19 +197,19 @@ function calendarDatesFillIn(chosenDate) {
             calCntct.classList.add('hiddenContact');
           if (
             StatusSelect.value != '' &&
-            StatusSelect.value != 'All' &&
+            StatusSelect.value != 'calTask' &&
             StatusSelect.value != rnwlCntct.Status
           )
             calCntct.classList.add('hiddenContact');
           if (
             SourceSelect.value != '' &&
-            SourceSelect.value != 'All' &&
+            SourceSelect.value != 'calTask' &&
             SourceSelect.value != rnwlCntct.Source
           )
             calCntct.classList.add('hiddenContact');
           if (
             LastEditedBySelect.value != '' &&
-            LastEditedBySelect.value != 'All' &&
+            LastEditedBySelect.value != 'calTask' &&
             LastEditedBySelect.value != sortedCalEvents[0].EventAuthor
           )
             calCntct.classList.add('hiddenContact');
@@ -391,7 +391,7 @@ function calendarFilter(chosenFilter) {
     renewals = document.getElementsByClassName('calTask');
     for (key in renewals) {
       if (renewals[key].className) {
-        if (chosenFilter.target.value == 'All') {
+        if (chosenFilter.target.value == 'calTask') {
           document
             .getElementById(`${renewals[key].id}`)
             .classList.remove('hiddenContact');

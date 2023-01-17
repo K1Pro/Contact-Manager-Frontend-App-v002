@@ -41,18 +41,71 @@ function buttonHandlers() {
     calendarDatesFillIn(checktime);
   });
 
-  StatusSelect.addEventListener('change', function (chosenFilter) {
-    calendarFilter(chosenFilter);
+  // document.querySelectorAll('.dynamicInputs').forEach((dynamicInput) => {
+  //   dynamicInput.addEventListener('change', function (e) {
+  //     const dynamicInputVals = [...dynamicInput].map((el) => el.value);
+
+  document.querySelectorAll('.DropDown').forEach((filterDropDown) => {
+    filterDropDown.addEventListener('change', function (e) {
+      let filteredRenewals = document.getElementsByClassName('calTask');
+      let filterGroup = document.querySelectorAll('.DropDown');
+      let dynamicFilters = [...filterGroup].map((el) => el.value);
+      dynamicFilters.forEach((dynamicFilter) => {
+        if (dynamicFilter != '' && dynamicFilter != 'All') {
+          for (key in filteredRenewals) {
+            if (filteredRenewals[key].className) {
+              let filtered = dynamicFilters.filter(function (value) {
+                return value != '';
+              });
+              let filteredClasses = filteredRenewals[key].className;
+              let myArray = filteredClasses.split(' ');
+              let found = filtered.every((r) => myArray.includes(r));
+              if (found) {
+                document
+                  .getElementById(`${filteredRenewals[key].id}`)
+                  .classList.remove('hiddenContact');
+              } else {
+                document
+                  .getElementById(`${filteredRenewals[key].id}`)
+                  .classList.add('hiddenContact');
+              }
+              // }
+              //this is working ^^^^^^^^^^^
+              // if (chosenFilter.target.value == 'All') {
+              //   document
+              //     .getElementById(`${renewals[key].id}`)
+              //     .classList.remove('hiddenContact');
+              // } else {
+              //   document
+              //     .getElementById(`${renewals[key].id}`)
+              //     .classList.add('hiddenContact');
+              //   if (
+              //     renewals[key].className.includes(chosenFilter.target.value)
+              //   ) {
+              //     document
+              //       .getElementById(`${renewals[key].id}`)
+              //       .classList.remove('hiddenContact');
+              //   }
+              // }
+            }
+          }
+        }
+      });
+    });
   });
-  SourceSelect.addEventListener('change', function (chosenFilter) {
-    calendarFilter(chosenFilter);
-  });
-  LastEditedBySelect.addEventListener('change', function (chosenFilter) {
-    calendarFilter(chosenFilter);
-  });
-  TasksDropDown.addEventListener('change', function (chosenFilter) {
-    calendarFilter(chosenFilter);
-  });
+
+  // StatusSelect.addEventListener('change', function (chosenFilter) {
+  //   calendarFilter(chosenFilter);
+  // });
+  // SourceSelect.addEventListener('change', function (chosenFilter) {
+  //   calendarFilter(chosenFilter);
+  // });
+  // LastEditedBySelect.addEventListener('change', function (chosenFilter) {
+  //   calendarFilter(chosenFilter);
+  // });
+  // TasksDropDown.addEventListener('change', function (chosenFilter) {
+  //   calendarFilter(chosenFilter);
+  // });
 
   // Review Button in Side Panel
   reviewContact.addEventListener('click', function () {
