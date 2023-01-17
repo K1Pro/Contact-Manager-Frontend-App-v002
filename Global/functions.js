@@ -126,19 +126,16 @@ function calendarDatesFillIn(chosenDate) {
             )
               calCntct.classList.add('hiddenContact');
             if (
-              StatusSelect.value != '' &&
               StatusSelect.value != 'calTask' &&
               StatusSelect.value != rnwlCntct.Status
             )
               calCntct.classList.add('hiddenContact');
             if (
-              SourceSelect.value != '' &&
               SourceSelect.value != 'calTask' &&
               SourceSelect.value != rnwlCntct.Source
             )
               calCntct.classList.add('hiddenContact');
             if (
-              LastEditedBySelect.value != '' &&
               LastEditedBySelect.value != 'calTask' &&
               LastEditedBySelect.value != rnwlCntct.LastEditedBy
             )
@@ -196,19 +193,16 @@ function calendarDatesFillIn(chosenDate) {
           )
             calCntct.classList.add('hiddenContact');
           if (
-            StatusSelect.value != '' &&
             StatusSelect.value != 'calTask' &&
             StatusSelect.value != rnwlCntct.Status
           )
             calCntct.classList.add('hiddenContact');
           if (
-            SourceSelect.value != '' &&
             SourceSelect.value != 'calTask' &&
             SourceSelect.value != rnwlCntct.Source
           )
             calCntct.classList.add('hiddenContact');
           if (
-            LastEditedBySelect.value != '' &&
             LastEditedBySelect.value != 'calTask' &&
             LastEditedBySelect.value != sortedCalEvents[0].EventAuthor
           )
