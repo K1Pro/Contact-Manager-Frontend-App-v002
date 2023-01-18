@@ -24,16 +24,18 @@ function loadSidePanel(URL) {
         // Highlights each renewal and event active in the calendar
         calID = data.data.contacts[0]._id;
         for (let rep = 0; rep < 31; rep++) {
-          let cntctCalRnwl = document.getElementById(`renewal${calID}${rep}`);
+          let cntctCalRnwl = document.getElementById(
+            `${renewalTag}${calID}${rep}`
+          );
           if (cntctCalRnwl) {
-            cntctCalRnwl.classList.add('active');
+            cntctCalRnwl.classList.add(activeTag);
           }
         }
         calEvnts = data.data.contacts[0].CalendarEvents;
         calEvnts.forEach((calEvent) => {
           let cntctCalEvnt = document.getElementById(`Event${calEvent._id}`);
           if (cntctCalEvnt) {
-            cntctCalEvnt.classList.add('active');
+            cntctCalEvnt.classList.add(activeTag);
           }
         });
       }
@@ -58,7 +60,9 @@ function changeCalendarHTML_Date(chosenDate) {
 function calendarDatesFillIn(chosenDate) {
   let prevMondayLastWeek = 0 - chosenDate.getDay() - daysInWeek;
   for (let rep = 1; rep < 29; rep++) {
-    document.getElementById(`day${rep}`).classList.remove('calendarCurrentDay');
+    document
+      .getElementById(`${dayTag}${rep}`)
+      .classList.remove(calendarCurrentDayTag);
     let calDates = new Date(
       chosenDate.getTime() +
         1000 /*sec*/ *
@@ -77,13 +81,13 @@ function calendarDatesFillIn(chosenDate) {
     );
     // Highlights the selected date, defaults to today's date
     // prettier-ignore
-    if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`day${rep}`).classList.add('calendarCurrentDay');
+    if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`${dayTag}${rep}`).classList.add(calendarCurrentDayTag);
     // prettier-ignore
-    document.getElementById(`day${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`;
+    document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`;
     // document.getElementById(`day${rep}`).removeEventListener('click', () => {
     //   changeCalendarHTML_Date(calDates);
     // });
-    document.getElementById(`day${rep}`).addEventListener('click', () => {
+    document.getElementById(`${dayTag}${rep}`).addEventListener('click', () => {
       changeCalendarHTML_Date(calDates);
       createEventTime.value = `${calDates.toJSON().slice(0, 16)}`;
     });
@@ -99,57 +103,60 @@ function calendarDatesFillIn(chosenDate) {
             let calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
             // prettier-ignore
             let lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
-            calCntct.classList.add('text-light');
-            calCntct.classList.add('calTask');
-            calCntct.classList.add('renewal');
+            calCntct.classList.add(textlightTag);
+            calCntct.classList.add(calTaskTag);
+            calCntct.classList.add(renewalTag);
             lastReviewDateNoDash >= calDateNoDash
-              ? calCntct.classList.add('rCompleted')
-              : calCntct.classList.add('rNotCompleted');
-            if (rnwlCntct._id == _id.value) calCntct.classList.add('active');
+              ? calCntct.classList.add(rCompletedTag)
+              : calCntct.classList.add(rNotCompletedTag);
+            if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
             calCntct.classList.add(rnwlCntct.Status);
             calCntct.classList.add(rnwlCntct.Source);
             calCntct.classList.add(rnwlCntct.LastEditedBy);
             if (
-              TasksDropDown.value == 'event' ||
-              TasksDropDown.value == 'eCompleted' ||
-              TasksDropDown.value == 'eNotCompleted'
+              TasksDropDown.value == eventTag ||
+              TasksDropDown.value == eCompletedTag ||
+              TasksDropDown.value == eNotCompletedTag
             )
-              calCntct.classList.add('hiddenContact');
+              calCntct.classList.add(hiddenContactTag);
             if (
-              TasksDropDown.value == 'rCompleted' &&
+              TasksDropDown.value == rCompletedTag &&
               lastReviewDateNoDash < calDateNoDash
             )
-              calCntct.classList.add('hiddenContact');
+              calCntct.classList.add(hiddenContactTag);
             if (
-              TasksDropDown.value == 'rNotCompleted' &&
+              TasksDropDown.value == rNotCompletedTag &&
               lastReviewDateNoDash >= calDateNoDash
             )
-              calCntct.classList.add('hiddenContact');
+              calCntct.classList.add(hiddenContactTag);
             if (
-              StatusSelect.value != 'calTask' &&
+              StatusSelect.value != calTaskTag &&
               StatusSelect.value != rnwlCntct.Status
             )
-              calCntct.classList.add('hiddenContact');
+              calCntct.classList.add(hiddenContactTag);
             if (
-              SourceSelect.value != 'calTask' &&
+              SourceSelect.value != calTaskTag &&
               SourceSelect.value != rnwlCntct.Source
             )
-              calCntct.classList.add('hiddenContact');
+              calCntct.classList.add(hiddenContactTag);
             if (
-              LastEditedBySelect.value != 'calTask' &&
+              LastEditedBySelect.value != calTaskTag &&
               LastEditedBySelect.value != rnwlCntct.LastEditedBy
             )
-              calCntct.classList.add('hiddenContact');
+              calCntct.classList.add(hiddenContactTag);
             calCntct.textContent = `${rnwlCntct.LastName}`;
-            calCntct.setAttribute('id', `renewal${rnwlCntct._id}${rep + 1}`);
+            calCntct.setAttribute(
+              'id',
+              `${renewalTag}${rnwlCntct._id}${rep + 1}`
+            );
             calCntct.addEventListener('click', () => {
               emailBody.value = '';
               emailSubject.value = 'choose-email-template';
               removeActiveCalCntct();
               loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`);
-              calCntct.classList.add('active');
+              calCntct.classList.add(activeTag);
             });
-            document.getElementById(`day${rep}`).appendChild(calCntct);
+            document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
           });
         }
       }
@@ -163,59 +170,59 @@ function calendarDatesFillIn(chosenDate) {
         rnwlCntcts = data.contacts;
         rnwlCntcts.map((rnwlCntct) => {
           let calCntct = document.createElement('div');
-          calCntct.classList.add('text-light');
-          calCntct.classList.add('calTask');
-          calCntct.classList.add('event');
+          calCntct.classList.add(textlightTag);
+          calCntct.classList.add(calTaskTag);
+          calCntct.classList.add(eventTag);
           const sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
             return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
           });
           !sortedCalEvents[0].Completed
-            ? calCntct.classList.add('eNotCompleted')
-            : calCntct.classList.add('eCompleted');
-          if (rnwlCntct._id == _id.value) calCntct.classList.add('active');
+            ? calCntct.classList.add(eNotCompletedTag)
+            : calCntct.classList.add(eCompletedTag);
+          if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
           calCntct.classList.add(rnwlCntct.Status);
           calCntct.classList.add(rnwlCntct.Source);
           calCntct.classList.add(sortedCalEvents[0].EventAuthor);
           if (
-            TasksDropDown.value == 'renewal' ||
-            TasksDropDown.value == 'rCompleted' ||
-            TasksDropDown.value == 'rNotCompleted'
+            TasksDropDown.value == renewalTag ||
+            TasksDropDown.value == rCompletedTag ||
+            TasksDropDown.value == rNotCompletedTag
           )
-            calCntct.classList.add('hiddenContact');
+            calCntct.classList.add(hiddenContactTag);
           if (
-            TasksDropDown.value == 'eCompleted' &&
+            TasksDropDown.value == eCompletedTag &&
             !sortedCalEvents[0].Completed
           )
-            calCntct.classList.add('hiddenContact');
+            calCntct.classList.add(hiddenContactTag);
           if (
-            TasksDropDown.value == 'eNotCompleted' &&
+            TasksDropDown.value == eNotCompletedTag &&
             sortedCalEvents[0].Completed
           )
-            calCntct.classList.add('hiddenContact');
+            calCntct.classList.add(hiddenContactTag);
           if (
-            StatusSelect.value != 'calTask' &&
+            StatusSelect.value != calTaskTag &&
             StatusSelect.value != rnwlCntct.Status
           )
-            calCntct.classList.add('hiddenContact');
+            calCntct.classList.add(hiddenContactTag);
           if (
-            SourceSelect.value != 'calTask' &&
+            SourceSelect.value != calTaskTag &&
             SourceSelect.value != rnwlCntct.Source
           )
-            calCntct.classList.add('hiddenContact');
+            calCntct.classList.add(hiddenContactTag);
           if (
-            LastEditedBySelect.value != 'calTask' &&
+            LastEditedBySelect.value != calTaskTag &&
             LastEditedBySelect.value != sortedCalEvents[0].EventAuthor
           )
-            calCntct.classList.add('hiddenContact');
+            calCntct.classList.add(hiddenContactTag);
           calCntct.textContent = `${rnwlCntct.LastName}`;
           calCntct.setAttribute('id', `Event${sortedCalEvents[0]._id}`);
           calCntct.addEventListener('click', () => {
             emailBody.value = '';
             removeActiveCalCntct();
             loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`);
-            calCntct.classList.add('active');
+            calCntct.classList.add(activeTag);
           });
-          document.getElementById(`day${rep}`).appendChild(calCntct);
+          document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
         });
       }
     });
@@ -287,7 +294,7 @@ function loadContactTasks(dailyTask) {
       );
       contactTask.Description.setAttribute(
         'class',
-        'form-control eventDescriptions border-top-0'
+        `form-control ${eventDescriptionsTag} border-top-0`
       );
       contactTask.Description.addEventListener('change', () => {
         updateContactTasks(contactTask);
@@ -311,7 +318,7 @@ function loadContactTasks(dailyTask) {
       contactTask.CheckBox.checked = value.Completed;
       contactTask.CheckBox.setAttribute(
         'class',
-        'form-check-input mt-0 bartkaCheckbox'
+        `form-check-input mt-0 ${bartkaCheckboxTag}`
       );
       contactTask.CheckBox.addEventListener('click', () => {
         fetch(`${srvrURL}${updateEventPath}${value._id}`, {
@@ -334,18 +341,21 @@ function loadContactTasks(dailyTask) {
             let checkCompletion = document.getElementById(`Event${value._id}`);
             if (checkCompletion) {
               checkCompletion = checkCompletion.className;
-              if (checkCompletion.includes('eNotCompleted')) {
+              if (checkCompletion.includes(eNotCompletedTag)) {
                 let checkCompletion = document.getElementById(
                   `Event${value._id}`
                 );
-                checkCompletion.setAttribute('class', `eCompleted text-light`);
+                checkCompletion.setAttribute(
+                  'class',
+                  `${eCompletedTag} ${textlightTag}`
+                );
               } else {
                 let checkCompletion = document.getElementById(
                   `Event${value._id}`
                 );
                 checkCompletion.setAttribute(
                   'class',
-                  `eNotCompleted text-light`
+                  `${eNotCompletedTag} ${textlightTag}`
                 );
               }
             }
@@ -364,10 +374,10 @@ function loadContactTasks(dailyTask) {
 
 function removeActiveCalCntct() {
   let highlightedItems = document
-    .getElementById('calendarDates')
+    .getElementById(calendarDatesTag)
     .querySelectorAll('*');
   highlightedItems.forEach((userItem) => {
-    userItem.classList.remove('active');
+    userItem.classList.remove(activeTag);
   });
 }
 
@@ -382,21 +392,21 @@ function populateSelect(calArray, SelectElement) {
 
 function calendarFilter(chosenFilter) {
   if (chosenFilter) {
-    renewals = document.getElementsByClassName('calTask');
+    renewals = document.getElementsByClassName(calTaskTag);
     for (key in renewals) {
       if (renewals[key].className) {
-        if (chosenFilter.target.value == 'calTask') {
+        if (chosenFilter.target.value == calTaskTag) {
           document
             .getElementById(`${renewals[key].id}`)
-            .classList.remove('hiddenContact');
+            .classList.remove(hiddenContactTag);
         } else {
           document
             .getElementById(`${renewals[key].id}`)
-            .classList.add('hiddenContact');
+            .classList.add(hiddenContactTag);
           if (renewals[key].className.includes(chosenFilter.target.value)) {
             document
               .getElementById(`${renewals[key].id}`)
-              .classList.remove('hiddenContact');
+              .classList.remove(hiddenContactTag);
           }
         }
       }

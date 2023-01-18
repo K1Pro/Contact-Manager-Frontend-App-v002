@@ -45,6 +45,7 @@ function buttonHandlers() {
     calendarDatesFillIn(checktime);
   });
 
+  // Calendar filter dropdowns
   document.querySelectorAll('.DropDown').forEach((filterDropDown) => {
     filterDropDown.addEventListener('change', function () {
       let retrievedTasksEvents = document.getElementsByClassName('calTask');
@@ -86,6 +87,8 @@ function buttonHandlers() {
       });
     }
   });
+
+  // Side Panel Call Button
   callContact.addEventListener('mousedown', function () {
     callContact.setAttribute('href', `tel:${Phone.value}`);
     // if (Phone.value) {
@@ -93,6 +96,8 @@ function buttonHandlers() {
     //   //<a href="tel:630-202-3773">CLICK TO CALL</a>
     // }
   });
+
+  // Email module send email button using SMPTJS
   sendEmail.addEventListener('click', function () {
     let cntctEmail = document.getElementById('Email');
     if (cntctEmail.value) {
@@ -122,9 +127,6 @@ function buttonHandlers() {
         let obj = {};
         calendarEventsArray.push(
           (obj = {
-            // id: _id.value,
-            // EventID: calendarEventsArray.length + 1,
-            // Date: createEventTime.value,
             EventAuthor: EventAuthor.value,
             DateYYYYMMDD: createEventTime.value.slice(0, 10),
             DateHHMMSS: createEventTime.value.slice(10, 16),
@@ -135,7 +137,6 @@ function buttonHandlers() {
         fetch(`${srvrURL}/${_id.value}`, {
           method: 'PATCH',
           body: JSON.stringify({
-            // This creates a key-value pair to be patached, ex: "FirstName": Bart
             CalendarEvents: calendarEventsArray,
           }),
           headers: {
