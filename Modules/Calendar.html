@@ -4,10 +4,10 @@
   class="row calendarHeaderRow bg-dark responsiveHeaderFont"
   style="--bs-bg-opacity: 0.5"
 >
-  <div id="LastMonthButton" class="col-1">
+  <div class="col-1"></div>
+  <div id="LastMonthButton" class="col-1 float-left">
     <img src="images/FastBackwardWhite.png" alt="Last-Month" />
   </div>
-  <div class="col-1"></div>
   <div id="LastWeekButton" class="col-1">
     <img src="images/BackwardWhite.png" alt="Last-Week" />
   </div>
@@ -16,7 +16,7 @@
       type="date"
       id="CalendarDate"
       name="CalendarDatePicker"
-      min="1900-01-01"
+      min="2010-01-01"
       max="2050-12-31"
     />
   </div>
@@ -24,8 +24,8 @@
   <div id="NextWeekButton" class="col-1 text-end">
     <img src="images/ForwardWhite.png" alt="Next-Week" />
   </div>
-  <div class="col-1 text-end"></div>
   <div id="NextMonthButton" class="col-1 text-end">
+    <div class="col-1 text-end"></div>
     <img src="images/FastForwardWhite.png" alt="Next-Month" />
   </div>
 </div>
