@@ -13,11 +13,18 @@ function buttonHandlers() {
   // Previous Week Button in Calendar Module
   CalendarHTML_PrevWeekBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
-    weekTracker = weekTracker - daysInWeek;
-    let prevWeek = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
-    // daysInWeek = daysInWeek + 7;
-    changeCalendarHTML_Date(prevWeek);
-    calendarDatesFillIn(prevWeek);
+    let retrievedDate = document
+      .getElementById('CalendarDate')
+      .value.split('-');
+    let prevWeek =
+      new Date(
+        retrievedDate[0],
+        retrievedDate[1] - 1,
+        retrievedDate[2]
+      ).getTime() +
+      1000 * 60 * 60 * 24 * -7;
+    changeCalendarHTML_Date(new Date(prevWeek));
+    calendarDatesFillIn(new Date(prevWeek));
   });
 
   // Next Week Button in Calendar Module
