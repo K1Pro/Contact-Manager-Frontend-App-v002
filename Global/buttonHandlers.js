@@ -48,8 +48,16 @@ function buttonHandlers() {
   });
 
   CalendarHTML_Date.addEventListener('focusout', function (e) {
-    let checktime = new Date(e.target.value);
-    calendarDatesFillIn(checktime);
+    //there is a timezone issue
+    let retrievedDate = e.target.value.split('-');
+    let dateSelected =
+      new Date(
+        retrievedDate[0],
+        retrievedDate[1] - 1,
+        retrievedDate[2]
+      ).getTime() +
+      1000 * 60 * 60 * 12;
+    calendarDatesFillIn(new Date(dateSelected));
   });
 
   // Calendar filter dropdowns
