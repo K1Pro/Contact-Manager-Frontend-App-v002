@@ -3,9 +3,7 @@ function buttonHandlers() {
 
   // Previous Month Button in Calendar Module
   CalendarHTML_PrevMonthBtn.addEventListener('click', function () {
-    controller.abort();
-    controller = new AbortController();
-    signal = controller.signal;
+    abortCalendarDatesFillIn();
     weekTracker = weekTracker - 28;
     let prevMonth = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
     changeCalendarHTML_Date(prevMonth);
@@ -14,9 +12,7 @@ function buttonHandlers() {
 
   // Previous Week Button in Calendar Module
   CalendarHTML_PrevWeekBtn.addEventListener('click', function () {
-    controller.abort();
-    controller = new AbortController();
-    signal = controller.signal;
+    abortCalendarDatesFillIn();
     weekTracker = weekTracker - daysInWeek;
     let prevWeek = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
     // daysInWeek = daysInWeek + 7;
@@ -26,9 +22,7 @@ function buttonHandlers() {
 
   // Next Week Button in Calendar Module
   CalendarHTML_NextWeekBtn.addEventListener('click', function () {
-    controller.abort();
-    controller = new AbortController();
-    signal = controller.signal;
+    abortCalendarDatesFillIn();
     weekTracker = weekTracker + daysInWeek;
     let nextWeek = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
     changeCalendarHTML_Date(nextWeek);
@@ -39,9 +33,7 @@ function buttonHandlers() {
 
   // Next Month Button in Calendar Module
   CalendarHTML_NextMonthBtn.addEventListener('click', function () {
-    controller.abort();
-    controller = new AbortController();
-    signal = controller.signal;
+    abortCalendarDatesFillIn();
     weekTracker = weekTracker + 28;
     let nextMonth = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
     changeCalendarHTML_Date(nextMonth);
@@ -54,41 +46,30 @@ function buttonHandlers() {
   });
 
   document.querySelectorAll('.DropDown').forEach((filterDropDown) => {
-    filterDropDown.addEventListener('change', function (e) {
-      let filteredRenewals = document.getElementsByClassName('calTask');
-      let filterGroup = document.querySelectorAll('.DropDown');
-      let dynamicFilters = [...filterGroup].map((el) => el.value);
-      for (key in filteredRenewals) {
-        if (filteredRenewals[key].className) {
-          let filteredClasses = filteredRenewals[key].className;
-          let myArray = filteredClasses.split(' ');
-          let found = dynamicFilters.every((r) => myArray.includes(r));
-          if (found) {
+    filterDropDown.addEventListener('change', function () {
+      let retrievedTasksEvents = document.getElementsByClassName('calTask');
+      let allFilterDropDowns = document.querySelectorAll('.DropDown');
+      let filterDropDownArray = [...allFilterDropDowns].map((el) => el.value);
+      for (key in retrievedTasksEvents) {
+        if (retrievedTasksEvents[key].className) {
+          let filteredClasses = retrievedTasksEvents[key].className;
+          let TasksEventsClassArray = filteredClasses.split(' ');
+          let bothArraysEqual = filterDropDownArray.every((r) =>
+            TasksEventsClassArray.includes(r)
+          );
+          if (bothArraysEqual) {
             document
-              .getElementById(`${filteredRenewals[key].id}`)
+              .getElementById(`${retrievedTasksEvents[key].id}`)
               .classList.remove('hiddenContact');
           } else {
             document
-              .getElementById(`${filteredRenewals[key].id}`)
+              .getElementById(`${retrievedTasksEvents[key].id}`)
               .classList.add('hiddenContact');
           }
         }
       }
     });
   });
-
-  // StatusSelect.addEventListener('change', function (chosenFilter) {
-  //   calendarFilter(chosenFilter);
-  // });
-  // SourceSelect.addEventListener('change', function (chosenFilter) {
-  //   calendarFilter(chosenFilter);
-  // });
-  // LastEditedBySelect.addEventListener('change', function (chosenFilter) {
-  //   calendarFilter(chosenFilter);
-  // });
-  // TasksDropDown.addEventListener('change', function (chosenFilter) {
-  //   calendarFilter(chosenFilter);
-  // });
 
   // Review Button in Side Panel
   reviewContact.addEventListener('click', function () {
@@ -250,13 +231,6 @@ function buttonHandlers() {
       }
     });
   });
-
-  // Source.addEventListener('change', function (e) {
-  //   console.log(e.target.value);
-  // });
-  // LastEditedBy.addEventListener('change', function (e) {
-  //   console.log(e.target.value);
-  // });
 
   // ^^^ End coding here for Calendar Module ^^^
 }

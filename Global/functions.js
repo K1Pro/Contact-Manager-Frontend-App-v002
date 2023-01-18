@@ -419,6 +419,12 @@ function contactEditDate() {
   }
 }
 
+function abortCalendarDatesFillIn() {
+  controller.abort();
+  controller = new AbortController();
+  signal = controller.signal;
+}
+
 function updateDB(input) {
   fetch(input.updateURL, {
     method: input.fetchMethod,
