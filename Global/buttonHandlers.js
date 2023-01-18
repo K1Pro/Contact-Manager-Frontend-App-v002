@@ -3,6 +3,9 @@ function buttonHandlers() {
 
   // Previous Month Button in Calendar Module
   CalendarHTML_PrevMonthBtn.addEventListener('click', function () {
+    controller.abort();
+    controller = new AbortController();
+    signal = controller.signal;
     weekTracker = weekTracker - 28;
     let prevMonth = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
     changeCalendarHTML_Date(prevMonth);
@@ -11,6 +14,9 @@ function buttonHandlers() {
 
   // Previous Week Button in Calendar Module
   CalendarHTML_PrevWeekBtn.addEventListener('click', function () {
+    controller.abort();
+    controller = new AbortController();
+    signal = controller.signal;
     weekTracker = weekTracker - daysInWeek;
     let prevWeek = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
     // daysInWeek = daysInWeek + 7;
@@ -20,6 +26,9 @@ function buttonHandlers() {
 
   // Next Week Button in Calendar Module
   CalendarHTML_NextWeekBtn.addEventListener('click', function () {
+    controller.abort();
+    controller = new AbortController();
+    signal = controller.signal;
     weekTracker = weekTracker + daysInWeek;
     let nextWeek = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
     changeCalendarHTML_Date(nextWeek);
@@ -30,6 +39,9 @@ function buttonHandlers() {
 
   // Next Month Button in Calendar Module
   CalendarHTML_NextMonthBtn.addEventListener('click', function () {
+    controller.abort();
+    controller = new AbortController();
+    signal = controller.signal;
     weekTracker = weekTracker + 28;
     let nextMonth = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
     changeCalendarHTML_Date(nextMonth);
