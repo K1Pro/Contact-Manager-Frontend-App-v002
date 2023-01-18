@@ -4,10 +4,18 @@ function buttonHandlers() {
   // Previous Month Button in Calendar Module
   CalendarHTML_PrevMonthBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
-    weekTracker = weekTracker - 28;
-    let prevMonth = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
-    changeCalendarHTML_Date(prevMonth);
-    calendarDatesFillIn(prevMonth);
+    let retrievedDate = document
+      .getElementById('CalendarDate')
+      .value.split('-');
+    let prevMonth =
+      new Date(
+        retrievedDate[0],
+        retrievedDate[1] - 1,
+        retrievedDate[2]
+      ).getTime() +
+      1000 * 60 * 60 * 24 * -28;
+    changeCalendarHTML_Date(new Date(prevMonth));
+    calendarDatesFillIn(new Date(prevMonth));
   });
 
   // Previous Week Button in Calendar Module
@@ -30,21 +38,35 @@ function buttonHandlers() {
   // Next Week Button in Calendar Module
   CalendarHTML_NextWeekBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
-    weekTracker = weekTracker + daysInWeek;
-    let nextWeek = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
-    changeCalendarHTML_Date(nextWeek);
-    calendarDatesFillIn(nextWeek);
-    // daysInWeek = daysInWeek - 7;
-    // calendarDatesFillIn(TodaysDate, daysInWeek);
+    let retrievedDate = document
+      .getElementById('CalendarDate')
+      .value.split('-');
+    let nextWeek =
+      new Date(
+        retrievedDate[0],
+        retrievedDate[1] - 1,
+        retrievedDate[2]
+      ).getTime() +
+      1000 * 60 * 60 * 24 * 7;
+    changeCalendarHTML_Date(new Date(nextWeek));
+    calendarDatesFillIn(new Date(nextWeek));
   });
 
   // Next Month Button in Calendar Module
   CalendarHTML_NextMonthBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
-    weekTracker = weekTracker + 28;
-    let nextMonth = new Date(Date.now() + 1000 * 60 * 60 * 24 * weekTracker);
-    changeCalendarHTML_Date(nextMonth);
-    calendarDatesFillIn(nextMonth);
+    let retrievedDate = document
+      .getElementById('CalendarDate')
+      .value.split('-');
+    let nextMonth =
+      new Date(
+        retrievedDate[0],
+        retrievedDate[1] - 1,
+        retrievedDate[2]
+      ).getTime() +
+      1000 * 60 * 60 * 24 * 28;
+    changeCalendarHTML_Date(new Date(nextMonth));
+    calendarDatesFillIn(new Date(nextMonth));
   });
 
   CalendarHTML_Date.addEventListener('focusout', function (e) {
