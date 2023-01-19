@@ -75,6 +75,7 @@ function buttonHandlers() {
         .catch((error) => {
           alert('Please enter a unique phone number');
         });
+      snackbar(`Updated ${FirstName.value} placed on "Do Not Renew" List`);
       contactEditDate();
     }
   });

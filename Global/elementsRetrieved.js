@@ -53,10 +53,12 @@ function elementsRequired() {
                 let changedInputMMDD = this.id.replace('Date', 'MMDD');
                 updateThis.key = changedInputMMDD;
                 updateDB(updateThis);
+                snackbar(`Deleted ${this.id} for ${FirstName.value}`);
                 contactEditDate();
               } else {
                 updateThis.key = this.id;
                 updateDB(updateThis);
+                snackbar(`Deleted ${this.id} for ${FirstName.value}`);
                 contactEditDate();
               }
             } else {
@@ -70,11 +72,13 @@ function elementsRequired() {
                 updateThis.key = changedInputMMDD;
                 updateThis.value = MMDD;
                 updateDB(updateThis);
+                snackbar(`Updated ${this.id} for ${FirstName.value}`);
                 contactEditDate();
               } else {
                 updateThis.key = this.id;
                 updateThis.value = this.value;
                 updateDB(updateThis);
+                snackbar(`Updated ${this.id} for ${FirstName.value}`);
                 contactEditDate();
               }
             }
