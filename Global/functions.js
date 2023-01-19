@@ -246,10 +246,11 @@ function updateContactTasks(contactTask) {
   })
     .then((response) => response.text())
     .then(() => {
+      snackbar(`Update event for ${FirstName.value}`);
       contactEditDate();
-      PhoneInput = document.getElementById('Phone');
-      contactTasksTextArea.value = '';
-      loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
+      // PhoneInput = document.getElementById('Phone');
+      // contactTasksTextArea.value = '';
+      // loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
     });
 }
 
@@ -359,10 +360,10 @@ function loadContactTasks(dailyTask) {
                 );
               }
             }
-            PhoneInput = document.getElementById('Phone');
-            contactTasksTextArea.value = '';
+            // PhoneInput = document.getElementById('Phone');
+            // contactTasksTextArea.value = '';
             snackbar(`Event updated for ${FirstName.value}`);
-            loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
+            // loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
           });
       });
       ContactTaskGroup.appendChild(contactTask.CheckBox);
