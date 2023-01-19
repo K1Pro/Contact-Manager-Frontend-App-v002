@@ -359,9 +359,9 @@ function loadContactTasks(dailyTask) {
                 );
               }
             }
-
             PhoneInput = document.getElementById('Phone');
             contactTasksTextArea.value = '';
+            snackbar(`Event updated for ${FirstName.value}`);
             loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
           });
       });

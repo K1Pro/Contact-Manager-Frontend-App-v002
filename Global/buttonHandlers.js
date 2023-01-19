@@ -213,6 +213,7 @@ function buttonHandlers() {
             contactEditDate();
             PhoneInput = document.getElementById('Phone');
             contactTasksTextArea.value = '';
+            snackbar(`Event created for ${FirstName.value}`);
             loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
             // You can possibly use this in the future
             // getJSON(ContactsURL).then((data) => {
