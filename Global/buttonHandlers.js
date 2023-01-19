@@ -52,6 +52,33 @@ function buttonHandlers() {
     calendarDatesFillIn(new Date(nextWeek));
   });
 
+  Status.addEventListener('change', function (e) {
+    if (e.target.value == 'Do-Not-Renew') {
+      console.log('Hi there, status was changed');
+      Policy1RenewDate.value = '';
+      Policy2RenewDate.value = '';
+      Policy3RenewDate.value = '';
+      Policy4RenewDate.value = '';
+      fetch(`${srvrURL}${deleteEmptyFieldPath}${_id.value}`, {
+        method: 'DELETE',
+        body: JSON.stringify({
+          Policy1RenewMMDD: '',
+          Policy2RenewMMDD: '',
+          Policy3RenewMMDD: '',
+          Policy4RenewMMDD: '',
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .catch((error) => {
+          alert('Please enter a unique phone number');
+        });
+      contactEditDate();
+    }
+  });
+
   // Next Month Button in Calendar Module
   CalendarHTML_NextMonthBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
@@ -219,19 +246,21 @@ function buttonHandlers() {
           calEvnts = data.data.contact.CalendarEvents;
           calEvnts.forEach((calEvent) => {
             let cntctEvents = document.getElementById(`Event${calEvent._id}`);
-            dynamicInputVals.forEach((CntctStatus) => {
-              cntctEvents.classList.remove(CntctStatus);
-              cntctEvents.classList.add(e.target.value);
-              if (
-                dynamicSelect.value == '' ||
-                dynamicSelect.value == 'All' ||
-                dynamicSelect.value == e.target.value
-              ) {
-                cntctEvents.classList.remove('hiddenContact');
-              } else {
-                cntctEvents.classList.add('hiddenContact');
-              }
-            });
+            if (cntctEvents) {
+              dynamicInputVals.forEach((CntctStatus) => {
+                cntctEvents.classList.remove(CntctStatus);
+                cntctEvents.classList.add(e.target.value);
+                if (
+                  dynamicSelect.value == '' ||
+                  dynamicSelect.value == 'All' ||
+                  dynamicSelect.value == e.target.value
+                ) {
+                  cntctEvents.classList.remove('hiddenContact');
+                } else {
+                  cntctEvents.classList.add('hiddenContact');
+                }
+              });
+            }
           });
         }
       });

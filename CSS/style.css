@@ -278,7 +278,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
 .bartkaCheckbox:checked {
   width: 41px;
   height: 41px;
-  background-color: red !important;
+  background-color: #ff3366 !important;
 }
 
 #createEventTime {
@@ -303,7 +303,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
 
 .eventDescriptions,
 .eventDates {
-  border-left: 0px solid red;
+  border-left: 0px solid #ff3366;
   border-left-width: 0.5vw;
   padding-left: 0.5vw;
 }
