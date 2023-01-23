@@ -48,11 +48,23 @@ input[type='date']:invalid::-webkit-datetime-edit {
   height: 7.5vh;
 }
 .day-hover:hover {
-  background-color: #ccffff;
+  background-color: #ebccff;
   cursor: pointer;
 }
-.calendarCurrentDay {
+.calCurrentDay {
+  background-color: #ebccff;
+}
+.calTodaysDay {
   background-color: #ccffcc;
+}
+.calTodaysDay:hover {
+  background-color: #ccffcc;
+}
+.calSelectedDay {
+  background-color: #ccffff;
+}
+.calSelectedDay:hover {
+  background-color: #ccffff;
 }
 
 .responsiveFont {

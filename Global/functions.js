@@ -58,11 +58,14 @@ function changeCalendarHTML_Date(chosenDate) {
 }
 
 function calendarDatesFillIn(chosenDate) {
-  let prevMondayLastWeek = 0 - chosenDate.getDay() - daysInWeek;
-  for (let rep = 1; rep < 29; rep++) {
+  let prevMondayLastWeek = 1 - chosenDate.getDay() - daysInWeek;
+  for (let rep = 0; rep < 28; rep++) {
     document
       .getElementById(`${dayTag}${rep}`)
       .classList.remove(calendarCurrentDayTag);
+    document
+      .getElementById(`${dayTag}${rep}`)
+      .classList.remove(calTodaysDayTag);
     let calDates = new Date(
       chosenDate.getTime() +
         1000 /*sec*/ *
@@ -71,6 +74,9 @@ function calendarDatesFillIn(chosenDate) {
           24 /*day*/ *
           (prevMondayLastWeek + rep) /*# of days*/
     );
+    if (TodaysDate.toJSON().slice(0, 10) == calDates.toJSON().slice(0, 10))
+      document.getElementById(`${dayTag}${rep}`).classList.add(calTodaysDayTag);
+
     let rnwlDates = new Date(
       chosenDate.getTime() +
         1000 /*sec*/ *
@@ -81,13 +87,21 @@ function calendarDatesFillIn(chosenDate) {
     );
     // Highlights the selected date, defaults to today's date
     // prettier-ignore
-    if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`${dayTag}${rep}`).classList.add(calendarCurrentDayTag);
+    // if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`${dayTag}${rep}`).classList.add(calendarCurrentDayTag);
     // prettier-ignore
     document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`;
     // document.getElementById(`day${rep}`).removeEventListener('click', () => {
     //   changeCalendarHTML_Date(calDates);
     // });
     document.getElementById(`${dayTag}${rep}`).addEventListener('click', () => {
+      for (let rep = 0; rep < 28; rep++) {
+        document
+          .getElementById(`${dayTag}${rep}`)
+          .classList.remove(calSelectedDayTag);
+      }
+      document
+        .getElementById(`${dayTag}${rep}`)
+        .classList.add(calSelectedDayTag);
       changeCalendarHTML_Date(calDates);
       createEventTime.value = `${calDates.toJSON().slice(0, 16)}`;
     });

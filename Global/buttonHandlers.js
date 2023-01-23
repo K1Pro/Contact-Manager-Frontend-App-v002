@@ -4,52 +4,65 @@ function buttonHandlers() {
   // Previous Month Button in Calendar Module
   CalendarHTML_PrevMonthBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
-    let retrievedDate = document
-      .getElementById('CalendarDate')
-      .value.split('-');
-    let prevMonth =
+    retrievedDate = document.getElementById('CalendarDate').value.split('-');
+    prevMonth =
       new Date(
         retrievedDate[0],
         retrievedDate[1] - 1,
         retrievedDate[2]
       ).getTime() +
       1000 * 60 * 60 * 24 * -28;
-    changeCalendarHTML_Date(new Date(prevMonth));
-    calendarDatesFillIn(new Date(prevMonth));
+    prevMonthHHMM = new Date(prevMonth).setHours(TodaysHour, TodaysMinutes);
+    changeCalendarHTML_Date(new Date(prevMonthHHMM));
+    calendarDatesFillIn(new Date(prevMonthHHMM));
   });
 
   // Previous Week Button in Calendar Module
   CalendarHTML_PrevWeekBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
-    let retrievedDate = document
-      .getElementById('CalendarDate')
-      .value.split('-');
-    let prevWeek =
+    retrievedDate = document.getElementById('CalendarDate').value.split('-');
+    prevWeek =
       new Date(
         retrievedDate[0],
         retrievedDate[1] - 1,
         retrievedDate[2]
       ).getTime() +
       1000 * 60 * 60 * 24 * -7;
-    changeCalendarHTML_Date(new Date(prevWeek));
-    calendarDatesFillIn(new Date(prevWeek));
+    prevWeekHHMM = new Date(prevWeek).setHours(TodaysHour, TodaysMinutes);
+    changeCalendarHTML_Date(new Date(prevWeekHHMM));
+    calendarDatesFillIn(new Date(prevWeekHHMM));
   });
 
   // Next Week Button in Calendar Module
   CalendarHTML_NextWeekBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
-    let retrievedDate = document
-      .getElementById('CalendarDate')
-      .value.split('-');
-    let nextWeek =
+    retrievedDate = document.getElementById('CalendarDate').value.split('-');
+    nextWeek =
       new Date(
         retrievedDate[0],
         retrievedDate[1] - 1,
         retrievedDate[2]
       ).getTime() +
       1000 * 60 * 60 * 24 * 7;
-    changeCalendarHTML_Date(new Date(nextWeek));
-    calendarDatesFillIn(new Date(nextWeek));
+    nextWeekHHMM = new Date(nextWeek).setHours(TodaysHour, TodaysMinutes);
+    changeCalendarHTML_Date(new Date(nextWeekHHMM));
+    calendarDatesFillIn(new Date(nextWeekHHMM));
+  });
+
+  // Next Month Button in Calendar Module
+  CalendarHTML_NextMonthBtn.addEventListener('click', function () {
+    abortCalendarDatesFillIn();
+    retrievedDate = document.getElementById('CalendarDate').value.split('-');
+    nextMonth =
+      new Date(
+        retrievedDate[0],
+        retrievedDate[1] - 1,
+        retrievedDate[2]
+      ).getTime() +
+      1000 * 60 * 60 * 24 * 28;
+    nextMonthHHMM = new Date(nextMonth).setHours(TodaysHour, TodaysMinutes);
+    changeCalendarHTML_Date(new Date(nextMonthHHMM));
+    calendarDatesFillIn(new Date(nextMonthHHMM));
   });
 
   Status.addEventListener('change', function (e) {
@@ -80,34 +93,24 @@ function buttonHandlers() {
     }
   });
 
-  // Next Month Button in Calendar Module
-  CalendarHTML_NextMonthBtn.addEventListener('click', function () {
-    abortCalendarDatesFillIn();
-    let retrievedDate = document
-      .getElementById('CalendarDate')
-      .value.split('-');
-    let nextMonth =
-      new Date(
-        retrievedDate[0],
-        retrievedDate[1] - 1,
-        retrievedDate[2]
-      ).getTime() +
-      1000 * 60 * 60 * 24 * 28;
-    changeCalendarHTML_Date(new Date(nextMonth));
-    calendarDatesFillIn(new Date(nextMonth));
+  CalendarHTML_Date.addEventListener('click', function (e) {
+    console.log(e.target.value);
+    dateSelector = e.target.value;
+    return dateSelector;
   });
 
   CalendarHTML_Date.addEventListener('focusout', function (e) {
-    //there is a timezone issue
-    let retrievedDate = e.target.value.split('-');
-    let dateSelected =
-      new Date(
-        retrievedDate[0],
-        retrievedDate[1] - 1,
-        retrievedDate[2]
-      ).getTime() +
-      1000 * 60 * 60 * 12;
-    calendarDatesFillIn(new Date(dateSelected));
+    if (dateSelector != e.target.value) {
+      let retrievedDate = e.target.value.split('-');
+      let dateSelected =
+        new Date(
+          retrievedDate[0],
+          retrievedDate[1] - 1,
+          retrievedDate[2]
+        ).getTime() +
+        1000 * 60 * 60 * 12;
+      calendarDatesFillIn(new Date(dateSelected));
+    }
   });
 
   // Calendar filter dropdowns
