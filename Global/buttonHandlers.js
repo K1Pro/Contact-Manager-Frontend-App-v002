@@ -94,13 +94,13 @@ function buttonHandlers() {
   });
 
   CalendarHTML_Date.addEventListener('click', function (e) {
-    console.log(e.target.value);
     dateSelector = e.target.value;
     return dateSelector;
   });
 
-  CalendarHTML_Date.addEventListener('focusout', function (e) {
+  CalendarHTML_Date.addEventListener('change', function (e) {
     if (dateSelector != e.target.value) {
+      abortCalendarDatesFillIn();
       let retrievedDate = e.target.value.split('-');
       let dateSelected =
         new Date(

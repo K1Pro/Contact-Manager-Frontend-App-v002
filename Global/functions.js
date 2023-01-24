@@ -62,7 +62,7 @@ function calendarDatesFillIn(chosenDate) {
   for (let rep = 0; rep < 28; rep++) {
     document
       .getElementById(`${dayTag}${rep}`)
-      .classList.remove(calendarCurrentDayTag);
+      .classList.remove(calSelectedDayTag);
     document
       .getElementById(`${dayTag}${rep}`)
       .classList.remove(calTodaysDayTag);
@@ -87,12 +87,9 @@ function calendarDatesFillIn(chosenDate) {
     );
     // Highlights the selected date, defaults to today's date
     // prettier-ignore
-    // if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`${dayTag}${rep}`).classList.add(calendarCurrentDayTag);
+    if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`${dayTag}${rep}`).classList.add(calSelectedDayTag);
     // prettier-ignore
     document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`;
-    // document.getElementById(`day${rep}`).removeEventListener('click', () => {
-    //   changeCalendarHTML_Date(calDates);
-    // });
     document.getElementById(`${dayTag}${rep}`).addEventListener('click', () => {
       for (let rep = 0; rep < 28; rep++) {
         document
