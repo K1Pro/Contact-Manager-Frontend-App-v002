@@ -10,8 +10,10 @@ async function isElementLoaded(selector) {
 function loadSidePanel(URL) {
   // This populates the Side Panel Input Fields following certain actions
   getJSON(URL).then((data) => {
+    dateSelector = document.getElementById(`CalendarDate`).value;
     for (let rep = 0; rep < ContactFields.length; rep++) {
       let ContactFieldsIDs = ContactFields[rep].id;
+      // console.log(ContactFieldsIDs);
       if (ContactFieldsIDs) {
         document.getElementById(`${ContactFieldsIDs}`).value = data.data
           .contacts[0][ContactFieldsIDs]
@@ -38,6 +40,38 @@ function loadSidePanel(URL) {
             cntctCalEvnt.classList.add(activeTag);
           }
         });
+      }
+      if (
+        ContactFieldsIDs == 'Policy1RenewDate' ||
+        ContactFieldsIDs == 'Policy2RenewDate' ||
+        ContactFieldsIDs == 'Policy3RenewDate' ||
+        ContactFieldsIDs == 'Policy4RenewDate'
+      ) {
+        slctdPolicyGroup = ContactFieldsIDs.slice(0, 7);
+        slctdPolicy1RenewDate = document.getElementById(ContactFieldsIDs);
+        slctdPolicyType = document.getElementById(`${slctdPolicyGroup}Type`);
+        slctdPolicyNo = document.getElementById(`${slctdPolicyGroup}Number`);
+        slctdPolicy1RenewDate.classList.remove('selectedRenewDate');
+        slctdPolicyNo.classList.remove('selectedRenewDate');
+        slctdPolicyType.classList.remove('selectedRenewDate');
+        cnvrtdDateSelector = new Date(dateSelector);
+        dateSelectorRenewal = new Date(
+          cnvrtdDateSelector.getTime() +
+            1000 /*sec*/ *
+              60 /*min*/ *
+              60 /*hour*/ *
+              24 /*day*/ *
+              28 /*# of days*/
+        )
+          .toJSON()
+          .slice(5, 10);
+
+        if (dateSelectorRenewal == slctdPolicy1RenewDate.value.slice(5, 10)) {
+          slctdPolicy1RenewDate.classList.add('selectedRenewDate');
+          slctdPolicyNo.classList.add('selectedRenewDate');
+          slctdPolicyType.classList.add('selectedRenewDate');
+          console.log(ContactFieldsIDs.slice(0, 7));
+        }
       }
     }
   });
@@ -85,20 +119,15 @@ function calendarDatesFillIn(chosenDate) {
           24 /*day*/ *
           (prevMondayLastWeek + rep + 28) /*# of days*/
     );
-    // Highlights the selected date, defaults to today's date
     // prettier-ignore
     if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`${dayTag}${rep}`).classList.add(calSelectedDayTag);
     // prettier-ignore
     document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`;
     document.getElementById(`${dayTag}${rep}`).addEventListener('click', () => {
-      for (let rep = 0; rep < 28; rep++) {
-        document
-          .getElementById(`${dayTag}${rep}`)
-          .classList.remove(calSelectedDayTag);
-      }
-      document
-        .getElementById(`${dayTag}${rep}`)
-        .classList.add(calSelectedDayTag);
+      // prettier-ignore
+      for (let rep = 0; rep < 28; rep++) {document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);}
+      // prettier-ignore
+      document.getElementById(`${dayTag}${rep}`).classList.add(calSelectedDayTag);
       changeCalendarHTML_Date(calDates);
       createEventTime.value = `${calDates.toJSON().slice(0, 16)}`;
     });

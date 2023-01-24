@@ -313,6 +313,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
   width: 23vw;
 }
 
+.selectedRenewDate {
+  background-color: rgb(255, 218, 237);
+}
+
 .eventDescriptions,
 .eventDates {
   border-left: 0px solid #ff3366;
