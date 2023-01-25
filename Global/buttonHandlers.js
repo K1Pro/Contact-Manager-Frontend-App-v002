@@ -4,6 +4,7 @@ function buttonHandlers() {
   // Previous Month Button in Calendar Module
   CalendarHTML_PrevMonthBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
+    removePolicyInfoHighlight();
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
     prevMonth =
       new Date(
@@ -20,6 +21,7 @@ function buttonHandlers() {
   // Previous Week Button in Calendar Module
   CalendarHTML_PrevWeekBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
+    removePolicyInfoHighlight();
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
     prevWeek =
       new Date(
@@ -36,6 +38,7 @@ function buttonHandlers() {
   // Next Week Button in Calendar Module
   CalendarHTML_NextWeekBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
+    removePolicyInfoHighlight();
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
     nextWeek =
       new Date(
@@ -52,6 +55,7 @@ function buttonHandlers() {
   // Next Month Button in Calendar Module
   CalendarHTML_NextMonthBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
+    removePolicyInfoHighlight();
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
     nextMonth =
       new Date(
@@ -101,6 +105,7 @@ function buttonHandlers() {
   CalendarHTML_Date.addEventListener('change', function (e) {
     if (dateSelector != e.target.value) {
       abortCalendarDatesFillIn();
+      removePolicyInfoHighlight();
       let retrievedDate = e.target.value.split('-');
       let dateSelected =
         new Date(

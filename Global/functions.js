@@ -70,7 +70,6 @@ function loadSidePanel(URL) {
           slctdPolicy1RenewDate.classList.add('selectedRenewDate');
           slctdPolicyNo.classList.add('selectedRenewDate');
           slctdPolicyType.classList.add('selectedRenewDate');
-          console.log(ContactFieldsIDs.slice(0, 7));
         }
       }
     }
@@ -499,4 +498,12 @@ function snackbar(message) {
   setTimeout(function () {
     snackbar.className = snackbar.className.replace('show', '');
   }, 3000);
+}
+
+function removePolicyInfoHighlight() {
+  document.querySelectorAll('.policyInfo').forEach((policyInfoInput) => {
+    document
+      .getElementById(`${policyInfoInput.id}`)
+      .classList.remove('selectedRenewDate');
+  });
 }
