@@ -319,7 +319,7 @@ function loadContactTasks(dailyTask) {
       contactTask.Dated.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
       contactTask.Dated.setAttribute(
         'class',
-        'form-control eventDates border-bottom-0'
+        `form-control eventDates border-bottom-0 task${value._id}`
       );
       contactTask.Dated.addEventListener('focusout', () => {
         updateContactTasks(contactTask);
@@ -334,7 +334,7 @@ function loadContactTasks(dailyTask) {
       );
       contactTask.Description.setAttribute(
         'class',
-        `form-control ${eventDescriptionsTag} border-top-0`
+        `form-control ${eventDescriptionsTag} border-top-0 task${value._id}`
       );
       contactTask.Description.addEventListener('change', () => {
         updateContactTasks(contactTask);
@@ -343,6 +343,8 @@ function loadContactTasks(dailyTask) {
       contactTask.Author.addEventListener('change', () => {
         updateContactTasks(contactTask);
       });
+      contactTask.Author.setAttribute('name', `TasksAgentSelector`);
+      contactTask.Author.setAttribute('class', `task${value._id}`);
       ContactTaskGroup.appendChild(contactTask.Author);
 
       LastEditedByS.forEach((staffMember) => {
@@ -358,7 +360,7 @@ function loadContactTasks(dailyTask) {
       contactTask.CheckBox.checked = value.Completed;
       contactTask.CheckBox.setAttribute(
         'class',
-        `form-check-input mt-0 ${bartkaCheckboxTag}`
+        `form-check-input mt-0 ${bartkaCheckboxTag} task${value._id}`
       );
       contactTask.CheckBox.addEventListener('click', () => {
         fetch(`${srvrURL}${updateEventPath}${value._id}`, {
@@ -387,7 +389,7 @@ function loadContactTasks(dailyTask) {
                 );
                 checkCompletion.setAttribute(
                   'class',
-                  `${eCompletedTag} ${textlightTag}`
+                  `${eCompletedTag} ${textlightTag} task${value._id}`
                 );
               } else {
                 let checkCompletion = document.getElementById(
@@ -395,7 +397,7 @@ function loadContactTasks(dailyTask) {
                 );
                 checkCompletion.setAttribute(
                   'class',
-                  `${eNotCompletedTag} ${textlightTag}`
+                  `${eNotCompletedTag} ${textlightTag} task${value._id}`
                 );
               }
             }
