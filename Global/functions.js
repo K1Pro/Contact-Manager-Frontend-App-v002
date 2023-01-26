@@ -7,7 +7,7 @@ async function isElementLoaded(selector) {
   }
 }
 
-function loadSidePanel(URL) {
+function loadSidePanel(URL, slctdCalTask) {
   // This populates the Side Panel Input Fields following certain actions
   getJSON(URL).then((data) => {
     dateSelector = document.getElementById(`CalendarDate`).value;
@@ -22,7 +22,7 @@ function loadSidePanel(URL) {
       }
       if (ContactFieldsIDs == '_id') {
         let contactID = document.getElementById(`${ContactFieldsIDs}`);
-        loadContactTasks(contactID.value);
+        loadContactTasks(contactID.value, slctdCalTask);
         // Highlights each renewal and event active in the calendar
         calID = data.data.contacts[0]._id;
         for (let rep = 0; rep < 31; rep++) {
@@ -258,7 +258,10 @@ function calendarDatesFillIn(chosenDate) {
           calCntct.addEventListener('click', () => {
             emailBody.value = '';
             removeActiveCalCntct();
-            loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`);
+            loadSidePanel(
+              `${srvrURL}${phonePath}${rnwlCntct.Phone}`,
+              `${sortedCalEvents[0]._id}`
+            );
             calCntct.classList.add(activeTag);
           });
           document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
@@ -293,7 +296,7 @@ function updateContactTasks(contactTask) {
     });
 }
 
-function loadContactTasks(dailyTask) {
+function loadContactTasks(dailyTask, slctdCalTask) {
   ContactTaskList.innerHTML = '';
   getJSON(`${srvrURL}${eventsPath}${dailyTask}`).then((data) => {
     // sorts the array in reverse chronological order
@@ -313,15 +316,16 @@ function loadContactTasks(dailyTask) {
         CheckBox: document.createElement('input'),
         Author: document.createElement('select'),
       };
-
       // Creates a datetime-local Input
       contactTask.Dated.type = 'datetime-local';
       contactTask.Dated.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
       contactTask.Dated.setAttribute(
         'class',
-        `form-control eventDates border-bottom-0 task${value._id}`
+        `form-control eventDates border-bottom-0`
       );
-      contactTask.Dated.addEventListener('focusout', () => {
+      if (slctdCalTask && slctdCalTask == contactTask.UID)
+        contactTask.Dated.classList.add('contactTaskSelected');
+      contactTask.Dated.addEventListener('change', () => {
         updateContactTasks(contactTask);
       });
       ContactTaskGroup.appendChild(contactTask.Dated);
@@ -334,8 +338,10 @@ function loadContactTasks(dailyTask) {
       );
       contactTask.Description.setAttribute(
         'class',
-        `form-control ${eventDescriptionsTag} border-top-0 task${value._id}`
+        `form-control ${eventDescriptionsTag} border-top-0`
       );
+      if (slctdCalTask && slctdCalTask == contactTask.UID)
+        contactTask.Description.classList.add('contactTaskSelected');
       contactTask.Description.addEventListener('change', () => {
         updateContactTasks(contactTask);
       });
@@ -344,7 +350,8 @@ function loadContactTasks(dailyTask) {
         updateContactTasks(contactTask);
       });
       contactTask.Author.setAttribute('name', `TasksAgentSelector`);
-      contactTask.Author.setAttribute('class', `task${value._id}`);
+      if (slctdCalTask && slctdCalTask == contactTask.UID)
+        contactTask.Author.classList.add('contactTaskSelected');
       ContactTaskGroup.appendChild(contactTask.Author);
 
       LastEditedByS.forEach((staffMember) => {
@@ -360,8 +367,10 @@ function loadContactTasks(dailyTask) {
       contactTask.CheckBox.checked = value.Completed;
       contactTask.CheckBox.setAttribute(
         'class',
-        `form-check-input mt-0 ${bartkaCheckboxTag} task${value._id}`
+        `form-check-input mt-0 ${bartkaCheckboxTag}`
       );
+      if (slctdCalTask && slctdCalTask == contactTask.UID)
+        contactTask.CheckBox.classList.add('contactTaskSelected');
       contactTask.CheckBox.addEventListener('click', () => {
         fetch(`${srvrURL}${updateEventPath}${value._id}`, {
           method: 'PATCH',

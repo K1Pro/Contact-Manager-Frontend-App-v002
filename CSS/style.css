@@ -339,6 +339,9 @@ input[type='date']:invalid::-webkit-datetime-edit {
   border-left-width: 0.5vw;
   padding-left: 0.5vw;
 }
+.contactTaskSelected {
+  background-color: rgb(255, 218, 237);
+}
 /* .eventDates { */
 /* position: absolute; */
 /* padding-right: 5vw !important;

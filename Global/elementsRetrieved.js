@@ -95,6 +95,7 @@ function elementsRequired() {
 // vvv All retrieved elements should be declared here vvv
 let DOMElements,
   ContactTaskList,
+  newCntctTaskList,
   IDinput,
   CalendarHTML_Date,
   CalendarHTML_PrevMonthBtn,
