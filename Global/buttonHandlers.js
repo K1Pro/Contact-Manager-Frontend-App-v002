@@ -220,13 +220,35 @@ function buttonHandlers() {
           .then(() => {
             contactEditDate();
             PhoneInput = document.getElementById('Phone');
-            contactTasksTextArea.value = '';
             snackbar(`Event created for ${FirstName.value}`);
             loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
-            // You can possibly use this in the future
-            // getJSON(ContactsURL).then((data) => {
-            //   console.log('This is after the create button is pressed');
-            // });
+            let retrievedUniqueDays =
+              document.getElementsByClassName('uniqueday');
+            rtrvdCalDateSlctr = document.getElementById('CalendarDate');
+            for (key in retrievedUniqueDays) {
+              if (retrievedUniqueDays[key].className) {
+                // prettier-ignore
+                let fullCalPpltdDate = `${rtrvdCalDateSlctr.value.slice(0, 5)}${retrievedUniqueDays[key].innerHTML.slice(0, 5)}`;
+                let shortCreatedEvntTime = createEventTime.value.slice(0, 10);
+                if (shortCreatedEvntTime == fullCalPpltdDate) {
+                  let eventUniqueDay = document.getElementById(
+                    retrievedUniqueDays[key].id
+                  );
+                  let calCntct = document.createElement('div');
+                  calCntct.classList.add(textlightTag);
+                  calCntct.classList.add(calTaskTag);
+                  calCntct.classList.add(eventTag);
+                  calCntct.classList.add(eNotCompletedTag);
+                  calCntct.classList.add(activeTag);
+                  calCntct.classList.add(Status.value);
+                  calCntct.classList.add(Source.value);
+                  calCntct.classList.add(EventAuthor.value);
+                  calCntct.textContent = `${LastName.value}`;
+                  eventUniqueDay.appendChild(calCntct);
+                }
+              }
+            }
+            contactTasksTextArea.value = '';
           });
       });
     }

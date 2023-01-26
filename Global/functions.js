@@ -259,8 +259,8 @@ function calendarDatesFillIn(chosenDate) {
             emailBody.value = '';
             removeActiveCalCntct();
             loadSidePanel(
-              `${srvrURL}${phonePath}${rnwlCntct.Phone}`,
-              `${sortedCalEvents[0]._id}`
+              `${srvrURL}${phonePath}${rnwlCntct.Phone}`, // Phone URL
+              `${sortedCalEvents[0]._id}` // Specific Contact Task ID
             );
             calCntct.classList.add(activeTag);
           });
