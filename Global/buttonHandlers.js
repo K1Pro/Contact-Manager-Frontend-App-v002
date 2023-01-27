@@ -262,6 +262,43 @@ function buttonHandlers() {
     contactSearch.value = '';
   });
 
+  //REFACTOR AND CLEAN THIS UP A BIT
+  contactSearch.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      console.log('pressed enter');
+      let dataList = document.getElementById('contactsList');
+      let numb = dataList.childNodes.length;
+      let tracker = 1;
+      console.log(numb);
+      let uniquePhoneSet = new Set();
+      let first;
+      Array.from(document.getElementById('contactsList').options).forEach(
+        function (option_element) {
+          tracker++;
+          // console.log(tracker);
+          let dataListLabel = option_element.label.toLowerCase();
+          let dataListvalue = option_element.value;
+          let searchInput = e.target.value.toLowerCase();
+          // console.log('Option Text : ' + dataListLabel);
+          if (dataListLabel.includes(searchInput)) {
+            // console.log(e.target.value);
+            uniquePhoneSet.add(dataListvalue);
+            [first] = uniquePhoneSet;
+            // console.log(first);
+            return first;
+          }
+          if (tracker == numb) {
+            console.log("we're in");
+            console.log('first item =', first);
+            loadSidePanel(`${srvrURL}${phonePath}${first}`);
+            removeActiveCalCntct();
+            contactSearch.value = '';
+          }
+        }
+      );
+    }
+  });
+
   document.querySelectorAll('.eventTemplates').forEach((dynamicEvent) => {
     dynamicEvent.addEventListener('click', function (e) {
       e.preventDefault();
