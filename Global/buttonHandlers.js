@@ -225,6 +225,7 @@ function buttonHandlers() {
             let retrievedUniqueDays =
               document.getElementsByClassName('uniqueday');
             rtrvdCalDateSlctr = document.getElementById('CalendarDate');
+            // This adds an event to the calendar once the event is created, work on this further
             for (key in retrievedUniqueDays) {
               if (retrievedUniqueDays[key].className) {
                 // prettier-ignore
