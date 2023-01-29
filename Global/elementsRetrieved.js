@@ -40,6 +40,17 @@ function elementsRequired() {
     if (ContactFieldsIDs) {
       document
         .getElementById(`${ContactFieldsIDs}`)
+        .addEventListener('focus', function (e) {
+          oldInputValue = this.value;
+          return oldInputValue;
+        });
+      document
+        .getElementById(`${ContactFieldsIDs}`)
+        .addEventListener('change', function (e) {
+          onChangeTest(this);
+        });
+      document
+        .getElementById(`${ContactFieldsIDs}`)
         .addEventListener('change', function (e) {
           let checkValid = document
             .getElementById(`${ContactFieldsIDs}`)
@@ -58,12 +69,10 @@ function elementsRequired() {
                   let changedInputMMDD = this.id.replace('Date', 'MMDD');
                   updateThis.key = changedInputMMDD;
                   updateDB(updateThis);
-                  snackbar(`Deleted ${this.id} for ${FirstName.value}`);
                   contactEditDate();
                 } else {
                   updateThis.key = this.id;
                   updateDB(updateThis);
-                  snackbar(`Deleted ${this.id} for ${FirstName.value}`);
                   contactEditDate();
                 }
               } else {
@@ -77,27 +86,17 @@ function elementsRequired() {
                   updateThis.key = changedInputMMDD;
                   updateThis.value = MMDD;
                   updateDB(updateThis);
-                  snackbar(`Updated ${this.id} for ${FirstName.value}`);
                   contactEditDate();
                 } else {
                   updateThis.key = this.id;
                   updateThis.value = this.value;
                   updateDB(updateThis);
-                  snackbar(`Updated ${this.id} for ${FirstName.value}`);
                   contactEditDate();
                 }
               }
             } else {
-              alert('Please search for and choose a customer.');
+              snackbar('Please search for and choose a customer.');
             }
-          } else {
-            let invalidInput = document.getElementById(`${ContactFieldsIDs}`);
-            console.log(invalidInput.pattern);
-            snackbar(
-              `Please correct the ${ContactFieldsIDs.toLowerCase()} format: ${
-                invalidInput.pattern
-              }`
-            );
           }
         });
     }

@@ -465,6 +465,29 @@ function calendarFilter(chosenFilter) {
   }
 }
 
+function onChangeTest(textbox) {
+  let checkValidAgain = document
+    .getElementById(`${textbox.id}`)
+    .checkValidity();
+  if (checkValidAgain) {
+    snackbar(`Updated ${textbox.id} for ${FirstName.value}`);
+  } else {
+    let invalidInput = document.getElementById(`${textbox.id}`);
+    if (invalidInput.value) {
+      snackbar(
+        `Please correct the ${textbox.placeholder.toLowerCase()} format: ${
+          invalidInput.pattern
+        }`
+      );
+    } else {
+      snackbar(
+        `Please enter a ${textbox.placeholder.toLowerCase()}. This is required.`
+      );
+    }
+    invalidInput.value = oldInputValue;
+  }
+}
+
 function contactEditDate() {
   if (_id.value) {
     lastEditDate = new Date().toJSON(); //.slice(0, 16);
