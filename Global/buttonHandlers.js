@@ -299,6 +299,23 @@ function buttonHandlers() {
     }
   });
 
+  // phoneInput.addEventListener('input', () => {
+  //   console.log('input bart');
+  //   phoneInput.setCustomValidity('');
+  //   phoneInput.checkValidity();
+  // });
+  // phoneInput.addEventListener('invalid', () => {
+  //   if (phoneInput.value === '') {
+  //     phoneInput.setCustomValidity('Enter phone number!');
+  //     console.log('Enter phone number!');
+  //   } else {
+  //     phoneInput.setCustomValidity(
+  //       'Enter phone number in this format: 123-456-7890'
+  //     );
+  //     console.log('Enter phone number in this format: 123-456-7890');
+  //   }
+  // });
+
   document.querySelectorAll('.eventTemplates').forEach((dynamicEvent) => {
     dynamicEvent.addEventListener('click', function (e) {
       e.preventDefault();
