@@ -465,7 +465,7 @@ function calendarFilter(chosenFilter) {
   }
 }
 
-function onChangeTest(textbox) {
+function saveOldValue(textbox) {
   let checkValidAgain = document
     .getElementById(`${textbox.id}`)
     .checkValidity();
@@ -486,6 +486,48 @@ function onChangeTest(textbox) {
     }
     invalidInput.value = oldInputValue;
   }
+}
+
+function phonenumber(inputtxt) {
+  console.log(inputtxt);
+  let phoneno = /^\(?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$/;
+  if (inputtxt.match(phoneno)) {
+    snackbar('Phone is good');
+  } else {
+    snackbar('Please enter either a valid name or phone.');
+  }
+}
+
+function matchDatalist(searchInput) {
+  let dataList = document.getElementById('contactsList');
+  let totalSearchCntcts = dataList.childNodes.length;
+  let searchCncttracker = 1;
+  let uniquePhoneSet = new Set();
+  let firstSearchCntct;
+  Array.from(document.getElementById('contactsList').options).forEach(function (
+    option_element
+  ) {
+    searchCncttracker++;
+    let dataListLabel = option_element.label.toLowerCase();
+    let dataListvalue = option_element.value;
+    if (
+      dataListLabel.includes(searchInput) ||
+      dataListvalue.includes(searchInput)
+    ) {
+      uniquePhoneSet.add(dataListvalue);
+      [firstSearchCntct] = uniquePhoneSet;
+      return firstSearchCntct;
+    }
+    if (firstSearchCntct && searchCncttracker == totalSearchCntcts) {
+      loadSidePanel(`${srvrURL}${phonePath}${firstSearchCntct}`);
+      removeActiveCalCntct();
+      contactSearch.value = '';
+    } else if (!firstSearchCntct && searchCncttracker == totalSearchCntcts) {
+      snackbar(
+        'Please enter either a valid name (First name, Last Name) or phone.'
+      );
+    }
+  });
 }
 
 function contactEditDate() {

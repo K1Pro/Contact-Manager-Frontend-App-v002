@@ -47,11 +47,7 @@ function elementsRequired() {
       document
         .getElementById(`${ContactFieldsIDs}`)
         .addEventListener('change', function (e) {
-          onChangeTest(this);
-        });
-      document
-        .getElementById(`${ContactFieldsIDs}`)
-        .addEventListener('change', function (e) {
+          saveOldValue(this);
           let checkValid = document
             .getElementById(`${ContactFieldsIDs}`)
             .checkValidity();

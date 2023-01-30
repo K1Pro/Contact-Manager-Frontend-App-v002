@@ -257,64 +257,37 @@ function buttonHandlers() {
 
   // This populates the Side Panel Input Fields following a Contact Search
   contactSearch.addEventListener('change', function (e) {
-    loadSidePanel(`${srvrURL}${phonePath}${e.target.value}`);
-    removeActiveCalCntct();
-    contactSearch.value = '';
-  });
-
-  //REFACTOR AND CLEAN THIS UP A BIT
-  contactSearch.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      console.log('pressed enter');
-      let dataList = document.getElementById('contactsList');
-      let numb = dataList.childNodes.length;
-      let tracker = 1;
-      console.log(numb);
-      let uniquePhoneSet = new Set();
-      let first;
-      Array.from(document.getElementById('contactsList').options).forEach(
-        function (option_element) {
-          tracker++;
-          // console.log(tracker);
-          let dataListLabel = option_element.label.toLowerCase();
-          let dataListvalue = option_element.value;
-          let searchInput = e.target.value.toLowerCase();
-          // console.log('Option Text : ' + dataListLabel);
-          if (dataListLabel.includes(searchInput)) {
-            // console.log(e.target.value);
-            uniquePhoneSet.add(dataListvalue);
-            [first] = uniquePhoneSet;
-            // console.log(first);
-            return first;
-          }
-          if (tracker == numb) {
-            console.log("we're in");
-            console.log('first item =', first);
-            loadSidePanel(`${srvrURL}${phonePath}${first}`);
-            removeActiveCalCntct();
-            contactSearch.value = '';
-          }
-        }
-      );
+    let searchInput = e.target.value.toLowerCase();
+    // phonenumber(e.target.value);
+    if (e.target.value) {
+      matchDatalist(searchInput);
     }
   });
 
-  // phoneInput.addEventListener('input', () => {
-  //   console.log('input bart');
-  //   phoneInput.setCustomValidity('');
-  //   phoneInput.checkValidity();
-  // });
-  // phoneInput.addEventListener('invalid', () => {
-  //   if (phoneInput.value === '') {
-  //     phoneInput.setCustomValidity('Enter phone number!');
-  //     console.log('Enter phone number!');
-  //   } else {
-  //     phoneInput.setCustomValidity(
-  //       'Enter phone number in this format: 123-456-7890'
-  //     );
-  //     console.log('Enter phone number in this format: 123-456-7890');
-  //   }
-  // });
+  //REFACTOR AND CLEAN THIS UP A BIT
+  contactSearch.addEventListener('keyup', function (e) {
+    if (e.key !== 'Backspace') {
+      let searchInput = e.target.value.toLowerCase();
+      // checks a phone number for example 773
+      let phNoBegin = /^\d{3}$/;
+      // checks a phone number for example 773-853
+      let phNoMiddle = /^\+?([0-9]{3})\)?[-]?([0-9]{3})$/;
+      // checks a phone number for example 773-853-2731
+      let phNoLast = /^\+?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$/;
+      if (searchInput.match(phNoBegin)) {
+        this.value = `${searchInput}-`;
+      } else if (searchInput.match(phNoMiddle)) {
+        this.value = `${searchInput}-`;
+      } else if (searchInput.match(phNoLast)) {
+        matchDatalist(searchInput);
+        contactSearch.blur();
+      }
+      if (e.key === 'Enter') {
+        matchDatalist(searchInput);
+        contactSearch.blur();
+      }
+    }
+  });
 
   document.querySelectorAll('.eventTemplates').forEach((dynamicEvent) => {
     dynamicEvent.addEventListener('click', function (e) {

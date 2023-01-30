@@ -38,9 +38,6 @@
   color: white;
 }
 
-input[type='date']:invalid::-webkit-datetime-edit {
-  color: #cccccc;
-}
 .calendarRow {
   height: 15vh;
 }
@@ -86,7 +83,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
 }
 /* Date time placeholders */
 input[type='date']:invalid::-webkit-datetime-edit {
-  color: #cccccc;
+  color: #cccccc !important;
 }
 
 .paddingZero {
