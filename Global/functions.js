@@ -90,6 +90,10 @@ function changeCalendarHTML_Date(chosenDate) {
   CalendarHTML_Date.value = `${chosenDate.toJSON().slice(0, 10)}`;
 }
 
+function isInt(n) {
+  return n % 1 === 0;
+}
+
 function calendarDatesFillIn(chosenDate) {
   let prevMondayLastWeek = 1 - chosenDate.getDay() - daysInWeek;
   for (let rep = 0; rep < 28; rep++) {

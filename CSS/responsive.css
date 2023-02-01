@@ -21,6 +21,34 @@
     height: 11.5vh;
     /* height: 5.875vh; */
   }
+  .Day21 {
+    height: 30vh;
+    /* height: 11.75vh; */
+  }
+  .SatSun21 {
+    height: 15vh;
+    /* height: 5.875vh; */
+  }
+  .Day14 {
+    height: 46vh;
+    /* height: 11.75vh; */
+  }
+  .SatSun14 {
+    height: 23vh;
+    /* height: 5.875vh; */
+  }
+  .Day07 {
+    height: 92vh;
+    /* height: 11.75vh; */
+  }
+  .SatSun07 {
+    height: 46vh;
+    /* height: 5.875vh; */
+  }
+  .Day01 {
+    height: 92vh;
+    /* height: 11.75vh; */
+  }
   .responsiveFont {
     font-size: 1.65vh;
   }
