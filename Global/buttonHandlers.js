@@ -145,6 +145,22 @@ function buttonHandlers() {
     });
   });
 
+  DaysSelect.addEventListener('change', function (e) {
+    daysSelected = e.target.value.slice(6, 8);
+    console.log(daysSelected);
+    for (let rep = 0; rep < 28; rep++) {
+      document
+        .getElementById(`${dayTag}${rep}`)
+        .classList.add(hiddenContactTag);
+      if (rep < daysSelected) {
+        console.log(rep);
+        document
+          .getElementById(`${dayTag}${rep}`)
+          .classList.remove(hiddenContactTag);
+      }
+    }
+  });
+
   // Review Button in Side Panel
   reviewContact.addEventListener('click', function () {
     if (_id.value) {

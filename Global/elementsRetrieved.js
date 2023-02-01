@@ -30,6 +30,7 @@ function elementsRequired() {
   StatusSelect = document.getElementById('StatusSelect');
   SourceSelect = document.getElementById('SourceSelect');
   LastEditedBySelect = document.getElementById('LastEditedBySelect');
+  DaysSelect = document.getElementById('DaysSelect');
   TasksDropDown = document.getElementById('TasksDropDown');
   CalendarDates = document
     .getElementById('calendarDates')
