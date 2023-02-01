@@ -30,7 +30,8 @@
   .calendarFooter {
     height: 4vh;
   }
-  .DropDown {
-    width: 8vw;
+  .DropDown,
+  .DaysDropDown {
+    width: 7.5vw;
   }
 }

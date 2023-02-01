@@ -306,10 +306,6 @@ input[type='date']:invalid::-webkit-datetime-edit {
   padding-left: 1vw;
 }
 
-.DropDown {
-  width: 23vw;
-}
-
 .selectedRenewDate {
   background-color: rgb(255, 218, 237);
 }
@@ -331,10 +327,16 @@ input[type='date']:invalid::-webkit-datetime-edit {
 #TasksDropDown,
 #StatusSelect,
 #SourceSelect,
-#LastEditedBySelect {
+#LastEditedBySelect,
+#DaysSelect {
   border-left: 0px solid #ff9933;
   border-left-width: 0.5vw;
   padding-left: 0.5vw;
+}
+
+.DropDown,
+.DaysDropDown {
+  width: 18vw;
 }
 .contactTaskSelected {
   background-color: rgb(255, 218, 237);

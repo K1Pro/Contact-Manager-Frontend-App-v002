@@ -5,6 +5,7 @@ function calendarModule() {
   populateSelect(LastEditedByS, LastEditedBySelect);
   populateSelect(StatusS, StatusSelect);
   populateSelect(SourceS, SourceSelect);
+  populateSelect(DaysS, DaysSelect);
   // ^^^ End coding here for Calendar Module ^^^
 }
 
