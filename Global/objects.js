@@ -1,3 +1,31 @@
+const TasksObj = {
+  renewal: 'All Renewals',
+  rCompleted: 'Completed Renewals',
+  rNotCompleted: 'Not Completed Renewals',
+  event: 'All Events',
+  eCompleted: 'Completed Events',
+  eNotCompleted: 'Not Completed Events',
+};
+
+const StatusObj = {
+  Customer: 'Customer',
+  Former_customer: 'Former Customer',
+  Prospect: 'Prospect',
+  Hot_Lead: 'Hot Lead',
+  Cold_Lead: 'Cold Lead',
+  Do_Not_Call: 'Do Not Call',
+  Do_Not_Renew: 'Do Not Renew',
+};
+
+const SourceObj = {
+  Erie: 'Erie',
+  Allstate: 'Allstate',
+  Assurance: 'Assurance',
+  Live_Transfer_Lead: 'Live Transfer Lead',
+  Online_Lead: 'Online Lead',
+  Referral: 'Referral',
+};
+
 const LastEditedByObj = {
   Bartosz: 'Bartosz',
   Hanna: 'Hanna',
@@ -6,25 +34,6 @@ const LastEditedByObj = {
   Aneta: 'Aneta',
   Yuliya: 'Yuliya',
   Eliza: 'Eliza',
-};
-
-const StatusObj = {
-  Customer: 'Customer',
-  Former_customer: 'Former-customer',
-  Prospect: 'Prospect',
-  Hot_Lead: 'Hot-Lead',
-  Cold_Lead: 'Cold-Lead',
-  Do_Not_Call: 'Do-Not-Call',
-  Do_Not_Renew: 'Do-Not-Renew',
-};
-
-const SourceObj = {
-  Erie: 'Erie',
-  Allstate: 'Allstate',
-  Assurance: 'Assurance',
-  Live_Transfer_Lead: 'Live-Transfer-Lead',
-  Online_Lead: 'Online-Lead',
-  Referral: 'Referral',
 };
 
 const DaysObj = {

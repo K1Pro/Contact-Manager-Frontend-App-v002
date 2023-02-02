@@ -1,7 +1,7 @@
 function contactTasksModule() {
   // vvv Start coding here for Contact Tasks Module vvv
   createEventTime.value = TodaysDate.toJSON().slice(0, 16);
-  populateSelect(LastEditedByS, EventAuthor);
+  populateSlctWObj(LastEditedByObj, EventAuthor);
   // ^^^ End coding here for Contact Tasks Module ^^^
 }
 

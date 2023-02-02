@@ -138,18 +138,18 @@ function calendarDatesFillIn(chosenDate) {
               calCntct.classList.add(rnwlCntct.Source);
               calCntct.classList.add(rnwlCntct.LastEditedBy);
               if (
-                TasksDropDown.value == eventTag ||
-                TasksDropDown.value == eCompletedTag ||
-                TasksDropDown.value == eNotCompletedTag
+                TasksSelect.value == eventTag ||
+                TasksSelect.value == eCompletedTag ||
+                TasksSelect.value == eNotCompletedTag
               )
                 calCntct.classList.add(hiddenContactTag);
               if (
-                TasksDropDown.value == rCompletedTag &&
+                TasksSelect.value == rCompletedTag &&
                 lastReviewDateNoDash < calDateNoDash
               )
                 calCntct.classList.add(hiddenContactTag);
               if (
-                TasksDropDown.value == rNotCompletedTag &&
+                TasksSelect.value == rNotCompletedTag &&
                 lastReviewDateNoDash >= calDateNoDash
               )
                 calCntct.classList.add(hiddenContactTag);
@@ -209,18 +209,18 @@ function calendarDatesFillIn(chosenDate) {
           calCntct.classList.add(rnwlCntct.Source);
           calCntct.classList.add(sortedCalEvents[0].EventAuthor);
           if (
-            TasksDropDown.value == renewalTag ||
-            TasksDropDown.value == rCompletedTag ||
-            TasksDropDown.value == rNotCompletedTag
+            TasksSelect.value == renewalTag ||
+            TasksSelect.value == rCompletedTag ||
+            TasksSelect.value == rNotCompletedTag
           )
             calCntct.classList.add(hiddenContactTag);
           if (
-            TasksDropDown.value == eCompletedTag &&
+            TasksSelect.value == eCompletedTag &&
             !sortedCalEvents[0].Completed
           )
             calCntct.classList.add(hiddenContactTag);
           if (
-            TasksDropDown.value == eNotCompletedTag &&
+            TasksSelect.value == eNotCompletedTag &&
             sortedCalEvents[0].Completed
           )
             calCntct.classList.add(hiddenContactTag);

@@ -3,11 +3,10 @@ function calendarModule() {
   CalendarHTML_Date.value = TodaysDate.toJSON().slice(0, 10);
   calendarDatesFillIn(TodaysDate);
   // populateSelect(LastEditedByS, LastEditedBySelect);
+  populateSlctWObj(TasksObj, TasksSelect);
   populateSlctWObj(LastEditedByObj, LastEditedBySelect);
-  populateSelect(StatusS, StatusSelect);
-  populateSelect(SourceS, SourceSelect);
-  // populateSelect(DaysS, DaysSelect);
-
+  populateSlctWObj(StatusObj, StatusSelect);
+  populateSlctWObj(SourceObj, SourceSelect);
   populateSlctWObj(DaysObj, DaysSelect);
   // ^^^ End coding here for Calendar Module ^^^
 }

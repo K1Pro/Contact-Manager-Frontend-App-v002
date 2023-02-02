@@ -31,7 +31,7 @@ function elementsRequired() {
   SourceSelect = document.getElementById('SourceSelect');
   LastEditedBySelect = document.getElementById('LastEditedBySelect');
   DaysSelect = document.getElementById('DaysSelect');
-  TasksDropDown = document.getElementById('TasksDropDown');
+  TasksSelect = document.getElementById('TasksSelect');
   CalendarDates = document
     .getElementById('calendarDates')
     .querySelectorAll('*');
