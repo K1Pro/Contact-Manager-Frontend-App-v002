@@ -206,6 +206,13 @@ function buttonHandlers() {
     }
   });
 
+  contactTasksTextArea.addEventListener('focusout', () => {
+    cntctTasksTxtAreaList.classList.remove(hiddenContactTag);
+  });
+  contactTasksTextArea.addEventListener('keydown', () => {
+    cntctTasksTxtAreaList.classList.add(hiddenContactTag);
+  });
+
   // Review Button in Side Panel
   reviewContact.addEventListener('click', function () {
     if (_id.value) {
@@ -353,7 +360,10 @@ function buttonHandlers() {
   document.querySelectorAll('.eventTemplates').forEach((dynamicEvent) => {
     dynamicEvent.addEventListener('click', function (e) {
       e.preventDefault();
-      contactTasksTextArea.value = `${e.target.id.replaceAll('-', ' ')}, `;
+      contactTasksTextArea.value = `${e.target.innerHTML.replaceAll(
+        '...[Insert text here]',
+        ','
+      )} `;
     });
   });
 

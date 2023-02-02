@@ -204,3 +204,13 @@ function removePolicyInfoHighlight() {
       .classList.remove('selectedRenewDate');
   });
 }
+///////////////////////////////////////////////////////////
+///// vvv Increases the height of tasks textarea vvv //////
+function auto_height(elem) {
+  elem.style.height = '1px';
+  elem.style.height = elem.scrollHeight + 'px';
+}
+
+function test() {
+  cntctTasksTxtAreaList.classList.add(hiddenContactTag);
+}

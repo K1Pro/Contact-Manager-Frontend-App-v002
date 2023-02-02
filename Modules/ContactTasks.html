@@ -15,7 +15,7 @@
   <button type="button" class="btn btn-success" id="createEvent">
     Create Event
   </button>
-  <button
+  <!-- <button
     type="button"
     class="btn btn-success dropdown-toggle dropdown-toggle-split"
     data-bs-toggle="dropdown"
@@ -40,6 +40,17 @@
       >
     </li>
     <li><hr class="dropdown-divider" /></li>
+  </ul> -->
+
+  <button
+    type="button"
+    class="btn btn-success dropdown-toggle dropdown-toggle-split"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <span class="visually-hidden">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end" data-bs-theme="dark">
     <li>
       <a class="dropdown-item" href="">Create Weekly Event</a>
     </li>
@@ -63,10 +74,46 @@
 </div>
 <div class="input-group">
   <textarea
+    rows="1"
     id="contactTasksTextArea"
-    class="form-control"
+    class="form-control auto_height dropdown-toggle"
     placeholder="Please select your contact and type their today's event here..."
+    oninput="auto_height(this)"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+    onpaste="test()"
   ></textarea>
+  <ul id="cntctTasksTxtAreaList" class="dropdown-menu">
+    <li>
+      <a class="dropdown-item eventTemplates" href="" id="Just-called"
+        >Just called...[Insert text here]</a
+      >
+    </li>
+    <li>
+      <a class="dropdown-item eventTemplates" href="" id="Made-a-payment"
+        >Made a payment...[Insert text here]</a
+      >
+    </li>
+    <li>
+      <a class="dropdown-item eventTemplates" href="" id="Endorsement-created"
+        >Endorsement...[Insert text here]</a
+      >
+    </li>
+    <li>
+      <a class="dropdown-item eventTemplates" href="" id="Endorsement-created"
+        >Requested a quote...[Insert text here]</a
+      >
+    </li>
+    <!-- <li><hr class="dropdown-divider" /></li>
+    <li><a class="dropdown-item" href="#">Separated link</a></li> -->
+  </ul>
+  <!-- <datalist id="bilar">
+    <option value="Just called "></option>
+    <option value="Made a payment "></option>
+    <option value="Endorsement "></option>
+    <option value="Spoke over the phone "></option>
+    <option value="Wanted proof of insurance "></option>
+  </datalist> -->
 </div>
 <br />
 <form id="ContactTaskList"></form>

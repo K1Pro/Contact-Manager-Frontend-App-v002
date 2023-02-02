@@ -94,7 +94,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
   display: none;
 }
 .hiddenContact {
-  display: none;
+  display: none !important;
 }
 #contactsList {
   height: 10px;
@@ -304,6 +304,12 @@ input[type='date']:invalid::-webkit-datetime-edit {
   border-left: 0px solid green;
   border-left-width: 0.5vw;
   padding-left: 1vw;
+  word-break: break-word;
+  /* height: 64px; */
+}
+.auto_height {
+  /* CSS */
+  width: 100%;
 }
 
 .selectedRenewDate {

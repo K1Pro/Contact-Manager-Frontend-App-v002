@@ -4,6 +4,7 @@ function elementsRequired() {
   // Contact Task Module Elements
   ContactTaskList = document.getElementById('ContactTaskList');
   contactTasksTextArea = document.getElementById('contactTasksTextArea');
+  cntctTasksTxtAreaList = document.getElementById('cntctTasksTxtAreaList');
   createEventTime = document.getElementById('createEventTime');
   createEvent = document.getElementById('createEvent');
   EventAuthor = document.getElementById('EventAuthor');
