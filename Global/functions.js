@@ -294,9 +294,9 @@ function loadContactTasks(dailyTask, slctdCalTask) {
       // Creates a text input for the description
       contactTask.Description.value = `${value.Description}`;
       contactTask.Description.spellcheck = 'false';
-      contactTask.Description.rows = Math.round(
-        contactTask.Description.value.length / 120 + 1
-      );
+      // contactTask.Description.rows = Math.round(
+      //   contactTask.Description.value.length / 120 + 1
+      // );
       contactTask.Description.setAttribute(
         'class',
         `form-control ${eventDescriptionsTag} border-top-0`
@@ -379,7 +379,9 @@ function loadContactTasks(dailyTask, slctdCalTask) {
       });
       ContactTaskGroup.appendChild(contactTask.CheckBox);
       ContactTaskList.appendChild(contactTask.Description);
-      // console.log(ContactTaskList);
+      contactTask.Description.style.height = '1px';
+      contactTask.Description.style.height =
+        contactTask.Description.scrollHeight + 'px';
     }
     return data;
   });
