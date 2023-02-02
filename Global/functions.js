@@ -1,6 +1,5 @@
 console.log('retrieved all global functions');
 ///////////////////////////////////////////////
-// vvv This scans for all separate HTML Modules vvv
 
 function loadSidePanel(URL, slctdCalTask) {
   // This populates the Side Panel Input Fields following certain actions
@@ -118,65 +117,69 @@ function calendarDatesFillIn(chosenDate) {
         if (data.data.contacts.length) {
           rnwlCntcts = data.data.contacts;
           rnwlCntcts.map((rnwlCntct) => {
-            let calCntct = document.createElement('div');
-            // prettier-ignore
-            let calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
-            // prettier-ignore
-            let lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
-            calCntct.classList.add(textlightTag);
-            calCntct.classList.add(calTaskTag);
-            calCntct.classList.add(renewalTag);
-            lastReviewDateNoDash >= calDateNoDash
-              ? calCntct.classList.add(rCompletedTag)
-              : calCntct.classList.add(rNotCompletedTag);
-            if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
-            calCntct.classList.add(rnwlCntct.Status);
-            calCntct.classList.add(rnwlCntct.Source);
-            calCntct.classList.add(rnwlCntct.LastEditedBy);
-            if (
-              TasksDropDown.value == eventTag ||
-              TasksDropDown.value == eCompletedTag ||
-              TasksDropDown.value == eNotCompletedTag
-            )
-              calCntct.classList.add(hiddenContactTag);
-            if (
-              TasksDropDown.value == rCompletedTag &&
-              lastReviewDateNoDash < calDateNoDash
-            )
-              calCntct.classList.add(hiddenContactTag);
-            if (
-              TasksDropDown.value == rNotCompletedTag &&
+            rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
+            cntctCreatedDate = rnwlCntct.CreateDate;
+            if (rtrvdCalDateSlctr >= cntctCreatedDate) {
+              let calCntct = document.createElement('div');
+              // prettier-ignore
+              let calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
+              // prettier-ignore
+              let lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
+              calCntct.classList.add(textlightTag);
+              calCntct.classList.add(calTaskTag);
+              calCntct.classList.add(renewalTag);
               lastReviewDateNoDash >= calDateNoDash
-            )
-              calCntct.classList.add(hiddenContactTag);
-            if (
-              StatusSelect.value != calTaskTag &&
-              StatusSelect.value != rnwlCntct.Status
-            )
-              calCntct.classList.add(hiddenContactTag);
-            if (
-              SourceSelect.value != calTaskTag &&
-              SourceSelect.value != rnwlCntct.Source
-            )
-              calCntct.classList.add(hiddenContactTag);
-            if (
-              LastEditedBySelect.value != calTaskTag &&
-              LastEditedBySelect.value != rnwlCntct.LastEditedBy
-            )
-              calCntct.classList.add(hiddenContactTag);
-            calCntct.textContent = `${rnwlCntct.LastName}`;
-            calCntct.setAttribute(
-              'id',
-              `${renewalTag}${rnwlCntct._id}${rep + 1}`
-            );
-            calCntct.addEventListener('click', () => {
-              emailBody.value = '';
-              emailSubject.value = 'choose-email-template';
-              removeActiveCalCntct();
-              loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`);
-              calCntct.classList.add(activeTag);
-            });
-            document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+                ? calCntct.classList.add(rCompletedTag)
+                : calCntct.classList.add(rNotCompletedTag);
+              if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
+              calCntct.classList.add(rnwlCntct.Status);
+              calCntct.classList.add(rnwlCntct.Source);
+              calCntct.classList.add(rnwlCntct.LastEditedBy);
+              if (
+                TasksDropDown.value == eventTag ||
+                TasksDropDown.value == eCompletedTag ||
+                TasksDropDown.value == eNotCompletedTag
+              )
+                calCntct.classList.add(hiddenContactTag);
+              if (
+                TasksDropDown.value == rCompletedTag &&
+                lastReviewDateNoDash < calDateNoDash
+              )
+                calCntct.classList.add(hiddenContactTag);
+              if (
+                TasksDropDown.value == rNotCompletedTag &&
+                lastReviewDateNoDash >= calDateNoDash
+              )
+                calCntct.classList.add(hiddenContactTag);
+              if (
+                StatusSelect.value != calTaskTag &&
+                StatusSelect.value != rnwlCntct.Status
+              )
+                calCntct.classList.add(hiddenContactTag);
+              if (
+                SourceSelect.value != calTaskTag &&
+                SourceSelect.value != rnwlCntct.Source
+              )
+                calCntct.classList.add(hiddenContactTag);
+              if (
+                LastEditedBySelect.value != calTaskTag &&
+                LastEditedBySelect.value != rnwlCntct.LastEditedBy
+              )
+                calCntct.classList.add(hiddenContactTag);
+              calCntct.textContent = `${rnwlCntct.LastName}`;
+              calCntct.setAttribute(
+                'id',
+                `${renewalTag}${rnwlCntct._id}${rep + 1}`
+              );
+              calCntct.addEventListener('click', () => {
+                emailBody.value = '';
+                emailSubject.value = 'choose-email-template';
+                removeActiveCalCntct();
+                loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`);
+                calCntct.classList.add(activeTag);
+              });
+              document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+            }
           });
         }
       }
