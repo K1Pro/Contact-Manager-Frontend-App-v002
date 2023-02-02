@@ -379,6 +379,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
       });
       ContactTaskGroup.appendChild(contactTask.CheckBox);
       ContactTaskList.appendChild(contactTask.Description);
+      // console.log(ContactTaskList);
     }
     return data;
   });

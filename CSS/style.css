@@ -301,10 +301,13 @@ input[type='date']:invalid::-webkit-datetime-edit {
 }
 
 #contactTasksTextArea {
+  /* resize: none !important;
+  overflow: hidden !important; */
+  min-height: 64px !important;
   border-left: 0px solid green;
   border-left-width: 0.5vw;
   padding-left: 1vw;
-  word-break: break-word;
+  /* word-break: break-word; */
   /* height: 64px; */
 }
 .auto_height {

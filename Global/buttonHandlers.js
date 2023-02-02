@@ -206,7 +206,7 @@ function buttonHandlers() {
     }
   });
 
-  contactTasksTextArea.addEventListener('focusout', () => {
+  contactTasksTextArea.addEventListener('focus', () => {
     cntctTasksTxtAreaList.classList.remove(hiddenContactTag);
   });
   contactTasksTextArea.addEventListener('keydown', () => {
