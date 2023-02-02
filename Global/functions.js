@@ -306,6 +306,10 @@ function loadContactTasks(dailyTask, slctdCalTask) {
       contactTask.Description.addEventListener('change', () => {
         updateContactTasks(contactTask);
       });
+      contactTask.Description.addEventListener('keyup', () => {
+        auto_height(contactTask.Description);
+      });
+
       // Create a select input for the Event Author
       contactTask.Author.addEventListener('change', () => {
         updateContactTasks(contactTask);
