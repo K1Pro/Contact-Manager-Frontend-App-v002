@@ -120,7 +120,7 @@ function calendarDatesFillIn(chosenDate) {
             rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
             cntctCreatedDate = rnwlCntct.CreateDate;
             dayOfWeek = new Date(`${cntctCreatedDate}`);
-            console.log(dayOfWeek.getDay());
+            // console.log(dayOfWeek.getDay());
             if (rtrvdCalDateSlctr >= cntctCreatedDate) {
               let calCntct = document.createElement('div');
               // prettier-ignore

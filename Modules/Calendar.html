@@ -271,7 +271,8 @@
     overflow-x: hidden;
   "
 >
-  <select id="TasksDropDown" class="DropDown">
+  <label for="TasksDropDown"></label>
+  <select name="TasksDropDown" id="TasksDropDown" class="DropDown">
     <option value="calTask">Tasks-All</option>
     <option value="renewal">All Renewals</option>
     <option value="rCompleted">Completed Renewals</option>
@@ -280,15 +281,19 @@
     <option value="eCompleted">Completed Events</option>
     <option value="eNotCompleted">Not Completed Events</option>
   </select>
-  <select id="StatusSelect" class="DropDown">
+  <label for="StatusSelect"></label>
+  <select name="StatusSelect" id="StatusSelect" class="DropDown">
     <option value="calTask">Status-All</option>
   </select>
-  <select id="SourceSelect" class="DropDown">
+  <label for="SourceSelect"></label>
+  <select name="SourceSelect" id="SourceSelect" class="DropDown">
     <option value="calTask">Source-All</option>
   </select>
-  <select id="LastEditedBySelect" class="DropDown">
+  <label for="LastEditedBySelect"></label>
+  <select name="LastEditedBySelect" id="LastEditedBySelect" class="DropDown">
     <option value="calTask">Agent-All</option>
   </select>
-  <select id="DaysSelect" class="DaysDropDown"></select>
+  <label for="DaysSelect"></label>
+  <select name="DaysSelect" id="DaysSelect" class="DaysDropDown"></select>
 </div>
 <div id="CalendarHTMLModule"></div>

@@ -27,7 +27,13 @@ const SourceObj = {
   Referral: 'Referral',
 };
 
-const DaysObj = { Days_28: 28, Days_21: 21, Days_14: 14, Days_7: 7, Days_1: 1 };
+const DaysObj = {
+  number28: 'Days (28)',
+  number21: 'Days (21)',
+  number14: 'Days (14)',
+  number7: 'Days (7)',
+  number1: 'Day (1)',
+};
 
 const repeatEvnts = {
   weekly: 'weekly',

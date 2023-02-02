@@ -146,7 +146,7 @@ function buttonHandlers() {
   });
 
   DaysSelect.addEventListener('change', function (e) {
-    daysSelected = e.target.value.slice(6, 8);
+    daysSelected = e.target.value;
     // console.log(daysSelected);
     document.querySelectorAll('.weekend').forEach((weekend) => {
       weekend.classList.remove('calendarSatSunRow');

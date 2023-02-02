@@ -71,6 +71,21 @@ function populateSelect(calArray, SelectElement) {
   });
 }
 ///////////////////////////////////////////////////////////
+//////// vvv Populates selects with objects vvv ///////////
+function populateSlctWObj(calArray, SelectElement) {
+  Object.entries(calArray).forEach((calArrayItems) => {
+    let [key, value] = calArrayItems;
+    key = key.replaceAll('_', '-');
+    value = value.replaceAll('_', '-');
+    key = key.replaceAll('number', '');
+    value = value.replaceAll('number', '');
+    let calOption = document.createElement('option');
+    calOption.value = key;
+    calOption.innerHTML = value;
+    SelectElement.appendChild(calOption);
+  });
+}
+///////////////////////////////////////////////////////////
 ////////////// vvv Filters Calendar vvv ///////////////////
 function calendarFilter(chosenFilter) {
   if (chosenFilter) {

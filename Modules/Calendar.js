@@ -2,10 +2,13 @@ function calendarModule() {
   // vvv Start coding here for Calendar Module vvv
   CalendarHTML_Date.value = TodaysDate.toJSON().slice(0, 10);
   calendarDatesFillIn(TodaysDate);
-  populateSelect(LastEditedByS, LastEditedBySelect);
+  // populateSelect(LastEditedByS, LastEditedBySelect);
+  populateSlctWObj(LastEditedByObj, LastEditedBySelect);
   populateSelect(StatusS, StatusSelect);
   populateSelect(SourceS, SourceSelect);
-  populateSelect(DaysS, DaysSelect);
+  // populateSelect(DaysS, DaysSelect);
+
+  populateSlctWObj(DaysObj, DaysSelect);
   // ^^^ End coding here for Calendar Module ^^^
 }
 
