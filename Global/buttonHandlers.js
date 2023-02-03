@@ -147,34 +147,10 @@ function buttonHandlers() {
 
   DaysSelect.addEventListener('change', function (e) {
     daysSelected = e.target.value;
-    // console.log(daysSelected);
-    document.querySelectorAll('.weekend').forEach((weekend) => {
-      weekend.classList.remove('calendarSatSunRow');
-      console.log(weekend);
-    });
-    document.querySelectorAll('.weekdays').forEach((weekdays) => {
-      weekdays.classList.remove('calendarRow');
-      console.log(weekdays);
-    });
     for (let rep = 0; rep < 28; rep++) {
-      document
-        .getElementById(`${dayTag}${rep}`)
-        .classList.add(hiddenContactTag);
-      document
-        .getElementById(`${dayTag}${rep}`)
-        .classList.remove('calendarRow');
-      document
-        .getElementById(`${dayTag}${rep}`)
-        .classList.remove('calendarSatSunRow');
-      document.getElementById(`${dayTag}${rep}`).classList.remove('Day21');
-      document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun21');
-      document.getElementById(`${dayTag}${rep}`).classList.remove('Day14');
-      document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun14');
-      document.getElementById(`${dayTag}${rep}`).classList.remove('Day07');
-      document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun07');
-      document.getElementById(`${dayTag}${rep}`).classList.remove('Day01');
+      deleteCalRow(rep);
       if (rep < daysSelected) {
-        // console.log(rep);
+        document.getElementById(`day0`).classList.remove(hiddenContactTag);
         document
           .getElementById(`${dayTag}${rep}`)
           .classList.remove(hiddenContactTag);
@@ -188,20 +164,27 @@ function buttonHandlers() {
           rep == 26 ||
           rep == 27
         ) {
-          document.querySelectorAll('.weekend').forEach((weekend) => {
-            weekend.classList.add(`SatSun${daysSelected}`);
-          });
           document
             .getElementById(`${dayTag}${rep}`)
             .classList.add(`SatSun${daysSelected}`);
         } else {
-          document.querySelectorAll('.weekdays').forEach((weekdays) => {
-            weekdays.classList.add(`Day${daysSelected}`);
-          });
           document
             .getElementById(`${dayTag}${rep}`)
             .classList.add(`Day${daysSelected}`);
         }
+      } else if (daysSelected == 0) {
+        deleteCalRow(rep); // Deletes Day0 once
+        document.querySelectorAll('.uniqueday').forEach((weekdays) => {
+          uniqueday = weekdays.className;
+          if (uniqueday.includes(calSelectedDayTag)) {
+            document
+              .getElementById(weekdays.id)
+              .classList.remove('hiddenContact');
+            document
+              .getElementById(weekdays.id)
+              .classList.add(`Day${daysSelected}`);
+          }
+        });
       }
     }
   });
