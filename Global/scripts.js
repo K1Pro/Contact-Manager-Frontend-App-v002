@@ -210,7 +210,35 @@ function auto_height(elem) {
   elem.style.height = '1px';
   elem.style.height = elem.scrollHeight + 'px';
 }
-
-function test() {
-  cntctTasksTxtAreaList.classList.add(hiddenContactTag);
+///////////////////////////////////////////////////////////
+////////// vvv Removes calendar row styling vvv ///////////
+function deleteCalRow(rep) {
+  document.getElementById(`${dayTag}${rep}`).classList.add(hiddenContactTag);
+  document.getElementById(`${dayTag}${rep}`).classList.remove('calendarRow');
+  document
+    .getElementById(`${dayTag}${rep}`)
+    .classList.remove('calendarSatSunRow');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('Day28');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun28');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('Day21');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun21');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('Day14');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun14');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('Day7');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun7');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('Day1');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('Day0');
 }
+///////////////////////////////////////////////////////////
+///////////// vvv Resizes the screen on load vvv ///////////
+let limitFunc = function () {
+  if (window.innerWidth < 768) {
+    /*your functions for big screen*/
+    console.log('smallscreen');
+    document.getElementById('DaysSelect').value = 0;
+    document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
+  }
+};
+// window.addEventListener('load', limitFunc);
+// document.addEventListener('DOMContentLoaded', limitFunc);
+window.addEventListener('resize', limitFunc);

@@ -1,5 +1,10 @@
 /* +++++ScrollBar++++++ */
 /* width */
+.Day0 {
+  width: 100vw !important;
+  /* height: 11.75vh; */
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -65,7 +70,7 @@
 }
 
 .responsiveFont {
-  font-size: 2vh;
+  font-size: 3vh;
 }
 .responsiveHeaderFont {
   font-size: 3vh;
@@ -84,6 +89,9 @@
 /* Date time placeholders */
 input[type='date']:invalid::-webkit-datetime-edit {
   color: #cccccc !important;
+}
+.uniqueday {
+  white-space: nowrap;
 }
 
 .paddingZero {
@@ -292,9 +300,16 @@ input[type='date']:invalid::-webkit-datetime-edit {
 
 #createEventTime {
   border: 0px;
-  width: 12vw !important;
+  width: 100vw !important;
   /* padding-right: 5vw !important; */
   padding-right: 0.5vw !important;
+  border-left: 0px solid green;
+  border-left-width: 0.5vw;
+  padding-left: 1vw;
+}
+#EventAuthor {
+  /* padding-right: 5vw !important; */
+  margin-left: 0.09vw;
   border-left: 0px solid green;
   border-left-width: 0.5vw;
   padding-left: 1vw;
@@ -333,6 +348,9 @@ input[type='date']:invalid::-webkit-datetime-edit {
   border-left-width: 0.5vw;
   padding-left: 0.5vw;
 }
+#TasksSelect {
+  margin-left: -0.75vw;
+}
 #TasksSelect,
 #StatusSelect,
 #SourceSelect,
@@ -343,9 +361,13 @@ input[type='date']:invalid::-webkit-datetime-edit {
   padding-left: 0.5vw;
 }
 
-.DropDown,
+.DropDown {
+  width: 21vw;
+}
+
 .DaysDropDown {
-  width: 18vw;
+  width: 0vw;
+  display: none;
 }
 .contactTaskSelected {
   background-color: rgb(255, 218, 237);

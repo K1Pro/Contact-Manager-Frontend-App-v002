@@ -100,8 +100,13 @@ function calendarDatesFillIn(chosenDate) {
     );
     // prettier-ignore
     if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`${dayTag}${rep}`).classList.add(calSelectedDayTag);
-    // prettier-ignore
-    document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`;
+    if (TodaysDate.toJSON().slice(0, 10) == calDates.toJSON().slice(0, 10)) {
+      // prettier-ignore
+      document.getElementById(`${dayTag}${rep}`).innerHTML = `<b>${calDates.toJSON().slice(5, 10)} (Today)</b>`;
+    } else {
+      // prettier-ignore
+      document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`;
+    }
     document.getElementById(`${dayTag}${rep}`).addEventListener('click', () => {
       // prettier-ignore
       for (let rep = 0; rep < 28; rep++) {document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);}
@@ -385,7 +390,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
       ContactTaskList.appendChild(contactTask.Description);
       contactTask.Description.style.height = '1px';
       contactTask.Description.style.height =
-        contactTask.Description.scrollHeight + 'px';
+        contactTask.Description.scrollHeight + 2 + 'px';
     }
     return data;
   });

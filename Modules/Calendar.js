@@ -8,6 +8,12 @@ function calendarModule() {
   populateSlctWObj(StatusObj, StatusSelect);
   populateSlctWObj(SourceObj, SourceSelect);
   populateSlctWObj(DaysObj, DaysSelect);
+  if (window.innerWidth < 768) {
+    /*your functions for big screen*/
+    console.log('smallscreen');
+    document.getElementById('DaysSelect').value = 0;
+    document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
+  }
   // ^^^ End coding here for Calendar Module ^^^
 }
 

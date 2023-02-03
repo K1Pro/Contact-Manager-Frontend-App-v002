@@ -21,12 +21,20 @@
     height: 11.5vh;
     /* height: 5.875vh; */
   }
+  .Day28 {
+    height: 23vh;
+    /* height: 11.75vh; */
+  }
+  .SatSun28 {
+    height: 11.5vh;
+    /* height: 5.875vh; */
+  }
   .Day21 {
-    height: 30vh;
+    height: 30.66vh;
     /* height: 11.75vh; */
   }
   .SatSun21 {
-    height: 15vh;
+    height: 15.33vh;
     /* height: 5.875vh; */
   }
   .Day14 {
@@ -37,16 +45,17 @@
     height: 23vh;
     /* height: 5.875vh; */
   }
-  .Day07 {
+  .Day7 {
     height: 92vh;
     /* height: 11.75vh; */
   }
-  .SatSun07 {
+  .SatSun7 {
     height: 46vh;
     /* height: 5.875vh; */
   }
-  .Day01 {
+  .Day0 {
     height: 92vh;
+    width: 50vw;
     /* height: 11.75vh; */
   }
   .responsiveFont {
@@ -61,5 +70,21 @@
   .DropDown,
   .DaysDropDown {
     width: 7.5vw;
+  }
+  #createEventTime {
+    border: 0px;
+    width: 12vw !important;
+    /* padding-right: 5vw !important; */
+    padding-right: 0.5vw !important;
+    border-left: 0px solid green;
+    border-left-width: 0.5vw;
+    padding-left: 1vw;
+  }
+  #EventAuthor {
+    /* padding-right: 5vw !important; */
+    margin-left: 0;
+    border-left: 0;
+    border-left-width: 0;
+    padding-left: 0;
   }
 }
