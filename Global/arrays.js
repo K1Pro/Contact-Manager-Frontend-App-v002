@@ -1,3 +1,10 @@
+const recurEvntsArray = [
+  'WeeklyEvents',
+  'MonthlyEvents',
+  'SemiAnnualEvents',
+  'AnnualEvents',
+];
+
 const LastEditedByS = [
   'Bartosz',
   'Hanna',

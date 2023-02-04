@@ -354,9 +354,22 @@ function buttonHandlers() {
     recurEvents.addEventListener('click', function (e) {
       console.log(e.target.id);
       // if (_id.value && contactTasksTextArea.value) { use this later
-      if (_id.value) {
-        getJSON(`${srvrURL}/${_id.value}`).then((data) => {
-          console.log(data);
+      if (_id.value && contactTasksTextArea.value) {
+        monthlyEventsArray = {
+          EventAuthor: EventAuthor.value,
+          DayOfMonth: createEventTime.value.slice(8, 10),
+          DateYYYYMMDD: createEventTime.value.slice(0, 10),
+          DateHHMMSS: createEventTime.value.slice(10, 16),
+          Description: contactTasksTextArea.value,
+        };
+        fetch(`${srvrURL}/${_id.value}`, {
+          method: 'PATCH',
+          body: JSON.stringify({
+            MonthlyEvents: monthlyEventsArray,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
         });
       }
     });
