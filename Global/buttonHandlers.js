@@ -350,6 +350,18 @@ function buttonHandlers() {
     });
   });
 
+  document.querySelectorAll('#RecurEvents').forEach((recurEvents) => {
+    recurEvents.addEventListener('click', function (e) {
+      console.log(e.target.id);
+      // if (_id.value && contactTasksTextArea.value) { use this later
+      if (_id.value) {
+        getJSON(`${srvrURL}/${_id.value}`).then((data) => {
+          console.log(data);
+        });
+      }
+    });
+  });
+
   document.querySelectorAll('.dynamicInputs').forEach((dynamicInput) => {
     dynamicInput.addEventListener('change', function (e) {
       const dynamicInputVals = [...dynamicInput].map((el) => el.value);

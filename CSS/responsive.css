@@ -71,6 +71,9 @@
   .DaysDropDown {
     width: 7.5vw;
   }
+  .DaysDropDown {
+    display: inline;
+  }
   #createEventTime {
     border: 0px;
     width: 12vw !important;

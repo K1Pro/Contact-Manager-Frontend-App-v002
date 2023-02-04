@@ -372,6 +372,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
 .contactTaskSelected {
   background-color: rgb(255, 218, 237);
 }
+
+.dropdown-item:hover {
+  cursor: pointer;
+}
 /* .eventDates { */
 /* position: absolute; */
 /* padding-right: 5vw !important;
