@@ -353,7 +353,6 @@ function buttonHandlers() {
   document.querySelectorAll('#RecurEvents').forEach((recurEvents) => {
     recurEvents.addEventListener('click', function (e) {
       console.log(e.target.id);
-      // if (_id.value && contactTasksTextArea.value) { use this later
       if (_id.value && contactTasksTextArea.value) {
         monthlyEventsArray = {
           EventAuthor: EventAuthor.value,
@@ -370,7 +369,16 @@ function buttonHandlers() {
           headers: {
             'Content-Type': 'application/json',
           },
-        });
+        })
+          .then((response) => response.text())
+          .then(() => {
+            contactEditDate();
+            PhoneInput = document.getElementById('Phone');
+            snackbar(`Event created for ${FirstName.value}`);
+            loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
+            // This should be last
+            contactTasksTextArea.value = '';
+          });
       }
     });
   });

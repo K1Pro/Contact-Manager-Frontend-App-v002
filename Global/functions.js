@@ -259,7 +259,19 @@ function calendarDatesFillIn(chosenDate) {
         });
       }
     });
+    getJSON(
+      `${srvrURL}${MonthlyEventsPath}${rnwlDates.toJSON().slice(8, 10)}`
+    ).then((data) => {
+      if (data.contacts.length) {
+        console.log(data.contacts);
+        // left off here
+      }
+    });
   }
+}
+
+function recurringTasks() {
+  RecurringTask.innerHTML = '';
 }
 
 function loadContactTasks(dailyTask, slctdCalTask) {
