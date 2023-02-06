@@ -341,6 +341,13 @@ input[type='date']:invalid::-webkit-datetime-edit {
   padding-left: 0.5vw;
 }
 
+.recurDescriptions,
+.recurDates {
+  border-left: 0px solid #cf33ff;
+  border-left-width: 0.5vw;
+  padding-left: 0.5vw;
+}
+
 #emailSubject,
 #emailBody,
 #inputGroupFile04 {

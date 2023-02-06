@@ -17,6 +17,7 @@ function loadSidePanel(URL, slctdCalTask) {
       if (ContactFieldsIDs == '_id') {
         let contactID = document.getElementById(`${ContactFieldsIDs}`);
         loadContactTasks(contactID.value, slctdCalTask);
+        loadRecurCntctTasks(contactID.value, slctdCalTask);
         // Highlights each renewal and event active in the calendar
         calID = data.data.contacts[0]._id;
         for (let rep = 0; rep < 31; rep++) {
@@ -259,12 +260,74 @@ function calendarDatesFillIn(chosenDate) {
         });
       }
     });
+    // document.querySelectorAll('#RecurEvents').forEach((recurEvents) => {})  Use this in the future to possibly itereate through all the recurring options
+    // console.log(calDates.toJSON().slice(8, 10));
     getJSON(
-      `${srvrURL}${MonthlyEventsPath}${rnwlDates.toJSON().slice(8, 10)}`
+      `${srvrURL}${MonthlyEventsPath}${calDates.toJSON().slice(8, 10)}`
     ).then((data) => {
+      let rnwlCntcts;
       if (data.contacts.length) {
-        console.log(data.contacts);
-        // left off here
+        rnwlCntcts = data.contacts;
+        rnwlCntcts.map((rnwlCntct) => {
+          console.log('this is a recurring event');
+          let calCntct = document.createElement('div');
+          calCntct.classList.add(textlightTag);
+          calCntct.classList.add(calTaskTag);
+          calCntct.classList.add(eventTag);
+          const sortedCalEvents = rnwlCntct.MonthlyEvents.filter((obj) => {
+            return obj.DayOfMonth === `${calDates.toJSON().slice(8, 10)}`;
+          });
+          // !sortedCalEvents[0].Completed
+          //   ? calCntct.classList.add(eNotCompletedTag)
+          //   : calCntct.classList.add(eCompletedTag);
+          if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
+          calCntct.classList.add(rnwlCntct.Status);
+          calCntct.classList.add(rnwlCntct.Source);
+          calCntct.classList.add(sortedCalEvents[0].EventAuthor);
+          if (
+            TasksSelect.value == renewalTag ||
+            TasksSelect.value == rCompletedTag ||
+            TasksSelect.value == rNotCompletedTag
+          )
+            calCntct.classList.add(hiddenContactTag);
+          if (
+            TasksSelect.value == eCompletedTag &&
+            !sortedCalEvents[0].Completed
+          )
+            calCntct.classList.add(hiddenContactTag);
+          if (
+            TasksSelect.value == eNotCompletedTag &&
+            sortedCalEvents[0].Completed
+          )
+            calCntct.classList.add(hiddenContactTag);
+          if (
+            StatusSelect.value != calTaskTag &&
+            StatusSelect.value != rnwlCntct.Status
+          )
+            calCntct.classList.add(hiddenContactTag);
+          if (
+            SourceSelect.value != calTaskTag &&
+            SourceSelect.value != rnwlCntct.Source
+          )
+            calCntct.classList.add(hiddenContactTag);
+          if (
+            LastEditedBySelect.value != calTaskTag &&
+            LastEditedBySelect.value != sortedCalEvents[0].EventAuthor
+          )
+            calCntct.classList.add(hiddenContactTag);
+          calCntct.textContent = `${rnwlCntct.LastName}`;
+          calCntct.setAttribute('id', `Event${sortedCalEvents[0]._id}`);
+          calCntct.addEventListener('click', () => {
+            emailBody.value = '';
+            removeActiveCalCntct();
+            loadSidePanel(
+              `${srvrURL}${phonePath}${rnwlCntct.Phone}`, // Phone URL
+              `${sortedCalEvents[0]._id}` // Specific Contact Task ID
+            );
+            calCntct.classList.add(activeTag);
+          });
+          document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+        });
       }
     });
   }
@@ -400,6 +463,141 @@ function loadContactTasks(dailyTask, slctdCalTask) {
       });
       ContactTaskGroup.appendChild(contactTask.CheckBox);
       ContactTaskList.appendChild(contactTask.Description);
+      contactTask.Description.style.height = '1px';
+      contactTask.Description.style.height =
+        contactTask.Description.scrollHeight + 2 + 'px';
+    }
+    return data;
+  });
+}
+
+function loadRecurCntctTasks(dailyTask, slctdCalTask) {
+  RecurringTask.innerHTML = '';
+  getJSON(`${srvrURL}${recurPath}${dailyTask}`).then((data) => {
+    console.log(data);
+    // sorts the array in reverse chronological order
+    let CalendarEventsArray = data.data.RecurEvents;
+    // CalendarEventsArray.sort(compare);
+
+    for (const [key, value] of Object.entries(CalendarEventsArray)) {
+      // Creates a DIV
+      let ContactTaskGroup = document.createElement('div');
+      ContactTaskGroup.setAttribute('class', 'input-group');
+      RecurringTask.appendChild(ContactTaskGroup);
+
+      let contactTask = {
+        UID: value._id,
+        Dated: document.createElement('input'),
+        Description: document.createElement('textarea'),
+        // CheckBox: document.createElement('input'),
+        Author: document.createElement('select'),
+      };
+      // Creates a datetime-local Input
+      contactTask.Dated.type = 'datetime-local';
+      contactTask.Dated.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
+      contactTask.Dated.setAttribute(
+        'class',
+        `form-control recurDates border-bottom-0`
+      );
+      if (slctdCalTask && slctdCalTask == contactTask.UID)
+        contactTask.Dated.classList.add('contactTaskSelected');
+      // contactTask.Dated.addEventListener('change', () => {
+      //   updateContactTasks(contactTask);
+      // });
+      ContactTaskGroup.appendChild(contactTask.Dated);
+
+      // Creates a text input for the description
+      contactTask.Description.value = `${value.Description}`;
+      contactTask.Description.spellcheck = 'false';
+      // contactTask.Description.rows = Math.round(
+      //   contactTask.Description.value.length / 120 + 1
+      // );
+      contactTask.Description.setAttribute(
+        'class',
+        `form-control ${recurDescriptionsTag} border-top-0`
+      );
+      if (slctdCalTask && slctdCalTask == contactTask.UID)
+        contactTask.Description.classList.add('contactTaskSelected');
+      // contactTask.Description.addEventListener('change', () => {
+      //   updateContactTasks(contactTask);
+      // });
+      // contactTask.Description.addEventListener('keyup', () => {
+      //   auto_height(contactTask.Description);
+      // });
+
+      // Create a select input for the Event Author
+      // contactTask.Author.addEventListener('change', () => {
+      //   updateContactTasks(contactTask);
+      // });
+      contactTask.Author.setAttribute('name', `TasksAgentSelector`);
+      if (slctdCalTask && slctdCalTask == contactTask.UID)
+        contactTask.Author.classList.add('contactTaskSelected');
+      ContactTaskGroup.appendChild(contactTask.Author);
+
+      LastEditedByS.forEach((staffMember) => {
+        let CntctTskAuthors = document.createElement('option');
+        CntctTskAuthors.value = staffMember;
+        CntctTskAuthors.innerHTML = staffMember;
+        if (value.EventAuthor == staffMember) CntctTskAuthors.selected = true;
+        contactTask.Author.appendChild(CntctTskAuthors);
+      });
+
+      // Creates a checkbox
+      // contactTask.CheckBox.type = 'checkbox';
+      // contactTask.CheckBox.checked = value.Completed;
+      // contactTask.CheckBox.setAttribute(
+      //   'class',
+      //   `form-check-input mt-0 ${bartkaCheckboxTag}`
+      // );
+      // if (slctdCalTask && slctdCalTask == contactTask.UID)
+      //   contactTask.CheckBox.classList.add('contactTaskSelected');
+      // contactTask.CheckBox.addEventListener('click', () => {
+      //   fetch(`${srvrURL}${updateEventPath}${value._id}`, {
+      //     method: 'PATCH',
+      //     body: JSON.stringify({
+      //       _id: value._id,
+      //       EventAuthor: contactTask.Author.value,
+      //       DateYYYYMMDD: contactTask.Dated.value.slice(0, 10),
+      //       DateHHMMSS: contactTask.Dated.value.slice(10, 16),
+      //       Description: contactTask.Description.value,
+      //       Completed: contactTask.CheckBox.checked,
+      //     }),
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //   })
+      //     .then((response) => response.text())
+      //     .then(() => {
+      //       contactEditDate();
+      //       let checkCompletion = document.getElementById(`Event${value._id}`);
+      //       if (checkCompletion) {
+      //         checkCompletion = checkCompletion.className;
+      //         if (checkCompletion.includes(eNotCompletedTag)) {
+      //           let checkCompletion = document.getElementById(
+      //             `Event${value._id}`
+      //           );
+      //           checkCompletion.setAttribute(
+      //             'class',
+      //             `${eCompletedTag} ${textlightTag} task${value._id}`
+      //           );
+      //         } else {
+      //           let checkCompletion = document.getElementById(
+      //             `Event${value._id}`
+      //           );
+      //           checkCompletion.setAttribute(
+      //             'class',
+      //             `${eNotCompletedTag} ${textlightTag} task${value._id}`
+      //           );
+      //         }
+      //       }
+      //       // PhoneInput = document.getElementById('Phone');
+      //       // contactTasksTextArea.value = '';
+      //       snackbar(`Event updated for ${FirstName.value}`);
+      //       // loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
+      //     });
+      // });
+      // ContactTaskGroup.appendChild(contactTask.CheckBox);
+      RecurringTask.appendChild(contactTask.Description);
       contactTask.Description.style.height = '1px';
       contactTask.Description.style.height =
         contactTask.Description.scrollHeight + 2 + 'px';
