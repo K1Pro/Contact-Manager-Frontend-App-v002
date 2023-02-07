@@ -143,7 +143,7 @@ function calendarDatesFillIn(chosenDate) {
               calCntct.classList.add(rnwlCntct.Status);
               calCntct.classList.add(rnwlCntct.Source);
               calCntct.classList.add(rnwlCntct.LastEditedBy);
-              calEventStyle(calCntct);
+              calEventStyle(calCntct, rnwlCntct);
               if (
                 TasksSelect.value == rCompletedTag &&
                 lastReviewDateNoDash < calDateNoDash
@@ -152,16 +152,6 @@ function calendarDatesFillIn(chosenDate) {
               if (
                 TasksSelect.value == rNotCompletedTag &&
                 lastReviewDateNoDash >= calDateNoDash
-              )
-                calCntct.classList.add(hiddenContactTag);
-              if (
-                StatusSelect.value != calTaskTag &&
-                StatusSelect.value != rnwlCntct.Status
-              )
-                calCntct.classList.add(hiddenContactTag);
-              if (
-                SourceSelect.value != calTaskTag &&
-                SourceSelect.value != rnwlCntct.Source
               )
                 calCntct.classList.add(hiddenContactTag);
               if (
@@ -209,7 +199,7 @@ function calendarDatesFillIn(chosenDate) {
           calCntct.classList.add(rnwlCntct.Status);
           calCntct.classList.add(rnwlCntct.Source);
           calCntct.classList.add(sortedCalEvents[0].EventAuthor);
-          calEventStyle(calCntct);
+          calEventStyle(calCntct, rnwlCntct);
           if (
             TasksSelect.value == eCompletedTag &&
             !sortedCalEvents[0].Completed
@@ -220,16 +210,7 @@ function calendarDatesFillIn(chosenDate) {
             sortedCalEvents[0].Completed
           )
             calCntct.classList.add(hiddenContactTag);
-          if (
-            StatusSelect.value != calTaskTag &&
-            StatusSelect.value != rnwlCntct.Status
-          )
-            calCntct.classList.add(hiddenContactTag);
-          if (
-            SourceSelect.value != calTaskTag &&
-            SourceSelect.value != rnwlCntct.Source
-          )
-            calCntct.classList.add(hiddenContactTag);
+
           if (
             LastEditedBySelect.value != calTaskTag &&
             LastEditedBySelect.value != sortedCalEvents[0].EventAuthor

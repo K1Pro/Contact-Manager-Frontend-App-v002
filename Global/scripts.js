@@ -241,11 +241,21 @@ let limitFunc = function () {
 };
 ///////////////////////////////////////////////////////////
 ///////////// vvv Calendar Events styling vvv ///////////
-function calEventStyle(calCntct) {
+function calEventStyle(calCntct, rnwlCntct) {
   if (
     TasksSelect.value == eventTag ||
     TasksSelect.value == eCompletedTag ||
     TasksSelect.value == eNotCompletedTag
+  )
+    calCntct.classList.add(hiddenContactTag);
+  if (
+    StatusSelect.value != calTaskTag &&
+    StatusSelect.value != rnwlCntct.Status
+  )
+    calCntct.classList.add(hiddenContactTag);
+  if (
+    SourceSelect.value != calTaskTag &&
+    SourceSelect.value != rnwlCntct.Source
   )
     calCntct.classList.add(hiddenContactTag);
 }
