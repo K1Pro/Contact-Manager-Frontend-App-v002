@@ -242,6 +242,12 @@ let limitFunc = function () {
 ///////////////////////////////////////////////////////////
 ///////////// vvv Calendar Events styling vvv ///////////
 function calEventStyle(calCntct, rnwlCntct) {
+  if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
+  calCntct.classList.add(textlightTag);
+  calCntct.classList.add(calTaskTag);
+  calCntct.classList.add(renewalTag);
+  calCntct.classList.add(rnwlCntct.Status);
+  calCntct.classList.add(rnwlCntct.Source);
   if (
     TasksSelect.value == eventTag ||
     TasksSelect.value == eCompletedTag ||
@@ -258,7 +264,10 @@ function calEventStyle(calCntct, rnwlCntct) {
     SourceSelect.value != rnwlCntct.Source
   )
     calCntct.classList.add(hiddenContactTag);
+  calCntct.textContent = `${rnwlCntct.LastName}`;
 }
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 // window.addEventListener('load', limitFunc);
 // document.addEventListener('DOMContentLoaded', limitFunc);
 window.addEventListener('resize', limitFunc);

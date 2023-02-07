@@ -129,21 +129,18 @@ function calendarDatesFillIn(chosenDate) {
             // console.log(dayOfWeek.getDay());
             if (rtrvdCalDateSlctr >= cntctCreatedDate) {
               let calCntct = document.createElement('div');
+              calEventStyle(calCntct, rnwlCntct);
               // prettier-ignore
               let calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
               // prettier-ignore
               let lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
-              calCntct.classList.add(textlightTag);
-              calCntct.classList.add(calTaskTag);
-              calCntct.classList.add(renewalTag);
+
               lastReviewDateNoDash >= calDateNoDash
                 ? calCntct.classList.add(rCompletedTag)
                 : calCntct.classList.add(rNotCompletedTag);
-              if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
-              calCntct.classList.add(rnwlCntct.Status);
-              calCntct.classList.add(rnwlCntct.Source);
+
               calCntct.classList.add(rnwlCntct.LastEditedBy);
-              calEventStyle(calCntct, rnwlCntct);
+
               if (
                 TasksSelect.value == rCompletedTag &&
                 lastReviewDateNoDash < calDateNoDash
@@ -159,7 +156,6 @@ function calendarDatesFillIn(chosenDate) {
                 LastEditedBySelect.value != rnwlCntct.LastEditedBy
               )
                 calCntct.classList.add(hiddenContactTag);
-              calCntct.textContent = `${rnwlCntct.LastName}`;
               calCntct.setAttribute(
                 'id',
                 `${renewalTag}${rnwlCntct._id}${rep + 1}`
@@ -186,20 +182,14 @@ function calendarDatesFillIn(chosenDate) {
         rnwlCntcts = data.contacts;
         rnwlCntcts.map((rnwlCntct) => {
           let calCntct = document.createElement('div');
-          calCntct.classList.add(textlightTag);
-          calCntct.classList.add(calTaskTag);
-          calCntct.classList.add(eventTag);
+          calEventStyle(calCntct, rnwlCntct);
           const sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
             return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
           });
           !sortedCalEvents[0].Completed
             ? calCntct.classList.add(eNotCompletedTag)
             : calCntct.classList.add(eCompletedTag);
-          if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
-          calCntct.classList.add(rnwlCntct.Status);
-          calCntct.classList.add(rnwlCntct.Source);
           calCntct.classList.add(sortedCalEvents[0].EventAuthor);
-          calEventStyle(calCntct, rnwlCntct);
           if (
             TasksSelect.value == eCompletedTag &&
             !sortedCalEvents[0].Completed
@@ -216,7 +206,6 @@ function calendarDatesFillIn(chosenDate) {
             LastEditedBySelect.value != sortedCalEvents[0].EventAuthor
           )
             calCntct.classList.add(hiddenContactTag);
-          calCntct.textContent = `${rnwlCntct.LastName}`;
           calCntct.setAttribute('id', `Event${sortedCalEvents[0]._id}`);
           calCntct.addEventListener('click', () => {
             emailBody.value = '';
