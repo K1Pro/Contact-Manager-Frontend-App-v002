@@ -239,6 +239,16 @@ let limitFunc = function () {
     document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
   }
 };
+///////////////////////////////////////////////////////////
+///////////// vvv Calendar Events styling vvv ///////////
+function calEventStyle(calCntct) {
+  if (
+    TasksSelect.value == eventTag ||
+    TasksSelect.value == eCompletedTag ||
+    TasksSelect.value == eNotCompletedTag
+  )
+    calCntct.classList.add(hiddenContactTag);
+}
 // window.addEventListener('load', limitFunc);
 // document.addEventListener('DOMContentLoaded', limitFunc);
 window.addEventListener('resize', limitFunc);

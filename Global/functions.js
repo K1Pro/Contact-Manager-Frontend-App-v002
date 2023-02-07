@@ -143,12 +143,7 @@ function calendarDatesFillIn(chosenDate) {
               calCntct.classList.add(rnwlCntct.Status);
               calCntct.classList.add(rnwlCntct.Source);
               calCntct.classList.add(rnwlCntct.LastEditedBy);
-              if (
-                TasksSelect.value == eventTag ||
-                TasksSelect.value == eCompletedTag ||
-                TasksSelect.value == eNotCompletedTag
-              )
-                calCntct.classList.add(hiddenContactTag);
+              calEventStyle(calCntct);
               if (
                 TasksSelect.value == rCompletedTag &&
                 lastReviewDateNoDash < calDateNoDash
@@ -214,12 +209,7 @@ function calendarDatesFillIn(chosenDate) {
           calCntct.classList.add(rnwlCntct.Status);
           calCntct.classList.add(rnwlCntct.Source);
           calCntct.classList.add(sortedCalEvents[0].EventAuthor);
-          if (
-            TasksSelect.value == renewalTag ||
-            TasksSelect.value == rCompletedTag ||
-            TasksSelect.value == rNotCompletedTag
-          )
-            calCntct.classList.add(hiddenContactTag);
+          calEventStyle(calCntct);
           if (
             TasksSelect.value == eCompletedTag &&
             !sortedCalEvents[0].Completed
