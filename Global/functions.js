@@ -9,8 +9,7 @@ function loadSidePanel(URL, slctdCalTask) {
       let ContactFieldsIDs = ContactFields[rep].id;
       // console.log(ContactFieldsIDs);
       if (ContactFieldsIDs) {
-        document.getElementById(`${ContactFieldsIDs}`).value = data.data
-          .contacts[0][ContactFieldsIDs]
+        document.getElementById(`${ContactFieldsIDs}`).value = data.data.contacts[0][ContactFieldsIDs]
           ? `${data.data.contacts[0][ContactFieldsIDs]}`
           : '';
       }
@@ -21,9 +20,7 @@ function loadSidePanel(URL, slctdCalTask) {
         // Highlights each renewal and event active in the calendar
         calID = data.data.contacts[0]._id;
         for (let rep = 0; rep < 31; rep++) {
-          let cntctCalRnwl = document.getElementById(
-            `${renewalTag}${calID}${rep}`
-          );
+          let cntctCalRnwl = document.getElementById(`${renewalTag}${calID}${rep}`);
           if (cntctCalRnwl) {
             cntctCalRnwl.classList.add(activeTag);
           }
@@ -51,12 +48,7 @@ function loadSidePanel(URL, slctdCalTask) {
         slctdPolicyType.classList.remove('selectedRenewDate');
         cnvrtdDateSelector = new Date(dateSelector);
         dateSelectorRenewal = new Date(
-          cnvrtdDateSelector.getTime() +
-            1000 /*sec*/ *
-              60 /*min*/ *
-              60 /*hour*/ *
-              24 /*day*/ *
-              28 /*# of days*/
+          cnvrtdDateSelector.getTime() + 1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 28 /*# of days*/
         )
           .toJSON()
           .slice(5, 10);
@@ -74,30 +66,18 @@ function loadSidePanel(URL, slctdCalTask) {
 function calendarDatesFillIn(chosenDate) {
   let prevMondayLastWeek = 1 - chosenDate.getDay() - daysInWeek;
   for (let rep = 0; rep < 28; rep++) {
-    document
-      .getElementById(`${dayTag}${rep}`)
-      .classList.remove(calSelectedDayTag);
-    document
-      .getElementById(`${dayTag}${rep}`)
-      .classList.remove(calTodaysDayTag);
+    document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);
+    document.getElementById(`${dayTag}${rep}`).classList.remove(calTodaysDayTag);
     let calDates = new Date(
       chosenDate.getTime() +
-        1000 /*sec*/ *
-          60 /*min*/ *
-          60 /*hour*/ *
-          24 /*day*/ *
-          (prevMondayLastWeek + rep) /*# of days*/
+        1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * (prevMondayLastWeek + rep) /*# of days*/
     );
     if (TodaysDate.toJSON().slice(0, 10) == calDates.toJSON().slice(0, 10))
       document.getElementById(`${dayTag}${rep}`).classList.add(calTodaysDayTag);
 
     let rnwlDates = new Date(
       chosenDate.getTime() +
-        1000 /*sec*/ *
-          60 /*min*/ *
-          60 /*hour*/ *
-          24 /*day*/ *
-          (prevMondayLastWeek + rep + 28) /*# of days*/
+        1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * (prevMondayLastWeek + rep + 28) /*# of days*/
     );
     // prettier-ignore
     if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`${dayTag}${rep}`).classList.add(calSelectedDayTag);
@@ -116,125 +96,104 @@ function calendarDatesFillIn(chosenDate) {
       changeCalendarHTML_Date(calDates);
       createEventTime.value = `${calDates.toJSON().slice(0, 16)}`;
     });
-    getJSON(`${srvrURL}${rnwlPath}${rnwlDates.toJSON().slice(5, 10)}`).then(
-      (data) => {
-        // Populates renewals
-        let rnwlCntcts;
-        if (data.data.contacts.length) {
-          rnwlCntcts = data.data.contacts;
-          rnwlCntcts.map((rnwlCntct) => {
-            rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
-            cntctCreatedDate = rnwlCntct.CreateDate;
-            dayOfWeek = new Date(`${cntctCreatedDate}`);
-            // console.log(dayOfWeek.getDay());
-            if (rtrvdCalDateSlctr >= cntctCreatedDate) {
-              let calCntct = document.createElement('div');
-              calEventStyle(calCntct, rnwlCntct);
-              // prettier-ignore
-              let calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
-              // prettier-ignore
-              let lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
-
-              lastReviewDateNoDash >= calDateNoDash
-                ? calCntct.classList.add(rCompletedTag)
-                : calCntct.classList.add(rNotCompletedTag);
-
-              calCntct.classList.add(rnwlCntct.LastEditedBy);
-
-              if (
-                TasksSelect.value == rCompletedTag &&
-                lastReviewDateNoDash < calDateNoDash
-              )
-                calCntct.classList.add(hiddenContactTag);
-              if (
-                TasksSelect.value == rNotCompletedTag &&
-                lastReviewDateNoDash >= calDateNoDash
-              )
-                calCntct.classList.add(hiddenContactTag);
-              if (
-                LastEditedBySelect.value != calTaskTag &&
-                LastEditedBySelect.value != rnwlCntct.LastEditedBy
-              )
-                calCntct.classList.add(hiddenContactTag);
-              calCntct.setAttribute(
-                'id',
-                `${renewalTag}${rnwlCntct._id}${rep + 1}`
-              );
-              calCntct.addEventListener('click', () => {
-                emailBody.value = '';
-                emailSubject.value = 'choose-email-template';
-                removeActiveCalCntct();
-                loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`);
-                calCntct.classList.add(activeTag);
-              });
-              document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
-            }
-          });
-        }
-      }
-    );
-    getJSON(
-      `${srvrURL}${contactsWithCalEventsPath}${calDates.toJSON().slice(0, 10)}`
-    ).then((data) => {
-      // Populates completed and not completed calendar events
-      let rnwlCntcts;
-      if (data.contacts.length) {
-        rnwlCntcts = data.contacts;
+    getJSON(`${srvrURL}${rnwlPath}${rnwlDates.toJSON().slice(5, 10)}`).then((data) => {
+      // Populates renewals
+      if (data.data.contacts.length) {
+        rnwlCntcts = data.data.contacts;
         rnwlCntcts.map((rnwlCntct) => {
-          let calCntct = document.createElement('div');
-          calEventStyle(calCntct, rnwlCntct);
-          const sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
-            return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
-          });
-          !sortedCalEvents[0].Completed
-            ? calCntct.classList.add(eNotCompletedTag)
-            : calCntct.classList.add(eCompletedTag);
-          calCntct.classList.add(sortedCalEvents[0].EventAuthor);
-          if (
-            TasksSelect.value == eCompletedTag &&
-            !sortedCalEvents[0].Completed
-          )
-            calCntct.classList.add(hiddenContactTag);
-          if (
-            TasksSelect.value == eNotCompletedTag &&
-            sortedCalEvents[0].Completed
-          )
-            calCntct.classList.add(hiddenContactTag);
+          rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
+          cntctCreatedDate = rnwlCntct.CreateDate;
+          if (rtrvdCalDateSlctr >= cntctCreatedDate) {
+            let calCntct = document.createElement('div');
+            calEventStyle(calCntct, rnwlCntct);
+            calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
+            lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
 
-          if (
-            LastEditedBySelect.value != calTaskTag &&
-            LastEditedBySelect.value != sortedCalEvents[0].EventAuthor
-          )
-            calCntct.classList.add(hiddenContactTag);
-          calCntct.setAttribute('id', `Event${sortedCalEvents[0]._id}`);
-          calCntct.addEventListener('click', () => {
-            emailBody.value = '';
-            removeActiveCalCntct();
-            loadSidePanel(
-              `${srvrURL}${phonePath}${rnwlCntct.Phone}`, // Phone URL
-              `${sortedCalEvents[0]._id}` // Specific Contact Task ID
-            );
-            calCntct.classList.add(activeTag);
-          });
-          document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+            lastReviewDateNoDash >= calDateNoDash
+              ? calCntct.classList.add(rCmpltdTag)
+              : calCntct.classList.add(rNotCompletedTag);
+            //////////////
+            calCntct.classList.add(rnwlCntct.LastEditedBy);
+            //////////////
+            if (TasksSelect.value == rCmpltdTag && lastReviewDateNoDash < calDateNoDash)
+              calCntct.classList.add(hiddenContactTag);
+            //////////////
+            if (TasksSelect.value == rNotCompletedTag && lastReviewDateNoDash >= calDateNoDash)
+              calCntct.classList.add(hiddenContactTag);
+            //////////////
+            if (LastEditedBySelect.value != calTaskTag && LastEditedBySelect.value != rnwlCntct.LastEditedBy)
+              calCntct.classList.add(hiddenContactTag);
+            //////////////
+            calCntct.setAttribute('id', `${renewalTag}${rnwlCntct._id}${rep + 1}`);
+            calCntct.addEventListener('click', () => {
+              emailBody.value = '';
+              emailSubject.value = 'choose-email-template';
+              removeActiveCalCntct();
+              loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`);
+              calCntct.classList.add(activeTag);
+            });
+            document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+          }
+        });
+      }
+    });
+    getJSON(`${srvrURL}${contactsWithCalEventsPath}${calDates.toJSON().slice(0, 10)}`).then((data) => {
+      // Populates completed and not completed calendar events
+      if (data.data.contacts.length) {
+        rnwlCntcts = data.data.contacts;
+        rnwlCntcts.map((rnwlCntct) => {
+          rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
+          cntctCreatedDate = rnwlCntct.CreateDate;
+          if (rtrvdCalDateSlctr >= cntctCreatedDate) {
+            let calCntct = document.createElement('div');
+            calEventStyle(calCntct, rnwlCntct);
+            //////////////
+            sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
+              return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
+            });
+
+            sortedCalEvents[0].Completed
+              ? calCntct.classList.add(eCompletedTag)
+              : calCntct.classList.add(eNotCompletedTag);
+            //////////////
+            calCntct.classList.add(sortedCalEvents[0].EventAuthor);
+            //////////////
+            if (TasksSelect.value == eCompletedTag && !sortedCalEvents[0].Completed)
+              calCntct.classList.add(hiddenContactTag);
+            //////////////
+            if (TasksSelect.value == eNotCompletedTag && sortedCalEvents[0].Completed)
+              calCntct.classList.add(hiddenContactTag);
+            //////////////
+            if (LastEditedBySelect.value != calTaskTag && LastEditedBySelect.value != sortedCalEvents[0].EventAuthor)
+              calCntct.classList.add(hiddenContactTag);
+            //////////////
+            calCntct.setAttribute('id', `Event${sortedCalEvents[0]._id}`);
+            calCntct.addEventListener('click', () => {
+              emailBody.value = '';
+              removeActiveCalCntct();
+              loadSidePanel(
+                `${srvrURL}${phonePath}${rnwlCntct.Phone}`, // Phone URL
+                `${sortedCalEvents[0]._id}` // Specific Contact Task ID
+              );
+              calCntct.classList.add(activeTag);
+            });
+            document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+          }
         });
       }
     });
     // document.querySelectorAll('#RecurEvents').forEach((recurEvents) => {})  Use this in the future to possibly itereate through all the recurring options
     // console.log(calDates.toJSON().slice(8, 10));
-    getJSON(
-      `${srvrURL}${MonthlyEventsPath}${calDates.toJSON().slice(8, 10)}`
-    ).then((data) => {
-      let rnwlCntcts;
-      if (data.contacts.length) {
-        rnwlCntcts = data.contacts;
+    getJSON(`${srvrURL}${MonthlyEventsPath}${calDates.toJSON().slice(8, 10)}`).then((data) => {
+      if (data.data.contacts.length) {
+        rnwlCntcts = data.data.contacts;
         rnwlCntcts.map((rnwlCntct) => {
           console.log('this is a recurring event');
           let calCntct = document.createElement('div');
           calCntct.classList.add(textlightTag);
           calCntct.classList.add(calTaskTag);
           calCntct.classList.add(eventTag);
-          const sortedCalEvents = rnwlCntct.MonthlyEvents.filter((obj) => {
+          sortedCalEvents = rnwlCntct.MonthlyEvents.filter((obj) => {
             return obj.DayOfMonth === `${calDates.toJSON().slice(8, 10)}`;
           });
           // !sortedCalEvents[0].Completed
@@ -246,34 +205,19 @@ function calendarDatesFillIn(chosenDate) {
           calCntct.classList.add(sortedCalEvents[0].EventAuthor);
           if (
             TasksSelect.value == renewalTag ||
-            TasksSelect.value == rCompletedTag ||
+            TasksSelect.value == rCmpltdTag ||
             TasksSelect.value == rNotCompletedTag
           )
             calCntct.classList.add(hiddenContactTag);
-          if (
-            TasksSelect.value == eCompletedTag &&
-            !sortedCalEvents[0].Completed
-          )
+          if (TasksSelect.value == eCompletedTag && !sortedCalEvents[0].Completed)
             calCntct.classList.add(hiddenContactTag);
-          if (
-            TasksSelect.value == eNotCompletedTag &&
-            sortedCalEvents[0].Completed
-          )
+          if (TasksSelect.value == eNotCompletedTag && sortedCalEvents[0].Completed)
             calCntct.classList.add(hiddenContactTag);
-          if (
-            StatusSelect.value != calTaskTag &&
-            StatusSelect.value != rnwlCntct.Status
-          )
+          if (StatusSelect.value != calTaskTag && StatusSelect.value != rnwlCntct.Status)
             calCntct.classList.add(hiddenContactTag);
-          if (
-            SourceSelect.value != calTaskTag &&
-            SourceSelect.value != rnwlCntct.Source
-          )
+          if (SourceSelect.value != calTaskTag && SourceSelect.value != rnwlCntct.Source)
             calCntct.classList.add(hiddenContactTag);
-          if (
-            LastEditedBySelect.value != calTaskTag &&
-            LastEditedBySelect.value != sortedCalEvents[0].EventAuthor
-          )
+          if (LastEditedBySelect.value != calTaskTag && LastEditedBySelect.value != sortedCalEvents[0].EventAuthor)
             calCntct.classList.add(hiddenContactTag);
           calCntct.textContent = `${rnwlCntct.LastName}`;
           calCntct.setAttribute('id', `Event${sortedCalEvents[0]._id}`);
@@ -320,12 +264,8 @@ function loadContactTasks(dailyTask, slctdCalTask) {
       // Creates a datetime-local Input
       contactTask.Dated.type = 'datetime-local';
       contactTask.Dated.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
-      contactTask.Dated.setAttribute(
-        'class',
-        `form-control eventDates border-bottom-0`
-      );
-      if (slctdCalTask && slctdCalTask == contactTask.UID)
-        contactTask.Dated.classList.add('contactTaskSelected');
+      contactTask.Dated.setAttribute('class', `form-control eventDates border-bottom-0`);
+      if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Dated.classList.add('contactTaskSelected');
       contactTask.Dated.addEventListener('change', () => {
         updateContactTasks(contactTask);
       });
@@ -337,12 +277,8 @@ function loadContactTasks(dailyTask, slctdCalTask) {
       // contactTask.Description.rows = Math.round(
       //   contactTask.Description.value.length / 120 + 1
       // );
-      contactTask.Description.setAttribute(
-        'class',
-        `form-control ${eventDescriptionsTag} border-top-0`
-      );
-      if (slctdCalTask && slctdCalTask == contactTask.UID)
-        contactTask.Description.classList.add('contactTaskSelected');
+      contactTask.Description.setAttribute('class', `form-control ${eventDescriptionsTag} border-top-0`);
+      if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Description.classList.add('contactTaskSelected');
       contactTask.Description.addEventListener('change', () => {
         updateContactTasks(contactTask);
       });
@@ -355,8 +291,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         updateContactTasks(contactTask);
       });
       contactTask.Author.setAttribute('name', `TasksAgentSelector`);
-      if (slctdCalTask && slctdCalTask == contactTask.UID)
-        contactTask.Author.classList.add('contactTaskSelected');
+      if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Author.classList.add('contactTaskSelected');
       ContactTaskGroup.appendChild(contactTask.Author);
 
       LastEditedByS.forEach((staffMember) => {
@@ -370,12 +305,8 @@ function loadContactTasks(dailyTask, slctdCalTask) {
       // Creates a checkbox
       contactTask.CheckBox.type = 'checkbox';
       contactTask.CheckBox.checked = value.Completed;
-      contactTask.CheckBox.setAttribute(
-        'class',
-        `form-check-input mt-0 ${bartkaCheckboxTag}`
-      );
-      if (slctdCalTask && slctdCalTask == contactTask.UID)
-        contactTask.CheckBox.classList.add('contactTaskSelected');
+      contactTask.CheckBox.setAttribute('class', `form-check-input mt-0 ${bartkaCheckboxTag}`);
+      if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.CheckBox.classList.add('contactTaskSelected');
       contactTask.CheckBox.addEventListener('click', () => {
         fetch(`${srvrURL}${updateEventPath}${value._id}`, {
           method: 'PATCH',
@@ -398,21 +329,11 @@ function loadContactTasks(dailyTask, slctdCalTask) {
             if (checkCompletion) {
               checkCompletion = checkCompletion.className;
               if (checkCompletion.includes(eNotCompletedTag)) {
-                let checkCompletion = document.getElementById(
-                  `Event${value._id}`
-                );
-                checkCompletion.setAttribute(
-                  'class',
-                  `${eCompletedTag} ${textlightTag} task${value._id}`
-                );
+                let checkCompletion = document.getElementById(`Event${value._id}`);
+                checkCompletion.setAttribute('class', `${eCompletedTag} ${textlightTag} task${value._id}`);
               } else {
-                let checkCompletion = document.getElementById(
-                  `Event${value._id}`
-                );
-                checkCompletion.setAttribute(
-                  'class',
-                  `${eNotCompletedTag} ${textlightTag} task${value._id}`
-                );
+                let checkCompletion = document.getElementById(`Event${value._id}`);
+                checkCompletion.setAttribute('class', `${eNotCompletedTag} ${textlightTag} task${value._id}`);
               }
             }
             // PhoneInput = document.getElementById('Phone');
@@ -424,8 +345,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
       ContactTaskGroup.appendChild(contactTask.CheckBox);
       ContactTaskList.appendChild(contactTask.Description);
       contactTask.Description.style.height = '1px';
-      contactTask.Description.style.height =
-        contactTask.Description.scrollHeight + 2 + 'px';
+      contactTask.Description.style.height = contactTask.Description.scrollHeight + 2 + 'px';
     }
     return data;
   });
@@ -455,12 +375,8 @@ function loadRecurCntctTasks(dailyTask, slctdCalTask) {
       // Creates a datetime-local Input
       contactTask.Dated.type = 'datetime-local';
       contactTask.Dated.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
-      contactTask.Dated.setAttribute(
-        'class',
-        `form-control recurDates border-bottom-0`
-      );
-      if (slctdCalTask && slctdCalTask == contactTask.UID)
-        contactTask.Dated.classList.add('contactTaskSelected');
+      contactTask.Dated.setAttribute('class', `form-control recurDates border-bottom-0`);
+      if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Dated.classList.add('contactTaskSelected');
       // contactTask.Dated.addEventListener('change', () => {
       //   updateContactTasks(contactTask);
       // });
@@ -472,12 +388,8 @@ function loadRecurCntctTasks(dailyTask, slctdCalTask) {
       // contactTask.Description.rows = Math.round(
       //   contactTask.Description.value.length / 120 + 1
       // );
-      contactTask.Description.setAttribute(
-        'class',
-        `form-control ${recurDescriptionsTag} border-top-0`
-      );
-      if (slctdCalTask && slctdCalTask == contactTask.UID)
-        contactTask.Description.classList.add('contactTaskSelected');
+      contactTask.Description.setAttribute('class', `form-control ${recurDescriptionsTag} border-top-0`);
+      if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Description.classList.add('contactTaskSelected');
       // contactTask.Description.addEventListener('change', () => {
       //   updateContactTasks(contactTask);
       // });
@@ -490,8 +402,7 @@ function loadRecurCntctTasks(dailyTask, slctdCalTask) {
       //   updateContactTasks(contactTask);
       // });
       contactTask.Author.setAttribute('name', `TasksAgentSelector`);
-      if (slctdCalTask && slctdCalTask == contactTask.UID)
-        contactTask.Author.classList.add('contactTaskSelected');
+      if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Author.classList.add('contactTaskSelected');
       ContactTaskGroup.appendChild(contactTask.Author);
 
       LastEditedByS.forEach((staffMember) => {
@@ -559,8 +470,7 @@ function loadRecurCntctTasks(dailyTask, slctdCalTask) {
       // ContactTaskGroup.appendChild(contactTask.CheckBox);
       RecurringTask.appendChild(contactTask.Description);
       contactTask.Description.style.height = '1px';
-      contactTask.Description.style.height =
-        contactTask.Description.scrollHeight + 2 + 'px';
+      contactTask.Description.style.height = contactTask.Description.scrollHeight + 2 + 'px';
     }
     return data;
   });
@@ -572,16 +482,11 @@ function matchDatalist(searchInput) {
   let searchCncttracker = 1;
   let uniquePhoneSet = new Set();
   let firstSearchCntct;
-  Array.from(document.getElementById('contactsList').options).forEach(function (
-    option_element
-  ) {
+  Array.from(document.getElementById('contactsList').options).forEach(function (option_element) {
     searchCncttracker++;
     let dataListLabel = option_element.label.toLowerCase();
     let dataListvalue = option_element.value;
-    if (
-      dataListLabel.includes(searchInput) ||
-      dataListvalue.includes(searchInput)
-    ) {
+    if (dataListLabel.includes(searchInput) || dataListvalue.includes(searchInput)) {
       uniquePhoneSet.add(dataListvalue);
       [firstSearchCntct] = uniquePhoneSet;
       return firstSearchCntct;
@@ -591,9 +496,7 @@ function matchDatalist(searchInput) {
       removeActiveCalCntct();
       contactSearch.value = '';
     } else if (!firstSearchCntct && searchCncttracker == totalSearchCntcts) {
-      snackbar(
-        'Please enter either a valid name (First name, Last Name) or phone.'
-      );
+      snackbar('Please enter either a valid name (First name, Last Name) or phone.');
     }
   });
 }
