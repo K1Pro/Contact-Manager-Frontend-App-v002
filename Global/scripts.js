@@ -53,9 +53,7 @@ function updateContactTasks(contactTask) {
 ///////////////////////////////////////////////////////////
 //////// vvv Removes active tag from calendar vvv /////////
 function removeActiveCalCntct() {
-  let highlightedItems = document
-    .getElementById(calendarDatesTag)
-    .querySelectorAll('*');
+  let highlightedItems = document.getElementById(calendarDatesTag).querySelectorAll('*');
   highlightedItems.forEach((userItem) => {
     userItem.classList.remove(activeTag);
   });
@@ -93,17 +91,11 @@ function calendarFilter(chosenFilter) {
     for (key in renewals) {
       if (renewals[key].className) {
         if (chosenFilter.target.value == calTaskTag) {
-          document
-            .getElementById(`${renewals[key].id}`)
-            .classList.remove(hiddenContactTag);
+          document.getElementById(`${renewals[key].id}`).classList.remove(hiddenContactTag);
         } else {
-          document
-            .getElementById(`${renewals[key].id}`)
-            .classList.add(hiddenContactTag);
+          document.getElementById(`${renewals[key].id}`).classList.add(hiddenContactTag);
           if (renewals[key].className.includes(chosenFilter.target.value)) {
-            document
-              .getElementById(`${renewals[key].id}`)
-              .classList.remove(hiddenContactTag);
+            document.getElementById(`${renewals[key].id}`).classList.remove(hiddenContactTag);
           }
         }
       }
@@ -113,23 +105,15 @@ function calendarFilter(chosenFilter) {
 ///////////////////////////////////////////////////////////
 ///// vvv Saves old value mostly from side panel vvv //////
 function saveOldValue(textbox) {
-  let checkValidAgain = document
-    .getElementById(`${textbox.id}`)
-    .checkValidity();
+  let checkValidAgain = document.getElementById(`${textbox.id}`).checkValidity();
   if (checkValidAgain) {
     snackbar(`Updated ${textbox.id} for ${FirstName.value}`);
   } else {
     let invalidInput = document.getElementById(`${textbox.id}`);
     if (invalidInput.value) {
-      snackbar(
-        `Please correct the ${textbox.placeholder.toLowerCase()} format: ${
-          invalidInput.pattern
-        }`
-      );
+      snackbar(`Please correct the ${textbox.placeholder.toLowerCase()} format: ${invalidInput.pattern}`);
     } else {
-      snackbar(
-        `Please enter a ${textbox.placeholder.toLowerCase()}. This is required.`
-      );
+      snackbar(`Please enter a ${textbox.placeholder.toLowerCase()}. This is required.`);
     }
     invalidInput.value = oldInputValue;
   }
@@ -199,9 +183,7 @@ function snackbar(message) {
 ////////// vvv Removes highlighted fields vvv /////////////
 function removePolicyInfoHighlight() {
   document.querySelectorAll('.policyInfo').forEach((policyInfoInput) => {
-    document
-      .getElementById(`${policyInfoInput.id}`)
-      .classList.remove('selectedRenewDate');
+    document.getElementById(`${policyInfoInput.id}`).classList.remove('selectedRenewDate');
   });
 }
 ///////////////////////////////////////////////////////////
@@ -215,9 +197,7 @@ function auto_height(elem) {
 function deleteCalRow(rep) {
   document.getElementById(`${dayTag}${rep}`).classList.add(hiddenContactTag);
   document.getElementById(`${dayTag}${rep}`).classList.remove('calendarRow');
-  document
-    .getElementById(`${dayTag}${rep}`)
-    .classList.remove('calendarSatSunRow');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('calendarSatSunRow');
   document.getElementById(`${dayTag}${rep}`).classList.remove('Day28');
   document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun28');
   document.getElementById(`${dayTag}${rep}`).classList.remove('Day21');
@@ -245,24 +225,14 @@ function calEventStyle(calCntct, rnwlCntct) {
   if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
   calCntct.classList.add(textlightTag);
   calCntct.classList.add(calTaskTag);
-  calCntct.classList.add(renewalTag);
+  calCntct.classList.add(rnwlTag);
   calCntct.classList.add(rnwlCntct.Status);
   calCntct.classList.add(rnwlCntct.Source);
-  if (
-    TasksSelect.value == eventTag ||
-    TasksSelect.value == eCompletedTag ||
-    TasksSelect.value == eNotCompletedTag
-  )
+  if (TasksSelect.value == eventTag || TasksSelect.value == eCompletedTag || TasksSelect.value == eNotCompletedTag)
     calCntct.classList.add(hiddenContactTag);
-  if (
-    StatusSelect.value != calTaskTag &&
-    StatusSelect.value != rnwlCntct.Status
-  )
+  if (StatusSelect.value != calTaskTag && StatusSelect.value != rnwlCntct.Status)
     calCntct.classList.add(hiddenContactTag);
-  if (
-    SourceSelect.value != calTaskTag &&
-    SourceSelect.value != rnwlCntct.Source
-  )
+  if (SourceSelect.value != calTaskTag && SourceSelect.value != rnwlCntct.Source)
     calCntct.classList.add(hiddenContactTag);
   calCntct.textContent = `${rnwlCntct.LastName}`;
 }

@@ -20,6 +20,10 @@ let calEvntsArray = [
     evntType: 'renewal',
     shrtCut: 'r',
     apiPath: rnwlPath,
+    param: function (calDates, rnwlDates) {
+      return rnwlDates.toJSON().slice(5, 10);
+    },
+    srtMthd: false,
     cmpltd: lastReviewDateNoDash >= calDateNoDash,
     evntAthr: rnwlCntct ? rnwlCntct.LastEditedBy : false,
   },
@@ -27,13 +31,20 @@ let calEvntsArray = [
     evntType: 'event',
     shrtCut: 'e',
     apiPath: contactsWithCalEventsPath,
+    param: function (calDates, rnwlDates) {
+      return calDates.toJSON().slice(0, 10);
+    },
+    srtMthd: rnwlCntct
+      ? (sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
+          return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
+        }))
+      : false,
     cmpltd: sortedCalEvents ? sortedCalEvents[0].Completed : false,
     evntAthr: sortedCalEvents ? sortedCalEvents[0].EventAuthor : false,
   },
-  { evntType: 'recur', shrtCut: 'r', apiPath: MonthlyEventsPath },
+  // { evntType: 'recur', shrtCut: 'r', apiPath: MonthlyEventsPath },
 ];
 
 let trialbart = calEvntsArray.forEach((element) => {
-  console.log(element);
+  // console.log(element);
 });
-console.log(trialbart);

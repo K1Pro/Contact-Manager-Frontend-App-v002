@@ -20,7 +20,7 @@ function loadSidePanel(URL, slctdCalTask) {
         // Highlights each renewal and event active in the calendar
         calID = data.data.contacts[0]._id;
         for (let rep = 0; rep < 31; rep++) {
-          let cntctCalRnwl = document.getElementById(`${renewalTag}${calID}${rep}`);
+          let cntctCalRnwl = document.getElementById(`${rnwlTag}${calID}${rep}`);
           if (cntctCalRnwl) {
             cntctCalRnwl.classList.add(activeTag);
           }
@@ -79,23 +79,42 @@ function calendarDatesFillIn(chosenDate) {
       chosenDate.getTime() +
         1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * (prevMondayLastWeek + rep + 28) /*# of days*/
     );
-    // prettier-ignore
-    if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) document.getElementById(`${dayTag}${rep}`).classList.add(calSelectedDayTag);
+    if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10))
+      document.getElementById(`${dayTag}${rep}`).classList.add(calSelectedDayTag);
     if (TodaysDate.toJSON().slice(0, 10) == calDates.toJSON().slice(0, 10)) {
-      // prettier-ignore
       document.getElementById(`${dayTag}${rep}`).innerHTML = `<b>${calDates.toJSON().slice(5, 10)} (Today)</b>`;
     } else {
-      // prettier-ignore
       document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`;
     }
     document.getElementById(`${dayTag}${rep}`).addEventListener('click', () => {
-      // prettier-ignore
-      for (let rep = 0; rep < 28; rep++) {document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);}
-      // prettier-ignore
+      for (let rep = 0; rep < 28; rep++) {
+        document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);
+      }
       document.getElementById(`${dayTag}${rep}`).classList.add(calSelectedDayTag);
       changeCalendarHTML_Date(calDates);
       createEventTime.value = `${calDates.toJSON().slice(0, 16)}`;
     });
+
+    calEvntsArray.forEach((calEvnt) => {
+      getJSON(`${srvrURL}${calEvnt.apiPath}${calEvnt.param(calDates, rnwlDates)}`).then((data) => {
+        if (data.data.contacts.length) {
+          rnwlCntcts = data.data.contacts;
+          rnwlCntcts.map((rnwlCntct) => {
+            rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
+            cntctCreatedDate = rnwlCntct.CreateDate;
+            if (rtrvdCalDateSlctr >= cntctCreatedDate) {
+              let calCntct = document.createElement('div');
+              calEventStyle(calCntct, rnwlCntct);
+              calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
+              lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
+              // left off here
+              console.log(rnwlCntct);
+            }
+          });
+        }
+      });
+    });
+
     getJSON(`${srvrURL}${rnwlPath}${rnwlDates.toJSON().slice(5, 10)}`).then((data) => {
       // Populates renewals
       if (data.data.contacts.length) {
@@ -108,28 +127,27 @@ function calendarDatesFillIn(chosenDate) {
             calEventStyle(calCntct, rnwlCntct);
             calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
             lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
-
+            calCntct.classList.add(rnwlCntct.LastEditedBy);
+            //////////////
             lastReviewDateNoDash >= calDateNoDash
               ? calCntct.classList.add(rCmpltdTag)
-              : calCntct.classList.add(rNotCompletedTag);
-            //////////////
-            calCntct.classList.add(rnwlCntct.LastEditedBy);
+              : calCntct.classList.add(rNotCmpltdTag);
             //////////////
             if (TasksSelect.value == rCmpltdTag && lastReviewDateNoDash < calDateNoDash)
               calCntct.classList.add(hiddenContactTag);
             //////////////
-            if (TasksSelect.value == rNotCompletedTag && lastReviewDateNoDash >= calDateNoDash)
+            if (TasksSelect.value == rNotCmpltdTag && lastReviewDateNoDash >= calDateNoDash)
               calCntct.classList.add(hiddenContactTag);
             //////////////
             if (LastEditedBySelect.value != calTaskTag && LastEditedBySelect.value != rnwlCntct.LastEditedBy)
               calCntct.classList.add(hiddenContactTag);
             //////////////
-            calCntct.setAttribute('id', `${renewalTag}${rnwlCntct._id}${rep + 1}`);
+            calCntct.setAttribute('id', `${rnwlTag}${rnwlCntct._id}${rep + 1}`);
             calCntct.addEventListener('click', () => {
               emailBody.value = '';
               emailSubject.value = 'choose-email-template';
               removeActiveCalCntct();
-              loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`);
+              loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`, false);
               calCntct.classList.add(activeTag);
             });
             document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
@@ -147,16 +165,18 @@ function calendarDatesFillIn(chosenDate) {
           if (rtrvdCalDateSlctr >= cntctCreatedDate) {
             let calCntct = document.createElement('div');
             calEventStyle(calCntct, rnwlCntct);
+            calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
+            lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
+
             //////////////
             sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
               return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
             });
-
+            calCntct.classList.add(sortedCalEvents[0].EventAuthor);
+            //////////////
             sortedCalEvents[0].Completed
               ? calCntct.classList.add(eCompletedTag)
               : calCntct.classList.add(eNotCompletedTag);
-            //////////////
-            calCntct.classList.add(sortedCalEvents[0].EventAuthor);
             //////////////
             if (TasksSelect.value == eCompletedTag && !sortedCalEvents[0].Completed)
               calCntct.classList.add(hiddenContactTag);
@@ -203,11 +223,7 @@ function calendarDatesFillIn(chosenDate) {
           calCntct.classList.add(rnwlCntct.Status);
           calCntct.classList.add(rnwlCntct.Source);
           calCntct.classList.add(sortedCalEvents[0].EventAuthor);
-          if (
-            TasksSelect.value == renewalTag ||
-            TasksSelect.value == rCmpltdTag ||
-            TasksSelect.value == rNotCompletedTag
-          )
+          if (TasksSelect.value == rnwlTag || TasksSelect.value == rCmpltdTag || TasksSelect.value == rNotCmpltdTag)
             calCntct.classList.add(hiddenContactTag);
           if (TasksSelect.value == eCompletedTag && !sortedCalEvents[0].Completed)
             calCntct.classList.add(hiddenContactTag);
@@ -354,7 +370,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
 function loadRecurCntctTasks(dailyTask, slctdCalTask) {
   RecurringTask.innerHTML = '';
   getJSON(`${srvrURL}${recurPath}${dailyTask}`).then((data) => {
-    console.log(data);
+    // console.log(data);
     // sorts the array in reverse chronological order
     let CalendarEventsArray = data.data.RecurEvents;
     // CalendarEventsArray.sort(compare);
