@@ -20,8 +20,8 @@ let calEvntsArray = [
     evntType: 'renewal',
     shrtCut: 'r',
     apiPath: rnwlPath,
-    tag: function (rnwlCntct, rep) {
-      return `${rnwlTag}${rnwlCntct._id}${rep + 1}`;
+    tag: function () {
+      return `${rnwlTag}${this.rnwlCntct}${this.rep + 1}`;
     },
     param: function (calDates, rnwlDates) {
       return rnwlDates.toJSON().slice(5, 10);
@@ -41,8 +41,8 @@ let calEvntsArray = [
     evntType: 'event',
     shrtCut: 'e',
     apiPath: contactsWithCalEventsPath,
-    tag: function (x, y, sortedCalEvents) {
-      return `Event${sortedCalEvents}`;
+    tag: function () {
+      return `Event${this.sortedCalEvents}`;
     },
     param: function (calDates, rnwlDates) {
       return calDates.toJSON().slice(0, 10);
@@ -54,7 +54,7 @@ let calEvntsArray = [
       : false,
     cmpltd: sortedCalEvents ? sortedCalEvents[0].Completed : false,
     // cmpltd: function (type) {
-    //   sortedCalEvents[0].Completed ? calCntct.classList.add(eCompletedTag) : calCntct.classList.add(eNotCompletedTag);
+    //   sortedCalEvents[0].Completed ? calCntct.classList.add(eCmpltdTag) : calCntct.classList.add(eNotCmpltdTag);
     // },
     evntAthr: sortedCalEvents ? sortedCalEvents[0].EventAuthor : false,
   },

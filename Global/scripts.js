@@ -222,19 +222,18 @@ let limitFunc = function () {
 ///////////////////////////////////////////////////////////
 ///////////// vvv Calendar Events styling vvv ///////////
 function calEventStyle(calCntct, rnwlCntct) {
-  if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
-  calCntct.classList.add(textlightTag);
-  calCntct.classList.add(calTaskTag);
-  calCntct.classList.add(rnwlTag);
-  calCntct.classList.add(rnwlCntct.Status);
-  calCntct.classList.add(rnwlCntct.Source);
-  if (TasksSelect.value == eventTag || TasksSelect.value == eCompletedTag || TasksSelect.value == eNotCompletedTag)
-    calCntct.classList.add(hiddenContactTag);
-  if (StatusSelect.value != calTaskTag && StatusSelect.value != rnwlCntct.Status)
-    calCntct.classList.add(hiddenContactTag);
-  if (SourceSelect.value != calTaskTag && SourceSelect.value != rnwlCntct.Source)
-    calCntct.classList.add(hiddenContactTag);
-  calCntct.textContent = `${rnwlCntct.LastName}`;
+  // if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
+  // calCntct.classList.add(textlightTag);
+  // calCntct.classList.add(calTaskTag);
+  // calCntct.classList.add(rnwlCntct.Status);
+  // calCntct.classList.add(rnwlCntct.Source);
+  // if (TasksSelect.value == eventTag || TasksSelect.value == eCmpltdTag || TasksSelect.value == eNotCmpltdTag)
+  //   calCntct.classList.add(hiddenContactTag);
+  // if (StatusSelect.value != calTaskTag && StatusSelect.value != rnwlCntct.Status)
+  //   calCntct.classList.add(hiddenContactTag);
+  // if (SourceSelect.value != calTaskTag && SourceSelect.value != rnwlCntct.Source)
+  //   calCntct.classList.add(hiddenContactTag);
+  // calCntct.textContent = `${rnwlCntct.LastName}`;
 }
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////

@@ -1,10 +1,10 @@
 const TasksObj = {
   renewal: 'All Renewals',
-  rCompleted: 'Completed Renewals',
-  rNotCompleted: 'Not Completed Renewals',
+  rCmpltd: 'Completed Renewals',
+  rNotCmpltd: 'Not Completed Renewals',
   event: 'All Events',
-  eCompleted: 'Completed Events',
-  eNotCompleted: 'Not Completed Events',
+  eCmpltd: 'Completed Events',
+  eNotCmpltd: 'Not Completed Events',
 };
 
 const StatusObj = {

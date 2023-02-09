@@ -7,12 +7,7 @@ function buttonHandlers() {
     removePolicyInfoHighlight();
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
     prevMonth =
-      new Date(
-        retrievedDate[0],
-        retrievedDate[1] - 1,
-        retrievedDate[2]
-      ).getTime() +
-      1000 * 60 * 60 * 24 * -28;
+      new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime() + 1000 * 60 * 60 * 24 * -28;
     prevMonthHHMM = new Date(prevMonth).setHours(TodaysHour, TodaysMinutes);
     changeCalendarHTML_Date(new Date(prevMonthHHMM));
     calendarDatesFillIn(new Date(prevMonthHHMM));
@@ -23,13 +18,7 @@ function buttonHandlers() {
     abortCalendarDatesFillIn();
     removePolicyInfoHighlight();
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
-    prevWeek =
-      new Date(
-        retrievedDate[0],
-        retrievedDate[1] - 1,
-        retrievedDate[2]
-      ).getTime() +
-      1000 * 60 * 60 * 24 * -7;
+    prevWeek = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime() + 1000 * 60 * 60 * 24 * -7;
     prevWeekHHMM = new Date(prevWeek).setHours(TodaysHour, TodaysMinutes);
     changeCalendarHTML_Date(new Date(prevWeekHHMM));
     calendarDatesFillIn(new Date(prevWeekHHMM));
@@ -40,13 +29,7 @@ function buttonHandlers() {
     abortCalendarDatesFillIn();
     removePolicyInfoHighlight();
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
-    nextWeek =
-      new Date(
-        retrievedDate[0],
-        retrievedDate[1] - 1,
-        retrievedDate[2]
-      ).getTime() +
-      1000 * 60 * 60 * 24 * 7;
+    nextWeek = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime() + 1000 * 60 * 60 * 24 * 7;
     nextWeekHHMM = new Date(nextWeek).setHours(TodaysHour, TodaysMinutes);
     changeCalendarHTML_Date(new Date(nextWeekHHMM));
     calendarDatesFillIn(new Date(nextWeekHHMM));
@@ -57,13 +40,7 @@ function buttonHandlers() {
     abortCalendarDatesFillIn();
     removePolicyInfoHighlight();
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
-    nextMonth =
-      new Date(
-        retrievedDate[0],
-        retrievedDate[1] - 1,
-        retrievedDate[2]
-      ).getTime() +
-      1000 * 60 * 60 * 24 * 28;
+    nextMonth = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime() + 1000 * 60 * 60 * 24 * 28;
     nextMonthHHMM = new Date(nextMonth).setHours(TodaysHour, TodaysMinutes);
     changeCalendarHTML_Date(new Date(nextMonthHHMM));
     calendarDatesFillIn(new Date(nextMonthHHMM));
@@ -108,12 +85,7 @@ function buttonHandlers() {
       removePolicyInfoHighlight();
       let retrievedDate = e.target.value.split('-');
       let dateSelected =
-        new Date(
-          retrievedDate[0],
-          retrievedDate[1] - 1,
-          retrievedDate[2]
-        ).getTime() +
-        1000 * 60 * 60 * 12;
+        new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime() + 1000 * 60 * 60 * 12;
       calendarDatesFillIn(new Date(dateSelected));
     }
   });
@@ -128,17 +100,11 @@ function buttonHandlers() {
         if (retrievedTasksEvents[key].className) {
           let filteredClasses = retrievedTasksEvents[key].className;
           let TasksEventsClassArray = filteredClasses.split(' ');
-          let bothArraysEqual = filterDropDownArray.every((r) =>
-            TasksEventsClassArray.includes(r)
-          );
+          let bothArraysEqual = filterDropDownArray.every((r) => TasksEventsClassArray.includes(r));
           if (bothArraysEqual) {
-            document
-              .getElementById(`${retrievedTasksEvents[key].id}`)
-              .classList.remove('hiddenContact');
+            document.getElementById(`${retrievedTasksEvents[key].id}`).classList.remove('hiddenContact');
           } else {
-            document
-              .getElementById(`${retrievedTasksEvents[key].id}`)
-              .classList.add('hiddenContact');
+            document.getElementById(`${retrievedTasksEvents[key].id}`).classList.add('hiddenContact');
           }
         }
       }
@@ -151,38 +117,19 @@ function buttonHandlers() {
       deleteCalRow(rep);
       if (rep < daysSelected) {
         document.getElementById(`day0`).classList.remove(hiddenContactTag);
-        document
-          .getElementById(`${dayTag}${rep}`)
-          .classList.remove(hiddenContactTag);
-        if (
-          rep == 5 ||
-          rep == 6 ||
-          rep == 12 ||
-          rep == 13 ||
-          rep == 19 ||
-          rep == 20 ||
-          rep == 26 ||
-          rep == 27
-        ) {
-          document
-            .getElementById(`${dayTag}${rep}`)
-            .classList.add(`SatSun${daysSelected}`);
+        document.getElementById(`${dayTag}${rep}`).classList.remove(hiddenContactTag);
+        if (rep == 5 || rep == 6 || rep == 12 || rep == 13 || rep == 19 || rep == 20 || rep == 26 || rep == 27) {
+          document.getElementById(`${dayTag}${rep}`).classList.add(`SatSun${daysSelected}`);
         } else {
-          document
-            .getElementById(`${dayTag}${rep}`)
-            .classList.add(`Day${daysSelected}`);
+          document.getElementById(`${dayTag}${rep}`).classList.add(`Day${daysSelected}`);
         }
       } else if (daysSelected == 0) {
         deleteCalRow(rep); // Deletes Day0 once
         document.querySelectorAll('.uniqueday').forEach((weekdays) => {
           uniqueday = weekdays.className;
           if (uniqueday.includes(calSelectedDayTag)) {
-            document
-              .getElementById(weekdays.id)
-              .classList.remove('hiddenContact');
-            document
-              .getElementById(weekdays.id)
-              .classList.add(`Day${daysSelected}`);
+            document.getElementById(weekdays.id).classList.remove('hiddenContact');
+            document.getElementById(weekdays.id).classList.add(`Day${daysSelected}`);
           }
         });
       }
@@ -245,9 +192,7 @@ function buttonHandlers() {
   createEvent.addEventListener('click', function () {
     if (_id.value && contactTasksTextArea.value) {
       getJSON(`${srvrURL}/${_id.value}`).then((data) => {
-        let calendarEventsArray = data.data.contact.CalendarEvents
-          ? data.data.contact.CalendarEvents
-          : [];
+        let calendarEventsArray = data.data.contact.CalendarEvents ? data.data.contact.CalendarEvents : [];
         let obj = {};
         calendarEventsArray.push(
           (obj = {
@@ -273,8 +218,7 @@ function buttonHandlers() {
             PhoneInput = document.getElementById('Phone');
             snackbar(`Event created for ${FirstName.value}`);
             loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
-            let retrievedUniqueDays =
-              document.getElementsByClassName('uniqueday');
+            let retrievedUniqueDays = document.getElementsByClassName('uniqueday');
             rtrvdCalDateSlctr = document.getElementById('CalendarDate');
             // This adds an event to the calendar once the event is created, work on this further
             for (key in retrievedUniqueDays) {
@@ -283,14 +227,12 @@ function buttonHandlers() {
                 let fullCalPpltdDate = `${rtrvdCalDateSlctr.value.slice(0, 5)}${retrievedUniqueDays[key].innerHTML.slice(0, 5)}`;
                 let shortCreatedEvntTime = createEventTime.value.slice(0, 10);
                 if (shortCreatedEvntTime == fullCalPpltdDate) {
-                  let eventUniqueDay = document.getElementById(
-                    retrievedUniqueDays[key].id
-                  );
+                  let eventUniqueDay = document.getElementById(retrievedUniqueDays[key].id);
                   let calCntct = document.createElement('div');
                   calCntct.classList.add(textlightTag);
                   calCntct.classList.add(calTaskTag);
                   calCntct.classList.add(eventTag);
-                  calCntct.classList.add(eNotCompletedTag);
+                  calCntct.classList.add(eNotCmpltdTag);
                   calCntct.classList.add(activeTag);
                   calCntct.classList.add(Status.value);
                   calCntct.classList.add(Source.value);
@@ -343,10 +285,7 @@ function buttonHandlers() {
   document.querySelectorAll('.eventTemplates').forEach((dynamicEvent) => {
     dynamicEvent.addEventListener('click', function (e) {
       e.preventDefault();
-      contactTasksTextArea.value = `${e.target.innerHTML.replaceAll(
-        '...[Insert text here]',
-        ','
-      )} `;
+      contactTasksTextArea.value = `${e.target.innerHTML.replaceAll('...[Insert text here]', ',')} `;
     });
   });
 
@@ -412,15 +351,9 @@ function buttonHandlers() {
         }
       });
       // this changes renewals that are viewable after filtering
-      if (
-        dynamicSelect.value == '' ||
-        dynamicSelect.value == 'All' ||
-        dynamicSelect.value == this.value
-      ) {
+      if (dynamicSelect.value == '' || dynamicSelect.value == 'All' || dynamicSelect.value == this.value) {
         for (let rep = 0; rep < 31; rep++) {
-          let cntctCalRnwl = document.getElementById(
-            `renewal${_id.value}${rep}`
-          );
+          let cntctCalRnwl = document.getElementById(`renewal${_id.value}${rep}`);
           if (cntctCalRnwl) {
             cntctCalRnwl.classList.remove('hiddenContact');
             dynamicInputVals.forEach((prevStatus) => {
@@ -431,9 +364,7 @@ function buttonHandlers() {
         }
       } else {
         for (let rep = 0; rep < 31; rep++) {
-          let cntctCalRnwl = document.getElementById(
-            `renewal${_id.value}${rep}`
-          );
+          let cntctCalRnwl = document.getElementById(`renewal${_id.value}${rep}`);
           if (cntctCalRnwl) {
             cntctCalRnwl.classList.add('hiddenContact');
             dynamicInputVals.forEach((prevStatus) => {
