@@ -68,10 +68,12 @@ function calendarDatesFillIn(chosenDate) {
   for (let rep = 0; rep < 28; rep++) {
     document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);
     document.getElementById(`${dayTag}${rep}`).classList.remove(calTodaysDayTag);
+
     let calDates = new Date(
       chosenDate.getTime() +
         1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * (prevMondayLastWeek + rep) /*# of days*/
     );
+
     if (TodaysDate.toJSON().slice(0, 10) == calDates.toJSON().slice(0, 10))
       document.getElementById(`${dayTag}${rep}`).classList.add(calTodaysDayTag);
 
@@ -79,13 +81,16 @@ function calendarDatesFillIn(chosenDate) {
       chosenDate.getTime() +
         1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * (prevMondayLastWeek + rep + 28) /*# of days*/
     );
+
     if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10))
       document.getElementById(`${dayTag}${rep}`).classList.add(calSelectedDayTag);
+
     if (TodaysDate.toJSON().slice(0, 10) == calDates.toJSON().slice(0, 10)) {
       document.getElementById(`${dayTag}${rep}`).innerHTML = `<b>${calDates.toJSON().slice(5, 10)} (Today)</b>`;
     } else {
       document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`;
     }
+
     document.getElementById(`${dayTag}${rep}`).addEventListener('click', () => {
       for (let rep = 0; rep < 28; rep++) {
         document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);
@@ -107,8 +112,35 @@ function calendarDatesFillIn(chosenDate) {
               calEventStyle(calCntct, rnwlCntct);
               calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
               lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
-              // left off here
-              console.log(rnwlCntct);
+              if (data.type == 'event') {
+                sortedCalEvents = rnwlCntct.MonthlyEvents.filter((obj) => {
+                  return obj.DayOfMonth === `${calDates.toJSON().slice(8, 10)}`;
+                });
+                let newsortedCalEvents = sortedCalEvents[0]._id;
+                return newsortedCalEvents;
+              }
+              //left off here......
+              // Renewals
+              // console.log(data.type);
+              // if (data.type == calEvnt.evntType) {
+              // }
+              // console.log(calEvnt.cmpltd);
+              // lastReviewDateNoDash >= calDateNoDash
+              // ? calCntct.classList.add(rCmpltdTag)
+              // : calCntct.classList.add(rNotCmpltdTag);
+              // //Events
+              // sortedCalEvents[0].Completed
+              // ? calCntct.classList.add(eCompletedTag)
+              // : calCntct.classList.add(eNotCompletedTag);
+              calCntct.setAttribute('id', calEvnt.tag(rnwlCntct, rep, newsortedCalEvents));
+              calCntct.addEventListener('click', () => {
+                emailBody.value = '';
+                emailSubject.value = 'choose-email-template';
+                removeActiveCalCntct();
+                loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`, false);
+                calCntct.classList.add(activeTag);
+              });
+              document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
             }
           });
         }
@@ -150,7 +182,7 @@ function calendarDatesFillIn(chosenDate) {
               loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`, false);
               calCntct.classList.add(activeTag);
             });
-            document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+            // document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
           }
         });
       }
@@ -197,7 +229,7 @@ function calendarDatesFillIn(chosenDate) {
               );
               calCntct.classList.add(activeTag);
             });
-            document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+            // document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
           }
         });
       }
@@ -246,7 +278,7 @@ function calendarDatesFillIn(chosenDate) {
             );
             calCntct.classList.add(activeTag);
           });
-          document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+          // document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
         });
       }
     });
