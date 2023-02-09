@@ -115,32 +115,25 @@ function calendarDatesFillIn(chosenDate) {
               calCntct.classList.add(calTaskTag);
               calCntct.classList.add(rnwlCntct.Status);
               calCntct.classList.add(rnwlCntct.Source);
-              calEventStyle(calCntct, rnwlCntct);
               calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
               lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
+              // Sorting calendar events if they exist
               let sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
                 return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
               });
+              // Last Edit By or Event Author added to class name
               if (data.type == 'renewal') calCntct.classList.add(rnwlCntct.LastEditedBy);
               if (data.type == 'event') calCntct.classList.add(sortedCalEvents[0].EventAuthor);
-              calEvnt.sortedCalEvents = sortedCalEvents[0]?._id;
-              calEvnt.rep = rep;
-              calEvnt.rnwlCntct = rnwlCntct._id;
               // Completed or Not Completed Styling
               (data.type == 'renewal' && lastReviewDateNoDash >= calDateNoDash) ||
               (data.type == 'event' && sortedCalEvents[0]?.Completed)
                 ? calCntct.classList.add(`${calEvnt.shrtCut}Cmpltd`)
                 : calCntct.classList.add(`${calEvnt.shrtCut}NotCmpltd`);
-              //have to work on this
-              if (
-                (data.type == 'renewal' &&
-                  TasksSelect.value == `${calEvnt.shrtCut}Cmpltd` &&
-                  lastReviewDateNoDash < calDateNoDash) ||
-                (data.type == 'event' &&
-                  TasksSelect.value == `${calEvnt.shrtCut}Cmpltd` &&
-                  !sortedCalEvents[0].Completed)
-              )
-                calCntct.classList.add(hiddenContactTag);
+              // Passing a few variables into the calEvent
+              calEvnt.sortedCalEvents = sortedCalEvents[0]?._id;
+              calEvnt.rep = rep;
+              calEvnt.rnwlCntct = rnwlCntct._id;
+              // Adding text content, ID and Event Listener to each event
               calCntct.textContent = `${rnwlCntct.LastName}`;
               calCntct.setAttribute('id', calEvnt.tag());
               calCntct.addEventListener('click', () => {
@@ -150,7 +143,22 @@ function calendarDatesFillIn(chosenDate) {
                 loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`, `${sortedCalEvents[0]?._id}`);
                 calCntct.classList.add(activeTag);
               });
+              // Adding event to calendar box
               document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+              // applying existing calendar filters
+              calCntctClasses = calCntct.className;
+              if (!calCntctClasses.includes(TasksSelect.value)) {
+                calCntct.classList.add(hiddenContactTag);
+              }
+              if (!calCntctClasses.includes(StatusSelect.value)) {
+                calCntct.classList.add(hiddenContactTag);
+              }
+              if (!calCntctClasses.includes(SourceSelect.value)) {
+                calCntct.classList.add(hiddenContactTag);
+              }
+              if (!calCntctClasses.includes(LastEditedBySelect.value)) {
+                calCntct.classList.add(hiddenContactTag);
+              }
             }
           });
         }
