@@ -42,6 +42,8 @@ let calEvntsArray = [
   },
 ];
 
+let cntctTasksArray = [{ taskType: 'CalendarEvents' }, { taskType: 'RecurEvents' }];
+
 // Probably delete this
 // let dynamic = {
 //   Status: StatusS,
