@@ -303,7 +303,7 @@ function buttonHandlers() {
         fetch(`${srvrURL}/${_id.value}`, {
           method: 'PATCH',
           body: JSON.stringify({
-            MonthlyEvents: monthlyEventsArray,
+            [e.target.id]: monthlyEventsArray,
           }),
           headers: {
             'Content-Type': 'application/json',
