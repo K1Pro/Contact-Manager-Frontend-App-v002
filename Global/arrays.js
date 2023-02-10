@@ -38,5 +38,15 @@ let calEvntsArray = [
       return calDates.toJSON().slice(0, 10);
     },
   },
-  // { evntType: 'recur', shrtCut: 'r', apiPath: MonthlyEventsPath },
+  {
+    evntType: 'monthly',
+    shrtCut: 'm',
+    apiPath: MonthlyEventsPath,
+    tag: function () {
+      return `Event${this.sortedCalEvents}`;
+    },
+    param: function (calDates, rnwlDates) {
+      return calDates.toJSON().slice(8, 10);
+    },
+  },
 ];

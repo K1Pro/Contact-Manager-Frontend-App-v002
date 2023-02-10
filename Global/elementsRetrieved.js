@@ -14,9 +14,7 @@ function elementsRequired() {
   contactsList = document.getElementById('contactsList');
   phoneInput = document.getElementById('Phone');
   // IDinput = document.getElementById('_id'); Delete this sooner or later if it is not needed
-  ContactFields = document
-    .getElementById('ContactFields')
-    .querySelectorAll('*');
+  ContactFields = document.getElementById('ContactFields').querySelectorAll('*');
   reviewContact = document.getElementById('reviewContact');
   callContact = document.getElementById('callContact');
   sendEmail = document.getElementById('sendEmail');
@@ -34,70 +32,62 @@ function elementsRequired() {
   LastEditedBySelect = document.getElementById('LastEditedBySelect');
   DaysSelect = document.getElementById('DaysSelect');
   TasksSelect = document.getElementById('TasksSelect');
-  CalendarDates = document
-    .getElementById('calendarDates')
-    .querySelectorAll('*');
+  CalendarDates = document.getElementById('calendarDates').querySelectorAll('*');
   for (let rep = 0; rep < ContactFields.length; rep++) {
     // Side Panel inputs if changed will update database to these values
     let ContactFieldsIDs = ContactFields[rep].id;
     if (ContactFieldsIDs) {
-      document
-        .getElementById(`${ContactFieldsIDs}`)
-        .addEventListener('focus', function (e) {
-          oldInputValue = this.value;
-          return oldInputValue;
-        });
-      document
-        .getElementById(`${ContactFieldsIDs}`)
-        .addEventListener('change', function (e) {
-          saveOldValue(this);
-          let checkValid = document
-            .getElementById(`${ContactFieldsIDs}`)
-            .checkValidity();
-          if (checkValid) {
-            if (_id.value) {
-              let checkEmptyFields = this.value;
-              if (!checkEmptyFields.replace(/\s/g, '').length) {
-                console.log('string only contains spaces, tabs or line breaks');
-                let updateThis = {
-                  updateURL: `${srvrURL}${deleteEmptyFieldPath}${_id.value}`,
-                  fetchMethod: 'DELETE',
-                  value: '',
-                };
-                if (renewDateKeys.includes(this.id)) {
-                  let changedInputMMDD = this.id.replace('Date', 'MMDD');
-                  updateThis.key = changedInputMMDD;
-                  updateDB(updateThis);
-                  contactEditDate();
-                } else {
-                  updateThis.key = this.id;
-                  updateDB(updateThis);
-                  contactEditDate();
-                }
+      document.getElementById(`${ContactFieldsIDs}`).addEventListener('focus', function (e) {
+        oldInputValue = this.value;
+        return oldInputValue;
+      });
+      document.getElementById(`${ContactFieldsIDs}`).addEventListener('change', function (e) {
+        saveOldValue(this);
+        let checkValid = document.getElementById(`${ContactFieldsIDs}`).checkValidity();
+        if (checkValid) {
+          if (_id.value) {
+            let checkEmptyFields = this.value;
+            if (!checkEmptyFields.replace(/\s/g, '').length) {
+              console.log('string only contains spaces, tabs or line breaks');
+              let updateThis = {
+                updateURL: `${srvrURL}${deleteEmptyFieldPath}${_id.value}`,
+                fetchMethod: 'DELETE',
+                value: '',
+              };
+              if (renewDateKeys.includes(this.id)) {
+                let changedInputMMDD = this.id.replace('Date', 'MMDD');
+                updateThis.key = changedInputMMDD;
+                updateDB(updateThis);
+                contactEditDate();
               } else {
-                let updateThis = {
-                  updateURL: `${srvrURL}/${_id.value}`,
-                  fetchMethod: 'PATCH',
-                };
-                if (renewDateKeys.includes(this.id)) {
-                  let changedInputMMDD = this.id.replace('Date', 'MMDD');
-                  let MMDD = this.value.slice(5, 10);
-                  updateThis.key = changedInputMMDD;
-                  updateThis.value = MMDD;
-                  updateDB(updateThis);
-                  contactEditDate();
-                } else {
-                  updateThis.key = this.id;
-                  updateThis.value = this.value;
-                  updateDB(updateThis);
-                  contactEditDate();
-                }
+                updateThis.key = this.id;
+                updateDB(updateThis);
+                contactEditDate();
               }
             } else {
-              snackbar('Please search for and choose a customer.');
+              let updateThis = {
+                updateURL: `${srvrURL}/${_id.value}`,
+                fetchMethod: 'PATCH',
+              };
+              if (renewDateKeys.includes(this.id)) {
+                let changedInputMMDD = this.id.replace('Date', 'MMDD');
+                let MMDD = this.value.slice(5, 10);
+                updateThis.key = changedInputMMDD;
+                updateThis.value = MMDD;
+                updateDB(updateThis);
+                contactEditDate();
+              } else {
+                updateThis.key = this.id;
+                updateThis.value = this.value;
+                updateDB(updateThis);
+                contactEditDate();
+              }
             }
+          } else {
+            snackbar('Please search for and choose a customer.');
           }
-        });
+        }
+      });
     }
   }
 
@@ -119,6 +109,7 @@ let DOMElements,
   createEvent,
   createEventTime,
   contactTasksTextArea,
+  cntctTasksTxtAreaList,
   contactSearch,
   contactsList,
   ContactFields,
@@ -140,9 +131,7 @@ isElementLoaded('#CalendarHTMLModule').then(() => {
   isElementLoaded('#ContactTasksHTMLModule').then(() => {
     isElementLoaded('#EmailHTMLModule').then(() => {
       isElementLoaded('#SidePanelHTMLModule').then(() => {
-        console.log(
-          'retrieved all DOM elements {for elements retrieved module}'
-        );
+        console.log('retrieved all DOM elements {for elements retrieved module}');
         elementsRequired();
       });
     });
