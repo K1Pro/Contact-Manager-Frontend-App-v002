@@ -71,7 +71,11 @@ function populateSelect(calArray, SelectElement) {
 ///////////////////////////////////////////////////////////
 //////// vvv Populates selects with objects vvv ///////////
 function populateSlctWObj(calArray, SelectElement) {
+  storedFilter = localStorage.getItem(SelectElement.id);
+  calArrayLength = Object.entries(calArray).length;
+  rep = 0;
   Object.entries(calArray).forEach((calArrayItems) => {
+    rep++;
     let [key, value] = calArrayItems;
     key = key.replaceAll('_', '-');
     value = value.replaceAll('_', '-');
@@ -81,6 +85,9 @@ function populateSlctWObj(calArray, SelectElement) {
     calOption.value = key;
     calOption.innerHTML = value;
     SelectElement.appendChild(calOption);
+    if (rep == calArrayLength && storedFilter) {
+      SelectElement.value = storedFilter;
+    }
   });
 }
 ///////////////////////////////////////////////////////////

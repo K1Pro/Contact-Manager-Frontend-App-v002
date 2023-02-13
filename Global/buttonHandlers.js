@@ -92,7 +92,8 @@ function buttonHandlers() {
 
   // Calendar filter dropdowns
   document.querySelectorAll('.DropDown').forEach((filterDropDown) => {
-    filterDropDown.addEventListener('change', function () {
+    filterDropDown.addEventListener('change', function (filter) {
+      localStorage.setItem(filter.target.id, filter.target.value);
       let retrievedTasksEvents = document.getElementsByClassName('calTask');
       let allFilterDropDowns = document.querySelectorAll('.DropDown');
       let filterDropDownArray = [...allFilterDropDowns].map((el) => el.value);
@@ -112,6 +113,7 @@ function buttonHandlers() {
   });
 
   DaysSelect.addEventListener('change', function (e) {
+    // localStorage.setItem(e.target.id, e.target.value);
     daysSelected = e.target.value;
     for (let rep = 0; rep < 28; rep++) {
       deleteCalRow(rep);
