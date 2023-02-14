@@ -43,8 +43,8 @@ let calEvntsArray = [
 ];
 
 let cntctTasksArray = [
-  { taskType: 'CalendarEvents', apiPath: eventsPath },
-  { taskType: 'RecurEvents', apiPath: recurPath },
+  { taskType: 'CalendarEvents', apiPath: eventsPath, checkBox: true },
+  { taskType: 'RecurEvents', apiPath: recurPath, checkbox: false },
 ];
 
 // Probably delete this

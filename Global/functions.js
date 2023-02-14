@@ -207,19 +207,6 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         });
         ContactTaskGroup.appendChild(contactTask.Dated);
 
-        // Creates a text input for the description
-        contactTask.Description.value = `${value.Description}`;
-        contactTask.Description.spellcheck = 'false';
-        contactTask.Description.setAttribute('class', `form-control ${eventDescriptionsTag} border-top-0`);
-        if (slctdCalTask && slctdCalTask == contactTask.UID)
-          contactTask.Description.classList.add('contactTaskSelected');
-        contactTask.Description.addEventListener('change', (inputChanged) => {
-          updateContactTasks(contactTask, inputChanged);
-        });
-        contactTask.Description.addEventListener('keyup', () => {
-          auto_height(contactTask.Description);
-        });
-
         // Create a select input for the Event Author
         contactTask.Author.addEventListener('change', (inputChanged) => {
           updateContactTasks(contactTask, inputChanged);
@@ -235,7 +222,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
           contactTask.Author.appendChild(CntctTskAuthors);
         });
 
-        // Creates a checkbox
+        // Creates a checkbox for completed or not completed tasks
         contactTask.CheckBox.type = 'checkbox';
         contactTask.CheckBox.checked = value.Completed;
         contactTask.CheckBox.setAttribute('class', `form-check-input mt-0 ${bartkaCheckboxTag}`);
@@ -243,14 +230,25 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         contactTask.CheckBox.addEventListener('click', (inputChanged) => {
           updateContactTasks(contactTask, inputChanged);
         });
-
-        // Appends all new elements to Contact Task Group
         ContactTaskGroup.appendChild(contactTask.CheckBox);
+
+        // Creates a text input for the description
+        contactTask.Description.value = `${value.Description}`;
+        contactTask.Description.spellcheck = 'false';
+        contactTask.Description.setAttribute('class', `form-control ${eventDescriptionsTag} border-top-0`);
+        if (slctdCalTask && slctdCalTask == contactTask.UID)
+          contactTask.Description.classList.add('contactTaskSelected');
+        contactTask.Description.addEventListener('change', (inputChanged) => {
+          updateContactTasks(contactTask, inputChanged);
+        });
+        contactTask.Description.addEventListener('keyup', () => {
+          auto_height(contactTask.Description);
+        });
         ContactTaskList.appendChild(contactTask.Description);
         contactTask.Description.style.height = '1px';
         contactTask.Description.style.height = contactTask.Description.scrollHeight + 2 + 'px';
       }
-      return data;
+      return data; //probably does nothing
     });
   });
 }
