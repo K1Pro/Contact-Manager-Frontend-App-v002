@@ -297,10 +297,13 @@ function buttonHandlers() {
       if (_id.value && contactTasksTextArea.value) {
         monthlyEventsArray = {
           EventAuthor: EventAuthor.value,
+          DayOfWeek: createEventTime.value.slice(8, 10), //need to compute this
           DayOfMonth: createEventTime.value.slice(8, 10),
+          DayOfYear: createEventTime.value.slice(5, 10),
           DateYYYYMMDD: createEventTime.value.slice(0, 10),
           DateHHMMSS: createEventTime.value.slice(10, 16),
           Description: contactTasksTextArea.value,
+          Completed: false,
         };
         fetch(`${srvrURL}/${_id.value}`, {
           method: 'PATCH',

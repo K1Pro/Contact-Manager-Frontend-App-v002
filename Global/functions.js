@@ -169,10 +169,6 @@ function calendarDatesFillIn(chosenDate) {
   }
 }
 
-function recurringTasks() {
-  RecurringTaskList.innerHTML = '';
-}
-
 function loadContactTasks(dailyTask, slctdCalTask) {
   cntctTasksArray.forEach((cntctTasks) => {
     getJSON(`${srvrURL}${cntctTasks.apiPath}${dailyTask}`).then((data) => {
