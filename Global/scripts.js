@@ -29,7 +29,7 @@ function isInt(n) {
 }
 ///////////////////////////////////////////////////////////
 ////////////// vvv Updates contact tasks vvv //////////////
-function updateContactTasks(contactTask) {
+function updateContactTasks(contactTask, inputChanged) {
   fetch(`${srvrURL}${updateEventPath}${contactTask.UID}`, {
     method: 'PATCH',
     body: JSON.stringify({
@@ -46,7 +46,16 @@ function updateContactTasks(contactTask) {
   })
     .then((response) => response.text())
     .then(() => {
-      snackbar(`Update event for ${FirstName.value}`);
+      if (inputChanged.target.type == 'checkbox') {
+        if (inputChanged.target.checked == true) {
+          let checkCompletion = document.getElementById(`Event${contactTask.UID}`);
+          checkCompletion.setAttribute('class', `${eCmpltdTag} ${textlightTag} ${activeTag}`);
+        } else {
+          let checkCompletion = document.getElementById(`Event${contactTask.UID}`);
+          checkCompletion.setAttribute('class', `${eNotCmpltdTag} ${textlightTag} ${activeTag}`);
+        }
+      }
+      snackbar(`Event updated for ${FirstName.value}`);
       contactEditDate();
     });
 }

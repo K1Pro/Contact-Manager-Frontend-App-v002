@@ -42,7 +42,10 @@ let calEvntsArray = [
   },
 ];
 
-let cntctTasksArray = [{ taskType: 'CalendarEvents' }, { taskType: 'RecurEvents' }];
+let cntctTasksArray = [
+  { taskType: 'CalendarEvents', apiPath: eventsPath },
+  { taskType: 'RecurEvents', apiPath: recurPath },
+];
 
 // Probably delete this
 // let dynamic = {
