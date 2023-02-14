@@ -3,7 +3,7 @@ function elementsRequired() {
 
   // Contact Task Module Elements
   ContactTaskList = document.getElementById('ContactTaskList');
-  RecurringTask = document.getElementById('RecurringTask');
+  RecurringTaskList = document.getElementById('RecurringTaskList');
   contactTasksTextArea = document.getElementById('contactTasksTextArea');
   cntctTasksTxtAreaList = document.getElementById('cntctTasksTxtAreaList');
   createEventTime = document.getElementById('createEventTime');

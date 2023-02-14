@@ -16,7 +16,6 @@ function loadSidePanel(URL, slctdCalTask) {
       if (ContactFieldsIDs == '_id') {
         let contactID = document.getElementById(`${ContactFieldsIDs}`);
         loadContactTasks(contactID.value, slctdCalTask);
-        // loadRecurCntctTasks(contactID.value, slctdCalTask);
         // Highlights each renewal and event active in the calendar
         calID = data.data.contacts[0]._id;
         for (let rep = 0; rep < 31; rep++) {
@@ -171,14 +170,14 @@ function calendarDatesFillIn(chosenDate) {
 }
 
 function recurringTasks() {
-  RecurringTask.innerHTML = '';
+  RecurringTaskList.innerHTML = '';
 }
 
 function loadContactTasks(dailyTask, slctdCalTask) {
-  RecurringTask.innerHTML = '';
-  ContactTaskList.innerHTML = '';
   cntctTasksArray.forEach((cntctTasks) => {
     getJSON(`${srvrURL}${cntctTasks.apiPath}${dailyTask}`).then((data) => {
+      taskList = document.getElementById(cntctTasks.placeHolder);
+      taskList.innerHTML = '';
       // sorts the array in reverse chronological order
       let CalendarEventsArray = data.data[cntctTasks.taskType];
       CalendarEventsArray.sort(compare);
@@ -187,7 +186,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         // Creates a DIV
         let ContactTaskGroup = document.createElement('div');
         ContactTaskGroup.setAttribute('class', 'input-group');
-        ContactTaskList.appendChild(ContactTaskGroup);
+        taskList.appendChild(ContactTaskGroup);
 
         let contactTask = {
           UID: value._id,
@@ -200,7 +199,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         // Creates a datetime-local Input
         contactTask.Dated.type = 'datetime-local';
         contactTask.Dated.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
-        contactTask.Dated.setAttribute('class', `form-control eventDates border-bottom-0`);
+        contactTask.Dated.setAttribute('class', `form-control ${cntctTasks.CSSstyle}Dates border-bottom-0`);
         if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Dated.classList.add('contactTaskSelected');
         contactTask.Dated.addEventListener('change', (inputChanged) => {
           updateContactTasks(contactTask, inputChanged);
@@ -223,19 +222,22 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         });
 
         // Creates a checkbox for completed or not completed tasks
-        contactTask.CheckBox.type = 'checkbox';
-        contactTask.CheckBox.checked = value.Completed;
-        contactTask.CheckBox.setAttribute('class', `form-check-input mt-0 ${bartkaCheckboxTag}`);
-        if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.CheckBox.classList.add('contactTaskSelected');
-        contactTask.CheckBox.addEventListener('click', (inputChanged) => {
-          updateContactTasks(contactTask, inputChanged);
-        });
-        ContactTaskGroup.appendChild(contactTask.CheckBox);
+        if (cntctTasks.checkBox) {
+          contactTask.CheckBox.type = 'checkbox';
+          contactTask.CheckBox.checked = value.Completed;
+          contactTask.CheckBox.setAttribute('class', `form-check-input mt-0 ${bartkaCheckboxTag}`);
+          if (slctdCalTask && slctdCalTask == contactTask.UID)
+            contactTask.CheckBox.classList.add('contactTaskSelected');
+          contactTask.CheckBox.addEventListener('click', (inputChanged) => {
+            updateContactTasks(contactTask, inputChanged);
+          });
+          ContactTaskGroup.appendChild(contactTask.CheckBox);
+        }
 
         // Creates a text input for the description
         contactTask.Description.value = `${value.Description}`;
         contactTask.Description.spellcheck = 'false';
-        contactTask.Description.setAttribute('class', `form-control ${eventDescriptionsTag} border-top-0`);
+        contactTask.Description.setAttribute('class', `form-control ${cntctTasks.CSSstyle}Descriptions border-top-0`);
         if (slctdCalTask && slctdCalTask == contactTask.UID)
           contactTask.Description.classList.add('contactTaskSelected');
         contactTask.Description.addEventListener('change', (inputChanged) => {
@@ -244,137 +246,12 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         contactTask.Description.addEventListener('keyup', () => {
           auto_height(contactTask.Description);
         });
-        ContactTaskList.appendChild(contactTask.Description);
+        taskList.appendChild(contactTask.Description);
         contactTask.Description.style.height = '1px';
         contactTask.Description.style.height = contactTask.Description.scrollHeight + 2 + 'px';
       }
       return data; //probably does nothing
     });
-  });
-}
-
-function loadRecurCntctTasks(dailyTask, slctdCalTask) {
-  RecurringTask.innerHTML = '';
-  getJSON(`${srvrURL}${recurPath}${dailyTask}`).then((data) => {
-    // console.log(data);
-    // sorts the array in reverse chronological order
-    let CalendarEventsArray = data.data.RecurEvents;
-    // CalendarEventsArray.sort(compare);
-
-    for (const [key, value] of Object.entries(CalendarEventsArray)) {
-      // Creates a DIV
-      let ContactTaskGroup = document.createElement('div');
-      ContactTaskGroup.setAttribute('class', 'input-group');
-      RecurringTask.appendChild(ContactTaskGroup);
-
-      let contactTask = {
-        UID: value._id,
-        Dated: document.createElement('input'),
-        Description: document.createElement('textarea'),
-        // CheckBox: document.createElement('input'),
-        Author: document.createElement('select'),
-      };
-      // Creates a datetime-local Input
-      contactTask.Dated.type = 'datetime-local';
-      contactTask.Dated.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
-      contactTask.Dated.setAttribute('class', `form-control recurDates border-bottom-0`);
-      if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Dated.classList.add('contactTaskSelected');
-      // contactTask.Dated.addEventListener('change', () => {
-      //   updateContactTasks(contactTask);
-      // });
-      ContactTaskGroup.appendChild(contactTask.Dated);
-
-      // Creates a text input for the description
-      contactTask.Description.value = `${value.Description}`;
-      contactTask.Description.spellcheck = 'false';
-      // contactTask.Description.rows = Math.round(
-      //   contactTask.Description.value.length / 120 + 1
-      // );
-      contactTask.Description.setAttribute('class', `form-control ${recurDescriptionsTag} border-top-0`);
-      if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Description.classList.add('contactTaskSelected');
-      // contactTask.Description.addEventListener('change', () => {
-      //   updateContactTasks(contactTask);
-      // });
-      // contactTask.Description.addEventListener('keyup', () => {
-      //   auto_height(contactTask.Description);
-      // });
-
-      // Create a select input for the Event Author
-      // contactTask.Author.addEventListener('change', () => {
-      //   updateContactTasks(contactTask);
-      // });
-      contactTask.Author.setAttribute('name', `TasksAgentSelector`);
-      if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Author.classList.add('contactTaskSelected');
-      ContactTaskGroup.appendChild(contactTask.Author);
-
-      LastEditedByS.forEach((staffMember) => {
-        let CntctTskAuthors = document.createElement('option');
-        CntctTskAuthors.value = staffMember;
-        CntctTskAuthors.innerHTML = staffMember;
-        if (value.EventAuthor == staffMember) CntctTskAuthors.selected = true;
-        contactTask.Author.appendChild(CntctTskAuthors);
-      });
-
-      // Creates a checkbox
-      // contactTask.CheckBox.type = 'checkbox';
-      // contactTask.CheckBox.checked = value.Completed;
-      // contactTask.CheckBox.setAttribute(
-      //   'class',
-      //   `form-check-input mt-0 ${bartkaCheckboxTag}`
-      // );
-      // if (slctdCalTask && slctdCalTask == contactTask.UID)
-      //   contactTask.CheckBox.classList.add('contactTaskSelected');
-      // contactTask.CheckBox.addEventListener('click', () => {
-      //   fetch(`${srvrURL}${updateEventPath}${value._id}`, {
-      //     method: 'PATCH',
-      //     body: JSON.stringify({
-      //       _id: value._id,
-      //       EventAuthor: contactTask.Author.value,
-      //       DateYYYYMMDD: contactTask.Dated.value.slice(0, 10),
-      //       DateHHMMSS: contactTask.Dated.value.slice(10, 16),
-      //       Description: contactTask.Description.value,
-      //       Completed: contactTask.CheckBox.checked,
-      //     }),
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //   })
-      //     .then((response) => response.text())
-      //     .then(() => {
-      //       contactEditDate();
-      //       let checkCompletion = document.getElementById(`Event${value._id}`);
-      //       if (checkCompletion) {
-      //         checkCompletion = checkCompletion.className;
-      //         if (checkCompletion.includes(eNotCmpltdTag)) {
-      //           let checkCompletion = document.getElementById(
-      //             `Event${value._id}`
-      //           );
-      //           checkCompletion.setAttribute(
-      //             'class',
-      //             `${eCmpltdTag} ${textlightTag} task${value._id}`
-      //           );
-      //         } else {
-      //           let checkCompletion = document.getElementById(
-      //             `Event${value._id}`
-      //           );
-      //           checkCompletion.setAttribute(
-      //             'class',
-      //             `${eNotCmpltdTag} ${textlightTag} task${value._id}`
-      //           );
-      //         }
-      //       }
-      //       // PhoneInput = document.getElementById('Phone');
-      //       // contactTasksTextArea.value = '';
-      //       snackbar(`Event updated for ${FirstName.value}`);
-      //       // loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
-      //     });
-      // });
-      // ContactTaskGroup.appendChild(contactTask.CheckBox);
-      RecurringTask.appendChild(contactTask.Description);
-      contactTask.Description.style.height = '1px';
-      contactTask.Description.style.height = contactTask.Description.scrollHeight + 2 + 'px';
-    }
-    return data;
   });
 }
 

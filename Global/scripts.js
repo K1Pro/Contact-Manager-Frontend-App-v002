@@ -35,6 +35,9 @@ function updateContactTasks(contactTask, inputChanged) {
     body: JSON.stringify({
       _id: contactTask.UID,
       EventAuthor: contactTask.Author.value,
+      DayOfWeek: contactTask.Dated.value.slice(8, 10), //need to compute this
+      DayOfMonth: contactTask.Dated.value.slice(8, 10),
+      DayOfYear: contactTask.Dated.value.slice(5, 10),
       DateYYYYMMDD: contactTask.Dated.value.slice(0, 10),
       DateHHMMSS: contactTask.Dated.value.slice(10, 16),
       Description: contactTask.Description.value,
@@ -49,10 +52,10 @@ function updateContactTasks(contactTask, inputChanged) {
       if (inputChanged.target.type == 'checkbox') {
         if (inputChanged.target.checked == true) {
           let checkCompletion = document.getElementById(`Event${contactTask.UID}`);
-          checkCompletion.setAttribute('class', `${eCmpltdTag} ${textlightTag} ${activeTag}`);
+          if (checkCompletion) checkCompletion.setAttribute('class', `${eCmpltdTag} ${textlightTag} ${activeTag}`);
         } else {
           let checkCompletion = document.getElementById(`Event${contactTask.UID}`);
-          checkCompletion.setAttribute('class', `${eNotCmpltdTag} ${textlightTag} ${activeTag}`);
+          if (checkCompletion) checkCompletion.setAttribute('class', `${eNotCmpltdTag} ${textlightTag} ${activeTag}`);
         }
       }
       snackbar(`Event updated for ${FirstName.value}`);

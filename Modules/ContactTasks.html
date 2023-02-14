@@ -1,10 +1,5 @@
 <div class="input-group">
-  <input
-    type="datetime-local"
-    id="createEventTime"
-    min="2000-06-06T00:00"
-    max="2050-06-22T00:00"
-  />
+  <input type="datetime-local" id="createEventTime" min="2000-06-06T00:00" max="2050-06-22T00:00" />
   <select class="form-select" id="EventAuthor">
     <option selected disabled="disabled">Agent</option>
   </select>
@@ -12,9 +7,7 @@
     Create Event
   </button> -->
   <!-- New Button -->
-  <button type="button" class="btn btn-success" id="createEvent">
-    Create Event
-  </button>
+  <button type="button" class="btn btn-success" id="createEvent">Create Event</button>
   <!-- <button
     type="button"
     class="btn btn-success dropdown-toggle dropdown-toggle-split"
@@ -50,11 +43,7 @@
   >
     <span class="visually-hidden">Toggle Dropdown</span>
   </button>
-  <ul
-    id="RecurEvents"
-    class="dropdown-menu dropdown-menu-end"
-    data-bs-theme="dark"
-  >
+  <ul id="RecurEvents" class="dropdown-menu dropdown-menu-end" data-bs-theme="dark">
     <li>
       <a id="WeeklyEvents" class="dropdown-item">Create Weekly Event</a>
     </li>
@@ -62,9 +51,7 @@
       <a id="MonthlyEvents" class="dropdown-item">Create Monthly Event</a>
     </li>
     <li>
-      <a id="SemiAnnualEvents" class="dropdown-item"
-        >Create Semi-annual Event</a
-      >
+      <a id="SemiAnnualEvents" class="dropdown-item">Create Semi-annual Event</a>
     </li>
     <li>
       <a id="AnnualEvents" class="dropdown-item">Create Annual Event</a>
@@ -83,24 +70,16 @@
   ></textarea>
   <ul id="cntctTasksTxtAreaList" class="dropdown-menu">
     <li>
-      <a class="dropdown-item eventTemplates" id="Just-called"
-        >Just called...[Insert text here]</a
-      >
+      <a class="dropdown-item eventTemplates" id="Just-called">Just called...[Insert text here]</a>
     </li>
     <li>
-      <a class="dropdown-item eventTemplates" id="Made-a-payment"
-        >Made a payment...[Insert text here]</a
-      >
+      <a class="dropdown-item eventTemplates" id="Made-a-payment">Made a payment...[Insert text here]</a>
     </li>
     <li>
-      <a class="dropdown-item eventTemplates" id="Endorsement-created"
-        >Endorsement...[Insert text here]</a
-      >
+      <a class="dropdown-item eventTemplates" id="Endorsement-created">Endorsement...[Insert text here]</a>
     </li>
     <li>
-      <a class="dropdown-item eventTemplates" id="Endorsement-created"
-        >Requested a quote...[Insert text here]</a
-      >
+      <a class="dropdown-item eventTemplates" id="Endorsement-created">Requested a quote...[Insert text here]</a>
     </li>
     <!-- <li><hr class="dropdown-divider" /></li>
     <li><a class="dropdown-item" href="#">Separated link</a></li> -->
@@ -114,6 +93,6 @@
   </datalist> -->
 </div>
 <br />
-<form id="RecurringTask"></form>
+<form id="RecurringTaskList"></form>
 <form id="ContactTaskList"></form>
 <div id="ContactTasksHTMLModule"></div>
