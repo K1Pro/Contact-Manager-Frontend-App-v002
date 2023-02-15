@@ -295,9 +295,9 @@ function buttonHandlers() {
     recurEvents.addEventListener('click', function (e) {
       console.log(e.target.id);
       if (_id.value && contactTasksTextArea.value) {
-        monthlyEventsArray = {
+        recurringEventsObj = {
           EventAuthor: EventAuthor.value,
-          DayOfWeek: createEventTime.value.slice(8, 10), //need to compute this
+          DayOfWeek: `${new Date(createEventTime.value.slice(0, 10)).getDay()}`, //need to compute this
           DayOfMonth: createEventTime.value.slice(8, 10),
           DayOfYear: createEventTime.value.slice(5, 10),
           DateYYYYMMDD: createEventTime.value.slice(0, 10),
@@ -305,10 +305,26 @@ function buttonHandlers() {
           Description: contactTasksTextArea.value,
           Completed: false,
         };
+        fetch(`${srvrURL}${deleteEmptyFieldPath}${_id.value}`, {
+          method: 'DELETE',
+          body: JSON.stringify({
+            WeeklyEvents: '',
+            MonthlyEvents: '',
+            SemiAnnualEvents: '',
+            AnnualEvents: '',
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .catch((error) => {
+            alert('Please connect to server');
+          });
         fetch(`${srvrURL}/${_id.value}`, {
           method: 'PATCH',
           body: JSON.stringify({
-            [e.target.id]: monthlyEventsArray,
+            [e.target.id]: recurringEventsObj,
           }),
           headers: {
             'Content-Type': 'application/json',
