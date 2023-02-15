@@ -188,6 +188,8 @@ function loadContactTasks(dailyTask, slctdCalTask) {
           UID: value._id,
           Dated: document.createElement('input'),
           Description: document.createElement('textarea'),
+          CheckBoxLabel: document.createElement('label'),
+          CheckBoxSpan: document.createElement('span'),
           CheckBox: document.createElement('input'),
           Author: document.createElement('select'),
         };
@@ -209,16 +211,18 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         contactTask.Author.setAttribute('name', `TasksAgentSelector`);
         if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Author.classList.add('contactTaskSelected');
         ContactTaskGroup.appendChild(contactTask.Author);
-        LastEditedByS.forEach((staffMember) => {
+        cntctTasks.DropDown.forEach((dropDownOpt) => {
           let CntctTskAuthors = document.createElement('option');
-          CntctTskAuthors.value = staffMember;
-          CntctTskAuthors.innerHTML = staffMember;
-          if (value.EventAuthor == staffMember) CntctTskAuthors.selected = true;
+          CntctTskAuthors.value = dropDownOpt;
+          CntctTskAuthors.innerHTML = dropDownOpt;
+          if (value.EventAuthor == dropDownOpt) CntctTskAuthors.selected = true;
           contactTask.Author.appendChild(CntctTskAuthors);
         });
 
         // Creates a checkbox for completed or not completed tasks
         if (cntctTasks.checkBox) {
+          contactTask.CheckBoxLabel.setAttribute('class', `${cntctTasks.CSSstyle}checkBoxLabel`);
+          ContactTaskGroup.appendChild(contactTask.CheckBoxLabel);
           contactTask.CheckBox.type = 'checkbox';
           contactTask.CheckBox.checked = value.Completed;
           contactTask.CheckBox.setAttribute('class', `form-check-input mt-0 ${bartkaCheckboxTag}`);
@@ -227,7 +231,9 @@ function loadContactTasks(dailyTask, slctdCalTask) {
           contactTask.CheckBox.addEventListener('click', (inputChanged) => {
             updateContactTasks(contactTask, inputChanged);
           });
-          ContactTaskGroup.appendChild(contactTask.CheckBox);
+          contactTask.CheckBoxLabel.appendChild(contactTask.CheckBox);
+          contactTask.CheckBoxSpan.setAttribute('class', `${cntctTasks.CSSstyle}checkBoxSpan`);
+          contactTask.CheckBoxLabel.appendChild(contactTask.CheckBoxSpan);
         }
 
         // Creates a text input for the description

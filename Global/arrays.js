@@ -1,5 +1,6 @@
 const recurEvntsArray = ['WeeklyEvents', 'MonthlyEvents', 'SemiAnnualEvents', 'AnnualEvents'];
 const LastEditedByS = ['Bartosz', 'Hanna', 'Kamilla', 'Piotr', 'Aneta', 'Yuliya', 'Eliza'];
+const recrrngEvntsArray = ['Weekly', 'Monthly', 'SemiAnnual', 'Annual'];
 const StatusS = ['Customer', 'Former-customer', 'Prospect', 'Hot-Lead', 'Cold-Lead', 'Do-Not-Call', 'Do-Not-Renew'];
 const SourceS = ['Erie', 'Allstate', 'Assurance', 'Live-Transfer-Lead', 'Online-Lead', 'Referral'];
 const DaysS = ['Days (28)', 'Days (21)', 'Days (14)', 'Days (07)', 'Days (01)'];
@@ -48,9 +49,17 @@ let cntctTasksArray = [
     apiPath: eventsPath,
     CSSstyle: 'event',
     placeHolder: 'ContactTaskList',
+    DropDown: LastEditedByS,
     checkBox: true,
   },
-  { taskType: 'RecurEvents', apiPath: recurPath, CSSstyle: 'recur', placeHolder: 'RecurringTaskList', checkBox: false },
+  {
+    taskType: 'RecurEvents',
+    apiPath: recurPath,
+    CSSstyle: 'recur',
+    placeHolder: 'RecurringTaskList',
+    DropDown: recrrngEvntsArray,
+    checkBox: true,
+  },
 ];
 
 // Probably delete this

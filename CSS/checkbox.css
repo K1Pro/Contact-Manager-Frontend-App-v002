@@ -1,0 +1,234 @@
+/* The container */
+.eventcheckBoxLabel {
+  display: block;
+  position: relative;
+  padding-left: 36px;
+  /* margin-bottom: 12px; */
+  cursor: pointer;
+  /* font-size: 22px; */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.eventcheckBoxLabel input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.eventcheckBoxSpan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 36px;
+  width: 36px;
+  /* background-color: #eee; */
+  background-image: url('./../icons/event.jpg');
+}
+
+/* On mouse-over, add a grey background color */
+.eventcheckBoxLabel:hover input ~ .eventcheckBoxSpan {
+  /* background-color: #ccc; */
+  background-image: url('./../icons/eventHover.jpg');
+}
+
+/* When the checkbox is checked, add a blue background */
+.eventcheckBoxLabel input:checked ~ .eventcheckBoxSpan {
+  /* background-color: #ff3366; */
+  background-image: url('./../icons/eventChecked.jpg');
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.eventcheckBoxSpan:after {
+  /* content: ''; */
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.eventcheckBoxLabel input:checked ~ .eventcheckBoxSpan:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.eventcheckBoxLabel .eventcheckBoxSpan:after {
+  /* left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg); */
+}
+
+/* 
+.bartkaCheckbox {
+  width: 41px;
+  height: 41px;
+  opacity: 0;
+}
+
+.bartkaCheckbox:checked {
+  width: 41px;
+  height: 41px;
+  background-color: #ff3366 !important;
+} */
+/* The container */
+.recurcheckBoxLabel {
+  display: block;
+  position: relative;
+  padding-left: 36px;
+  /* margin-bottom: 12px; */
+  cursor: pointer;
+  /* font-size: 22px; */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.recurcheckBoxLabel input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.recurcheckBoxSpan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 36px;
+  width: 36px;
+  /* background-color: #eee; */
+  background-image: url('./../icons/trash.jpg');
+}
+
+/* On mouse-over, add a grey background color */
+.recurcheckBoxLabel:hover input ~ .recurcheckBoxSpan {
+  /* background-color: #ccc; */
+  background-image: url('./../icons/trashHover.jpg');
+}
+
+/* When the checkbox is checked, add a blue background */
+.recurcheckBoxLabel input:checked ~ .recurcheckBoxSpan {
+  /* background-color: #ff3366; */
+  background-image: url('./../icons/trash.jpg');
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.recurcheckBoxSpan:after {
+  /* content: ''; */
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.recurcheckBoxLabel input:checked ~ .recurcheckBoxSpan:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.recurcheckBoxLabel .recurcheckBoxSpan:after {
+  /* left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg); */
+}
+
+/* 
+.bartkaCheckbox {
+  width: 41px;
+  height: 41px;
+  opacity: 0;
+}
+
+.bartkaCheckbox:checked {
+  width: 41px;
+  height: 41px;
+  background-color: #ff3366 !important;
+} */
+/* ====================Original template============= */
+/* The bartcontainer */
+/* .bartcontainer {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+} */
+
+/* Hide the browser's default checkbox */
+/* .bartcontainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+} */
+
+/* Create a custom checkbox */
+/* .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+} */
+
+/* On mouse-over, add a grey background color */
+/* .bartcontainer:hover input ~ .checkmark {
+  background-color: #ccc;
+} */
+
+/* When the checkbox is checked, add a blue background */
+/* .bartcontainer input:checked ~ .checkmark {
+  background-color: #2196f3;
+} */
+
+/* Create the checkmark/indicator (hidden when not checked) */
+/* .checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+} */
+
+/* Show the checkmark when checked */
+/* .bartcontainer input:checked ~ .checkmark:after {
+  display: block;
+} */
+
+/* Style the checkmark/indicator */
+/* .bartcontainer .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+} */

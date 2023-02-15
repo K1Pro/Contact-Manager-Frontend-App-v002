@@ -11,13 +11,7 @@
   <datalist id="contactsList"> </datalist>
 </div>
 <form id="ContactFields">
-  <input
-    type="text"
-    placeholder="Contact ID"
-    class="form-control"
-    id="_id"
-    disabled
-  />
+  <input type="text" placeholder="Contact ID" class="form-control" id="_id" disabled />
   <!-- Household Information -->
   <div class="input-group">
     <input
@@ -55,18 +49,8 @@
   </div>
 
   <div class="input-group">
-    <input
-      type="text"
-      placeholder="Spouse First Name"
-      class="form-control leftBorderGreen"
-      id="SpouseName"
-    />
-    <input
-      type="text"
-      placeholder="Spouse Last Name"
-      class="form-control topBottomBorderBlack"
-      id="SpouseLastName"
-    />
+    <input type="text" placeholder="Spouse First Name" class="form-control leftBorderGreen" id="SpouseName" />
+    <input type="text" placeholder="Spouse Last Name" class="form-control topBottomBorderBlack" id="SpouseLastName" />
     <!-- <input
       type="text"
       placeholder="Birth Date"
@@ -87,46 +71,17 @@
   <!-- Contact Information -->
   <div class="input-group">
     <!-- <div class="col-md-8 paddingZero"> need to add row to div class above -->
-    <input
-      type="text"
-      class="form-control leftBorderBlue"
-      id="Address"
-      placeholder="Address"
-    />
+    <input type="text" class="form-control leftBorderBlue" id="Address" placeholder="Address" />
     <!-- </div>
   <div class="col-md-4 paddingZero"> -->
-    <input
-      type="text"
-      class="form-control topBottomRightBorderBlack"
-      id="Address2"
-      placeholder="Unit"
-    />
+    <input type="text" class="form-control topBottomRightBorderBlack" id="Address2" placeholder="Unit" />
     <!-- </div> -->
   </div>
   <div class="input-group">
-    <input
-      type="text"
-      placeholder="City"
-      class="form-control leftBorderBlue"
-      id="City"
-    />
-    <select
-      id="State"
-      class="form-select topBottomBorderBlack"
-      w3-include-html="./HTML/StateDropDown01.html"
-    ></select>
-    <input
-      type="text"
-      placeholder="Zip"
-      class="form-control topBottomBorderBlack"
-      id="Zip"
-    />
-    <input
-      type="text"
-      class="form-control topBottomRightBorderBlack"
-      id="EHV"
-      placeholder="EHV"
-    />
+    <input type="text" placeholder="City" class="form-control leftBorderBlue" id="City" />
+    <select id="State" class="form-select topBottomBorderBlack" w3-include-html="./HTML/StateDropDown01.html"></select>
+    <input type="text" placeholder="Zip" class="form-control topBottomBorderBlack" id="Zip" />
+    <input type="text" class="form-control topBottomRightBorderBlack" id="EHV" placeholder="EHV" />
   </div>
   <div class="input-group">
     <input
@@ -139,12 +94,7 @@
       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
       required
     />
-    <input
-      type="text"
-      placeholder="Email"
-      class="form-control topBottomRightBorderBlack"
-      id="Email"
-    />
+    <input type="text" placeholder="Email" class="form-control topBottomRightBorderBlack" id="Email" />
   </div>
   <br />
 
@@ -255,26 +205,11 @@
       onfocus="this.oldvalue = this.value;"
       onchange="onChangeTest(this); this.oldvalue = this.value;"
     />
-    <input
-      type="text"
-      placeholder="Car 2"
-      class="form-control topBottomRightBorderBlack"
-      id="Car2"
-    />
+    <input type="text" placeholder="Car 2" class="form-control topBottomRightBorderBlack" id="Car2" />
   </div>
   <div class="input-group">
-    <input
-      type="text"
-      placeholder="Car3"
-      class="form-control leftBorderPurple"
-      id="Car3"
-    />
-    <input
-      type="text"
-      placeholder="Car 4"
-      class="form-control topBottomRightBorderBlack"
-      id="Car4"
-    />
+    <input type="text" placeholder="Car3" class="form-control leftBorderPurple" id="Car3" />
+    <input type="text" placeholder="Car 4" class="form-control topBottomRightBorderBlack" id="Car4" />
   </div>
   <br />
 
@@ -285,11 +220,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Notes</span>
         </div>
-        <textarea
-          class="form-control"
-          aria-label="With textarea"
-          id="Notes"
-        ></textarea>
+        <textarea class="form-control" aria-label="With textarea" id="Notes"></textarea>
       </div>
     </div>
   </div>
@@ -315,10 +246,7 @@
     <select class="form-select leftBorderRed dynamicInputs" id="Status">
       <option selected disabled="disabled">Status</option>
     </select>
-    <select
-      class="form-select topBottomRightBorderBlack dynamicInputs"
-      id="Source"
-    >
+    <select class="form-select topBottomRightBorderBlack dynamicInputs" id="Source">
       <option selected disabled="disabled">Source</option>
     </select>
   </div>
@@ -326,11 +254,10 @@
     <select class="form-select leftBorderRed dynamicInputs" id="LastEditedBy">
       <option selected disabled="disabled">Agent</option>
     </select>
-    <button class="btn btn-warning" type="button" id="reviewContact">
-      Reviewed
-    </button>
+    <button class="btn btn-warning" type="button" id="reviewContact">Reviewed</button>
     <a class="btn btn-success" id="callContact" href="tel:">Call</a>
     <!-- <button class="btn btn-success" type="button" id="callContact">Call</button> -->
   </div>
 </form>
+
 <div id="SidePanelHTMLModule"></div>

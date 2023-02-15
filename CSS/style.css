@@ -294,15 +294,6 @@ input[type='date']:invalid::-webkit-datetime-edit {
 .active:hover {
   background-color: #0066ff;
 }
-.bartkaCheckbox {
-  width: 41px;
-  height: 41px;
-}
-.bartkaCheckbox:checked {
-  width: 41px;
-  height: 41px;
-  background-color: #ff3366 !important;
-}
 
 #createEventTime {
   border: 0px;

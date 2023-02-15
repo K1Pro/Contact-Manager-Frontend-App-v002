@@ -45,10 +45,10 @@ const DaysObj = {
 };
 
 const repeatEvnts = {
-  weekly: 'weekly',
-  biweekly: 'biweekly',
-  monthly: 'monthly',
-  bimonthly: 'bimonthly',
-  semiannual: 'semiannual',
-  annual: 'annual',
+  Weekly: 'Weekly',
+  // BiWeekly: 'BiWeekly',
+  Monthly: 'Monthly',
+  // BiMonthly: 'BiMonthly',
+  SemiAnnual: 'SemiAnnual',
+  Annual: 'Annual',
 };
