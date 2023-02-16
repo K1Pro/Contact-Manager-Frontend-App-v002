@@ -100,7 +100,6 @@ function calendarDatesFillIn(chosenDate) {
     });
 
     calEvntsArray.forEach((calEvnt) => {
-      console.log(calEvnt.param(calDates, rnwlDates));
       getJSON(`${srvrURL}${calEvnt.apiPath}${calEvnt.param(calDates, rnwlDates)}`).then((data) => {
         if (data.data.contacts.length) {
           rnwlCntcts = data.data.contacts;
@@ -111,6 +110,7 @@ function calendarDatesFillIn(chosenDate) {
               let calCntct = document.createElement('div');
               calCntct.classList.add(calEvnt.evntType);
               if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
+
               calCntct.classList.add(textlightTag);
               calCntct.classList.add(calTaskTag);
               calCntct.classList.add(rnwlCntct.Status);
@@ -122,13 +122,9 @@ function calendarDatesFillIn(chosenDate) {
                 return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
               });
               // Last Edit By or Event Author added to class name
-              if (data.type == 'renewal') calCntct.classList.add(rnwlCntct.LastEditedBy);
-              if (data.type == 'event') calCntct.classList.add(sortedCalEvents[0].EventAuthor);
-              if (data.type == 'weekly') calCntct.classList.add(rnwlCntct.LastEditedBy);
-              if (data.type == 'monthly') calCntct.classList.add(rnwlCntct.LastEditedBy);
-              if (data.type == 'semiannual') calCntct.classList.add(rnwlCntct.LastEditedBy);
-              if (data.type == 'annual') calCntct.classList.add(rnwlCntct.LastEditedBy);
-
+              data.type == 'event'
+                ? calCntct.classList.add(sortedCalEvents[0].EventAuthor)
+                : calCntct.classList.add(rnwlCntct.LastEditedBy);
               // Completed or Not Completed Styling
               (data.type == 'renewal' && lastReviewDateNoDash >= calDateNoDash) ||
               (data.type == 'event' && sortedCalEvents[0]?.Completed) ||
