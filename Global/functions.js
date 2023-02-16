@@ -63,6 +63,7 @@ function loadSidePanel(URL, slctdCalTask) {
 }
 
 function calendarDatesFillIn(chosenDate) {
+  let calRep = 0;
   let prevMondayLastWeek = 1 - chosenDate.getDay() - daysInWeek;
   for (let rep = 0; rep < 28; rep++) {
     document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);
@@ -104,6 +105,8 @@ function calendarDatesFillIn(chosenDate) {
         if (data.data.contacts.length) {
           rnwlCntcts = data.data.contacts;
           rnwlCntcts.map((rnwlCntct) => {
+            calRep++;
+            console.log(calRep);
             rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
             cntctCreatedDate = rnwlCntct.CreateDate;
             if (rtrvdCalDateSlctr >= cntctCreatedDate) {
@@ -141,7 +144,8 @@ function calendarDatesFillIn(chosenDate) {
               calEvnt.rnwlCntct = rnwlCntct._id;
               // Adding text content, ID and Event Listener to each event
               calCntct.textContent = `${rnwlCntct.LastName}`;
-              calCntct.setAttribute('id', calEvnt.idTag());
+              // calCntct.setAttribute('id', calEvnt.idTag());
+              calCntct.setAttribute('id', `event${calRep}`);
               calCntct.addEventListener('click', () => {
                 emailBody.value = '';
                 emailSubject.value = 'choose-email-template';

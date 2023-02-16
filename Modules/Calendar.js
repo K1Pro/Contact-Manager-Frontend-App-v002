@@ -1,13 +1,13 @@
 function calendarModule() {
   // vvv Start coding here for Calendar Module vvv
   CalendarHTML_Date.value = TodaysDate.toJSON().slice(0, 10);
-  calendarDatesFillIn(TodaysDate);
   // populateSelect(LastEditedByS, LastEditedBySelect);
   populateSlctWObj(TasksObj, TasksSelect);
   populateSlctWObj(LastEditedByObj, LastEditedBySelect);
   populateSlctWObj(StatusObj, StatusSelect);
   populateSlctWObj(SourceObj, SourceSelect);
   populateSlctWObj(DaysObj, DaysSelect);
+  calendarDatesFillIn(TodaysDate);
   if (window.innerWidth < 768) {
     /*your functions for big screen*/
     console.log('smallscreen');
