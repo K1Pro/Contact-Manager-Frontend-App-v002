@@ -106,7 +106,6 @@ function calendarDatesFillIn(chosenDate) {
           rnwlCntcts = data.data.contacts;
           rnwlCntcts.map((rnwlCntct) => {
             calRep++;
-            console.log(calRep);
             rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
             cntctCreatedDate = rnwlCntct.CreateDate;
             if (rtrvdCalDateSlctr >= cntctCreatedDate) {
@@ -135,11 +134,11 @@ function calendarDatesFillIn(chosenDate) {
                 ? calCntct.classList.add(`${calEvnt.shrtCut}Cmpltd`)
                 : calCntct.classList.add(`${calEvnt.shrtCut}NotCmpltd`);
               // Passing a few variables into the calEvent
-              calEvnt.sortedCalEvents = sortedCalEvents[0]?._id;
-              calEvnt.weeklyCalEvents = rnwlCntct?.WeeklyEvents[0]?._id;
-              calEvnt.monthlyCalEvents = rnwlCntct?.MonthlyEvents[0]?._id;
-              calEvnt.semiannualCalEvents = rnwlCntct?.SemiAnnualEvents[0]?._id;
-              calEvnt.annualCalEvents = rnwlCntct?.AnnualEvents[0]?._id;
+              // calEvnt.sortedCalEvents = sortedCalEvents[0]?._id;
+              // calEvnt.weeklyCalEvents = rnwlCntct?.WeeklyEvents[0]?._id;
+              // calEvnt.monthlyCalEvents = rnwlCntct?.MonthlyEvents[0]?._id;
+              // calEvnt.semiannualCalEvents = rnwlCntct?.SemiAnnualEvents[0]?._id;
+              // calEvnt.annualCalEvents = rnwlCntct?.AnnualEvents[0]?._id;
               calEvnt.rep = rep;
               calEvnt.rnwlCntct = rnwlCntct._id;
               // Adding text content, ID and Event Listener to each event
