@@ -31,6 +31,17 @@ let calEvntsArray = [
     },
   },
   {
+    evntType: 'weekly',
+    shrtCut: 'w',
+    apiPath: '/WeeklyEvents/',
+    idTag: function () {
+      return `weekly${this.weeklyCalEvents}`;
+    },
+    param: function (calDates, rnwlDates) {
+      return `${new Date(calDates.toJSON().slice(0, 10)).getDay()}`;
+    },
+  },
+  {
     evntType: 'monthly',
     shrtCut: 'm',
     apiPath: MonthlyEventsPath,
@@ -42,7 +53,7 @@ let calEvntsArray = [
     },
   },
 ];
-
+// `${new Date(createEventTime.value.slice(0, 10)).getDay()}`
 let cntctTasksArray = [
   {
     taskType: 'CalendarEvents',

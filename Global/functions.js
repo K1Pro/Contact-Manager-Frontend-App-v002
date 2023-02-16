@@ -100,6 +100,7 @@ function calendarDatesFillIn(chosenDate) {
     });
 
     calEvntsArray.forEach((calEvnt) => {
+      console.log(calEvnt.param(calDates, rnwlDates));
       getJSON(`${srvrURL}${calEvnt.apiPath}${calEvnt.param(calDates, rnwlDates)}`).then((data) => {
         if (data.data.contacts.length) {
           rnwlCntcts = data.data.contacts;
@@ -123,7 +124,8 @@ function calendarDatesFillIn(chosenDate) {
               // Last Edit By or Event Author added to class name
               if (data.type == 'renewal') calCntct.classList.add(rnwlCntct.LastEditedBy);
               if (data.type == 'event') calCntct.classList.add(sortedCalEvents[0].EventAuthor);
-              if (data.type == 'monthly') calCntct.classList.add(rnwlCntct.MonthlyEvents[0].EventAuthor);
+              if (data.type == 'monthly') calCntct.classList.add(rnwlCntct.LastEditedBy);
+              if (data.type == 'weekly') calCntct.classList.add(rnwlCntct.LastEditedBy);
               // Completed or Not Completed Styling
               (data.type == 'renewal' && lastReviewDateNoDash >= calDateNoDash) ||
               (data.type == 'event' && sortedCalEvents[0]?.Completed) ||
@@ -133,6 +135,7 @@ function calendarDatesFillIn(chosenDate) {
               // Passing a few variables into the calEvent
               calEvnt.sortedCalEvents = sortedCalEvents[0]?._id;
               calEvnt.monthlyCalEvents = rnwlCntct?.MonthlyEvents[0]?._id;
+              calEvnt.weeklyCalEvents = rnwlCntct?.WeeklyEvents[0]?._id;
               calEvnt.rep = rep;
               calEvnt.rnwlCntct = rnwlCntct._id;
               // Adding text content, ID and Event Listener to each event
