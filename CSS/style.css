@@ -200,7 +200,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
 
 .renewal,
 .event,
-.monthly {
+.annual,
+.semiannual,
+.monthly,
+.weekly {
   background-color: #ff9933;
   margin-left: -12px;
   padding-left: 12px;
@@ -216,7 +219,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
 
 .renewal:hover,
 .event:hover,
-.monthly:hover {
+.annual:hover,
+.semiannual:hover,
+.monthly:hover,
+.weekly:hover {
   background-color: #cf33ff;
   /* border-radius: 0px !important;
   -webkit-transition: all 1s ease;

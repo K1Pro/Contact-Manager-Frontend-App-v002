@@ -52,8 +52,30 @@ let calEvntsArray = [
       return calDates.toJSON().slice(8, 10);
     },
   },
+  {
+    evntType: 'semiannual',
+    shrtCut: 'sa',
+    apiPath: /SemiAnnualEvents/,
+    idTag: function () {
+      return `semiannual${this.semiannualCalEvents}`;
+    },
+    param: function (calDates, rnwlDates) {
+      return calDates.toJSON().slice(5, 10);
+    },
+  },
+  {
+    evntType: 'annual',
+    shrtCut: 'a',
+    apiPath: /AnnualEvents/,
+    idTag: function () {
+      return `annual${this.annualCalEvents}`;
+    },
+    param: function (calDates, rnwlDates) {
+      return calDates.toJSON().slice(5, 10);
+    },
+  },
 ];
-// `${new Date(createEventTime.value.slice(0, 10)).getDay()}`
+
 let cntctTasksArray = [
   {
     taskType: 'CalendarEvents',
