@@ -110,7 +110,7 @@ function calendarDatesFillIn(chosenDate) {
               let calCntct = document.createElement('div');
               calCntct.classList.add(calEvnt.evntType);
               if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
-
+              calCntct.classList.add(`_${rnwlCntct._id}`);
               calCntct.classList.add(textlightTag);
               calCntct.classList.add(calTaskTag);
               calCntct.classList.add(rnwlCntct.Status);
