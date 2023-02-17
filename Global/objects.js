@@ -5,6 +5,7 @@ const TasksObj = {
   event: 'All Events',
   eCmpltd: 'Completed Events',
   eNotCmpltd: 'Not Completed Events',
+  recurring: 'All Recurring Events',
 };
 
 const StatusObj = {

@@ -64,22 +64,17 @@ let cntctTasksArray = [
     apiPath: eventsPath,
     CSSstyle: 'event',
     placeHolder: 'ContactTaskList',
-    DropDown: LastEditedByS,
-    checkBox: true,
+    dropDown: true,
+    dropDownArray: LastEditedByS,
+    checkBoxCMD: true,
   },
   {
     taskType: 'RecurEvents',
     apiPath: recurPath,
     CSSstyle: 'recur',
     placeHolder: 'RecurringTaskList',
-    DropDown: recrrngEvntsArray,
-    checkBox: true,
+    dropDown: false,
+    dropDownArray: recrrngEvntsArray,
+    checkBoxCMD: false,
   },
 ];
-
-// Probably delete this
-// let dynamic = {
-//   Status: StatusS,
-//   SourceS: SourceS,
-//   LastEditedByS: LastEditedByS,
-// };

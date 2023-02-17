@@ -336,6 +336,11 @@ function buttonHandlers() {
             PhoneInput = document.getElementById('Phone');
             snackbar(`Event created for ${FirstName.value}`);
             loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
+            // This reloads the calender with events
+            retrievedDate = document.getElementById('CalendarDate').value.split('-');
+            nextWeek = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime();
+            nextWeekHHMM = new Date(nextWeek).setHours(TodaysHour, TodaysMinutes);
+            calendarDatesFillIn(new Date(nextWeekHHMM));
             // This should be last
             contactTasksTextArea.value = '';
           });

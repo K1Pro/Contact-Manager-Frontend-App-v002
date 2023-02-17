@@ -63,6 +63,31 @@ function updateContactTasks(contactTask, inputChanged) {
     });
 }
 ///////////////////////////////////////////////////////////
+/////////// vvv Delete All Recurring Tasks vvv ////////////
+function deleteRecurTasks() {
+  fetch(`${srvrURL}${deleteEmptyFieldPath}${_id.value}`, {
+    method: 'DELETE',
+    body: JSON.stringify({
+      WeeklyEvents: '',
+      MonthlyEvents: '',
+      SemiAnnualEvents: '',
+      AnnualEvents: '',
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      loadContactTasks(_id.value);
+      snackbar(`Event updated for ${FirstName.value}`);
+      contactEditDate();
+      response.json();
+    })
+    .catch((error) => {
+      alert('Please connect to server');
+    });
+}
+///////////////////////////////////////////////////////////
 //// vvv Highlights active events from calendar vvv ///////
 function highlghtActvEvnt(cntctID) {
   let highlightedItems = document.getElementById(calendarDatesTag).querySelectorAll('*');
