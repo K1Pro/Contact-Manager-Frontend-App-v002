@@ -293,34 +293,23 @@ function buttonHandlers() {
 
   document.querySelectorAll('#RecurEvents').forEach((recurEvents) => {
     recurEvents.addEventListener('click', function (e) {
-      console.log(e.target.id);
+      ScndDayOfYear =
+        new Date(createEventTime.value.slice(0, 10)).getTime() +
+        1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 183;
+
       if (_id.value && contactTasksTextArea.value) {
         recurringEventsObj = {
           EventAuthor: EventAuthor.value,
           DayOfWeek: `${new Date(createEventTime.value.slice(0, 10)).getDay()}`, //need to compute this
           DayOfMonth: createEventTime.value.slice(8, 10),
           DayOfYear: createEventTime.value.slice(5, 10),
+          SecondDayOfYear: new Date(ScndDayOfYear).toJSON().slice(5, 10),
           DateYYYYMMDD: createEventTime.value.slice(0, 10),
           DateHHMMSS: createEventTime.value.slice(10, 16),
           Description: contactTasksTextArea.value,
           Completed: false,
         };
-        fetch(`${srvrURL}${deleteEmptyFieldPath}${_id.value}`, {
-          method: 'DELETE',
-          body: JSON.stringify({
-            WeeklyEvents: '',
-            MonthlyEvents: '',
-            SemiAnnualEvents: '',
-            AnnualEvents: '',
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-          .then((response) => response.json())
-          .catch((error) => {
-            alert('Please connect to server');
-          });
+        deleteRecurTasks();
         fetch(`${srvrURL}/${_id.value}`, {
           method: 'PATCH',
           body: JSON.stringify({
