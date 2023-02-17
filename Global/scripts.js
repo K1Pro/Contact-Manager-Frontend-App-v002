@@ -63,11 +63,12 @@ function updateContactTasks(contactTask, inputChanged) {
     });
 }
 ///////////////////////////////////////////////////////////
-//////// vvv Removes active tag from calendar vvv /////////
-function removeActiveCalCntct() {
+//// vvv Highlights active events from calendar vvv ///////
+function highlghtActvEvnt(cntctID) {
   let highlightedItems = document.getElementById(calendarDatesTag).querySelectorAll('*');
   highlightedItems.forEach((userItem) => {
     userItem.classList.remove(activeTag);
+    if (userItem.className.includes(cntctID)) userItem.classList.add(activeTag);
   });
 }
 ///////////////////////////////////////////////////////////

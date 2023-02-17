@@ -18,12 +18,7 @@ function loadSidePanel(URL, slctdCalTask) {
         loadContactTasks(contactID.value, slctdCalTask);
         // Highlights each renewal and event active in the calendar
         calID = data.data.contacts[0]._id;
-        for (let rep = 0; rep < 31; rep++) {
-          let cntctCalRnwl = document.getElementById(`${rnwlTag}${calID}${rep}`);
-          if (cntctCalRnwl) {
-            cntctCalRnwl.classList.add(activeTag);
-          }
-        }
+        highlghtActvEvnt(calID);
         calEvnts = data.data.contacts[0].CalendarEvents;
         calEvnts.forEach((calEvent) => {
           let cntctCalEvnt = document.getElementById(`Event${calEvent._id}`);
@@ -133,24 +128,17 @@ function calendarDatesFillIn(chosenDate) {
               (data.type == 'monthly' && lastReviewDateNoDash >= calDateNoDash)
                 ? calCntct.classList.add(`${calEvnt.shrtCut}Cmpltd`)
                 : calCntct.classList.add(`${calEvnt.shrtCut}NotCmpltd`);
-              // Passing a few variables into the calEvent
-              // calEvnt.sortedCalEvents = sortedCalEvents[0]?._id;
-              // calEvnt.weeklyCalEvents = rnwlCntct?.WeeklyEvents[0]?._id;
-              // calEvnt.monthlyCalEvents = rnwlCntct?.MonthlyEvents[0]?._id;
-              // calEvnt.semiannualCalEvents = rnwlCntct?.SemiAnnualEvents[0]?._id;
-              // calEvnt.annualCalEvents = rnwlCntct?.AnnualEvents[0]?._id;
               calEvnt.rep = rep;
               calEvnt.rnwlCntct = rnwlCntct._id;
               // Adding text content, ID and Event Listener to each event
               calCntct.textContent = `${rnwlCntct.LastName}`;
-              // calCntct.setAttribute('id', calEvnt.idTag());
               calCntct.setAttribute('id', `event${calRep}`);
               calCntct.addEventListener('click', () => {
                 emailBody.value = '';
                 emailSubject.value = 'choose-email-template';
-                removeActiveCalCntct();
                 loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`, `${sortedCalEvents[0]?._id}`);
                 calCntct.classList.add(activeTag);
+                highlghtActvEvnt(rnwlCntct._id);
               });
               // Adding event to calendar box
               document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
@@ -281,7 +269,6 @@ function matchDatalist(searchInput) {
     }
     if (firstSearchCntct && searchCncttracker == totalSearchCntcts) {
       loadSidePanel(`${srvrURL}${phonePath}${firstSearchCntct}`);
-      removeActiveCalCntct();
       contactSearch.value = '';
     } else if (!firstSearchCntct && searchCncttracker == totalSearchCntcts) {
       snackbar('Please enter either a valid name (First name, Last Name) or phone.');

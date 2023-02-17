@@ -12,9 +12,6 @@ let calEvntsArray = [
     evntType: 'renewal',
     shrtCut: 'r',
     apiPath: rnwlPath,
-    // idTag: function () {
-    //   return `${rnwlTag}${this.rnwlCntct}${this.rep + 1}`;
-    // },
     param: function (calDates, rnwlDates) {
       return rnwlDates.toJSON().slice(5, 10);
     },
@@ -23,53 +20,38 @@ let calEvntsArray = [
     evntType: 'event',
     shrtCut: 'e',
     apiPath: contactsWithCalEventsPath,
-    // idTag: function () {
-    //   return `Event${this.sortedCalEvents}`;
-    // },
     param: function (calDates, rnwlDates) {
       return calDates.toJSON().slice(0, 10);
     },
   },
   {
-    evntType: 'weekly',
+    evntType: 'recurring', // weekly
     shrtCut: 'w',
     apiPath: '/WeeklyEvents/',
-    // idTag: function () {
-    //   return `weekly${this.weeklyCalEvents}`;
-    // },
     param: function (calDates, rnwlDates) {
       return `${new Date(calDates.toJSON().slice(0, 10)).getDay()}`;
     },
   },
   {
-    evntType: 'monthly',
+    evntType: 'recurring', //monthly
     shrtCut: 'm',
     apiPath: MonthlyEventsPath,
-    // idTag: function () {
-    //   return `monthly${this.monthlyCalEvents}`;
-    // },
     param: function (calDates, rnwlDates) {
       return calDates.toJSON().slice(8, 10);
     },
   },
   {
-    evntType: 'semiannual',
+    evntType: 'recurring', //semiannual
     shrtCut: 'sa',
     apiPath: /SemiAnnualEvents/,
-    // idTag: function () {
-    //   return `semiannual${this.semiannualCalEvents}`;
-    // },
     param: function (calDates, rnwlDates) {
       return calDates.toJSON().slice(5, 10);
     },
   },
   {
-    evntType: 'annual',
+    evntType: 'recurring', //annual
     shrtCut: 'a',
     apiPath: /AnnualEvents/,
-    idTag: function () {
-      return `annual${this.annualCalEvents}`;
-    },
     param: function (calDates, rnwlDates) {
       return calDates.toJSON().slice(5, 10);
     },

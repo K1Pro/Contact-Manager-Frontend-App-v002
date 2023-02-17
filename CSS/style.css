@@ -203,7 +203,8 @@ input[type='date']:invalid::-webkit-datetime-edit {
 .annual,
 .semiannual,
 .monthly,
-.weekly {
+.weekly,
+.recurring {
   background-color: #ff9933;
   margin-left: -12px;
   padding-left: 12px;
@@ -222,7 +223,8 @@ input[type='date']:invalid::-webkit-datetime-edit {
 .annual:hover,
 .semiannual:hover,
 .monthly:hover,
-.weekly:hover {
+.weekly:hover,
+.recurring:hover {
   background-color: #cf33ff;
   /* border-radius: 0px !important;
   -webkit-transition: all 1s ease;
