@@ -235,7 +235,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
 }
 
 .eNotCmpltd,
-.mNotCmpltd {
+.wNotCmpltd,
+.mNotCmpltd,
+.saNotCmpltd,
+.aNotCmpltd {
   background-color: #009966;
   margin-left: -12px;
   padding-left: 12px;
@@ -249,7 +252,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
   text-shadow: 0px 0px 2px grey;
 }
 .eNotCmpltd:hover,
-.mNotCmpltd:hover {
+.wNotCmpltd:hover,
+.mNotCmpltd:hover,
+.saNotCmpltd:hover,
+.aNotCmpltd:hover {
   background-color: #cf33ff;
   /* border-radius: 0px !important;
   -webkit-transition: all 1s ease;
@@ -261,7 +267,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
 
 .eCmpltd,
 .rCmpltd,
-.mCmpltd {
+.wCmpltd,
+.mCmpltd,
+.saCmpltd,
+.aCmpltd {
   background-color: #ff3366;
   margin-left: -12px;
   padding-left: 12px;
@@ -277,7 +286,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
 
 .eCmpltd:hover,
 .rCmpltd:hover,
-.mCmpltd:hover {
+.wCmpltd:hover,
+.mCmpltd:hover,
+.saCmpltd:hover,
+.aCmpltd:hover {
   background-color: #cf33ff;
   /* border-radius: 0px !important;
   -webkit-transition: all 1s ease;

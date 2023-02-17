@@ -125,7 +125,10 @@ function calendarDatesFillIn(chosenDate) {
               // Completed or Not Completed Styling
               (data.type == 'renewal' && lastReviewDateNoDash >= calDateNoDash) ||
               (data.type == 'event' && sortedCalEvents[0]?.Completed) ||
-              (data.type == 'monthly' && lastReviewDateNoDash >= calDateNoDash)
+              (data.type == 'weekly' && lastReviewDateNoDash >= calDateNoDash) ||
+              (data.type == 'monthly' && lastReviewDateNoDash >= calDateNoDash) ||
+              (data.type == 'semiannual' && lastReviewDateNoDash >= calDateNoDash) ||
+              (data.type == 'annual' && lastReviewDateNoDash >= calDateNoDash)
                 ? calCntct.classList.add(`${calEvnt.shrtCut}Cmpltd`)
                 : calCntct.classList.add(`${calEvnt.shrtCut}NotCmpltd`);
               calEvnt.rep = rep;
