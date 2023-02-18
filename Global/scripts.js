@@ -1,29 +1,4 @@
 console.log('retrieved all global scripts');
-// this is temporary
-getJSON(`${srvrURL}${sortedContactsPath}`).then((data) => {
-  let policyrep = 0;
-  for (const [key, value] of Object.entries(data.data.contacts)) {
-    let PolicyOne = value.Policy1RenewMMDD;
-    if (PolicyOne) {
-      policyrep++;
-      console.log(`${policyrep} ${PolicyOne}`);
-    }
-    // let FullName = `${value.FirstName} ${value.LastName}`;
-    // You can change the value to whatever you would like, here it is to the createdby value
-    // if (CreatedBy == 'Bart') {
-    //   // console.log(value._id);
-    //   fetch(`${srvrURL}/${value._id}`, {
-    //     method: 'PATCH',
-    //     body: JSON.stringify({
-    //       CreatedBy: 'Bartosz',
-    //     }),
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //   });
-    // }
-  }
-});
 ///////////////////////////////////////////////////////////
 //// vvv This scans for all separate HTML Modules vvv /////
 async function isElementLoaded(selector) {
