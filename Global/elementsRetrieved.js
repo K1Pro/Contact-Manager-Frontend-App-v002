@@ -56,6 +56,9 @@ function elementsRequired() {
                   value: '',
                 };
                 if (renewDateKeys.includes(this.id)) {
+                  updateThis.key = this.id;
+                  updateDB(updateThis);
+                  // Inserts a PolicyXRenewMMDD value for the calendar fillin function
                   let changedInputMMDD = this.id.replace('Date', 'MMDD');
                   updateThis.key = changedInputMMDD;
                   updateDB(updateThis);
@@ -71,6 +74,10 @@ function elementsRequired() {
                   fetchMethod: 'PATCH',
                 };
                 if (renewDateKeys.includes(this.id)) {
+                  updateThis.key = this.id;
+                  updateThis.value = this.value;
+                  updateDB(updateThis);
+                  // Inserts a PolicyXRenewMMDD value for the calendar fillin function
                   let changedInputMMDD = this.id.replace('Date', 'MMDD');
                   let MMDD = this.value.slice(5, 10);
                   updateThis.key = changedInputMMDD;
