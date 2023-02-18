@@ -401,12 +401,18 @@ input[type='date']:invalid::-webkit-datetime-edit {
   cursor: pointer;
 }
 
-.disabledInput {
-  background-color: white;
+.disabledDropDownInput {
+  background-color: white !important;
   border: 0;
   color: black;
   text-align: right;
   padding-right: 12px;
+}
+
+.disabledDateInput {
+  background-color: white !important;
+  border-right: 0;
+  color: black;
 }
 /* .eventDates { */
 /* position: absolute; */

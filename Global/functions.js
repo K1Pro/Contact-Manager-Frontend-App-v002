@@ -194,14 +194,25 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         };
 
         // Creates a datetime-local Input
-        contactTask.Dated.type = 'datetime-local';
-        contactTask.Dated.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
-        contactTask.Dated.setAttribute('class', `form-control ${cntctTasks.CSSstyle}Dates border-bottom-0`);
-        if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Dated.classList.add('contactTaskSelected');
-        contactTask.Dated.addEventListener('change', (inputChanged) => {
-          updateContactTasks(contactTask, inputChanged);
-        });
-        ContactTaskGroup.appendChild(contactTask.Dated);
+        if (cntctTasks.dated) {
+          contactTask.Dated.type = 'datetime-local';
+          contactTask.Dated.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
+          contactTask.Dated.setAttribute('class', `form-control ${cntctTasks.CSSstyle}Dates border-bottom-0`);
+          if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Dated.classList.add('contactTaskSelected');
+          contactTask.Dated.addEventListener('change', (inputChanged) => {
+            updateContactTasks(contactTask, inputChanged);
+          });
+          ContactTaskGroup.appendChild(contactTask.Dated);
+        } else {
+          contactTask.Dated.type = 'date';
+          contactTask.Dated.disabled = true;
+          contactTask.Dated.setAttribute(
+            'class',
+            `form-control ${cntctTasks.CSSstyle}Dates border-bottom-0 disabledDateInput`
+          );
+          contactTask.Dated.value = `${value.DateYYYYMMDD}`;
+          ContactTaskGroup.appendChild(contactTask.Dated);
+        }
 
         // Create a select input for the Event Author
         if (cntctTasks.dropDown) {
@@ -221,7 +232,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         } else {
           contactTask.Input.value = data.type;
           contactTask.Input.disabled = true;
-          contactTask.Input.setAttribute('class', `disabledInput`);
+          contactTask.Input.setAttribute('class', `disabledDropDownInput`);
           ContactTaskGroup.appendChild(contactTask.Input);
         }
 
