@@ -37,6 +37,12 @@ function elementsRequired() {
     // Side Panel inputs if changed will update database to these values
     let ContactFieldsIDs = ContactFields[rep].id;
     if (ContactFieldsIDs) {
+      document.getElementById(`${ContactFieldsIDs}`).addEventListener('mouseover', function (e) {
+        e.target.classList.add('form-control-highlight');
+      });
+      document.getElementById(`${ContactFieldsIDs}`).addEventListener('mouseout', function (e) {
+        e.target.classList.remove('form-control-highlight');
+      });
       document.getElementById(`${ContactFieldsIDs}`).addEventListener('focus', function (e) {
         oldInputValue = this.value;
         return oldInputValue;
