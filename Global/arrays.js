@@ -24,38 +24,47 @@ let calEvntsArray = [
       return calDates.toJSON().slice(0, 10);
     },
   },
+  // new endpoint for recurring events: http://192.168.64.9:8000/api/v2/contacts?MonthlyEvent1DD=22
   {
     evntType: 'recurring', // weekly
-    shrtCut: 'w',
-    apiPath: '/WeeklyEvents/',
-    param: function (calDates, rnwlDates) {
-      return `${new Date(calDates.toJSON().slice(0, 10)).getDay()}`;
-    },
-  },
-  {
-    evntType: 'recurring', //monthly
     shrtCut: 'm',
-    apiPath: MonthlyEventsPath,
+    apiPath: '?MonthlyEvent1DD=',
     param: function (calDates, rnwlDates) {
       return calDates.toJSON().slice(8, 10);
     },
   },
-  {
-    evntType: 'recurring', //semiannual
-    shrtCut: 'sa',
-    apiPath: /SemiAnnualEvents/,
-    param: function (calDates, rnwlDates) {
-      return calDates.toJSON().slice(5, 10);
-    },
-  },
-  {
-    evntType: 'recurring', //annual
-    shrtCut: 'a',
-    apiPath: /AnnualEvents/,
-    param: function (calDates, rnwlDates) {
-      return calDates.toJSON().slice(5, 10);
-    },
-  },
+  // {
+  //   evntType: 'recurring', // weekly
+  //   shrtCut: 'w',
+  //   apiPath: '/WeeklyEvents/',
+  //   param: function (calDates, rnwlDates) {
+  //     return `${new Date(calDates.toJSON().slice(0, 10)).getDay()}`;
+  //   },
+  // },
+  // {
+  //   evntType: 'recurring', //monthly
+  //   shrtCut: 'm',
+  //   apiPath: MonthlyEventsPath,
+  //   param: function (calDates, rnwlDates) {
+  //     return calDates.toJSON().slice(8, 10);
+  //   },
+  // },
+  // {
+  //   evntType: 'recurring', //semiannual
+  //   shrtCut: 'sa',
+  //   apiPath: /SemiAnnualEvents/,
+  //   param: function (calDates, rnwlDates) {
+  //     return calDates.toJSON().slice(5, 10);
+  //   },
+  // },
+  // {
+  //   evntType: 'recurring', //annual
+  //   shrtCut: 'a',
+  //   apiPath: /AnnualEvents/,
+  //   param: function (calDates, rnwlDates) {
+  //     return calDates.toJSON().slice(5, 10);
+  //   },
+  // },
 ];
 
 let cntctTasksArray = [
