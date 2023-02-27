@@ -26,11 +26,35 @@ let calEvntsArray = [
   },
   // new endpoint for recurring events: http://192.168.64.9:8000/api/v2/contacts?MonthlyEvent1DD=22
   {
-    evntType: 'recurring', // weekly
+    evntType: 'recurring', //monthly
     shrtCut: 'm',
     apiPath: '?MonthlyEvent1DD=',
     param: function (calDates, rnwlDates) {
       return calDates.toJSON().slice(8, 10);
+    },
+  },
+  {
+    evntType: 'recurring', // monthly
+    shrtCut: 'm',
+    apiPath: '?MonthlyEvent2DD=',
+    param: function (calDates, rnwlDates) {
+      return calDates.toJSON().slice(8, 10);
+    },
+  },
+  {
+    evntType: 'recurring', // yearly
+    shrtCut: 'a',
+    apiPath: '?YearlyEvent1MMDD=',
+    param: function (calDates, rnwlDates) {
+      return calDates.toJSON().slice(5, 10);
+    },
+  },
+  {
+    evntType: 'recurring', // yearly
+    shrtCut: 'a',
+    apiPath: '?YearlyEvent2MMDD=',
+    param: function (calDates, rnwlDates) {
+      return calDates.toJSON().slice(5, 10);
     },
   },
   // {
