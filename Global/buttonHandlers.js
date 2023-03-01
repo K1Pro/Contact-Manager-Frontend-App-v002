@@ -291,12 +291,10 @@ function buttonHandlers() {
     });
   });
 
-  YearlyEvent1MM.addEventListener('change', () => {
-    if (YearlyEvent1MM.value && YearlyEvent1DD.value) {
-      //left off here
-      console.log(YearlyEvent1MM.value);
-      console.log(YearlyEvent1DD.value);
-    }
+  document.querySelectorAll('.yearlyEventInput').forEach((yearlyEvntInpt) => {
+    yearlyEvntInpt.addEventListener('change', function (e) {
+      console.log(e.target.id);
+    });
   });
 
   document.querySelectorAll('#RecurEvents').forEach((recurEvents) => {
