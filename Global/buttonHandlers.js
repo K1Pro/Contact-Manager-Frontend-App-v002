@@ -293,7 +293,16 @@ function buttonHandlers() {
 
   document.querySelectorAll('.yearlyEventInput').forEach((yearlyEvntInpt) => {
     yearlyEvntInpt.addEventListener('change', function (e) {
-      console.log(e.target.id);
+      let MM = document.getElementById(`${e.target.id.slice(0, 12)}MM`).value;
+      let DD = document.getElementById(`${e.target.id.slice(0, 12)}DD`).value;
+      let updateThis = {
+        updateURL: `${srvrURL}/${_id.value}`,
+        fetchMethod: 'PATCH',
+        key: `${e.target.id.slice(0, 12)}MMDD`,
+        value: `${MM}-${DD}`,
+      };
+      updateDB(updateThis);
+      contactEditDate();
     });
   });
 
