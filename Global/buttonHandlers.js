@@ -291,6 +291,14 @@ function buttonHandlers() {
     });
   });
 
+  YearlyEvent1MM.addEventListener('change', () => {
+    if (YearlyEvent1MM.value && YearlyEvent1DD.value) {
+      //left off here
+      console.log(YearlyEvent1MM.value);
+      console.log(YearlyEvent1DD.value);
+    }
+  });
+
   document.querySelectorAll('#RecurEvents').forEach((recurEvents) => {
     recurEvents.addEventListener('click', function (e) {
       ScndDayOfYear =
