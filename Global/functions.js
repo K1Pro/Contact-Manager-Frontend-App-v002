@@ -123,12 +123,8 @@ function calendarDatesFillIn(chosenDate) {
                 ? calCntct.classList.add(sortedCalEvents[0].EventAuthor)
                 : calCntct.classList.add(rnwlCntct.LastEditedBy);
               // Completed or Not Completed Styling
-              (data.type == 'renewal' && lastReviewDateNoDash >= calDateNoDash) ||
-              (data.type == 'event' && sortedCalEvents[0]?.Completed) ||
-              (data.type == 'weekly' && lastReviewDateNoDash >= calDateNoDash) ||
-              (data.type == 'monthly' && lastReviewDateNoDash >= calDateNoDash) ||
-              (data.type == 'semiannual' && lastReviewDateNoDash >= calDateNoDash) ||
-              (data.type == 'annual' && lastReviewDateNoDash >= calDateNoDash)
+              (data.type != 'event' && lastReviewDateNoDash >= calDateNoDash) ||
+              (data.type == 'event' && sortedCalEvents[0]?.Completed)
                 ? calCntct.classList.add(`${calEvnt.shrtCut}Cmpltd`)
                 : calCntct.classList.add(`${calEvnt.shrtCut}NotCmpltd`);
               calEvnt.rep = rep;
@@ -190,7 +186,6 @@ function loadContactTasks(dailyTask, slctdCalTask) {
           CheckBoxSpan: document.createElement('span'),
           CheckBox: document.createElement('input'),
           Author: document.createElement('select'),
-          Input: document.createElement('input'),
         };
 
         // Creates a datetime-local Input
@@ -202,15 +197,6 @@ function loadContactTasks(dailyTask, slctdCalTask) {
           contactTask.Dated.addEventListener('change', (inputChanged) => {
             updateContactTasks(contactTask, inputChanged);
           });
-          ContactTaskGroup.appendChild(contactTask.Dated);
-        } else {
-          contactTask.Dated.type = 'date';
-          contactTask.Dated.disabled = true;
-          contactTask.Dated.setAttribute(
-            'class',
-            `form-control ${cntctTasks.CSSstyle}Dates border-bottom-0 disabledDateInput`
-          );
-          contactTask.Dated.value = `${value.DateYYYYMMDD}`;
           ContactTaskGroup.appendChild(contactTask.Dated);
         }
 
@@ -229,11 +215,6 @@ function loadContactTasks(dailyTask, slctdCalTask) {
             if (value.EventAuthor == dropDownOpt) CntctTskAuthors.selected = true;
             contactTask.Author.appendChild(CntctTskAuthors);
           });
-        } else {
-          contactTask.Input.value = data.type;
-          contactTask.Input.disabled = true;
-          contactTask.Input.setAttribute('class', `disabledDropDownInput`);
-          ContactTaskGroup.appendChild(contactTask.Input);
         }
 
         // Creates a checkbox for completed or not completed tasks
