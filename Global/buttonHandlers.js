@@ -323,12 +323,14 @@ function buttonHandlers() {
       let dynamicSelect = document.getElementById(`${dynamicInput.id}Select`);
       // this changes events that are viewable after filtering
       getJSON(`${srvrURL}/${_id.value}`).then((data) => {
-        console.log('What does this do?');
         if (data.data.contact.CalendarEvents) {
           calEvnts = data.data.contact.CalendarEvents;
           calEvnts.forEach((calEvent) => {
             let cntctEvents = document.getElementById(`Event${calEvent._id}`);
+            // ended here get rid of the console.logs here
+            console.log(cntctEvents);
             if (cntctEvents) {
+              console.log('What does this do?');
               dynamicInputVals.forEach((CntctStatus) => {
                 cntctEvents.classList.remove(CntctStatus);
                 cntctEvents.classList.add(e.target.value);

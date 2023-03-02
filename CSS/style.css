@@ -431,6 +431,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
   border-right: 0;
   color: black;
 }
+.inputHeader {
+  color: black;
+  text-align: center;
+}
 /* .eventDates { */
 /* position: absolute; */
 /* padding-right: 5vw !important;
