@@ -8,14 +8,6 @@ const renewDateKeys = ['Policy1RenewDate', 'Policy2RenewDate', 'Policy3RenewDate
 
 let calEvntsArray = [
   {
-    evntType: 'renewal',
-    shrtCut: 'r',
-    apiPath: rnwlPath,
-    param: function (calDates, rnwlDates) {
-      return rnwlDates.toJSON().slice(5, 10);
-    },
-  },
-  {
     evntType: 'event',
     shrtCut: 'e',
     apiPath: contactsWithCalEventsPath,
@@ -23,7 +15,6 @@ let calEvntsArray = [
       return calDates.toJSON().slice(0, 10);
     },
   },
-  // new endpoint for recurring events: http://192.168.64.9:8000/api/v2/contacts?MonthlyEvent1DD=22
   {
     evntType: 'recurring', //monthly
     shrtCut: 'm',
@@ -54,6 +45,14 @@ let calEvntsArray = [
     apiPath: '?YearlyEvent2MMDD=',
     param: function (calDates, rnwlDates) {
       return calDates.toJSON().slice(5, 10);
+    },
+  },
+  {
+    evntType: 'renewal',
+    shrtCut: 'r',
+    apiPath: rnwlPath,
+    param: function (calDates, rnwlDates) {
+      return rnwlDates.toJSON().slice(5, 10);
     },
   },
   // {
