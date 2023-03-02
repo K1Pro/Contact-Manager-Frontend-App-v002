@@ -82,8 +82,7 @@ getJSON(`${srvrURL}${contactsWithCalEventsPath}${calDates.toJSON().slice(0, 10)}
     });
   }
 });
-// document.querySelectorAll('#RecurEvents').forEach((recurEvents) => {})  Use this in the future to possibly itereate through all the recurring options
-// console.log(calDates.toJSON().slice(8, 10));
+
 getJSON(`${srvrURL}${MonthlyEventsPath}${calDates.toJSON().slice(8, 10)}`).then((data) => {
   if (data.data.contacts.length) {
     rnwlCntcts = data.data.contacts;
