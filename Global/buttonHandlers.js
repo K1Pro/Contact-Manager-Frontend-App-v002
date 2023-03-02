@@ -295,14 +295,26 @@ function buttonHandlers() {
     yearlyEvntInpt.addEventListener('change', function (e) {
       let MM = document.getElementById(`${e.target.id.slice(0, 12)}MM`).value;
       let DD = document.getElementById(`${e.target.id.slice(0, 12)}DD`).value;
-      let updateThis = {
-        updateURL: `${srvrURL}/${_id.value}`,
-        fetchMethod: 'PATCH',
-        key: `${e.target.id.slice(0, 12)}MMDD`,
-        value: `${MM}-${DD}`,
-      };
-      updateDB(updateThis);
-      contactEditDate();
+      if (MM && DD) {
+        let updateThis = {
+          updateURL: `${srvrURL}/${_id.value}`,
+          fetchMethod: 'PATCH',
+          key: `${e.target.id.slice(0, 12)}MMDD`,
+          value: `${MM}-${DD}`,
+        };
+        updateDB(updateThis);
+        contactEditDate();
+      } else {
+        console.log('nothing - delete');
+        let updateThis = {
+          updateURL: `${srvrURL}${deleteEmptyFieldPath}${_id.value}`,
+          fetchMethod: 'DELETE',
+          key: `${e.target.id.slice(0, 12)}MMDD`,
+          value: ``,
+        };
+        updateDB(updateThis);
+        contactEditDate();
+      }
     });
   });
 
