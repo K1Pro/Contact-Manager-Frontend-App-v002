@@ -329,61 +329,12 @@ function buttonHandlers() {
           let cntctEvents = document.getElementById(retrievedTasksEvents[key].id);
           cntctEvents.classList.remove(oldDynamicInput);
           cntctEvents.classList.add(e.target.value);
+          let dynamicSelect = document.getElementById(`${dynamicInput.id}Select`);
+          e.target.value == dynamicSelect.value
+            ? cntctEvents.classList.remove('hiddenContact')
+            : cntctEvents.classList.add('hiddenContact');
         }
       }
-      // const dynamicInputVals = [...dynamicInput].map((el) => el.value);
-      // let dynamicSelect = document.getElementById(`${dynamicInput.id}Select`);
-      // this changes events that are viewable after filtering
-      // getJSON(`${srvrURL}/${_id.value}`).then((data) => {
-      //   if (data.data.contact.CalendarEvents) {
-      //     calEvnts = data.data.contact.CalendarEvents;
-      //     calEvnts.forEach((calEvent) => {
-      //       let cntctEvents = document.getElementById(`Event${calEvent._id}`);
-      //       // ended here get rid of the console.logs here
-      //       console.log(cntctEvents);
-      //       if (cntctEvents) {
-      //         console.log('What does this do?');
-      //         dynamicInputVals.forEach((CntctStatus) => {
-      //           cntctEvents.classList.remove(CntctStatus);
-      //           cntctEvents.classList.add(e.target.value);
-      //           if (
-      //             dynamicSelect.value == '' ||
-      //             dynamicSelect.value == 'All' ||
-      //             dynamicSelect.value == e.target.value
-      //           ) {
-      //             cntctEvents.classList.remove('hiddenContact');
-      //           } else {
-      //             cntctEvents.classList.add('hiddenContact');
-      //           }
-      //         });
-      //       }
-      //     });
-      //   }
-      // });
-      // this changes renewals that are viewable after filtering
-      // if (dynamicSelect.value == '' || dynamicSelect.value == 'All' || dynamicSelect.value == this.value) {
-      // for (let rep = 0; rep < 31; rep++) {
-      //   let cntctCalRnwl = document.getElementById(`renewal${_id.value}${rep}`);
-      //   if (cntctCalRnwl) {
-      //     cntctCalRnwl.classList.remove('hiddenContact');
-      //     dynamicInputVals.forEach((prevStatus) => {
-      //       cntctCalRnwl.classList.remove(prevStatus);
-      //     });
-      //     cntctCalRnwl.classList.add(Status.value);
-      //   }
-      // }
-      // } else {
-      //   for (let rep = 0; rep < 31; rep++) {
-      //     let cntctCalRnwl = document.getElementById(`renewal${_id.value}${rep}`);
-      //     if (cntctCalRnwl) {
-      //       cntctCalRnwl.classList.add('hiddenContact');
-      //       dynamicInputVals.forEach((prevStatus) => {
-      //         cntctCalRnwl.classList.remove(prevStatus);
-      //       });
-      //       cntctCalRnwl.classList.add(Status.value);
-      //     }
-      //   }
-      // }
     });
   });
 
