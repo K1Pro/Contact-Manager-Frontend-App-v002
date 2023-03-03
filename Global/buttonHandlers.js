@@ -321,8 +321,16 @@ function buttonHandlers() {
     dynamicInput.addEventListener('change', function (e) {
       for (let rep = 0; rep < 28; rep++) {
         if (e.target.value == document.getElementById(`${dayTag}${rep}`).innerHTML.slice(3, 5)) {
-          console.log(document.getElementById(`${dayTag}${rep}`).innerHTML.slice(3, 5));
           let calCntct = document.createElement('div');
+          calCntct.classList.add('recurring');
+          calCntct.classList.add(activeTag);
+          calCntct.classList.add(_id.value);
+          calCntct.classList.add(textlightTag);
+          calCntct.classList.add(calTaskTag);
+          calCntct.classList.add(Status.value);
+          calCntct.classList.add(Source.value);
+          calCntct.classList.add(LastEditedBy.value);
+          calCntct.classList.add(`mNotCmpltd`);
           calCntct.textContent = `${LastName.value}`;
           document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
         }
