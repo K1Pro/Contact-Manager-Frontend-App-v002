@@ -319,10 +319,18 @@ function buttonHandlers() {
 
   document.querySelectorAll('.monthlyEventInput').forEach((dynamicInput) => {
     dynamicInput.addEventListener('change', function (e) {
-      console.log('Monthly inputs clicked');
+      for (let rep = 0; rep < 28; rep++) {
+        if (e.target.value == document.getElementById(`${dayTag}${rep}`).innerHTML.slice(3, 5)) {
+          console.log(document.getElementById(`${dayTag}${rep}`).innerHTML.slice(3, 5));
+          let calCntct = document.createElement('div');
+          calCntct.textContent = `${LastName.value}`;
+          document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+        }
+      }
     });
   });
 
+  // Agent Information Input changed calendar event status
   document.querySelectorAll('.dynamicInputs').forEach((dynamicInput) => {
     dynamicInput.addEventListener('click', function (e) {
       oldDynamicInput = e.target.value;
