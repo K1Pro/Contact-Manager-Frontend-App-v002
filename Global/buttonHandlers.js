@@ -317,6 +317,7 @@ function buttonHandlers() {
     });
   });
 
+  // there is still one bug with this solution, sometimes after choosing another week in the calendar the task does not show up
   document.querySelectorAll('.monthlyEventInput').forEach((dynamicInput) => {
     dynamicInput.addEventListener('change', function (e) {
       let retrievedTasksEvents = document.getElementsByClassName(calTaskTag);
@@ -330,7 +331,6 @@ function buttonHandlers() {
           document.getElementById(retrievedTasksEvents[key].id).remove();
         }
       }
-
       for (let rep = 0; rep < 28; rep++) {
         if (e.target.value == document.getElementById(`${dayTag}${rep}`).innerHTML.slice(3, 5)) {
           let calCntct = document.createElement('div');
@@ -344,6 +344,7 @@ function buttonHandlers() {
           calCntct.classList.add(Source.value);
           calCntct.classList.add(LastEditedBy.value);
           calCntct.classList.add(`mNotCmpltd`);
+          calCntct.id = Date.now();
           let savedPhone = Phone.value;
           calCntct.textContent = `${LastName.value}`;
           calCntct.addEventListener('click', () => {
