@@ -8,7 +8,7 @@ const renewDateKeys = ['Policy1RenewDate', 'Policy2RenewDate', 'Policy3RenewDate
 
 let calEvntsArray = [
   {
-    evntType: 'event',
+    evntType: ['event'],
     shrtCut: 'e',
     apiPath: contactsWithCalEventsPath,
     param: function (calDates, rnwlDates) {
@@ -16,7 +16,7 @@ let calEvntsArray = [
     },
   },
   {
-    evntType: 'recurring', //monthly
+    evntType: ['recurring', 'MonthlyEvent1'],
     shrtCut: 'm',
     apiPath: '?MonthlyEvent1DD=',
     param: function (calDates, rnwlDates) {
@@ -24,7 +24,7 @@ let calEvntsArray = [
     },
   },
   {
-    evntType: 'recurring', // monthly
+    evntType: ['recurring', 'MonthlyEvent2'],
     shrtCut: 'm',
     apiPath: '?MonthlyEvent2DD=',
     param: function (calDates, rnwlDates) {
@@ -32,7 +32,7 @@ let calEvntsArray = [
     },
   },
   {
-    evntType: 'recurring', // yearly
+    evntType: ['recurring', 'YearlyEvent1'],
     shrtCut: 'a',
     apiPath: '?YearlyEvent1MMDD=',
     param: function (calDates, rnwlDates) {
@@ -40,7 +40,7 @@ let calEvntsArray = [
     },
   },
   {
-    evntType: 'recurring', // yearly
+    evntType: ['recurring', 'YearlyEvent2'],
     shrtCut: 'a',
     apiPath: '?YearlyEvent2MMDD=',
     param: function (calDates, rnwlDates) {
@@ -48,7 +48,7 @@ let calEvntsArray = [
     },
   },
   {
-    evntType: 'renewal',
+    evntType: ['renewal'],
     shrtCut: 'r',
     apiPath: rnwlPath,
     param: function (calDates, rnwlDates) {
