@@ -317,6 +317,12 @@ function buttonHandlers() {
     });
   });
 
+  document.querySelectorAll('.monthlyEventInput').forEach((dynamicInput) => {
+    dynamicInput.addEventListener('change', function (e) {
+      console.log('Monthly inputs clicked');
+    });
+  });
+
   document.querySelectorAll('.dynamicInputs').forEach((dynamicInput) => {
     dynamicInput.addEventListener('click', function (e) {
       oldDynamicInput = e.target.value;
