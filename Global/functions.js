@@ -275,3 +275,44 @@ function matchDatalist(searchInput) {
     }
   });
 }
+
+function addRecurEvntsToCal(e, recurEvntInptFld, MM) {
+  let retrievedTasksEvents = document.getElementsByClassName(calTaskTag);
+  for (key in retrievedTasksEvents) {
+    if (
+      retrievedTasksEvents[key].className &&
+      retrievedTasksEvents[key].className.includes(e.target.id.slice(0, -2)) &&
+      retrievedTasksEvents[key].className.includes(_id.value)
+    ) {
+      // console.log(retrievedTasksEvents[key].id);
+      document.getElementById(retrievedTasksEvents[key].id).remove();
+    }
+  }
+  for (let rep = 0; rep < 28; rep++) {
+    if (recurEvntInptFld == document.getElementById(`${dayTag}${rep}`).innerHTML.slice(MM, 5)) {
+      let calCntct = document.createElement('div');
+      calCntct.classList.add('recurring');
+      calCntct.classList.add(e.target.id.slice(0, -2));
+      calCntct.classList.add(activeTag);
+      calCntct.classList.add(`_${_id.value}`);
+      calCntct.classList.add(textlightTag);
+      calCntct.classList.add(calTaskTag);
+      calCntct.classList.add(Status.value);
+      calCntct.classList.add(Source.value);
+      calCntct.classList.add(LastEditedBy.value);
+      calCntct.classList.add(`mNotCmpltd`);
+      calCntct.id = Date.now();
+      let savedPhone = Phone.value;
+      calCntct.textContent = `${LastName.value}`;
+      calCntct.addEventListener('click', () => {
+        console.log(Phone.value);
+        emailBody.value = '';
+        emailSubject.value = 'choose-email-template';
+        loadSidePanel(`${srvrURL}${phonePath}${savedPhone}`);
+        calCntct.classList.add(activeTag);
+        highlghtActvEvnt(_id.value);
+      });
+      document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+    }
+  }
+}
