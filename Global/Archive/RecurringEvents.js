@@ -212,3 +212,12 @@ let cntctTasksArray = [
     checkBoxCMD: false,
   },
 ];
+
+// Text Area from buttonHanders.js
+
+contactTasksTextArea.addEventListener('focus', () => {
+  cntctTasksTxtAreaList.classList.remove(hiddenContactTag);
+});
+contactTasksTextArea.addEventListener('keydown', () => {
+  cntctTasksTxtAreaList.classList.add(hiddenContactTag);
+});
