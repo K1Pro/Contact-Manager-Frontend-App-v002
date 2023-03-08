@@ -58,6 +58,7 @@ function loadSidePanel(URL, slctdCalTask) {
 }
 
 function calendarDatesFillIn(chosenDate) {
+  console.log(document.getElementById('DaysSelect').value);
   let calRep = 0;
   let prevMondayLastWeek = 1 - chosenDate.getDay() - daysInWeek;
   for (let rep = 0; rep < 28; rep++) {
@@ -80,11 +81,9 @@ function calendarDatesFillIn(chosenDate) {
     if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10))
       document.getElementById(`${dayTag}${rep}`).classList.add(calSelectedDayTag);
 
-    if (TodaysDate.toJSON().slice(0, 10) == calDates.toJSON().slice(0, 10)) {
-      document.getElementById(`${dayTag}${rep}`).innerHTML = `<b>${calDates.toJSON().slice(5, 10)} (Today)</b>`;
-    } else {
-      document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`;
-    }
+    TodaysDate.toJSON().slice(0, 10) == calDates.toJSON().slice(0, 10)
+      ? (document.getElementById(`${dayTag}${rep}`).innerHTML = `<b>${calDates.toJSON().slice(5, 10)} (Today)</b>`)
+      : (document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`);
 
     document.getElementById(`${dayTag}${rep}`).addEventListener('click', () => {
       for (let rep = 0; rep < 28; rep++) {

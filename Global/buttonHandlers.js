@@ -94,18 +94,20 @@ function buttonHandlers() {
   document.querySelectorAll('.DropDown').forEach((filterDropDown) => {
     filterDropDown.addEventListener('change', function (filter) {
       localStorage.setItem(filter.target.id, filter.target.value);
-      let retrievedTasksEvents = document.getElementsByClassName('calTask');
-      let allFilterDropDowns = document.querySelectorAll('.DropDown');
-      let filterDropDownArray = [...allFilterDropDowns].map((el) => el.value);
-      for (key in retrievedTasksEvents) {
-        if (retrievedTasksEvents[key].className) {
-          let filteredClasses = retrievedTasksEvents[key].className;
-          let TasksEventsClassArray = filteredClasses.split(' ');
-          let bothArraysEqual = filterDropDownArray.every((r) => TasksEventsClassArray.includes(r));
-          if (bothArraysEqual) {
-            document.getElementById(`${retrievedTasksEvents[key].id}`).classList.remove('hiddenContact');
-          } else {
-            document.getElementById(`${retrievedTasksEvents[key].id}`).classList.add('hiddenContact');
+      if (filter.target.id != 'DaysSelect') {
+        let retrievedTasksEvents = document.getElementsByClassName('calTask');
+        let allFilterDropDowns = document.querySelectorAll('.DropDown');
+        let filterDropDownArray = [...allFilterDropDowns].map((el) => el.value);
+        for (key in retrievedTasksEvents) {
+          if (retrievedTasksEvents[key].className) {
+            let filteredClasses = retrievedTasksEvents[key].className;
+            let TasksEventsClassArray = filteredClasses.split(' ');
+            let bothArraysEqual = filterDropDownArray.every((r) => TasksEventsClassArray.includes(r));
+            if (bothArraysEqual) {
+              document.getElementById(`${retrievedTasksEvents[key].id}`).classList.remove('hiddenContact');
+            } else {
+              document.getElementById(`${retrievedTasksEvents[key].id}`).classList.add('hiddenContact');
+            }
           }
         }
       }
@@ -113,7 +115,7 @@ function buttonHandlers() {
   });
 
   DaysSelect.addEventListener('change', function (e) {
-    // localStorage.setItem(e.target.id, e.target.value);
+    localStorage.setItem(e.target.id, e.target.value);
     daysSelected = e.target.value;
     for (let rep = 0; rep < 28; rep++) {
       deleteCalRow(rep);
