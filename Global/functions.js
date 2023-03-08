@@ -58,7 +58,6 @@ function loadSidePanel(URL, slctdCalTask) {
 }
 
 function calendarDatesFillIn(chosenDate) {
-  console.log(document.getElementById('DaysSelect').value);
   let calRep = 0;
   let prevMondayLastWeek = 1 - chosenDate.getDay() - daysInWeek;
   for (let rep = 0; rep < 28; rep++) {

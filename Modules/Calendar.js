@@ -7,6 +7,7 @@ function calendarModule() {
   populateSlctWObj(StatusObj, StatusSelect);
   populateSlctWObj(SourceObj, SourceSelect);
   populateSlctWObj(DaysObj, DaysSelect);
+  dayShowHide(document.getElementById('DaysSelect').value);
   calendarDatesFillIn(TodaysDate);
   if (window.innerWidth < 768) {
     /*your functions for big screen*/

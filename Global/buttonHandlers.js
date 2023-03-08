@@ -116,30 +116,8 @@ function buttonHandlers() {
 
   DaysSelect.addEventListener('change', function (e) {
     localStorage.setItem(e.target.id, e.target.value);
-    daysSelected = e.target.value;
-    for (let rep = 0; rep < 28; rep++) {
-      deleteCalRow(rep);
-      if (rep < daysSelected) {
-        document.getElementById(`day0`).classList.remove(hiddenContactTag);
-        document.getElementById(`${dayTag}${rep}`).classList.remove(hiddenContactTag);
-        if (rep == 5 || rep == 6 || rep == 12 || rep == 13 || rep == 19 || rep == 20 || rep == 26 || rep == 27) {
-          document.getElementById(`${dayTag}${rep}`).classList.add(`SatSun${daysSelected}`);
-        } else {
-          document.getElementById(`${dayTag}${rep}`).classList.add(`Day${daysSelected}`);
-        }
-      } else if (daysSelected == 0) {
-        deleteCalRow(rep); // Deletes Day0 once
-        document.querySelectorAll('.uniqueday').forEach((weekdays) => {
-          uniqueday = weekdays.className;
-          if (uniqueday.includes(calSelectedDayTag)) {
-            document.getElementById(weekdays.id).classList.remove('hiddenContact');
-            document.getElementById(weekdays.id).classList.add(`Day${daysSelected}`);
-          }
-        });
-      }
-    }
+    dayShowHide(e.target.value);
   });
-
   // Review Button in Side Panel
   reviewContact.addEventListener('click', function () {
     if (_id.value) {
