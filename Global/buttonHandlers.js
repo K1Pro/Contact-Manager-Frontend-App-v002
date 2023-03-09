@@ -117,6 +117,10 @@ function buttonHandlers() {
   DaysSelect.addEventListener('change', function (e) {
     localStorage.setItem(e.target.id, e.target.value);
     dayShowHide(e.target.value);
+    retrievedDate = document.getElementById('CalendarDate').value.split('-');
+    nextWeek = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime();
+    nextWeekHHMM = new Date(nextWeek).setHours(TodaysHour, TodaysMinutes);
+    calendarDatesFillIn(new Date(nextWeekHHMM));
   });
   // Review Button in Side Panel
   reviewContact.addEventListener('click', function () {

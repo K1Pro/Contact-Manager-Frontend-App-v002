@@ -57,9 +57,22 @@ function loadSidePanel(URL, slctdCalTask) {
   });
 }
 
-function calendarDatesFillIn(chosenDate) {
+function calendarDatesFillIn(chosenDate, DaysSelected) {
   let calRep = 0;
+  document.getElementById('DaysSelect').value == 7 ? (daysInWeek = 0) : (daysInWeek = 7);
+
   let prevMondayLastWeek = 1 - chosenDate.getDay() - daysInWeek;
+
+  // if (document.getElementById('DaysSelect').value == 0) {
+  //   prevMondayLastWeek = 1 - chosenDate.getDay() - daysInWeek;
+  //   console.log('true');
+  // }
+  // check this there is a bug
+  console.log('+++++++++++++++++++++');
+  console.log(`prev monday: ${prevMondayLastWeek}`);
+  console.log(`checking this: ${chosenDate.getDay()}`);
+  console.log(`days select: ${document.getElementById('DaysSelect').value}`);
+  console.log('+++++++++++++++++++++');
   for (let rep = 0; rep < 28; rep++) {
     document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);
     document.getElementById(`${dayTag}${rep}`).classList.remove(calTodaysDayTag);
