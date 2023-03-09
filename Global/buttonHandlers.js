@@ -120,8 +120,9 @@ function buttonHandlers() {
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
     nextWeek = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime();
     nextWeekHHMM = new Date(nextWeek).setHours(TodaysHour, TodaysMinutes);
-    calendarDatesFillIn(new Date(nextWeekHHMM));
+    calendarDatesFillIn(new Date(nextWeekHHMM), document.getElementById('DaysSelect').value);
   });
+
   // Review Button in Side Panel
   reviewContact.addEventListener('click', function () {
     if (_id.value) {

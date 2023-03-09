@@ -73,7 +73,8 @@ function calendarDatesFillIn(chosenDate, DaysSelected) {
   console.log(`checking this: ${chosenDate.getDay()}`);
   console.log(`days select: ${document.getElementById('DaysSelect').value}`);
   console.log('+++++++++++++++++++++');
-  for (let rep = 0; rep < 28; rep++) {
+  for (let rep = 0; rep < DaysSelected; rep++) {
+    console.log(DaysSelected);
     document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);
     document.getElementById(`${dayTag}${rep}`).classList.remove(calTodaysDayTag);
 
