@@ -252,11 +252,12 @@ function deleteCalRow(rep) {
   document.getElementById(`${dayTag}${rep}`).classList.remove('Day7');
   document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun7');
   document.getElementById(`${dayTag}${rep}`).classList.remove('Day1');
-  document.getElementById(`${dayTag}${rep}`).classList.remove('Day0');
+  // document.getElementById(`${dayTag}${rep}`).classList.remove('Day0');
 }
 ///////////////////////////////////////////////////////////
 ///////////// vvv Calendar Day Show or Hide vvv ///////////
 function dayShowHide(daysSelected) {
+  console.log(`day selected: ${daysSelected}`);
   for (let rep = 0; rep < 28; rep++) {
     deleteCalRow(rep);
     if (rep < daysSelected) {
@@ -286,7 +287,7 @@ let limitFunc = function () {
   if (window.innerWidth < 768) {
     /*your functions for big screen*/
     console.log('smallscreen');
-    document.getElementById('DaysSelect').value = 0;
+    document.getElementById('DaysSelect').value = 1;
     document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
   }
 };
