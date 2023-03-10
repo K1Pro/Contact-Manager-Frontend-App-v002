@@ -251,6 +251,8 @@ function deleteCalRow(rep) {
   document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun14');
   document.getElementById(`${dayTag}${rep}`).classList.remove('Day7');
   document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun7');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('Day3');
+  document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun3');
   document.getElementById(`${dayTag}${rep}`).classList.remove('Day1');
   // document.getElementById(`${dayTag}${rep}`).classList.remove('Day0');
 }
