@@ -60,8 +60,10 @@ function loadSidePanel(URL, slctdCalTask) {
 function calendarDatesFillIn(chosenDate, DaysSelected) {
   let calRep = 0;
   document.getElementById('DaysSelect').value == 7 ? (daysInWeek = 0) : (daysInWeek = 7);
-  document.getElementById('DaysSelect').value == 1 ? prevMondayLastWeek = 0 :  prevMondayLastWeek = 1 - chosenDate.getDay() - daysInWeek;
-  
+  prevMondayLastWeek = 1 - chosenDate.getDay() - daysInWeek;
+  if (document.getElementById('DaysSelect').value == 3) prevMondayLastWeek = -1;
+  if (document.getElementById('DaysSelect').value == 1) prevMondayLastWeek = 0;
+
   for (let rep = 0; rep < DaysSelected; rep++) {
     console.log(DaysSelected);
     document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);

@@ -42,6 +42,7 @@ const DaysObj = {
   number21: 'Days (21)',
   number14: 'Days (14)',
   number7: 'Days (7)',
+  number3: 'Days (3)',
   number1: 'Day (1)',
 };
 

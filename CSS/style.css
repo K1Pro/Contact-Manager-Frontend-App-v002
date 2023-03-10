@@ -1,5 +1,13 @@
 /* +++++ScrollBar++++++ */
 /* width */
+.Day3 {
+  width: 33vw !important;
+  /* height: 11.75vh; */
+}
+.SatSun3 {
+  width: 33vw !important;
+  /* height: 5.875vh; */
+}
 .Day1 {
   width: 100vw !important;
   /* height: 11.75vh; */

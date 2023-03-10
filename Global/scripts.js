@@ -287,7 +287,7 @@ let limitFunc = function () {
   if (window.innerWidth < 768) {
     /*your functions for big screen*/
     console.log('smallscreen');
-    document.getElementById('DaysSelect').value = 1;
+    document.getElementById('DaysSelect').value = 3;
     document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
   }
 };
