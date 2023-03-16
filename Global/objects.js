@@ -45,12 +45,3 @@ const DaysObj = {
   number3: 'Days (3)',
   number1: 'Day (1)',
 };
-
-const repeatEvnts = {
-  Weekly: 'Weekly',
-  // BiWeekly: 'BiWeekly',
-  Monthly: 'Monthly',
-  // BiMonthly: 'BiMonthly',
-  SemiAnnual: 'SemiAnnual',
-  Annual: 'Annual',
-};

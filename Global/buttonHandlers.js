@@ -94,18 +94,24 @@ function buttonHandlers() {
   document.querySelectorAll('.DropDown').forEach((filterDropDown) => {
     filterDropDown.addEventListener('change', function (filter) {
       localStorage.setItem(filter.target.id, filter.target.value);
+
       if (filter.target.id != 'DaysSelect') {
         let retrievedTasksEvents = document.getElementsByClassName('calTask');
         let allFilterDropDowns = document.querySelectorAll('.DropDown');
         let filterDropDownArray = [...allFilterDropDowns].map((el) => el.value);
+        console.log(filterDropDownArray);
         for (key in retrievedTasksEvents) {
           if (retrievedTasksEvents[key].className) {
             let filteredClasses = retrievedTasksEvents[key].className;
+
             let TasksEventsClassArray = filteredClasses.split(' ');
+
             let bothArraysEqual = filterDropDownArray.every((r) => TasksEventsClassArray.includes(r));
             if (bothArraysEqual) {
+              console.log('test - yes');
               document.getElementById(`${retrievedTasksEvents[key].id}`).classList.remove('hiddenContact');
             } else {
+              console.log('test - no');
               document.getElementById(`${retrievedTasksEvents[key].id}`).classList.add('hiddenContact');
             }
           }
