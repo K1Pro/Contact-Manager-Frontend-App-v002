@@ -241,8 +241,6 @@ function auto_height(elem) {
 ////////// vvv Removes calendar row styling vvv ///////////
 function deleteCalRow(rep) {
   document.getElementById(`${dayTag}${rep}`).classList.add(hiddenContactTag);
-  // document.getElementById(`${dayTag}${rep}`).classList.remove('calendarRow');
-  // document.getElementById(`${dayTag}${rep}`).classList.remove('calendarSatSunRow');
   document.getElementById(`${dayTag}${rep}`).classList.remove('Day28');
   document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun28');
   document.getElementById(`${dayTag}${rep}`).classList.remove('Day21');
@@ -254,32 +252,19 @@ function deleteCalRow(rep) {
   document.getElementById(`${dayTag}${rep}`).classList.remove('Day3');
   document.getElementById(`${dayTag}${rep}`).classList.remove('SatSun3');
   document.getElementById(`${dayTag}${rep}`).classList.remove('Day1');
-  // document.getElementById(`${dayTag}${rep}`).classList.remove('Day0');
 }
 ///////////////////////////////////////////////////////////
 ///////////// vvv Calendar Day Show or Hide vvv ///////////
 function dayShowHide(daysSelected) {
-  console.log(`day selected: ${daysSelected}`);
   for (let rep = 0; rep < 28; rep++) {
     deleteCalRow(rep);
     if (rep < daysSelected) {
-      // document.getElementById(`day0`).classList.remove(hiddenContactTag);
       document.getElementById(`${dayTag}${rep}`).classList.remove(hiddenContactTag);
       if (rep == 5 || rep == 6 || rep == 12 || rep == 13 || rep == 19 || rep == 20 || rep == 26 || rep == 27) {
         document.getElementById(`${dayTag}${rep}`).classList.add(`SatSun${daysSelected}`);
       } else {
         document.getElementById(`${dayTag}${rep}`).classList.add(`Day${daysSelected}`);
       }
-    } else if (daysSelected == 0) {
-      console.log('hi there');
-      deleteCalRow(rep); // Deletes Day0 once
-      document.querySelectorAll('.uniqueday').forEach((weekdays) => {
-        uniqueday = weekdays.className;
-        if (uniqueday.includes(calSelectedDayTag)) {
-          document.getElementById(weekdays.id).classList.remove('hiddenContact');
-          document.getElementById(weekdays.id).classList.add(`Day${daysSelected}`);
-        }
-      });
     }
   }
 }

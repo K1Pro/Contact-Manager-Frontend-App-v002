@@ -65,7 +65,6 @@ function calendarDatesFillIn(chosenDate, DaysSelected) {
   if (document.getElementById('DaysSelect').value == 1) prevMondayLastWeek = 0;
 
   for (let rep = 0; rep < DaysSelected; rep++) {
-    console.log(DaysSelected);
     document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);
     document.getElementById(`${dayTag}${rep}`).classList.remove(calTodaysDayTag);
 
