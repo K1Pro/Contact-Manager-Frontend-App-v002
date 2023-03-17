@@ -467,10 +467,13 @@ input[type='date']:invalid::-webkit-datetime-edit {
 }
 
 .inputHeaderBlue {
-  color: blue;
+  /* color: blue; */
   letter-spacing: 1.5px;
   text-align: center;
   font-weight: 850;
+  -webkit-text-fill-color: blue; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(62, 62, 62);
 }
 
 .inputHeaderPink {
@@ -484,10 +487,13 @@ input[type='date']:invalid::-webkit-datetime-edit {
   -webkit-text-stroke-color: rgb(62, 62, 62);
 }
 .inputHeaderPurple {
-  color: purple;
+  /* color: purple; */
   letter-spacing: 1.5px;
   text-align: center;
   font-weight: 850;
+  -webkit-text-fill-color: purple; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(62, 62, 62);
 }
 .inputHeaderOrange {
   /* color: #ff9933; */
@@ -500,10 +506,13 @@ input[type='date']:invalid::-webkit-datetime-edit {
   -webkit-text-stroke-color: rgb(62, 62, 62);
 }
 .inputHeaderRed {
-  color: red;
+  /* color: red; */
   letter-spacing: 1.5px;
   text-align: center;
   font-weight: 850;
+  -webkit-text-fill-color: red; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(62, 62, 62);
 }
 /* .eventDates { */
 /* position: absolute; */
