@@ -8,16 +8,18 @@ function calendarModule() {
   populateSlctWObj(SourceObj, SourceSelect);
   populateSlctWObj(DaysObj, DaysSelect);
   dayShowHide(document.getElementById('DaysSelect').value);
-  calendarDatesFillIn(TodaysDate, document.getElementById('DaysSelect').value);
+  // calendarDatesFillIn(TodaysDate, document.getElementById('DaysSelect').value);
   if (window.innerWidth < 768) {
     /*your functions for big screen*/
     // console.log('smallscreen');
+    dayShowHide(3);
     document.getElementById('DaysSelect').value = 3;
-    document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
+    calendarDatesFillIn(TodaysDate, 3);
     document.getElementById('DaysSelect').classList.add(hiddenContactTag);
   } else {
+    dayShowHide(21);
     document.getElementById('DaysSelect').value = 21;
-    document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
+    calendarDatesFillIn(TodaysDate, 21);
     document.getElementById('DaysSelect').classList.remove(hiddenContactTag);
   }
   // ^^^ End coding here for Calendar Module ^^^

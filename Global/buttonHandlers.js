@@ -121,6 +121,7 @@ function buttonHandlers() {
   });
 
   DaysSelect.addEventListener('change', function (e) {
+    abortCalendarDatesFillIn();
     localStorage.setItem(e.target.id, e.target.value);
     dayShowHide(e.target.value);
     retrievedDate = document.getElementById('CalendarDate').value.split('-');

@@ -274,12 +274,16 @@ let limitFunc = function () {
   if (window.innerWidth < 768) {
     /*your functions for big screen*/
     // console.log('smallscreen');
+    abortCalendarDatesFillIn();
+    dayShowHide(3);
     document.getElementById('DaysSelect').value = 3;
-    document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
+    calendarDatesFillIn(TodaysDate, 3);
     document.getElementById('DaysSelect').classList.add(hiddenContactTag);
   } else {
+    abortCalendarDatesFillIn();
+    dayShowHide(21);
     document.getElementById('DaysSelect').value = 21;
-    document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
+    calendarDatesFillIn(TodaysDate, 21);
     document.getElementById('DaysSelect').classList.remove(hiddenContactTag);
   }
 };
