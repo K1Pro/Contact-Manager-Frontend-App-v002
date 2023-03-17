@@ -276,6 +276,7 @@ let limitFunc = function () {
     console.log('smallscreen');
     document.getElementById('DaysSelect').value = 3;
     document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
+    document.getElementById('DaysSelect').classList.add(hiddenContactTag);
   }
 };
 ///////////////////////////////////////////////////////////

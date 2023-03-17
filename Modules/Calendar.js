@@ -12,8 +12,9 @@ function calendarModule() {
   if (window.innerWidth < 768) {
     /*your functions for big screen*/
     console.log('smallscreen');
-    document.getElementById('DaysSelect').value = 0;
+    document.getElementById('DaysSelect').value = 3;
     document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
+    document.getElementById('DaysSelect').classList.add(hiddenContactTag);
   }
   // ^^^ End coding here for Calendar Module ^^^
 }
