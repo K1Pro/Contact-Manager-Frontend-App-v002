@@ -145,8 +145,16 @@ isElementLoaded('#CalendarHTMLModule').then(() => {
   isElementLoaded('#ContactTasksHTMLModule').then(() => {
     isElementLoaded('#EmailHTMLModule').then(() => {
       isElementLoaded('#SidePanelHTMLModule').then(() => {
-        console.log('retrieved all DOM elements {for elements retrieved module}');
-        elementsRequired();
+        isElementLoaded('#DaysDropDownModule').then(() => {
+          isElementLoaded('#MonthDropDownModule').then(() => {
+            isElementLoaded('#PolicyTypeDropDownModule').then(() => {
+              isElementLoaded('#StateDropDownModule').then(() => {
+                console.log('retrieved all DOM elements {for elements retrieved module}');
+                elementsRequired();
+              });
+            });
+          });
+        });
       });
     });
   });
