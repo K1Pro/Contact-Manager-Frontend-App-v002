@@ -11,10 +11,14 @@ function calendarModule() {
   calendarDatesFillIn(TodaysDate, document.getElementById('DaysSelect').value);
   if (window.innerWidth < 768) {
     /*your functions for big screen*/
-    console.log('smallscreen');
+    // console.log('smallscreen');
     document.getElementById('DaysSelect').value = 3;
     document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
     document.getElementById('DaysSelect').classList.add(hiddenContactTag);
+  } else {
+    document.getElementById('DaysSelect').value = 21;
+    document.getElementById('DaysSelect').dispatchEvent(new Event('change'));
+    document.getElementById('DaysSelect').classList.remove(hiddenContactTag);
   }
   // ^^^ End coding here for Calendar Module ^^^
 }
