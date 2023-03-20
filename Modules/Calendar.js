@@ -9,9 +9,8 @@ function calendarModule() {
   populateSlctWObj(DaysObj, DaysSelect);
   dayShowHide(document.getElementById('DaysSelect').value);
   // calendarDatesFillIn(TodaysDate, document.getElementById('DaysSelect').value);
-  if (window.innerWidth < 768) {
+  if (window.innerWidth < smallScrnSize) {
     /*your functions for big screen*/
-    // console.log('smallscreen');
     dayShowHide(3);
     document.getElementById('DaysSelect').value = 3;
     calendarDatesFillIn(TodaysDate, 3);

@@ -272,17 +272,15 @@ function dayShowHide(daysSelected) {
 ///////////// vvv Resizes the screen on load vvv ///////////
 let limitFunc = function () {
   newWidth = window.innerWidth;
-  // console.log(`prevwidth: ${prevWidth}`);
-  // console.log(`width: ${newWidth}`);
-  if (prevWidth > 768 && newWidth < 768) {
-    /*your functions for big screen*/
-    // console.log('smallscreen');
+  if (prevWidth > smallScrnSize && newWidth < smallScrnSize) {
+    // functions for big screen
     abortCalendarDatesFillIn();
     dayShowHide(3);
     document.getElementById('DaysSelect').value = 3;
     calendarDatesFillIn(TodaysDate, 3);
     document.getElementById('DaysSelect').classList.add(hiddenContactTag);
-  } else if (prevWidth < 768 && newWidth > 768) {
+  } else if (prevWidth < smallScrnSize && newWidth > smallScrnSize) {
+    // functions for small screen
     abortCalendarDatesFillIn();
     dayShowHide(21);
     document.getElementById('DaysSelect').value = 21;
