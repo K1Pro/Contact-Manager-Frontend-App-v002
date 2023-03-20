@@ -6,8 +6,8 @@ async function getJSON(url, errorMsg = 'Something went wrong') {
     return contactData;
   } catch (error) {
     if (error.name === 'AbortError') {
-      console.log('Fetch was aborted');
+      // console.log('Fetch was aborted');
     }
-    console.log(errorMsg);
+    // console.log(errorMsg);
   }
 }

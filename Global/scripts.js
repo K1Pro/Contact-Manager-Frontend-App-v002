@@ -271,6 +271,9 @@ function dayShowHide(daysSelected) {
 ///////////////////////////////////////////////////////////
 ///////////// vvv Resizes the screen on load vvv ///////////
 let limitFunc = function () {
+  newWidth = window.innerWidth;
+  console.log(`prevwidth: ${prevWidth}`);
+  console.log(`width: ${newWidth}`);
   if (window.innerWidth < 768) {
     /*your functions for big screen*/
     // console.log('smallscreen');
@@ -286,6 +289,8 @@ let limitFunc = function () {
     calendarDatesFillIn(TodaysDate, 21);
     document.getElementById('DaysSelect').classList.remove(hiddenContactTag);
   }
+  prevWidth = window.innerWidth;
+  return prevWidth;
 };
 ///////////////////////////////////////////////////////////
 ///////////// vvv Calendar Events styling vvv ///////////
