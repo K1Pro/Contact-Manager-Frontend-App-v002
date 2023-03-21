@@ -86,12 +86,7 @@
 * {
   border-radius: 0 !important;
 }
-.form-control,
-.custSelect {
-  padding-top: 0.275rem !important;
-  padding-bottom: 0.275rem !important;
-  font-size: 13.5px;
-}
+
 .form-control::-moz-placeholder {
   color: #cccccc;
   /* opacity: 0.6; */
@@ -473,7 +468,6 @@ input[type='date']:invalid::-webkit-datetime-edit {
 }
 
 .inputHeaderBlue {
-  font-size: 12px;
   /* color: blue; */
   letter-spacing: 1.5px;
   text-align: center;
@@ -485,7 +479,6 @@ input[type='date']:invalid::-webkit-datetime-edit {
 
 .inputHeaderPink {
   /* color: hotpink; */
-  font-size: 12px;
   text-align: center;
   font-weight: 850;
   /* text-shadow: 0px 0px 4px black; */
@@ -496,7 +489,6 @@ input[type='date']:invalid::-webkit-datetime-edit {
 }
 .inputHeaderPurple {
   /* color: purple; */
-  font-size: 12px;
   letter-spacing: 1.5px;
   text-align: center;
   font-weight: 850;
@@ -505,7 +497,6 @@ input[type='date']:invalid::-webkit-datetime-edit {
   -webkit-text-stroke-color: rgb(62, 62, 62);
 }
 .inputHeaderOrange {
-  font-size: 12px;
   /* color: #ff9933; */
   text-align: center;
   font-weight: 850;
@@ -516,7 +507,6 @@ input[type='date']:invalid::-webkit-datetime-edit {
   -webkit-text-stroke-color: rgb(62, 62, 62);
 }
 .inputHeaderRed {
-  font-size: 12px;
   /* color: red; */
   letter-spacing: 1.5px;
   text-align: center;
