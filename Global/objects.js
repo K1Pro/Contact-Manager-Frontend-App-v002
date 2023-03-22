@@ -28,8 +28,8 @@ const SourceObj = {
 };
 
 const LastEditedByObj = {
-  Bartosz: 'Bartosz',
   Hanna: 'Hanna',
+  Bartosz: 'Bartosz',
   Kamilla: 'Kamilla',
   Piotr: 'Piotr',
   Aneta: 'Aneta',
