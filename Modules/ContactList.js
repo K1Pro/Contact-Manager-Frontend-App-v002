@@ -1,6 +1,9 @@
 function contactListModule() {
   // vvv Start coding here for Calendar Module vvv
   testList.innerHTML = 'Nothing';
+  getJSON(`${srvrURL}`).then((data) => {
+    console.log(data.data.contacts);
+  });
   // ^^^ End coding here for Calendar Module ^^^
 }
 
