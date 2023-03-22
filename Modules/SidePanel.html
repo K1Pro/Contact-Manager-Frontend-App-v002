@@ -18,7 +18,7 @@
       type="text"
       placeholder="First Name..."
       aria-label="First name"
-      class="form-control leftBorderGreen"
+      class="form-control leftBorderGreen respHeight"
       id="FirstName"
       required
     />
@@ -26,14 +26,14 @@
       type="text"
       placeholder="Last Name..."
       aria-label="Last name"
-      class="form-control topBottomBorderBlack"
+      class="form-control topBottomBorderBlack respHeight"
       id="LastName"
       required
     />
     <input
       type="date"
       id="BirthDate"
-      class="form-control topBottomRightBorderBlack"
+      class="form-control topBottomRightBorderBlack respHeight"
       name="BirthDate"
       min="1900-01-01"
       max="2050-12-31"
@@ -41,17 +41,22 @@
   </div>
 
   <div class="input-group">
-    <input type="text" placeholder="Spouse First Name..." class="form-control leftBorderGreen" id="SpouseName" />
+    <input
+      type="text"
+      placeholder="Spouse First Name..."
+      class="form-control leftBorderGreen respHeight"
+      id="SpouseName"
+    />
     <input
       type="text"
       placeholder="Spouse Last Name..."
-      class="form-control topBottomBorderBlack"
+      class="form-control topBottomBorderBlack respHeight"
       id="SpouseLastName"
     />
     <input
       type="date"
       id="SpouseBirthDate"
-      class="form-control topBottomRightBorderBlack"
+      class="form-control topBottomRightBorderBlack respHeight"
       name="SpouseBirthDate"
       min="1900-01-01"
       max="2050-12-31"
@@ -62,34 +67,34 @@
   <!-- Contact Information -->
   <div class="input-group">
     <!-- <div class="col-md-8 paddingZero"> need to add row to div class above -->
-    <input type="text" class="form-control leftBorderBlue" id="Address" placeholder="Address..." />
+    <input type="text" class="form-control leftBorderBlue respHeight" id="Address" placeholder="Address..." />
     <!-- </div>
   <div class="col-md-4 paddingZero"> -->
-    <input type="text" class="form-control topBottomRightBorderBlack" id="Address2" placeholder="Unit..." />
+    <input type="text" class="form-control topBottomRightBorderBlack respHeight" id="Address2" placeholder="Unit..." />
     <!-- </div> -->
   </div>
   <div class="input-group">
-    <input type="text" placeholder="City..." class="form-control leftBorderBlue" id="City" />
+    <input type="text" placeholder="City..." class="form-control leftBorderBlue respHeight" id="City" />
     <select
       id="State"
-      class="form-select topBottomBorderBlack custSelect"
+      class="form-select topBottomBorderBlack respHeight"
       w3-include-html="./HTML/StateDropDown01.html"
     ></select>
-    <input type="text" placeholder="Zip..." class="form-control topBottomBorderBlack" id="Zip" />
-    <input type="text" class="form-control topBottomRightBorderBlack" id="EHV" placeholder="EHV..." />
+    <input type="text" placeholder="Zip..." class="form-control topBottomBorderBlack respHeight" id="Zip" />
+    <input type="text" class="form-control topBottomRightBorderBlack respHeight" id="EHV" placeholder="EHV..." />
   </div>
   <div class="input-group">
     <input
       type="tel"
       placeholder="Phone..."
-      class="form-control leftBorderBlue"
+      class="form-control leftBorderBlue respHeight"
       minlength="12"
       maxlength="12"
       id="Phone"
       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
       required
     />
-    <input type="text" placeholder="Email..." class="form-control topBottomRightBorderBlack" id="Email" />
+    <input type="text" placeholder="Email..." class="form-control topBottomRightBorderBlack respHeight" id="Email" />
   </div>
   <!-- <br /> -->
   <div class="inputHeaderPink">POLICY INFO</div>
@@ -97,20 +102,20 @@
   <div class="input-group">
     <select
       id="Policy1Type"
-      class="leftBorderPink policyInfo custSelect"
+      class="leftBorderPink policyInfo respHeight"
       w3-include-html="./HTML/PolicyTypeDropDown.html"
     ></select>
     <input
       type="text"
       placeholder="Policy# | Renewal Date --->"
-      class="form-control topBottomBorderBlack policyInfo"
+      class="form-control topBottomBorderBlack policyInfo respHeight"
       id="Policy1Number"
       aria-label="Auto Policy"
     />
     <input
       type="date"
       id="Policy1RenewDate"
-      class="form-control topBottomRightBorderBlack policyInfo"
+      class="form-control topBottomRightBorderBlack policyInfo respHeight"
       name="Policy1RenewDate"
       min="1900-01-01"
       max="2050-12-31"
@@ -121,20 +126,20 @@
   <div class="input-group">
     <select
       id="Policy2Type"
-      class="leftBorderPink policyInfo custSelect"
+      class="leftBorderPink policyInfo respHeight"
       w3-include-html="./HTML/PolicyTypeDropDown.html"
     ></select>
     <input
       type="text"
       placeholder="Policy# | Renewal Date --->"
-      class="form-control topBottomBorderBlack policyInfo"
+      class="form-control topBottomBorderBlack policyInfo respHeight"
       id="Policy2Number"
       aria-label="Auto Policy"
     />
     <input
       type="date"
       id="Policy2RenewDate"
-      class="form-control topBottomRightBorderBlack policyInfo"
+      class="form-control topBottomRightBorderBlack policyInfo respHeight"
       name="Policy2RenewDate"
       min="1900-01-01"
       max="2050-12-31"
@@ -145,20 +150,20 @@
   <div class="input-group">
     <select
       id="Policy3Type"
-      class="leftBorderPink policyInfo custSelect"
+      class="leftBorderPink policyInfo respHeight"
       w3-include-html="./HTML/PolicyTypeDropDown.html"
     ></select>
     <input
       type="text"
       placeholder="Policy# | Renewal Date --->"
-      class="form-control topBottomBorderBlack policyInfo"
+      class="form-control topBottomBorderBlack policyInfo respHeight"
       id="Policy3Number"
       aria-label="Auto Policy"
     />
     <input
       type="date"
       id="Policy3RenewDate"
-      class="form-control topBottomRightBorderBlack policyInfo"
+      class="form-control topBottomRightBorderBlack policyInfo respHeight"
       name="Policy3RenewDate"
       min="1900-01-01"
       max="2050-12-31"
@@ -169,20 +174,20 @@
   <div class="input-group">
     <select
       id="Policy4Type"
-      class="leftBorderPink policyInfo custSelect"
+      class="leftBorderPink policyInfo respHeight"
       w3-include-html="./HTML/PolicyTypeDropDown.html"
     ></select>
     <input
       type="text"
       placeholder="Policy# | Renewal Date --->"
-      class="form-control topBottomBorderBlack policyInfo"
+      class="form-control topBottomBorderBlack policyInfo respHeight"
       id="Policy4Number"
       aria-label="Auto Policy"
     />
     <input
       type="date"
       id="Policy4RenewDate"
-      class="form-control topBottomRightBorderBlack policyInfo"
+      class="form-control topBottomRightBorderBlack policyInfo respHeight"
       name="Policy4RenewDate"
       min="1900-01-01"
       max="2050-12-31"
@@ -195,16 +200,16 @@
     <input
       type="text"
       placeholder="Car 1..."
-      class="form-control leftBorderPurple"
+      class="form-control leftBorderPurple respHeight"
       id="Car1"
       onfocus="this.oldvalue = this.value;"
       onchange="onChangeTest(this); this.oldvalue = this.value;"
     />
-    <input type="text" placeholder="Car 2..." class="form-control topBottomRightBorderBlack" id="Car2" />
+    <input type="text" placeholder="Car 2..." class="form-control topBottomRightBorderBlack respHeight" id="Car2" />
   </div>
   <div class="input-group">
-    <input type="text" placeholder="Car 3..." class="form-control leftBorderPurple" id="Car3" />
-    <input type="text" placeholder="Car 4..." class="form-control topBottomRightBorderBlack" id="Car4" />
+    <input type="text" placeholder="Car 3..." class="form-control leftBorderPurple respHeight" id="Car3" />
+    <input type="text" placeholder="Car 4..." class="form-control topBottomRightBorderBlack respHeight" id="Car4" />
   </div>
   <!-- <br /> -->
   <div class="inputHeaderOrange">RECURRING EVENTS</div>
@@ -215,13 +220,13 @@
         <input
           type="text"
           placeholder="Monthly Event 1..."
-          class="form-control leftBorderYellow"
+          class="form-control leftBorderYellow respHeight"
           id="MonthlyEvent1Note"
         />
-        <label class="input-group-text borderTopBottom custSelect" for="MonthlyEvent1DD">@</label>
+        <label class="input-group-text borderTopBottom respHeight" for="MonthlyEvent1DD">@</label>
         <select
           id="MonthlyEvent1DD"
-          class="monthlyEventInput custSelect"
+          class="monthlyEventInput respHeight"
           w3-include-html="./HTML/DaysDropDown.html"
         ></select>
       </div>
@@ -233,13 +238,13 @@
         <input
           type="text"
           placeholder="Monthly Event 2..."
-          class="form-control leftBorderYellow"
+          class="form-control leftBorderYellow respHeight"
           id="MonthlyEvent2Note"
         />
-        <label class="input-group-text borderTopBottom custSelect" for="MonthlyEvent2DD">@</label>
+        <label class="input-group-text borderTopBottom respHeight" for="MonthlyEvent2DD">@</label>
         <select
           id="MonthlyEvent2DD"
-          class="monthlyEventInput custSelect"
+          class="monthlyEventInput respHeight"
           w3-include-html="./HTML/DaysDropDown.html"
         ></select>
       </div>
@@ -251,18 +256,18 @@
         <input
           type="text"
           placeholder="Yearly Event 1..."
-          class="form-control leftBorderYellow"
+          class="form-control leftBorderYellow respHeight"
           id="YearlyEvent1Note"
         />
-        <label class="input-group-text borderTopBottom custSelect" for="YearlyEvent1MM">@</label>
+        <label class="input-group-text borderTopBottom respHeight" for="YearlyEvent1MM">@</label>
         <select
           id="YearlyEvent1MM"
-          class="yearlyEventInput custSelect"
+          class="yearlyEventInput respHeight"
           w3-include-html="./HTML/MonthDropDown.html"
         ></select>
         <select
           id="YearlyEvent1DD"
-          class="yearlyEventInput custSelect"
+          class="yearlyEventInput respHeight"
           w3-include-html="./HTML/DaysDropDown.html"
         ></select>
       </div>
@@ -274,18 +279,18 @@
         <input
           type="text"
           placeholder="Yearly Event 2..."
-          class="form-control leftBorderYellow"
+          class="form-control leftBorderYellow respHeight"
           id="YearlyEvent2Note"
         />
-        <label class="input-group-text borderTopBottom custSelect" for="YearlyEvent2MM">@</label>
+        <label class="input-group-text borderTopBottom respHeight" for="YearlyEvent2MM">@</label>
         <select
           id="YearlyEvent2MM"
-          class="yearlyEventInput custSelect"
+          class="yearlyEventInput respHeight"
           w3-include-html="./HTML/MonthDropDown.html"
         ></select>
         <select
           id="YearlyEvent2DD"
-          class="yearlyEventInput custSelect"
+          class="yearlyEventInput respHeight"
           w3-include-html="./HTML/DaysDropDown.html"
         ></select>
       </div>
@@ -295,9 +300,9 @@
     <div class="col-12">
       <div class="input-group">
         <div class="input-group-prepend">
-          <span class="form-control input-group-text">Notes</span>
+          <span class="form-control input-group-text respHeight">Notes</span>
         </div>
-        <textarea class="form-control" aria-label="With textarea" id="Notes"></textarea>
+        <textarea class="form-control respHeight" aria-label="With textarea" id="Notes"></textarea>
       </div>
     </div>
   </div>
@@ -307,19 +312,19 @@
 
   <!-- Administrative -->
   <div class="input-group">
-    <select class="form-select leftBorderRed dynamicInputs custSelect" id="Status">
+    <select class="form-select leftBorderRed dynamicInputs respHeight" id="Status">
       <option selected disabled="disabled">Status</option>
     </select>
-    <select class="form-select topBottomRightBorderBlack dynamicInputs custSelect" id="Source">
+    <select class="form-select topBottomRightBorderBlack dynamicInputs respHeight" id="Source">
       <option selected disabled="disabled">Source</option>
     </select>
   </div>
   <div class="input-group">
-    <select class="form-select leftBorderRed dynamicInputs custSelect" id="LastEditedBy">
+    <select class="form-select leftBorderRed dynamicInputs respHeight" id="LastEditedBy">
       <!-- <option selected disabled="disabled">Agent</option> -->
     </select>
-    <button class="form-control btn btn-warning" type="button" id="reviewContact">Reviewed</button>
-    <a class="form-control btn btn-success" id="callContact" href="tel:">Call</a>
+    <button class="form-control btn btn-warning respHeight" type="button" id="reviewContact">Reviewed</button>
+    <a class="form-control btn btn-success respHeight" id="callContact" href="tel:">Call</a>
     <!-- <button class="btn btn-success" type="button" id="callContact">Call</button> -->
   </div>
 </form>

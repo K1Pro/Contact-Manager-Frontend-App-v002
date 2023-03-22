@@ -1,6 +1,5 @@
 @media only screen and (max-height: 950px) {
-  .form-control,
-  .custSelect {
+  .respHeight {
     padding-top: 0.275rem !important;
     padding-bottom: 0.275rem !important;
     font-size: 13.5px;
