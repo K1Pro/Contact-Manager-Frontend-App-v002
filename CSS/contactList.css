@@ -1,4 +1,4 @@
-table,
+/* table,
 td {
   border: 1px solid #333;
 }
@@ -7,4 +7,52 @@ thead,
 tfoot {
   background-color: #333;
   color: #fff;
+} */
+
+/* input {
+  width: 100px;
+} */
+
+/* form-control {
+  width: 100;
+} */
+
+#createContactButton {
+  display: inline-block;
+  background: green;
+  border-radius: 4px;
+  font-family: 'arial-black';
+  font-size: 14px;
+  color: #fff;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#createContactButton:hover {
+  background: blue;
+}
+
+.form-control::-moz-placeholder {
+  color: red;
+  opacity: 0.6;
+}
+.form-control::placeholder {
+  color: red;
+  opacity: 0.6;
+}
+.input-group > .form-control,
+.input-group > .form-select {
+  width: 150px;
+  margin-left: -10px;
+  margin-bottom: -50px;
+  margin-right: 50px;
+  height: 38px;
+  /* display: inline; */
+}
+
+.input-group
+  > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(
+    .invalid-feedback
+  ) {
+  margin-left: 139px;
 }

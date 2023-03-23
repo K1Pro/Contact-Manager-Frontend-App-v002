@@ -1,6 +1,6 @@
 function elementsRequired() {
   // vvv Start coding here for Retrieval Module vvv
-  testList = document.getElementById('testList');
+  contactList = document.getElementById('contactList');
   // ^^^ End coding here for Retrieval Module ^^^
   DOMElements = 'Loaded';
 }
