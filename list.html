@@ -12,11 +12,6 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./CSS/snackbar.css" />
-    <link rel="stylesheet" href="./CSS/style.css" />
-    <link rel="stylesheet" href="./CSS/responsive.css" />
-    <link rel="stylesheet" href="./CSS/responsiveHeight.css" />
-    <link rel="stylesheet" href="./CSS/checkbox.css" />
     <link rel="stylesheet" href="./CSS/contactList.css" />
     <!-- JavaScript Bundle with Popper -->
     <script defer src="./Global/includeHTML.js"></script>
@@ -40,9 +35,22 @@
   </head>
   <body>
     <div id="snackbar"></div>
-    <div class="container-fluid">
-      <div w3-include-html="./Modules/ContactList.html"></div>
-      <!-- <div class="row"></div> -->
+    <ul>
+      <li><img src="images/BundleWhite.png" alt="Bundle" />Contact List</li>
+      <li>
+        <div class="input-group">
+          <input type="checkbox" />
+          <input type="text" placeholder="First Name" id="FirstNameagain" />
+        </div>
+      </li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <div style="margin-left: 25%; padding: 1px 16px">
+      <div class="container-fluid">
+        <div w3-include-html="./Modules/ContactList.html"></div>
+        <!-- <div class="row"></div> -->
+      </div>
     </div>
   </body>
 </html>
