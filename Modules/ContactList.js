@@ -1,24 +1,78 @@
 function contactListModule() {
   // vvv Start coding here for Calendar Module vvv
-  getJSON(`${srvrURL}?sort=-LastEditDate`).then((data) => {
-    let rep = 0;
-    data.data.contacts.forEach((element) => {
-      rep++;
+
+  document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
+    cntctCheckBox.addEventListener('click', function (e) {
+      let allContctKeysCheck = document.querySelectorAll('.contctKeysCheck');
+      let allContctKeysCheckedArray = [...allContctKeysCheck].filter((el) => el.checked == true);
+      let allContctKeysNameArray = [...allContctKeysCheck].map((el) => el.id);
+      // console.log(allContctKeysCheckedArray);
+      valueArray = [];
+      allContctKeysCheckedArray.forEach((element) => {
+        // console.log(element.id.slice(0, -5));
+        valueArray.push(element.id.slice(0, -5));
+      });
+      // console.log(valueArray.toString());
+      // console.log(allContctKeysCheckedArray);
+      // console.log(allContctKeysNameArray);
+
+      contactListHeaders.innerHTML = '';
+      contactList.innerHTML = '';
+      for (key in allContctKeysCheck) {
+        if (allContctKeysCheck[key].className) {
+          if (allContctKeysCheck[key].checked == true) {
+            // console.log(allContctKeysCheck[key].id);
+            th = document.createElement('th');
+            th.scope = 'row';
+            th.innerHTML = allContctKeysCheck[key].id.slice(0, -5);
+            contactListHeaders.appendChild(th);
+            retrievedValue = allContctKeysCheck[key].id.slice(0, -5);
+            // console.log(retrievedValue);
+          }
+        }
+      }
+
+      getJSON(`${srvrURL}?fields=${valueArray.toString()}`).then((data) => {
+        // valueArray.forEach((element) =>)
+        console.log(data.data.contacts[0]);
+        // data.data.contacts.forEach((element) => {
+        //   console.log(element);
+        //   // tr = document.createElement('tr');
+        //   // contactList.appendChild(tr);
+        //   // th = document.createElement('th');
+        //   // th.scope = 'row';
+        //   // th.innerHTML = element[retrievedValue];
+        //   // tr.appendChild(th);
+        // });
+      });
+      // getJSON(`${srvrURL}?sort=-LastEditDate`).then((data) => {
+      // let rep = 0;
+      // data.data.contacts.forEach((element) => {
+      //   rep++;
       // console.log(element.LastName);
-      tr = document.createElement('tr');
-      contactList.appendChild(tr);
-      th = document.createElement('th');
-      th.scope = 'row';
-      th.innerHTML = rep;
-      tr.appendChild(th);
-      th2 = document.createElement('th');
-      th2.scope = 'row';
-      th2.innerHTML = element.FirstName;
-      tr.appendChild(th2);
-      th3 = document.createElement('th');
-      th3.scope = 'row';
-      th3.innerHTML = element.LastName;
-      tr.appendChild(th3);
+      // tr = document.createElement('tr');
+      // contactList.appendChild(tr);
+      // th = document.createElement('th');
+      // th.scope = 'row';
+      // th.innerHTML = rep;
+      // tr.appendChild(th);
+      // th2 = document.createElement('th');
+      // th2.scope = 'row';
+      // th2.innerHTML = element.FirstName;
+      // tr.appendChild(th2);
+      // th3 = document.createElement('th');
+      // th3.scope = 'row';
+      // th3.innerHTML = element.LastName;
+      // tr.appendChild(th3);
+      // });
+      // });
+      // if (cntctCheckBox.checked == true) {
+      //   console.log(cntctCheckBox.id);
+      //   th = document.createElement('th');
+      //   th.scope = 'row';
+      //   th.innerHTML = cntctCheckBox.id;
+      //   contactListHeaders.appendChild(th);
+      // }
     });
   });
 
