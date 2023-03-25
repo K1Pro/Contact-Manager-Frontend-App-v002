@@ -33,8 +33,19 @@ function contactListModule() {
       }
 
       getJSON(`${srvrURL}?fields=${valueArray.toString()}`).then((data) => {
-        // valueArray.forEach((element) =>)
-        console.log(data.data.contacts[0]);
+        data.data.contacts.forEach((element) => {
+          console.log(element);
+          tr = document.createElement('tr');
+          contactList.appendChild(tr);
+          valueArray.forEach((element2) => {
+            console.log(element[element2]);
+            th2 = document.createElement('th');
+            th2.scope = 'row';
+            th2.innerHTML = element[element2];
+            tr.appendChild(th2);
+          });
+        });
+
         // data.data.contacts.forEach((element) => {
         //   console.log(element);
         //   // tr = document.createElement('tr');
