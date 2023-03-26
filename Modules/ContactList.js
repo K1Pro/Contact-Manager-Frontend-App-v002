@@ -9,40 +9,32 @@ function contactListModule() {
       // console.log(allContctKeysCheckedArray);
       valueArray = [];
       allContctKeysCheckedArray.forEach((element) => {
-        // console.log(element.id.slice(0, -5));
         valueArray.push(element.id.slice(0, -5));
       });
-      // console.log(valueArray.toString());
-      // console.log(allContctKeysCheckedArray);
-      // console.log(allContctKeysNameArray);
 
       contactListHeaders.innerHTML = '';
       contactList.innerHTML = '';
       for (key in allContctKeysCheck) {
         if (allContctKeysCheck[key].className) {
           if (allContctKeysCheck[key].checked == true) {
-            // console.log(allContctKeysCheck[key].id);
-            th = document.createElement('th');
-            th.scope = 'row';
-            th.innerHTML = allContctKeysCheck[key].id.slice(0, -5);
-            contactListHeaders.appendChild(th);
+            tableHeader = document.createElement('th');
+            tableHeader.scope = 'row';
+            tableHeader.innerHTML = allContctKeysCheck[key].id.slice(0, -5);
+            contactListHeaders.appendChild(tableHeader);
             retrievedValue = allContctKeysCheck[key].id.slice(0, -5);
-            // console.log(retrievedValue);
           }
         }
       }
 
       getJSON(`${srvrURL}?fields=${valueArray.toString()}`).then((data) => {
-        data.data.contacts.forEach((element) => {
-          console.log(element);
-          tr = document.createElement('tr');
-          contactList.appendChild(tr);
-          valueArray.forEach((element2) => {
-            console.log(element[element2]);
-            th2 = document.createElement('th');
-            th2.scope = 'row';
-            th2.innerHTML = element[element2];
-            tr.appendChild(th2);
+        data.data.contacts.forEach((contact) => {
+          tableRow = document.createElement('tr');
+          contactList.appendChild(tableRow);
+          valueArray.forEach((value) => {
+            tableData = document.createElement('td');
+            // th2.scope = 'row';
+            contact[value] ? (tableData.innerHTML = contact[value]) : (tableData.innerHTML = '');
+            tableRow.appendChild(tableData);
           });
         });
 
