@@ -10,3 +10,5 @@
 /.sync
 /Global/variables.js
 /Global/serverConfig.js
+/JS/variables.js
+/JS/serverConfig.js

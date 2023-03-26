@@ -306,8 +306,3 @@ function calEventStyle(calCntct, rnwlCntct) {
   //   calCntct.classList.add(hiddenContactTag);
   // calCntct.textContent = `${rnwlCntct.LastName}`;
 }
-///////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////
-// window.addEventListener('load', limitFunc);
-// document.addEventListener('DOMContentLoaded', limitFunc);
-window.addEventListener('resize', limitFunc);

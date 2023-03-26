@@ -23,6 +23,9 @@ function sidePanelModule() {
     }
     // return data;
   });
+  // window.addEventListener('load', limitFunc);
+  // document.addEventListener('DOMContentLoaded', limitFunc);
+  window.addEventListener('resize', limitFunc);
   // ^^^ End coding here for SidePanel Module ^^^
 }
 
