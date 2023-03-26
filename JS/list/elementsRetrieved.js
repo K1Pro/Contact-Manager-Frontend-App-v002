@@ -2,11 +2,12 @@ function elementsRequired() {
   // vvv Start coding here for Retrieval Module vvv
   contactListHeaders = document.getElementById('contactListHeaders');
   contactList = document.getElementById('contactList');
+  allContctKeysCheck = document.querySelectorAll('.contctKeysCheck');
   // ^^^ End coding here for Retrieval Module ^^^
   DOMElements = 'Loaded';
 }
 // vvv All retrieved elements should be declared here vvv
-let DOMElements, retrievedValue, valueArray;
+let DOMElements, valueArray, allContctKeysCheck, allContctKeysCheckedArray;
 // ^^^ All retrieved elements should be declared here ^^^
 
 // vvv This scans for all separate HTML Modules vvv
