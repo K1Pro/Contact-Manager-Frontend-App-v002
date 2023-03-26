@@ -1,4 +1,4 @@
-function contactListModule() {
+function tableModule() {
   // vvv Start coding here for Calendar Module vvv
 
   document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
@@ -76,5 +76,5 @@ const isContactListElementLoaded = async () => {
 };
 isContactListElementLoaded().then(() => {
   console.log('retrieved module {contact list}');
-  contactListModule();
+  tableModule();
 });

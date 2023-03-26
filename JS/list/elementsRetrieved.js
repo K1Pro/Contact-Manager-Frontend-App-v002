@@ -6,13 +6,15 @@ function elementsRequired() {
   DOMElements = 'Loaded';
 }
 // vvv All retrieved elements should be declared here vvv
-let DOMElements, testList, retrievedValue, valueArray;
+let DOMElements, retrievedValue, valueArray;
 // ^^^ All retrieved elements should be declared here ^^^
 
 // vvv This scans for all separate HTML Modules vvv
-isElementLoaded('#ContactListHTMLModule').then(() => {
-  console.log('retrieved all DOM elements {for elements retrieved module}');
-  elementsRequired();
+isElementLoaded('#ListSidePanelHTMLModule').then(() => {
+  isElementLoaded('#TableHTMLModule').then(() => {
+    console.log('retrieved all DOM elements {for elements retrieved module}');
+    elementsRequired();
+  });
 });
 
 // import { ContactsURL } from './date.js';
