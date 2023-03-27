@@ -10,7 +10,7 @@
   </li>
   <li>
     <input type="checkbox" id="BirthDateCheck" class="form-check-input contctKeysCheck" />
-    <input type="text" placeholder="Birth Date" id="BirthDateInput" class="contctKeysInput" />
+    <input type="date" placeholder="Birth Date" id="BirthDateInput" class="contctKeysInput" />
   </li>
   <li>
     <input type="checkbox" id="SpouseNameCheck" class="form-check-input contctKeysCheck" />
@@ -22,7 +22,7 @@
   </li>
   <li>
     <input type="checkbox" id="SpouseBirthDateCheck" class="form-check-input contctKeysCheck" />
-    <input type="text" placeholder="Spouse Birth Date" id="SpouseBirthDateInput" class="contctKeysInput" />
+    <input type="date" placeholder="Spouse Birth Date" id="SpouseBirthDateInput" class="contctKeysInput" />
   </li>
   <li>
     <input type="checkbox" id="AddressCheck" class="form-check-input contctKeysCheck" />
@@ -54,11 +54,17 @@
   </li>
   <li>
     <input type="checkbox" id="SourceCheck" class="form-check-input contctKeysCheck" />
-    <input type="text" placeholder="Source" id="SourceInput" class="contctKeysInput" />
+    <!-- <input type="text" placeholder="Source" id="SourceInput" class="contctKeysInput" /> -->
+    <select id="SourceInput">
+      <option selected disabled="disabled">Source</option>
+    </select>
   </li>
   <li>
     <input type="checkbox" id="StatusCheck" class="form-check-input contctKeysCheck" />
-    <input type="text" placeholder="Status" id="StatusInput" class="contctKeysInput" />
+    <!-- <input type="text" placeholder="Status" id="StatusInput" class="contctKeysInput" /> -->
+    <select id="StatusInput">
+      <option selected disabled="disabled">Status</option>
+    </select>
   </li>
   <li>
     <input type="checkbox" id="EHVCheck" class="form-check-input contctKeysCheck" />
@@ -86,15 +92,18 @@
   </li>
   <li>
     <input type="checkbox" id="CreateDateCheck" class="form-check-input contctKeysCheck" />
-    <input type="text" placeholder="Created Date" id="CreateDateInput" class="contctKeysInput" />
+    <input type="date" placeholder="Created Date" id="CreateDateInput" class="contctKeysInput" />
   </li>
   <li>
     <input type="checkbox" id="LastEditedByCheck" class="form-check-input contctKeysCheck" />
-    <input type="text" placeholder="Last Edited By" id="LastEditedByInput" class="contctKeysInput" />
+    <!-- <input type="text" placeholder="Last Edited By" id="LastEditedByInput" class="contctKeysInput" /> -->
+    <select id="LastEditedByInput">
+      <option selected disabled="disabled">Last Edited By</option>
+    </select>
   </li>
   <li>
     <input type="checkbox" id="LastEditDateCheck" class="form-check-input contctKeysCheck" />
-    <input type="text" placeholder="Last Edit Date" id="LastEditDateInput" class="contctKeysInput" />
+    <input type="date" placeholder="Last Edit Date" id="LastEditDateInput" class="contctKeysInput" />
   </li>
   <li>
     <input type="checkbox" id="NotesCheck" class="form-check-input contctKeysCheck" />

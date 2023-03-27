@@ -1,6 +1,10 @@
 function listSidePanelModule() {
   // vvv Start coding here for Calendar Module vvv
 
+  populateSlctWObj(LastEditedByObj, LastEditedByInput);
+  populateSlctWObj(StatusObj, StatusInput);
+  populateSlctWObj(SourceObj, SourceInput);
+
   document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
     cntctCheckBox.addEventListener('click', function (e) {
       localStorage.setItem(`BundleContactList-${e.target.id.slice(0, -5)}`, e.target.checked);
