@@ -11,14 +11,11 @@ function listSidePanelModule() {
       allContctKeysCheck = document.querySelectorAll('.contctKeysCheck');
       allContctKeysCheckedArray = [...allContctKeysCheck].filter((el) => el.checked == true);
       allContctKeysInputArray = [...allContctKeysInput].filter((el) => el.value != '');
-      let InputArray = allContctKeysInputArray.map((element) => {
+      inputArray = allContctKeysInputArray.map((element) => {
         return `&${element.id.slice(0, -5)}=${element.value}`;
       });
-      console.log(InputArray.join(''));
-      // let allContctKeysNameArray = [...allContctKeysCheck].map((el) => el.id);
-      valueArray = [];
-      allContctKeysCheckedArray.forEach((element) => {
-        valueArray.push(element.id.slice(0, -5));
+      valueArray = allContctKeysCheckedArray.map((element) => {
+        return element.id.slice(0, -5);
       });
 
       contactListHeaders.innerHTML = '';
@@ -34,7 +31,7 @@ function listSidePanelModule() {
         }
       }
 
-      getJSON(`${srvrURL}?fields=${valueArray.toString()}${InputArray.join('')}`).then((data) => {
+      getJSON(`${srvrURL}?fields=${valueArray.toString()}${inputArray.join('')}`).then((data) => {
         data.data.contacts.forEach((contact) => {
           tableRow = document.createElement('tr');
           contactList.appendChild(tableRow);

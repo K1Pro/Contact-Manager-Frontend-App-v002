@@ -8,7 +8,7 @@ function elementsRequired() {
   DOMElements = 'Loaded';
 }
 // vvv All retrieved elements should be declared here vvv
-let DOMElements, valueArray, allContctKeysCheck, allContctKeysCheckedArray;
+let DOMElements, inputArray, valueArray, allContctKeysCheck, allContctKeysCheckedArray;
 // ^^^ All retrieved elements should be declared here ^^^
 
 // vvv This scans for all separate HTML Modules vvv
