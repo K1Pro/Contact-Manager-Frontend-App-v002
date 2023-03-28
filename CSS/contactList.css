@@ -49,6 +49,24 @@ li a:hover:not(.active) {
   color: white;
 }
 
+#ListSidePanel {
+  overflow-x: scroll;
+}
+.filterInputGroup {
+  width: 220px;
+}
+.contctKeysCheck {
+  border-radius: 0 !important;
+  margin-top: -1px;
+  margin-right: -4px;
+  height: 25px;
+  width: 25px;
+}
+.contctKeysInput {
+  height: 25px;
+  width: 180px;
+}
+
 #createContactButton {
   display: inline-block;
   background: green;
