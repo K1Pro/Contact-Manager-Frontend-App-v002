@@ -1,3 +1,15 @@
+const PolicyTypeObj = {
+  Auto: 'Auto',
+  Home: 'Home',
+  Cond: 'Condo',
+  Rent: 'Renters',
+  Life: 'Life',
+  Lord: 'Landlord',
+  Moto: 'Motorcycle',
+  Comm: 'Commercial',
+  Umbr: 'Umbrella',
+};
+
 const TasksObj = {
   renewal: 'All Renewals',
   rCmpltd: 'Completed Renewals',
