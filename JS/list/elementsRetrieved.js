@@ -3,6 +3,7 @@ function elementsRequired() {
   contactListHeaders = document.getElementById('contactListHeaders');
   contactList = document.getElementById('contactList');
   allContctKeysCheck = document.querySelectorAll('.contctKeysCheck');
+  allContctKeysInput = document.querySelectorAll('.contctKeysInput');
   // ^^^ End coding here for Retrieval Module ^^^
   DOMElements = 'Loaded';
 }

@@ -10,7 +10,12 @@ function listSidePanelModule() {
       localStorage.setItem(`BundleContactList-${e.target.id.slice(0, -5)}`, e.target.checked);
       allContctKeysCheck = document.querySelectorAll('.contctKeysCheck');
       allContctKeysCheckedArray = [...allContctKeysCheck].filter((el) => el.checked == true);
-      let allContctKeysNameArray = [...allContctKeysCheck].map((el) => el.id);
+      allContctKeysInputArray = [...allContctKeysInput].filter((el) => el.value != '');
+      let InputArray = allContctKeysInputArray.map((element) => {
+        return `&${element.id.slice(0, -5)}=${element.value}`;
+      });
+      console.log(InputArray.join(''));
+      // let allContctKeysNameArray = [...allContctKeysCheck].map((el) => el.id);
       valueArray = [];
       allContctKeysCheckedArray.forEach((element) => {
         valueArray.push(element.id.slice(0, -5));
@@ -29,7 +34,7 @@ function listSidePanelModule() {
         }
       }
 
-      getJSON(`${srvrURL}?fields=${valueArray.toString()}`).then((data) => {
+      getJSON(`${srvrURL}?fields=${valueArray.toString()}${InputArray.join('')}`).then((data) => {
         data.data.contacts.forEach((contact) => {
           tableRow = document.createElement('tr');
           contactList.appendChild(tableRow);
@@ -42,6 +47,12 @@ function listSidePanelModule() {
       });
     });
   });
+
+  // document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
+  //   cntctCheckBox.addEventListener('change', function (e) {
+  //     console.log(e.target.value);
+  //   });
+  // });
 
   // ^^^ End coding here for Calendar Module ^^^
 }
