@@ -46,7 +46,7 @@ function listSidePanelModule() {
 
   document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
     cntctCheckBox.addEventListener('change', function (e) {
-      console.log(e.target.value);
+      // console.log(e.target.value);
       listCheckBox = document.getElementById(`${e.target.id.slice(0, -5)}Check`);
       if (listCheckBox.checked == true) {
         allContctKeysCheckedArray = [...allContctKeysCheck].filter((el) => el.checked == true);
@@ -57,7 +57,7 @@ function listSidePanelModule() {
         inputArray = allContctKeysInputArray.map((element) => {
           return `&${element.id.slice(0, -5)}=${element.value}`;
         });
-        console.log(inputArray);
+        // console.log(inputArray);
         contactListHeaders.innerHTML = '';
         contactList.innerHTML = '';
         for (key in allContctKeysCheck) {
@@ -88,9 +88,17 @@ function listSidePanelModule() {
 
   listAddCntctBtn.addEventListener('click', function (e) {
     console.log('clicked create contact button');
+    allContctKeysInputArray = [...allContctKeysInput].filter((el) => el.value != '');
+    inputArray = allContctKeysInputArray
+      .map((element) => {
+        return `${element.id.slice(0, -5)}: "${element.value}"`;
+      })
+      .toString();
+    console.log(inputArray);
     fetch(`${srvrURL}`, {
       method: 'POST',
-      body: JSON.stringify({}),
+      //work on this
+      body: JSON.stringify({ inputArray }),
       headers: {
         'Content-Type': 'application/json',
       },
