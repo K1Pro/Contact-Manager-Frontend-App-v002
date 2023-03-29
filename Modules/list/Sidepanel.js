@@ -86,6 +86,21 @@ function listSidePanelModule() {
     });
   });
 
+  listAddCntctBtn.addEventListener('click', function (e) {
+    console.log('clicked create contact button');
+    fetch(`${srvrURL}`, {
+      method: 'POST',
+      body: JSON.stringify({}),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.text())
+      .then(() => {
+        snackbar(`Successfully added new contact!`);
+      });
+  });
+
   // ^^^ End coding here for Calendar Module ^^^
 }
 
