@@ -2,6 +2,7 @@ function listSidePanelModule() {
   // vvv Start coding here for Calendar Module vvv
 
   populateSlctWObj(LastEditedByObj, LastEditedByInput);
+  populateSlctWObj(LastEditedByObj, CreatedByInput);
   populateSlctWObj(StatusObj, StatusInput);
   populateSlctWObj(SourceObj, SourceInput);
 
@@ -87,14 +88,13 @@ function listSidePanelModule() {
   });
 
   listAddCntctBtn.addEventListener('click', function (e) {
-    console.log('clicked create contact button');
+    document.getElementById('CreateDateInput').value = TodaysDate.toISOString().slice(0, 10);
     allContctKeysInputArray = [...allContctKeysInput].filter((el) => el.value != '');
     inputArray = allContctKeysInputArray.map((element) => {
       return [element.id.slice(0, -5), element.value];
     });
     fetch(`${srvrURL}`, {
       method: 'POST',
-      //work on this
       body: JSON.stringify(Object.fromEntries(inputArray)),
       headers: {
         'Content-Type': 'application/json',
@@ -103,6 +103,9 @@ function listSidePanelModule() {
       .then((response) => response.text())
       .then(() => {
         snackbar(`Successfully added new contact!`);
+        [...allContctKeysInput].forEach((element) => {
+          document.getElementById(element.id).value = '';
+        });
       });
   });
 
