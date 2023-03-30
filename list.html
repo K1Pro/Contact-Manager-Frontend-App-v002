@@ -37,11 +37,15 @@
   </head>
   <body>
     <div id="snackbar"></div>
-    <div id="ListSidePanel" w3-include-html="./Modules/list/SidePanel.html"></div>
-    <div style="margin-left: 18%">
-      <div class="container-fluid">
-        <div w3-include-html="./Modules/list/Table.html"></div>
-        <!-- <div class="row"></div> -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3 col-md-3 bg-dark" style="--bs-bg-opacity: 0.5; overflow-x: scroll">
+          <div id="ListSidePanel" w3-include-html="./Modules/list/SidePanel.html"></div>
+        </div>
+        <div class="col-9 col-md-9" style="overflow-x: scroll">
+          <div w3-include-html="./Modules/list/Table.html"></div>
+          <!-- <div class="row"></div> -->
+        </div>
       </div>
     </div>
   </body>

@@ -1,3 +1,14 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  background-color: #999999;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
 /* table,
 td {
   border: 1px solid #333;
@@ -16,21 +27,12 @@ tfoot {
 /* form-control {
   width: 100;
 } */
-
+/* 
 body {
   margin: 0;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 18%;
-  background-color: #999999;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-}
+
 
 li a {
   display: block;
@@ -47,14 +49,14 @@ li a.active {
 li a:hover:not(.active) {
   background-color: #555;
   color: white;
-}
+} */
 
 #ListSidePanel {
   /* overflow-x: scroll; */
 }
-.filterInputGroup {
+/* .filterInputGroup {
   width: 220px;
-}
+} */
 .contctKeysCheck {
   border-radius: 0 !important;
   margin-top: -1px;
@@ -66,7 +68,7 @@ li a:hover:not(.active) {
   height: 25px;
   width: 180px;
 }
-
+/* 
 #createContactButton {
   display: inline-block;
   background: green;
@@ -96,13 +98,13 @@ li a:hover:not(.active) {
   margin-left: -10px;
   margin-bottom: -50px;
   margin-right: 50px;
-  height: 38px;
-  /* display: inline; */
-}
+  height: 38px; */
+/* display: inline; */
+/* }
 
 .input-group
   > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(
     .invalid-feedback
   ) {
   margin-left: 139px;
-}
+} */
