@@ -89,16 +89,13 @@ function listSidePanelModule() {
   listAddCntctBtn.addEventListener('click', function (e) {
     console.log('clicked create contact button');
     allContctKeysInputArray = [...allContctKeysInput].filter((el) => el.value != '');
-    inputArray = allContctKeysInputArray
-      .map((element) => {
-        return `${element.id.slice(0, -5)}: "${element.value}"`;
-      })
-      .toString();
-    console.log(inputArray);
+    inputArray = allContctKeysInputArray.map((element) => {
+      return [element.id.slice(0, -5), element.value];
+    });
     fetch(`${srvrURL}`, {
       method: 'POST',
       //work on this
-      body: JSON.stringify({ inputArray }),
+      body: JSON.stringify(Object.fromEntries(inputArray)),
       headers: {
         'Content-Type': 'application/json',
       },
