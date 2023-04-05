@@ -1,4 +1,4 @@
-<div class="flex-shrink-0 p-3 bg-white" style="width: 280px">
+<div class="flex-shrink-0 p-3 text-bg-secondary" style="width: 280px">
   <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
     <!-- <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg> -->
     <img src="images/BundleWhite.png" alt="Bundle" width="24" height="30" />
@@ -233,6 +233,24 @@
               class="contctKeysInput"
               w3-include-html="./HTML/PolicyTypeDropDown.html"
             ></select>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="mb-1">
+      <button
+        class="btn btn-toggle align-items-center rounded collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#create-collapse"
+        aria-expanded="false"
+      >
+        Create Contact
+      </button>
+      <div class="collapse" id="create-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li class="filterInputGroup">
+            <button type="button" id="listAddCntctBtn" class="btn btn-success">Add Contact</button>
           </li>
         </ul>
       </div>

@@ -1,4 +1,4 @@
-ul {
+/* ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -7,7 +7,7 @@ ul {
   position: fixed;
   height: 100%;
   overflow: auto;
-}
+} */
 
 /* table,
 td {
