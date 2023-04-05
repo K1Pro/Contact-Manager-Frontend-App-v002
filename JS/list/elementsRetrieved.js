@@ -23,10 +23,10 @@ let DOMElements,
 
 // vvv This scans for all separate HTML Modules vvv
 isElementLoaded('#ListSidePanelHTMLModule').then(() => {
-  // isElementLoaded('#TableHTMLModule').then(() => {
-  console.log('retrieved all DOM elements {for elements retrieved module}');
-  elementsRequired();
+  isElementLoaded('#TableHTMLModule').then(() => {
+    console.log('retrieved all DOM elements {for elements retrieved module}');
+    elementsRequired();
+  });
 });
-// });
 
 // import { ContactsURL } from './date.js';
