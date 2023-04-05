@@ -1,3 +1,13 @@
+/* .tableWidth {
+  table-layout: auto;
+  width: 100%;
+  white-space: nowrap;
+} */
+
+td {
+  white-space: nowrap;
+}
+
 /* ul {
   list-style-type: none;
   margin: 0;
