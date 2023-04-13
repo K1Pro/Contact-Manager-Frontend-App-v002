@@ -32,6 +32,13 @@
   background-image: url('./../icons/event.jpg');
 }
 
+@media only screen and (max-height: 950px) {
+  .eventcheckBoxSpan {
+    height: 32px;
+    width: 36px;
+  }
+}
+
 /* On mouse-over, add a grey background color */
 .eventcheckBoxLabel:hover input ~ .eventcheckBoxSpan {
   /* background-color: #ccc; */

@@ -1,16 +1,8 @@
 Send an Email or Fax
 <div class="input-group">
-  <select
-    class="form-select"
-    id="emailSubject"
-    aria-label="Example select with button addon"
-  >
-    <option value="choose-email-template" selected>
-      Choose Email Template
-    </option>
-    <option value="WelcomeEmail">
-      Welcome to Erie (Bundle Insurance Agency)
-    </option>
+  <select class="form-select respHeight" id="emailSubject" aria-label="Example select with button addon">
+    <option value="choose-email-template" selected>Choose Email Template</option>
+    <option value="WelcomeEmail">Welcome to Erie (Bundle Insurance Agency)</option>
     <option value="ThankYouEmail">Thank you for choosing Erie</option>
     <option value="RenewalEmail">Erie Policy Renewal Notice</option>
 
@@ -18,24 +10,15 @@ Send an Email or Fax
     <option value="Home Quote">Home Quote</option>
     <option value="Life Quote">Life Quote</option> -->
   </select>
-  <button class="btn btn-primary" type="button" id="sendEmail">
-    Send Email
-  </button>
+  <button class="btn btn-primary respHeight" type="button" id="sendEmail">Send Email</button>
 </div>
 <div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label"
-    >Email or Fax Body</label
-  >
-  <textarea class="form-control" id="emailBody" rows="5"></textarea>
+  <label for="exampleFormControlTextarea1" class="form-label respHeight">Email or Fax Body</label>
+  <textarea class="form-control respHeight" id="emailBody" rows="5"></textarea>
 </div>
 
 <div class="input-group">
-  <input
-    type="file"
-    class="form-control"
-    id="inputGroupFile04"
-    aria-label="Upload"
-  />
+  <input type="file" class="form-control respHeight" id="inputGroupFile04" aria-label="Upload" />
   <!-- aria-describedby="inputGroupFileAddon04" this was above the aria-label-->
 </div>
 <div id="EmailHTMLModule"></div>
