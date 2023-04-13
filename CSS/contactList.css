@@ -3,6 +3,11 @@
   width: 100%;
   white-space: nowrap;
 } */
+th {
+  position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+  background-color: #ffffff !important;
+}
 
 td {
   white-space: nowrap;
