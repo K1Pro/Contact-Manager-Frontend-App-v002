@@ -34,7 +34,11 @@ function tableModule() {
     }
   });
 
-  [...contactListHeaders.querySelectorAll('*')].forEach((header) => console.log(header.innerHTML));
+  [...contactListHeaders.querySelectorAll('*')].forEach((header) =>
+    header.addEventListener('click', () => {
+      console.log(header.innerHTML);
+    })
+  );
   // ^^^ End coding here for Calendar Module ^^^
 }
 
