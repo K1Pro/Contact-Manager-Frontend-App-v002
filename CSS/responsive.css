@@ -92,6 +92,7 @@
     border-left: 0px solid green;
     border-left-width: 0.5vw;
     padding-left: 1vw;
+    padding-top: 8px;
   }
   #EventAuthor {
     /* padding-right: 5vw !important; */
