@@ -3,12 +3,12 @@ function tableModule() {
 
   populateListTable('LastName');
 
-  [...contactListHeaders.querySelectorAll('*')].forEach((header) =>
-    header.addEventListener('click', () => {
-      console.log(header.innerHTML);
-      populateListTable(header.innerHTML);
-    })
-  );
+  // [...contactListHeaders.querySelectorAll('*')].forEach((header) =>
+  //   header.addEventListener('click', () => {
+  //     console.log(header.innerHTML);
+  //   })
+  // );
+
   // ^^^ End coding here for Calendar Module ^^^
 }
 

@@ -13,6 +13,9 @@ function populateListTable(sortFilter) {
       tableHeader = document.createElement('th');
       tableHeader.scope = 'row';
       tableHeader.innerHTML = CheckBox.id.slice(0, -5);
+      tableHeader.addEventListener('click', () => {
+        populateListTable(CheckBox.id.slice(0, -5));
+      });
       contactListHeaders.appendChild(tableHeader);
     }
     if (rep == allContctKeysCheck.length) {
