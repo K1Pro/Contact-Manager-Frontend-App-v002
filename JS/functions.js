@@ -1,4 +1,4 @@
-console.log('retrieved all global functions');
+console.log('retrieved contact manager functions');
 ///////////////////////////////////////////////
 
 function loadSidePanel(URL, slctdCalTask) {

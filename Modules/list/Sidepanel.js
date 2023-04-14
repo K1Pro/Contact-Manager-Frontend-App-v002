@@ -120,6 +120,6 @@ const isListSidePanelElementLoaded = async () => {
   }
 };
 isListSidePanelElementLoaded().then(() => {
-  console.log('retrieved module {contact list}');
+  console.log('retrieved module {list side panel}');
   listSidePanelModule();
 });

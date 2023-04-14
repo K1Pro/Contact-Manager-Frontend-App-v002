@@ -50,6 +50,6 @@ const isTableElementLoaded = async () => {
   }
 };
 isTableElementLoaded().then(() => {
-  console.log('retrieved module {contact list}');
+  console.log('retrieved module {list table}');
   tableModule();
 });

@@ -1,0 +1,2 @@
+console.log('retrieved contact list functions');
+///////////////////////////////////////////////
