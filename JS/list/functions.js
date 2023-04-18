@@ -3,8 +3,8 @@ console.log('retrieved contact list functions');
 
 function populateListTable(sortFilter) {
   rep = 0;
-  contactList.innerHTML = '';
   contactListHeaders.innerHTML = '';
+  contactList.innerHTML = '';
   allContctKeysCheck.forEach((CheckBox) => {
     storedCheckBoxValue = localStorage.getItem(`BundleContactList-${CheckBox.id.slice(0, -5)}`);
     rep++;
@@ -15,6 +15,7 @@ function populateListTable(sortFilter) {
       tableHeader.innerHTML = CheckBox.id.slice(0, -5);
       tableHeader.addEventListener('click', () => {
         populateListTable(CheckBox.id.slice(0, -5));
+        console.log('check');
       });
       contactListHeaders.appendChild(tableHeader);
     }
