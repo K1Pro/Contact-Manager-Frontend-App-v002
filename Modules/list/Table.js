@@ -1,7 +1,10 @@
 function tableModule() {
   // vvv Start coding here for Calendar Module vvv
 
-  populateListTable('LastName');
+  if (!localStorage.getItem(`BundleContactList-LastSortFilter`)) {
+    localStorage.setItem(`BundleContactList-LastSortFilter`, 'LastName');
+  }
+  populateListTable(localStorage.getItem(`BundleContactList-LastSortFilter`));
 
   // [...contactListHeaders.querySelectorAll('*')].forEach((header) =>
   //   header.addEventListener('click', () => {

@@ -19,7 +19,9 @@ let DOMElements,
   listCheckBox,
   inputArray,
   valueArray,
-  allContctKeysCheckedArray;
+  allContctKeysCheckedArray,
+  storedCheckBoxValue,
+  lastSortFilter;
 // ^^^ All retrieved elements should be declared here ^^^
 
 // vvv This scans for all separate HTML Modules vvv
