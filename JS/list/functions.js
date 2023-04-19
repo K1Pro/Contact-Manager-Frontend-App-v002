@@ -3,6 +3,12 @@ console.log('retrieved contact list functions');
 
 function populateListTable(sortFilter) {
   allContctKeysCheck = document.querySelectorAll('.contctKeysCheck');
+  allContctKeysCheck.forEach((CheckBox) => {
+    storedCheckBoxValue = localStorage.getItem(`BundleContactList-${CheckBox.id.slice(0, -5)}`);
+    if (storedCheckBoxValue == 'true') {
+      document.getElementById(CheckBox.id).checked = true;
+    }
+  });
   allContctKeysCheckedArray = [...allContctKeysCheck].filter((el) => el.checked == true);
   valueArray = [];
   allContctKeysCheckedArray.forEach((element) => {
@@ -17,12 +23,10 @@ function populateListTable(sortFilter) {
     allContctKeysCheck.forEach((CheckBox) => {
       storedCheckBoxValue = localStorage.getItem(`BundleContactList-${CheckBox.id.slice(0, -5)}`);
       if (storedCheckBoxValue == 'true') {
-        document.getElementById(CheckBox.id).checked = true;
         tableHeader = document.createElement('th');
         tableHeader.scope = 'row';
         tableHeader.innerHTML = CheckBox.id.slice(0, -5);
         tableHeader.addEventListener('click', () => {
-          console.log('click');
           if (CheckBox.id.slice(0, -5) == lastSortFilter) {
             localStorage.setItem(`BundleContactList-LastSortFilter`, `-${CheckBox.id.slice(0, -5)}`);
           } else if (`-${CheckBox.id.slice(0, -5)}` == `${lastSortFilter}`) {

@@ -10,6 +10,11 @@ th {
   cursor: pointer;
 }
 
+th:hover {
+  color: blue !important;
+  text-decoration: underline;
+}
+
 td {
   white-space: nowrap;
 }
