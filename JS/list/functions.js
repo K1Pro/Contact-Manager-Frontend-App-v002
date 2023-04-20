@@ -11,17 +11,19 @@ function populateListTable(sortFilter) {
   });
   allContctKeysCheckedArray = [...allContctKeysCheck].filter((el) => el.checked == true);
   valueArray = [];
+  inputArray = [];
   allContctKeysCheckedArray.forEach((element) => {
     valueArray.push(element.id.slice(0, -5));
-    console.log(document.getElementById(`${element.id.slice(0, -5)}Input`).value);
+    if (document.getElementById(`${element.id.slice(0, -5)}Input`).value) {
+      inputValue = document.getElementById(`${element.id.slice(0, -5)}Input`).value;
+      inputArray.push(`&${element.id.slice(0, -5)}=${inputValue}`);
+    }
   });
   lastSortFilter = localStorage.getItem(`BundleContactList-LastSortFilter`);
 
-  // document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
-  //   console.log(cntctCheckBox.value);
-  // });
-
-  getJSON(`${srvrURL}?fields=${valueArray.toString()}&sort=${lastSortFilter}`).then((data) => {
+  getJSON(
+    `${srvrURL}?fields=${valueArray.toString()}${inputArray.length ? inputArray.toString() : ''}&sort=${lastSortFilter}`
+  ).then((data) => {
     contactListHeaders.innerHTML = '';
     contactList.innerHTML = '';
 
