@@ -13,7 +13,7 @@ function populateListTable(sortFilter) {
   valueArray = [];
   allContctKeysCheckedArray.forEach((element) => {
     valueArray.push(element.id.slice(0, -5));
-    console.log(document.getElementById(`${element.id.slice(0, -5)}Input`).value)
+    console.log(document.getElementById(`${element.id.slice(0, -5)}Input`).value);
   });
   lastSortFilter = localStorage.getItem(`BundleContactList-LastSortFilter`);
 
