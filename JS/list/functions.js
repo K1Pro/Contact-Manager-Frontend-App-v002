@@ -19,10 +19,11 @@ function populateListTable(sortFilter) {
       inputArray.push(`&${element.id.slice(0, -5)}=${inputValue}`);
     }
   });
+  console.log(inputArray.join(''));
   lastSortFilter = localStorage.getItem(`BundleContactList-LastSortFilter`);
 
   getJSON(
-    `${srvrURL}?fields=${valueArray.toString()}${inputArray.length ? inputArray.toString() : ''}&sort=${lastSortFilter}`
+    `${srvrURL}?fields=${valueArray.toString()}${inputArray.length ? inputArray.join('') : ''}&sort=${lastSortFilter}`
   ).then((data) => {
     contactListHeaders.innerHTML = '';
     contactList.innerHTML = '';
