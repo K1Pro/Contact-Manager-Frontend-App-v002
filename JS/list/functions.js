@@ -19,7 +19,6 @@ function populateListTable() {
       inputArray.push(`&${element.id.slice(0, -5)}=${inputValue}`);
     }
   });
-  console.log(inputArray.join(''));
   lastSortFilter = localStorage.getItem(`BundleContactList-LastSortFilter`);
 
   getJSON(

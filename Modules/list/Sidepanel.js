@@ -9,39 +9,7 @@ function listSidePanelModule() {
   document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
     cntctCheckBox.addEventListener('click', function (e) {
       localStorage.setItem(`BundleContactList-${e.target.id.slice(0, -5)}`, e.target.checked);
-      allContctKeysCheckedArray = [...allContctKeysCheck].filter((el) => el.checked == true);
-      valueArray = allContctKeysCheckedArray.map((element) => {
-        return element.id.slice(0, -5);
-      });
-      allContctKeysInputArray = [...allContctKeysInput].filter((el) => el.value != '');
-      inputArray = allContctKeysInputArray.map((element) => {
-        return `&${element.id.slice(0, -5)}=${element.value}`;
-      });
-
-      contactListHeaders.innerHTML = '';
-      contactList.innerHTML = '';
-      for (key in allContctKeysCheck) {
-        if (allContctKeysCheck[key].className) {
-          if (allContctKeysCheck[key].checked == true) {
-            tableHeader = document.createElement('th');
-            tableHeader.scope = 'row';
-            tableHeader.innerHTML = allContctKeysCheck[key].id.slice(0, -5);
-            contactListHeaders.appendChild(tableHeader);
-          }
-        }
-      }
-
-      getJSON(`${srvrURL}?fields=${valueArray.toString()}${inputArray.join('')}`).then((data) => {
-        data.data.contacts.forEach((contact) => {
-          tableRow = document.createElement('tr');
-          contactList.appendChild(tableRow);
-          valueArray.forEach((value) => {
-            tableData = document.createElement('td');
-            contact[value] ? (tableData.innerHTML = contact[value]) : (tableData.innerHTML = '');
-            tableRow.appendChild(tableData);
-          });
-        });
-      });
+      populateListTable();
     });
   });
 
@@ -49,45 +17,8 @@ function listSidePanelModule() {
     storedInputValue = localStorage.getItem(`BundleContactList-${cntctCheckBox.id}`);
     cntctCheckBox.value = storedInputValue;
     cntctCheckBox.addEventListener('change', function (e) {
-      console.log(e.target.value);
       localStorage.setItem(`BundleContactList-${e.target.id}`, e.target.value);
       populateListTable();
-      //     // console.log(e.target.value);
-      //     listCheckBox = document.getElementById(`${e.target.id.slice(0, -5)}Check`);
-      //     if (listCheckBox.checked == true) {
-      //       allContctKeysCheckedArray = [...allContctKeysCheck].filter((el) => el.checked == true);
-      //       valueArray = allContctKeysCheckedArray.map((element) => {
-      //         return element.id.slice(0, -5);
-      //       });
-      //       allContctKeysInputArray = [...allContctKeysInput].filter((el) => el.value != '');
-      //       inputArray = allContctKeysInputArray.map((element) => {
-      //         return `&${element.id.slice(0, -5)}=${element.value}`;
-      //       });
-      //       // console.log(inputArray);
-      //       contactListHeaders.innerHTML = '';
-      //       contactList.innerHTML = '';
-      //       for (key in allContctKeysCheck) {
-      //         if (allContctKeysCheck[key].className) {
-      //           if (allContctKeysCheck[key].checked == true) {
-      //             tableHeader = document.createElement('th');
-      //             tableHeader.scope = 'row';
-      //             tableHeader.innerHTML = allContctKeysCheck[key].id.slice(0, -5);
-      //             contactListHeaders.appendChild(tableHeader);
-      //           }
-      //         }
-      //       }
-      //       getJSON(`${srvrURL}?fields=${valueArray.toString()}${inputArray.join('')}`).then((data) => {
-      //         data.data.contacts.forEach((contact) => {
-      //           tableRow = document.createElement('tr');
-      //           contactList.appendChild(tableRow);
-      //           valueArray.forEach((value) => {
-      //             tableData = document.createElement('td');
-      //             contact[value] ? (tableData.innerHTML = contact[value]) : (tableData.innerHTML = '');
-      //             tableRow.appendChild(tableData);
-      //           });
-      //         });
-      //       });
-      //     }
     });
   });
 
