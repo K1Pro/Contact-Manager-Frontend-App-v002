@@ -22,6 +22,7 @@ let DOMElements,
   valueArray,
   allContctKeysCheckedArray,
   storedCheckBoxValue,
+  storedInputValue,
   lastSortFilter;
 // ^^^ All retrieved elements should be declared here ^^^
 

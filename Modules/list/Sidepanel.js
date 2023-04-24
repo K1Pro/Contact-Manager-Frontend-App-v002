@@ -46,6 +46,8 @@ function listSidePanelModule() {
   });
 
   document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
+    storedInputValue = localStorage.getItem(`BundleContactList-${cntctCheckBox.id}`);
+    cntctCheckBox.value = storedInputValue;
     cntctCheckBox.addEventListener('change', function (e) {
       console.log(e.target.value);
       localStorage.setItem(`BundleContactList-${e.target.id}`, e.target.value);
