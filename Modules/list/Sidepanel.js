@@ -48,6 +48,7 @@ function listSidePanelModule() {
   document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
     cntctCheckBox.addEventListener('change', function (e) {
       console.log(e.target.value);
+      localStorage.setItem(`BundleContactList-${e.target.id}`, e.target.value);
       populateListTable();
       //     // console.log(e.target.value);
       //     listCheckBox = document.getElementById(`${e.target.id.slice(0, -5)}Check`);

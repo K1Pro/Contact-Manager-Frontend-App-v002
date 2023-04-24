@@ -1,7 +1,7 @@
 console.log('retrieved contact list functions');
 ///////////////////////////////////////////////
 
-function populateListTable(sortFilter) {
+function populateListTable() {
   allContctKeysCheck = document.querySelectorAll('.contctKeysCheck');
   allContctKeysCheck.forEach((CheckBox) => {
     storedCheckBoxValue = localStorage.getItem(`BundleContactList-${CheckBox.id.slice(0, -5)}`);

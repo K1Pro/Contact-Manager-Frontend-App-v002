@@ -4,7 +4,7 @@ function tableModule() {
   if (!localStorage.getItem(`BundleContactList-LastSortFilter`)) {
     localStorage.setItem(`BundleContactList-LastSortFilter`, 'LastName');
   }
-  populateListTable(localStorage.getItem(`BundleContactList-LastSortFilter`));
+  populateListTable();
 
   // [...contactListHeaders.querySelectorAll('*')].forEach((header) =>
   //   header.addEventListener('click', () => {
