@@ -71,14 +71,18 @@
       <div
         id="ListSidePanel"
         class="bg-secondary"
-        style="overflow-y: scroll"
+        style="overflow-y: scroll; overflow-x: hidden"
         w3-include-html="./Modules/list/SidePanel.html"
       ></div>
       <div class="b-example-divider"></div>
-      <div class="spinner-border text-primary" role="status">
-        <span class="sr-only"></span>
-      </div>
+
       <div style="overflow-y: scroll" w3-include-html="./Modules/list/Table.html"></div>
+
+      <!-- <div class="container">
+        <div class="d-flex align-items-center justify-content-center" style="height: 100vh">
+          <div class="spinner-border text-primary" style="width: 5rem; height: 5rem" role="status"></div>
+        </div>
+      </div> -->
     </main>
   </body>
 </html>
