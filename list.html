@@ -68,8 +68,16 @@
   </head>
   <body>
     <main>
-      <div id="ListSidePanel" class="bg-secondary" w3-include-html="./Modules/list/SidePanel.html"></div>
+      <div
+        id="ListSidePanel"
+        class="bg-secondary"
+        style="overflow-y: scroll"
+        w3-include-html="./Modules/list/SidePanel.html"
+      ></div>
       <div class="b-example-divider"></div>
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only"></span>
+      </div>
       <div style="overflow-y: scroll" w3-include-html="./Modules/list/Table.html"></div>
     </main>
   </body>
