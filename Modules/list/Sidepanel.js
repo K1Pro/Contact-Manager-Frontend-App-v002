@@ -44,6 +44,10 @@ function listSidePanelModule() {
       });
   });
 
+  resetCntctInptBtn.addEventListener('click', function (e) {
+    console.log('test');
+  });
+
   // ^^^ End coding here for Calendar Module ^^^
 }
 

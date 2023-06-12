@@ -1,6 +1,12 @@
 function contactTasksModule() {
   // vvv Start coding here for Contact Tasks Module vvv
   createEventTime.value = TodaysDate.toJSON().slice(0, 16);
+  setInterval(function () {
+    if (contactTasksTextArea.value == '') {
+      console.log(new Date().toJSON().slice(0, 19));
+    }
+  }, 1000);
+
   populateSlctWObj(LastEditedByObj, EventAuthor);
   // ^^^ End coding here for Contact Tasks Module ^^^
 }

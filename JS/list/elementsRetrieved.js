@@ -5,6 +5,7 @@ function elementsRequired() {
   allContctKeysCheck = document.querySelectorAll('.contctKeysCheck');
   allContctKeysInput = document.querySelectorAll('.contctKeysInput');
   listAddCntctBtn = document.getElementById('listAddCntctBtn');
+  resetCntctInptBtn = document.getElementById('resetCntctInptBtn');
 
   // ^^^ End coding here for Retrieval Module ^^^
   DOMElements = 'Loaded';
