@@ -262,8 +262,13 @@ input[type='date']:invalid::-webkit-datetime-edit {
   border-style: solid;
   border-color: white;
   border-width: thin;
+
   /* font-weight: bold; */
-  text-shadow: 0px 0px 2px grey;
+  /* text-shadow: 0px 0px 2px grey; */
+}
+
+.renewal {
+  color: black !important;
 }
 
 .renewal:hover,
@@ -274,6 +279,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
 .weekly:hover,
 .recurring:hover {
   background-color: #cf33ff;
+  color: white !important;
   /* border-radius: 0px !important;
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
@@ -356,11 +362,13 @@ input[type='date']:invalid::-webkit-datetime-edit {
   border-style: solid;
   border-color: white;
   border-width: thin;
+  color: white !important;
   /* font-weight: bold; */
   text-shadow: 0px 0px 2px grey;
 }
 .active:hover {
   background-color: #0066ff;
+  color: white !important;
 }
 
 #createEventTime {
