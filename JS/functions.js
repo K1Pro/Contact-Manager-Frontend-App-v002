@@ -141,6 +141,7 @@ function calendarDatesFillIn(chosenDate, DaysSelected) {
                 calCntct.classList.add(activeTag);
                 highlghtActvEvnt(rnwlCntct._id);
               });
+              console.log(calCntct);
               // Adding event to calendar box
               document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
               // applying existing calendar filters
