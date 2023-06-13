@@ -211,7 +211,7 @@ function buttonHandlers() {
             for (key in retrievedUniqueDays) {
               if (retrievedUniqueDays[key].className) {
                 // prettier-ignore
-                let fullCalPpltdDate = `${rtrvdCalDateSlctr.value.slice(0, 5)}${retrievedUniqueDays[key].innerHTML.slice(0, 5)}`;
+                let fullCalPpltdDate = `${rtrvdCalDateSlctr.value.slice(0, 5)}${retrievedUniqueDays[key].innerHTML.replaceAll('<b>', '').slice(0, 5)}`;
                 let shortCreatedEvntTime = createEventTime.value.slice(0, 10);
                 if (shortCreatedEvntTime == fullCalPpltdDate) {
                   let eventUniqueDay = document.getElementById(retrievedUniqueDays[key].id);
@@ -232,6 +232,8 @@ function buttonHandlers() {
             contactTasksTextArea.value = '';
           });
       });
+    } else {
+      snackbar('Please enter task description');
     }
   });
 
