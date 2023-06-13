@@ -6,6 +6,7 @@
 table {
   /* table-layout: fixed; */
   white-space: nowrap;
+  width: 200%;
 }
 
 th {
@@ -19,6 +20,13 @@ th {
 th:hover {
   color: blue !important;
   text-decoration: underline;
+}
+
+th,
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 
 /* td {

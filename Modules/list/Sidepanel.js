@@ -45,7 +45,10 @@ function listSidePanelModule() {
   });
 
   resetCntctInptBtn.addEventListener('click', function (e) {
-    console.log('test');
+    document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
+      cntctCheckBox.value = '';
+    });
+    populateListTable();
   });
 
   // ^^^ End coding here for Calendar Module ^^^
