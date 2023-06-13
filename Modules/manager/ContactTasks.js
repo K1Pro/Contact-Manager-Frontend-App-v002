@@ -1,20 +1,15 @@
 function contactTasksModule() {
   // vvv Start coding here for Contact Tasks Module vvv
-  // Accomodates for timezone difference
-  createEventTime.value = new Date(Date.now() + 1000 /*sec*/ * -new Date().getTimezoneOffset() /*min*/ * 60 /*hour*/)
-    .toJSON()
-    .slice(0, 16);
+  // Accomodates for timezone difference below:
+  // new Date(Date.now() + 1000 /*sec*/ * -new Date().getTimezoneOffset() /*min*/ * 60 /*hour*/)
+  // Bases timezone off Chicago time
+  createEventTime.value = new Date(Date.now() + 1000 /*sec*/ * -300 /*min*/ * 60 /*hour*/).toJSON().slice(0, 16);
 
   setInterval(function () {
     // if (contactTasksTextArea.value == '') {
     console.log(new Date().toJSON().slice(0, 19));
     if (document.activeElement.id != 'contactTasksTextArea' && contactTasksTextArea.value == '') {
-      createEventTime.value = new Date(
-        Date.now() + 1000 /*sec*/ * -new Date().getTimezoneOffset() /*min*/ * 60 /*hour*/
-      )
-        .toJSON()
-        .slice(0, 16);
-      // console.log(document.activeElement.id);
+      createEventTime.value = new Date(Date.now() + 1000 /*sec*/ * -300 /*min*/ * 60 /*hour*/).toJSON().slice(0, 16);
     }
   }, 60000);
 
