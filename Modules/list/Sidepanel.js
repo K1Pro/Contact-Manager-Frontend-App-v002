@@ -48,6 +48,16 @@ function listSidePanelModule() {
     document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
       cntctCheckBox.value = '';
     });
+
+    document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
+      localStorage.setItem(`BundleContactList-${cntctCheckBox.id.slice(0, -5)}`, cntctCheckBox.checked);
+    });
+
+    document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
+      // console.log(cntctCheckBox.id);
+      localStorage.setItem(`BundleContactList-${cntctCheckBox.id}`, cntctCheckBox.value);
+    });
+
     populateListTable();
   });
 
