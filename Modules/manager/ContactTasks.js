@@ -1,11 +1,19 @@
 function contactTasksModule() {
   // vvv Start coding here for Contact Tasks Module vvv
-  createEventTime.value = TodaysDate.toJSON().slice(0, 16);
+  // Accomodates for timezone difference
+  createEventTime.value = new Date(Date.now() + 1000 /*sec*/ * -new Date().getTimezoneOffset() /*min*/ * 60 /*hour*/)
+    .toJSON()
+    .slice(0, 16);
+
   setInterval(function () {
     // if (contactTasksTextArea.value == '') {
     console.log(new Date().toJSON().slice(0, 19));
     if (document.activeElement.id != 'contactTasksTextArea' && contactTasksTextArea.value == '') {
-      createEventTime.value = new Date().toJSON().slice(0, 19);
+      createEventTime.value = new Date(
+        Date.now() + 1000 /*sec*/ * -new Date().getTimezoneOffset() /*min*/ * 60 /*hour*/
+      )
+        .toJSON()
+        .slice(0, 16);
       // console.log(document.activeElement.id);
     }
   }, 60000);
