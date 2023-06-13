@@ -94,7 +94,9 @@ function calendarDatesFillIn(chosenDate, DaysSelected) {
       }
       document.getElementById(`${dayTag}${rep}`).classList.add(calSelectedDayTag);
       changeCalendarHTML_Date(calDates);
-      createEventTime.value = `${calDates.toJSON().slice(0, 16)}`;
+      createEventTime.value = `${new Date(calDates.getTime() + 1000 /*sec*/ * -300 /*min*/ * 60 /*hour*/)
+        .toJSON()
+        .slice(0, 16)}`;
     });
 
     calEvntsArray.forEach((calEvnt) => {
@@ -141,7 +143,6 @@ function calendarDatesFillIn(chosenDate, DaysSelected) {
                 calCntct.classList.add(activeTag);
                 highlghtActvEvnt(rnwlCntct._id);
               });
-              console.log(calCntct);
               // Adding event to calendar box
               document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
               // applying existing calendar filters

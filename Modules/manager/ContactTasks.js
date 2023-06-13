@@ -7,7 +7,6 @@ function contactTasksModule() {
 
   setInterval(function () {
     // if (contactTasksTextArea.value == '') {
-    console.log(new Date().toJSON().slice(0, 19));
     if (document.activeElement.id != 'contactTasksTextArea' && contactTasksTextArea.value == '') {
       createEventTime.value = new Date(Date.now() + 1000 /*sec*/ * -300 /*min*/ * 60 /*hour*/).toJSON().slice(0, 16);
     }
