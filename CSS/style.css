@@ -262,13 +262,12 @@ input[type='date']:invalid::-webkit-datetime-edit {
   border-style: solid;
   border-color: white;
   border-width: thin;
-
   /* font-weight: bold; */
   /* text-shadow: 0px 0px 2px grey; */
 }
 
 .renewal {
-  color: black !important;
+  color: black;
 }
 
 .renewal:hover,
@@ -279,7 +278,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
 .weekly:hover,
 .recurring:hover {
   background-color: #cf33ff;
-  color: white !important;
+  color: white;
   /* border-radius: 0px !important;
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
@@ -300,10 +299,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
   padding-right: 12px;
   /* border-radius: 10px !important; */
   border-style: solid;
-  border-color: white;
   border-width: thin;
   /* font-weight: bold; */
   text-shadow: 0px 0px 2px grey;
+  color: white;
 }
 .eNotCmpltd:hover,
 .wNotCmpltd:hover,
@@ -311,6 +310,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
 .saNotCmpltd:hover,
 .aNotCmpltd:hover {
   background-color: #cf33ff;
+  color: white;
   /* border-radius: 0px !important;
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
@@ -332,10 +332,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
   padding-right: 12px;
   /* border-radius: 10px !important; */
   border-style: solid;
-  border-color: white;
   border-width: thin;
   /* font-weight: bold; */
   text-shadow: 0px 0px 2px grey;
+  color: white;
 }
 
 .eCmpltd:hover,
@@ -345,6 +345,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
 .saCmpltd:hover,
 .aCmpltd:hover {
   background-color: #cf33ff;
+  color: white;
   /* border-radius: 0px !important;
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
@@ -522,6 +523,14 @@ input[type='date']:invalid::-webkit-datetime-edit {
   -webkit-text-fill-color: red; /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: rgb(62, 62, 62);
+}
+
+.btn-reviewed {
+  background-color: #ff9933;
+}
+.btn-reviewed:hover {
+  background-color: #e78a2d;
+  color: black;
 }
 /* .eventDates { */
 /* position: absolute; */
