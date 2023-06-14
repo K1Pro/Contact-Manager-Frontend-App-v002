@@ -163,9 +163,9 @@ function buttonHandlers() {
         SecureToken: SMTP[LastEditedBy.value][0],
         To: cntctEmail.value,
         From: SMTP[LastEditedBy.value][1],
-        Subject: emailSubject.value,
+        Subject: emailSubject.options[emailSubject.selectedIndex].text,
         Body: emailBody.value,
-      }).then(() => alert(`Email successfully sent to: ${cntctEmail.value}`));
+      }).then(() => snackbar(`Email successfully sent to: ${cntctEmail.value}`));
     }
   });
 
@@ -173,6 +173,13 @@ function buttonHandlers() {
     emailTemplateHandler();
     emailBody.value = `Hi <strong>${FirstName.value}</strong>,<br><br>
     ${emailTemplates[selected.target.value]}`;
+    console.log('==========================================');
+    let cntctEmail = document.getElementById('Email');
+    console.log(cntctEmail.value);
+    console.log(SMTP[LastEditedBy.value][1]);
+    console.log(emailSubject.options[emailSubject.selectedIndex].text);
+    console.log(emailBody.value);
+    console.log('==========================================');
   });
 
   // Create Event Button in ContactTasks Module
