@@ -24,6 +24,7 @@ function listSidePanelModule() {
 
   listAddCntctBtn.addEventListener('click', function (e) {
     document.getElementById('CreateDateInput').value = TodaysDate.toISOString().slice(0, 10);
+    document.getElementById('LastEditDateInput').value = TodaysDate.toISOString().slice(0, 10);
     allContctKeysInputArray = [...allContctKeysInput].filter((el) => el.value != '');
     inputArray = allContctKeysInputArray.map((element) => {
       return [element.id.slice(0, -5), element.value];
