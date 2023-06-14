@@ -33,13 +33,25 @@ function loadSidePanel(URL, slctdCalTask) {
         ContactFieldsIDs == 'Policy3RenewDate' ||
         ContactFieldsIDs == 'Policy4RenewDate'
       ) {
-        slctdPolicyGroup = ContactFieldsIDs.slice(0, 7);
-        slctdPolicy1RenewDate = document.getElementById(ContactFieldsIDs);
-        slctdPolicyType = document.getElementById(`${slctdPolicyGroup}Type`);
-        slctdPolicyNo = document.getElementById(`${slctdPolicyGroup}Number`);
+        let slctdPolicyGroup = ContactFieldsIDs.slice(0, 7);
+        let slctdPolicy1RenewDate = document.getElementById(ContactFieldsIDs);
+        let slctdPolicyType = document.getElementById(`${slctdPolicyGroup}Type`);
+        let slctdPolicyNo = document.getElementById(`${slctdPolicyGroup}Number`);
         slctdPolicy1RenewDate.classList.remove('selectedRenewDate');
         slctdPolicyNo.classList.remove('selectedRenewDate');
         slctdPolicyType.classList.remove('selectedRenewDate');
+        slctdPolicy1RenewDate.classList.remove('selectedRenewDateWiggle');
+        slctdPolicyNo.classList.remove('selectedRenewDateWiggle');
+        slctdPolicyType.classList.remove('selectedRenewDateWiggle');
+        setTimeout(function () {
+          slctdPolicy1RenewDate.classList.remove('selectedRenewDateWiggle');
+        }, 2000);
+        setTimeout(function () {
+          slctdPolicyNo.classList.remove('selectedRenewDateWiggle');
+        }, 2000);
+        setTimeout(function () {
+          slctdPolicyType.classList.remove('selectedRenewDateWiggle');
+        }, 2000);
         cnvrtdDateSelector = new Date(dateSelector);
         dateSelectorRenewal = new Date(
           cnvrtdDateSelector.getTime() + 1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 28 /*# of days*/
@@ -51,6 +63,9 @@ function loadSidePanel(URL, slctdCalTask) {
           slctdPolicy1RenewDate.classList.add('selectedRenewDate');
           slctdPolicyNo.classList.add('selectedRenewDate');
           slctdPolicyType.classList.add('selectedRenewDate');
+          slctdPolicy1RenewDate.classList.add('selectedRenewDateWiggle');
+          slctdPolicyNo.classList.add('selectedRenewDateWiggle');
+          slctdPolicyType.classList.add('selectedRenewDateWiggle');
         }
       }
     }
