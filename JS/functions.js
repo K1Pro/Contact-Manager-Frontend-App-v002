@@ -241,6 +241,8 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         });
         contactTask.CheckBoxLabel.appendChild(contactTask.CheckBox);
         contactTask.CheckBoxSpan.setAttribute('class', `${cntctTasks.CSSstyle}checkBoxSpan`);
+        if (slctdCalTask && slctdCalTask == contactTask.UID)
+          contactTask.CheckBoxSpan.classList.add('contactTaskSelected');
         contactTask.CheckBoxLabel.appendChild(contactTask.CheckBoxSpan);
 
         // Creates a text input for the description

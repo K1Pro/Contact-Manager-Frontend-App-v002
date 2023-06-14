@@ -406,6 +406,25 @@ input[type='date']:invalid::-webkit-datetime-edit {
 
 .selectedRenewDate {
   background-color: rgb(255, 218, 237);
+  animation: horizontal-shaking 2s;
+}
+
+@keyframes horizontal-shaking {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .eventDescriptions,
@@ -452,6 +471,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
 }
 .contactTaskSelected {
   background-color: rgb(255, 218, 237);
+  animation: horizontal-shaking 2s;
 }
 
 .dropdown-item:hover {
