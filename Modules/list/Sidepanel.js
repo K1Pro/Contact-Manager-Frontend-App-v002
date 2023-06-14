@@ -34,19 +34,28 @@ function listSidePanelModule() {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
-      .then((response) => response.text())
-      .then(() => {
-        snackbar(`Successfully added new contact!`);
-        [...allContctKeysInput].forEach((element) => {
-          document.getElementById(element.id).value = '';
-        });
+    }).then((response) => {
+      response.text();
+      snackbar(`Successfully added new contact!`);
+      [...allContctKeysInput].forEach((element) => {
+        document.getElementById(element.id).value = '';
       });
+
+      document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
+        localStorage.setItem(`BundleContactList-${cntctCheckBox.id.slice(0, -5)}`, cntctCheckBox.checked);
+      });
+
+      document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
+        localStorage.setItem(`BundleContactList-${cntctCheckBox.id}`, cntctCheckBox.value);
+      });
+
+      populateListTable();
+    });
   });
 
   resetCntctInptBtn.addEventListener('click', function (e) {
-    document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
-      cntctCheckBox.value = '';
+    [...allContctKeysInput].forEach((element) => {
+      document.getElementById(element.id).value = '';
     });
 
     document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
@@ -54,7 +63,6 @@ function listSidePanelModule() {
     });
 
     document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
-      // console.log(cntctCheckBox.id);
       localStorage.setItem(`BundleContactList-${cntctCheckBox.id}`, cntctCheckBox.value);
     });
 

@@ -107,7 +107,11 @@ function calendarDatesFillIn(chosenDate, DaysSelected) {
             calRep++;
             rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
             cntctCreatedDate = rnwlCntct.CreateDate;
-            if (rtrvdCalDateSlctr >= cntctCreatedDate) {
+            // Below if statement checks if contact was created earlier than chosen calendar date and does not replicate it at all
+            if (
+              rtrvdCalDateSlctr >= cntctCreatedDate &&
+              !document.getElementById(`${dayTag}${rep}`).innerHTML.includes(rnwlCntct._id)
+            ) {
               let calCntct = document.createElement('div');
               calCntct.classList.add(...calEvnt.evntType);
               if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
