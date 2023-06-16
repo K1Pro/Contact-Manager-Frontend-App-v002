@@ -4,15 +4,15 @@
   white-space: nowrap;
 } */
 table {
-  /* table-layout: fixed; */
+  table-layout: auto;
   white-space: nowrap;
-  width: 200%;
+  width: 78vw !important;
 }
 
 th {
   position: sticky;
   top: 0; /* Don't forget this, required for the stickiness */
-  background-color: #666666 !important;
+  background-color: #6c757d !important;
   cursor: pointer;
   color: white !important;
 }
@@ -24,9 +24,10 @@ th:hover {
 
 th,
 td {
-  overflow: hidden;
+  /* overflow: hidden;
   text-overflow: ellipsis;
-  word-wrap: break-word;
+  word-wrap: break-word; */
+  /* width: 100% !important; */
 }
 
 /* td {
@@ -101,7 +102,7 @@ li a:hover:not(.active) {
 }
 .contctKeysInput {
   height: 25px;
-  width: 180px;
+  width: 12vw;
 }
 /* 
 #createContactButton {

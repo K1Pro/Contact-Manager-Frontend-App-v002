@@ -68,13 +68,8 @@
   </head>
   <body>
     <div id="snackbar"></div>
-    <main>
-      <div
-        id="ListSidePanel"
-        class="bg-secondary"
-        style="overflow-y: scroll; overflow-x: hidden"
-        w3-include-html="./Modules/list/SidePanel.html"
-      ></div>
+    <main class="d-flex flex-nowrap">
+      <div id="ListSidePanel" class="bg-secondary" w3-include-html="./Modules/list/SidePanel.html"></div>
       <div class="b-example-divider b-example-vr"></div>
 
       <div style="overflow-y: auto; overflow-x: auto" w3-include-html="./Modules/list/Table.html"></div>

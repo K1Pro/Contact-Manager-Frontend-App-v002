@@ -1,4 +1,7 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-secondary" style="--bs-bg-opacity: 0.5; width: 280px">
+<div
+  class="d-flex flex-column flex-shrink-0 p-3 text-bg-secondary"
+  style="overflow-y: scroll; overflow-x: hidden; width: 20vw; height: 100vh"
+>
   <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
     <!-- <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg> -->
     <img src="images/BundleWhite.png" alt="Bundle" width="24" height="30" />
@@ -209,6 +212,17 @@
               w3-include-html="./HTML/PolicyTypeDropDown.html"
             ></select>
           </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy1NumberCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Policy 1 Number" class="contctKeysInput" id="Policy1NumberInput" />
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy1RenewDateCheck" class="form-check-input contctKeysCheck" />
+            <input type="date" id="Policy1RenewDateInput" class="contctKeysInput" min="1900-01-01" max="2050-12-31" />
+          </li>
+
           <li class="filterInputGroup">
             <input type="checkbox" id="Policy2TypeCheck" class="form-check-input contctKeysCheck" />
             <select
@@ -217,6 +231,17 @@
               w3-include-html="./HTML/PolicyTypeDropDown.html"
             ></select>
           </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy2NumberCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Policy 2 Number" class="contctKeysInput" id="Policy2NumberInput" />
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy2RenewDateCheck" class="form-check-input contctKeysCheck" />
+            <input type="date" id="Policy2RenewDateInput" class="contctKeysInput" min="1900-01-01" max="2050-12-31" />
+          </li>
+
           <li class="filterInputGroup">
             <input type="checkbox" id="Policy3TypeCheck" class="form-check-input contctKeysCheck" />
             <select
@@ -225,14 +250,34 @@
               w3-include-html="./HTML/PolicyTypeDropDown.html"
             ></select>
           </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy3NumberCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Policy 3 Number" class="contctKeysInput" id="Policy3NumberInput" />
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy3RenewDateCheck" class="form-check-input contctKeysCheck" />
+            <input type="date" id="Policy3RenewDateInput" class="contctKeysInput" min="1900-01-01" max="2050-12-31" />
+          </li>
+
           <li class="filterInputGroup">
             <input type="checkbox" id="Policy4TypeCheck" class="form-check-input contctKeysCheck" />
-
             <select
               id="Policy4TypeInput"
               class="contctKeysInput"
               w3-include-html="./HTML/PolicyTypeDropDown.html"
             ></select>
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy4NumberCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Policy 4 Number" class="contctKeysInput" id="Policy4NumberInput" />
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy4RenewDateCheck" class="form-check-input contctKeysCheck" />
+            <input type="date" id="Policy4RenewDateInput" class="contctKeysInput" min="1900-01-01" max="2050-12-31" />
           </li>
         </ul>
       </div>

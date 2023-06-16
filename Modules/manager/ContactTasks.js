@@ -7,7 +7,12 @@ function contactTasksModule() {
 
   setInterval(function () {
     // if (contactTasksTextArea.value == '') {
-    if (document.activeElement.id != 'contactTasksTextArea' && contactTasksTextArea.value == '') {
+    if (
+      document.activeElement.id != 'contactTasksTextArea' &&
+      document.activeElement.id != 'createEventTime' &&
+      document.activeElement.id != 'EventAuthor' &&
+      contactTasksTextArea.value == ''
+    ) {
       createEventTime.value = new Date(Date.now() + 1000 /*sec*/ * -300 /*min*/ * 60 /*hour*/).toJSON().slice(0, 16);
     }
   }, 60000);
