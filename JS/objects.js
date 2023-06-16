@@ -25,6 +25,7 @@ const StatusObj = {
   Former_customer: 'Former Customer',
   Prospect: 'Prospect',
   Hot_Lead: 'Hot Lead',
+  Online_Lead: 'Online Lead',
   Cold_Lead: 'Cold Lead',
   Do_Not_Call: 'Do Not Call',
   Do_Not_Renew: 'Do Not Renew',
