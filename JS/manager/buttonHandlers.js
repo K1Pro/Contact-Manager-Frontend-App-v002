@@ -212,30 +212,30 @@ function buttonHandlers() {
             PhoneInput = document.getElementById('Phone');
             snackbar(`Event created for ${FirstName.value}`);
             loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
-            let retrievedUniqueDays = document.getElementsByClassName('uniqueday');
-            rtrvdCalDateSlctr = document.getElementById('CalendarDate');
-            // This adds an event to the calendar once the event is created, work on this further
-            for (key in retrievedUniqueDays) {
-              if (retrievedUniqueDays[key].className) {
-                // prettier-ignore
-                let fullCalPpltdDate = `${rtrvdCalDateSlctr.value.slice(0, 5)}${retrievedUniqueDays[key].innerHTML.replaceAll('<b>', '').slice(0, 5)}`;
-                let shortCreatedEvntTime = createEventTime.value.slice(0, 10);
-                if (shortCreatedEvntTime == fullCalPpltdDate) {
-                  let eventUniqueDay = document.getElementById(retrievedUniqueDays[key].id);
-                  let calCntct = document.createElement('div');
-                  calCntct.classList.add(textlightTag);
-                  calCntct.classList.add(calTaskTag);
-                  calCntct.classList.add(eventTag);
-                  calCntct.classList.add(eNotCmpltdTag);
-                  calCntct.classList.add(activeTag);
-                  calCntct.classList.add(Status.value);
-                  calCntct.classList.add(Source.value);
-                  calCntct.classList.add(EventAuthor.value);
-                  calCntct.textContent = `${LastName.value}`;
-                  eventUniqueDay.appendChild(calCntct);
-                }
-              }
-            }
+            // let retrievedUniqueDays = document.getElementsByClassName('uniqueday');
+            // rtrvdCalDateSlctr = document.getElementById('CalendarDate');
+            // // This adds an event to the calendar once the event is created, work on this further
+            // for (key in retrievedUniqueDays) {
+            //   if (retrievedUniqueDays[key].className) {
+            //     // prettier-ignore
+            //     let fullCalPpltdDate = `${rtrvdCalDateSlctr.value.slice(0, 5)}${retrievedUniqueDays[key].innerHTML.replaceAll('<b>', '').slice(0, 5)}`;
+            //     let shortCreatedEvntTime = createEventTime.value.slice(0, 10);
+            //     if (shortCreatedEvntTime == fullCalPpltdDate) {
+            //       let eventUniqueDay = document.getElementById(retrievedUniqueDays[key].id);
+            //       let calCntct = document.createElement('div');
+            //       calCntct.classList.add(textlightTag);
+            //       calCntct.classList.add(calTaskTag);
+            //       calCntct.classList.add(eventTag);
+            //       calCntct.classList.add(eNotCmpltdTag);
+            //       calCntct.classList.add(activeTag);
+            //       calCntct.classList.add(Status.value);
+            //       calCntct.classList.add(Source.value);
+            //       calCntct.classList.add(EventAuthor.value);
+            //       calCntct.textContent = `${LastName.value}`;
+            //       eventUniqueDay.appendChild(calCntct);
+            //     }
+            //   }
+            // }
             contactTasksTextArea.value = '';
           });
       });

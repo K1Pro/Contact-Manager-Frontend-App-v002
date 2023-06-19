@@ -34,14 +34,14 @@ function calendarModule() {
         console.log('everything has changed');
         lastEdittedContact = data.data.contacts[0]._id;
 
-        // retrievedDate = document.getElementById('CalendarDate').value.split('-');
-        // console.log(retrievedDate);
-        // prevMonth = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime();
-        // console.log(prevMonth);
-        // prevMonthHHMM = new Date(prevMonth).setHours(TodaysHour, TodaysMinutes);
-        // console.log(prevMonthHHMM);
-        // // changeCalendarHTML_Date(new Date(prevMonthHHMM));
-        // calendarDatesFillIn(new Date(prevMonthHHMM), document.getElementById('DaysSelect').value);
+        retrievedDate = document.getElementById('CalendarDate').value.split('-');
+        console.log(retrievedDate);
+        prevMonth = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime();
+        console.log(prevMonth);
+        prevMonthHHMM = new Date(prevMonth).setHours(TodaysHour, TodaysMinutes);
+        console.log(prevMonthHHMM);
+        // changeCalendarHTML_Date(new Date(prevMonthHHMM));
+        calendarDatesFillIn(new Date(prevMonthHHMM), document.getElementById('DaysSelect').value);
 
         return lastEdittedContact;
       }
