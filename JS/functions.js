@@ -103,6 +103,8 @@ function calendarDatesFillIn(chosenDate, DaysSelected) {
       ? (document.getElementById(`${dayTag}${rep}`).innerHTML = `<b>${calDates.toJSON().slice(5, 10)} (Today)</b>`)
       : (document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`);
 
+    console.log(calDates.toJSON().slice(0, 10));
+
     document.getElementById(`${dayTag}${rep}`).addEventListener('click', () => {
       for (let rep = 0; rep < 28; rep++) {
         document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);
@@ -114,75 +116,143 @@ function calendarDatesFillIn(chosenDate, DaysSelected) {
         .slice(0, 16)}`;
     });
 
-    calEvntsArray.forEach((calEvnt) => {
-      getJSON(`${srvrURL}${calEvnt.apiPath}${calEvnt.param(calDates, rnwlDates)}`).then((data) => {
-        if (data.data.contacts.length) {
-          rnwlCntcts = data.data.contacts;
-          rnwlCntcts.map((rnwlCntct) => {
-            calRep++;
-            rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
-            cntctCreatedDate = rnwlCntct.CreateDate;
-            // Below if statement checks if contact was created earlier than chosen calendar date and does not replicate it at all
+    getJSON(`${srvrURL}${UniqueContactAllEventTypes}${calDates.toJSON().slice(0, 10)}`).then((data) => {
+      if (data.data.contacts.length) {
+        rnwlCntcts = data.data.contacts;
+        rnwlCntcts.map((rnwlCntct) => {
+          rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
+          cntctCreatedDate = rnwlCntct.CreateDate;
+          // Below if statement checks if contact was created earlier than chosen calendar date and does not replicate it at all
+          if (rtrvdCalDateSlctr >= cntctCreatedDate) {
+            let calCntct = document.createElement('div');
+            calCntct.classList.add(rnwlCntct.Type);
+            if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
+            calCntct.classList.add(`_${rnwlCntct._id}`);
+            // calCntct.classList.add(textlightTag);
+            calCntct.classList.add(calTaskTag);
+            calCntct.classList.add(rnwlCntct.Status);
+            calCntct.classList.add(rnwlCntct.Source);
+            calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
+            lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
+            // Sorting calendar events if they exist, not used for renewals or recurring
+            let sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
+              return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
+            });
+            // Last Edit By or Event Author added to class name
+            rnwlCntct.Type == 'event'
+              ? calCntct.classList.add(sortedCalEvents[0].EventAuthor)
+              : calCntct.classList.add(rnwlCntct.LastEditedBy);
+            // Completed or Not Completed Styling
             if (
-              rtrvdCalDateSlctr >= cntctCreatedDate &&
-              !document.getElementById(`${dayTag}${rep}`).innerHTML.includes(rnwlCntct._id)
+              (rnwlCntct.Type != 'event' && lastReviewDateNoDash >= calDateNoDash) ||
+              (rnwlCntct.Type == 'event' && sortedCalEvents[0]?.Completed)
             ) {
-              let calCntct = document.createElement('div');
-              calCntct.classList.add(...calEvnt.evntType);
-              if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
-              calCntct.classList.add(`_${rnwlCntct._id}`);
-              // calCntct.classList.add(textlightTag);
-              calCntct.classList.add(calTaskTag);
-              calCntct.classList.add(rnwlCntct.Status);
-              calCntct.classList.add(rnwlCntct.Source);
-              calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
-              lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
-              // Sorting calendar events if they exist, not used for renewals or recurring
-              let sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
-                return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
-              });
-              // Last Edit By or Event Author added to class name
-              data.type == 'event'
-                ? calCntct.classList.add(sortedCalEvents[0].EventAuthor)
-                : calCntct.classList.add(rnwlCntct.LastEditedBy);
-              // Completed or Not Completed Styling
-              (data.type != 'event' && lastReviewDateNoDash >= calDateNoDash) ||
-              (data.type == 'event' && sortedCalEvents[0]?.Completed)
-                ? calCntct.classList.add(`${calEvnt.shrtCut}Cmpltd`)
-                : calCntct.classList.add(`${calEvnt.shrtCut}NotCmpltd`);
-              calEvnt.rep = rep;
-              calEvnt.rnwlCntct = rnwlCntct._id;
-              // Adding text content, ID and Event Listener to each event
-              calCntct.textContent = `${rnwlCntct.LastName}`;
-              calCntct.setAttribute('id', `event${calRep}`);
-              calCntct.addEventListener('click', () => {
-                emailBody.value = '';
-                emailSubject.value = 'choose-email-template';
-                loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`, `${sortedCalEvents[0]?._id}`);
-                calCntct.classList.add(activeTag);
-                highlghtActvEvnt(rnwlCntct._id);
-              });
-              // Adding event to calendar box
-              document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
-              // applying existing calendar filters
-              calCntctClasses = calCntct.className;
-              if (!calCntctClasses.includes(TasksSelect.value)) {
-                calCntct.classList.add(hiddenContactTag);
-              }
-              if (!calCntctClasses.includes(StatusSelect.value)) {
-                calCntct.classList.add(hiddenContactTag);
-              }
-              if (!calCntctClasses.includes(SourceSelect.value)) {
-                calCntct.classList.add(hiddenContactTag);
-              }
-              if (!calCntctClasses.includes(LastEditedBySelect.value)) {
-                calCntct.classList.add(hiddenContactTag);
-              }
+              calCntct.classList.add(`Cmpltd`);
             }
-          });
-        }
-      });
+            // : calCntct.classList.add(`NotCmpltd`);
+            // calEvnt.rep = rep;
+            // calEvnt.rnwlCntct = rnwlCntct._id;
+            // Adding text content, ID and Event Listener to each event
+            calCntct.textContent = `${rnwlCntct.LastName}`;
+            calCntct.setAttribute('id', `_${rnwlCntct._id}_${calDates.toJSON().slice(8, 10)}`);
+            calCntct.addEventListener('click', () => {
+              emailBody.value = '';
+              emailSubject.value = 'choose-email-template';
+              loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`, `${sortedCalEvents[0]?._id}`);
+              calCntct.classList.add(activeTag);
+              highlghtActvEvnt(rnwlCntct._id);
+            });
+            // Adding event to calendar box
+            document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+            // applying existing calendar filters
+            calCntctClasses = calCntct.className;
+            if (!calCntctClasses.includes(TasksSelect.value)) {
+              calCntct.classList.add(hiddenContactTag);
+            }
+            if (!calCntctClasses.includes(StatusSelect.value)) {
+              calCntct.classList.add(hiddenContactTag);
+            }
+            if (!calCntctClasses.includes(SourceSelect.value)) {
+              calCntct.classList.add(hiddenContactTag);
+            }
+            if (!calCntctClasses.includes(LastEditedBySelect.value)) {
+              calCntct.classList.add(hiddenContactTag);
+            }
+          }
+        });
+      }
     });
+
+    // calEvntsArray.forEach((calEvnt) => {
+    //     getJSON(`${srvrURL}${calEvnt.apiPath}${calEvnt.param(calDates, rnwlDates)}`).then((data) => {
+    //     if (data.data.contacts.length) {
+    //       rnwlCntcts = data.data.contacts;
+    //       rnwlCntcts.map((rnwlCntct) => {
+    //         calRep++;
+    //         rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
+    //         cntctCreatedDate = rnwlCntct.CreateDate;
+    //         // Below if statement checks if contact was created earlier than chosen calendar date and does not replicate it at all
+    //         if (
+    //           rtrvdCalDateSlctr >= cntctCreatedDate &&
+    //           !document.getElementById(`${dayTag}${rep}`).innerHTML.includes(rnwlCntct._id)
+    //         ) {
+    //           let calCntct = document.createElement('div');
+    //           calCntct.classList.add(...calEvnt.evntType);
+    //           if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
+    //           calCntct.classList.add(`_${rnwlCntct._id}`);
+    //           // calCntct.classList.add(textlightTag);
+    //           calCntct.classList.add(calTaskTag);
+    //           calCntct.classList.add(rnwlCntct.Status);
+    //           calCntct.classList.add(rnwlCntct.Source);
+    //           calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
+    //           lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
+    //           // Sorting calendar events if they exist, not used for renewals or recurring
+    //           let sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
+    //             return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
+    //           });
+    //           // Last Edit By or Event Author added to class name
+    //           data.type == 'event'
+    //             ? calCntct.classList.add(sortedCalEvents[0].EventAuthor)
+    //             : calCntct.classList.add(rnwlCntct.LastEditedBy);
+    //           // Completed or Not Completed Styling
+    //           (data.type != 'event' && lastReviewDateNoDash >= calDateNoDash) ||
+    //           (data.type == 'event' && sortedCalEvents[0]?.Completed)
+    //             ? calCntct.classList.add(`${calEvnt.shrtCut}Cmpltd`)
+    //             : calCntct.classList.add(`${calEvnt.shrtCut}NotCmpltd`);
+    //           calEvnt.rep = rep;
+    //           calEvnt.rnwlCntct = rnwlCntct._id;
+    //           // Adding text content, ID and Event Listener to each event
+    //           calCntct.textContent = `${rnwlCntct.LastName}`;
+    //           calCntct.setAttribute('id', `event${calRep}`);
+    //           calCntct.addEventListener('click', () => {
+    //             emailBody.value = '';
+    //             emailSubject.value = 'choose-email-template';
+    //             loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`, `${sortedCalEvents[0]?._id}`);
+    //             calCntct.classList.add(activeTag);
+    //             highlghtActvEvnt(rnwlCntct._id);
+    //           });
+    //           // Adding event to calendar box
+    //           document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
+    //           // applying existing calendar filters
+    //           calCntctClasses = calCntct.className;
+    //           if (!calCntctClasses.includes(TasksSelect.value)) {
+    //             calCntct.classList.add(hiddenContactTag);
+    //           }
+    //           if (!calCntctClasses.includes(StatusSelect.value)) {
+    //             calCntct.classList.add(hiddenContactTag);
+    //           }
+    //           if (!calCntctClasses.includes(SourceSelect.value)) {
+    //             calCntct.classList.add(hiddenContactTag);
+    //           }
+    //           if (!calCntctClasses.includes(LastEditedBySelect.value)) {
+    //             calCntct.classList.add(hiddenContactTag);
+    //           }
+    //         }
+    //       });
+    //     }
+    //   });
+    // });
+    // end
   }
 }
 

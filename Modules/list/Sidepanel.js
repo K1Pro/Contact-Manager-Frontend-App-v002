@@ -73,6 +73,7 @@ function listSidePanelModule() {
     inputArray = allContctKeysInputArray.map((element) => {
       return [element.id.slice(0, -5), element.value];
     });
+    inputArray.push(['LastReviewDate', TodaysDate.toISOString().slice(0, 10)]);
     fetch(`${srvrURL}`, {
       method: 'POST',
       body: JSON.stringify(Object.fromEntries(inputArray)),

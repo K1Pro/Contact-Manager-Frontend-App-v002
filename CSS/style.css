@@ -247,12 +247,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
 }
 
 .renewal,
-.event,
 .annual,
 .semiannual,
 .monthly,
-.weekly,
-.recurring {
+.weekly {
   background-color: #ff9933;
   margin-left: -12px;
   padding-left: 12px;
@@ -271,12 +269,10 @@ input[type='date']:invalid::-webkit-datetime-edit {
 }
 
 .renewal:hover,
-.event:hover,
 .annual:hover,
 .semiannual:hover,
 .monthly:hover,
-.weekly:hover,
-.recurring:hover {
+.weekly:hover {
   background-color: #cf33ff;
   color: white;
   /* border-radius: 0px !important;
@@ -287,6 +283,9 @@ input[type='date']:invalid::-webkit-datetime-edit {
   transition: all 1s ease; */
 }
 
+.event,
+.recurring,
+.NotCmpltd,
 .eNotCmpltd,
 .wNotCmpltd,
 .mNotCmpltd,
@@ -304,11 +303,15 @@ input[type='date']:invalid::-webkit-datetime-edit {
   text-shadow: 0px 0px 2px grey;
   color: white;
 }
+
+.event:hover,
+.NotCmpltd:hover,
 .eNotCmpltd:hover,
 .wNotCmpltd:hover,
 .mNotCmpltd:hover,
 .saNotCmpltd:hover,
-.aNotCmpltd:hover {
+.aNotCmpltd:hover,
+.recurring:hover {
   background-color: #cf33ff;
   color: white;
   /* border-radius: 0px !important;
@@ -319,6 +322,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
   transition: all 1s ease; */
 }
 
+.Cmpltd,
 .eCmpltd,
 .rCmpltd,
 .wCmpltd,
@@ -338,6 +342,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
   color: white;
 }
 
+.Cmpltd:hover,
 .eCmpltd:hover,
 .rCmpltd:hover,
 .wCmpltd:hover,
