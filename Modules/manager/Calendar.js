@@ -24,16 +24,16 @@ function calendarModule() {
   }
 
   getJSON(`${srvrURL}${lastEdittedContactPath}`).then((data) => {
-    lastEdittedContact = data.data.contacts[0]._id;
+    lastEdittedContact = data.data.contacts[0].LastEditDate;
     return lastEdittedContact;
   });
   setInterval(function () {
     getJSON(`${srvrURL}${lastEdittedContactPath}`).then((data) => {
-      if (lastEdittedContact == data.data.contacts[0]._id) {
+      if (lastEdittedContact == data.data.contacts[0].LastEditDate) {
         console.log(data.data.contacts[0].LastName);
       } else {
         console.log(data.data.contacts[0].LastName);
-        lastEdittedContact = data.data.contacts[0]._id;
+        lastEdittedContact = data.data.contacts[0].LastEditDate;
         for (let rep = 0; rep < document.getElementById('DaysSelect').value; rep++) {
           if (document.getElementById(`${dayTag}${rep}`).classList.contains(calSelectedDayTag)) {
             prevMondayLastWeek = document.getElementById(`${dayTag}${rep}`).id.replace('day', '');

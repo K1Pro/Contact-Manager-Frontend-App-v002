@@ -179,20 +179,20 @@ function calendarDatesFillIn(chosenDate, DaysSelected, noDateChange) {
               });
               // Adding event to calendar box
               document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
-              // applying existing calendar filters
-              calCntctClasses = calCntct.className;
-              if (!calCntctClasses.includes(TasksSelect.value)) {
-                calCntct.classList.add(hiddenContactTag);
-              }
-              if (!calCntctClasses.includes(StatusSelect.value)) {
-                calCntct.classList.add(hiddenContactTag);
-              }
-              if (!calCntctClasses.includes(SourceSelect.value)) {
-                calCntct.classList.add(hiddenContactTag);
-              }
-              if (!calCntctClasses.includes(LastEditedBySelect.value)) {
-                calCntct.classList.add(hiddenContactTag);
-              }
+            }
+            // applying existing calendar filters
+            calCntctClasses = calCntct.className;
+            if (!calCntctClasses.includes(TasksSelect.value)) {
+              calCntct.classList.add(hiddenContactTag);
+            }
+            if (!calCntctClasses.includes(StatusSelect.value)) {
+              calCntct.classList.add(hiddenContactTag);
+            }
+            if (!calCntctClasses.includes(SourceSelect.value)) {
+              calCntct.classList.add(hiddenContactTag);
+            }
+            if (!calCntctClasses.includes(LastEditedBySelect.value)) {
+              calCntct.classList.add(hiddenContactTag);
             }
           }
           // }
