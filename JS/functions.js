@@ -119,11 +119,23 @@ function calendarDatesFillIn(chosenDate, DaysSelected, noDateChange) {
     getJSON(`${srvrURL}${UniqueContactAllEventTypes}${calDates.toJSON().slice(0, 10)}`).then((data) => {
       if (data.data.contacts.length) {
         rnwlCntcts = data.data.contacts;
+        rnwlCntctsIDArray = rnwlCntcts.map((a) => a._id);
+
+        // Removes existing events that have been moved....or in the future deleted
+        uniqueDayElArray = document.getElementById(`${dayTag}${rep}`).querySelectorAll('*');
+        for (let rep = 0; rep < uniqueDayElArray.length; rep++) {
+          uniqueDayElArrayIDs = uniqueDayElArray[rep].id;
+          if (uniqueDayElArrayIDs) {
+            existingEvents = document.getElementById(`${uniqueDayElArrayIDs}`).id.slice(3).slice(0, -3);
+            if (!rnwlCntctsIDArray.includes(existingEvents)) {
+              document.getElementById(uniqueDayElArrayIDs).remove();
+            }
+          }
+        }
+
         rnwlCntcts.map((rnwlCntct) => {
           rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
           cntctCreatedDate = rnwlCntct.CreateDate;
-          // Checks if contact already has an event on date
-
           // Below if statement checks if contact was created earlier than chosen calendar date and does not replicate it at all
           if (rtrvdCalDateSlctr >= cntctCreatedDate) {
             let calCntct;
