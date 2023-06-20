@@ -9,6 +9,7 @@ function calendarModule() {
   populateSlctWObj(DaysObj, DaysSelect);
   dayShowHide(document.getElementById('DaysSelect').value);
   // calendarDatesFillIn(TodaysDate, document.getElementById('DaysSelect').value);
+  console.log(TodaysDate);
   if (window.innerWidth < smallScrnSize) {
     /*your functions for big screen*/
     dayShowHide(3);
@@ -29,24 +30,23 @@ function calendarModule() {
   setInterval(function () {
     getJSON(`${srvrURL}${lastEdittedContactPath}`).then((data) => {
       if (lastEdittedContact == data.data.contacts[0]._id) {
-        console.log('nothing has changed');
+        console.log(data.data.contacts[0].LastName);
       } else {
-        console.log('everything has changed');
+        console.log(data.data.contacts[0].LastName);
         lastEdittedContact = data.data.contacts[0]._id;
-
-        retrievedDate = document.getElementById('CalendarDate').value.split('-');
-        console.log(retrievedDate);
-        prevMonth = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime();
-        console.log(prevMonth);
-        prevMonthHHMM = new Date(prevMonth).setHours(TodaysHour, TodaysMinutes);
-        console.log(prevMonthHHMM);
-        // changeCalendarHTML_Date(new Date(prevMonthHHMM));
-        calendarDatesFillIn(new Date(prevMonthHHMM), document.getElementById('DaysSelect').value);
-
-        return lastEdittedContact;
+        for (let rep = 0; rep < document.getElementById('DaysSelect').value; rep++) {
+          if (document.getElementById(`${dayTag}${rep}`).classList.contains(calSelectedDayTag)) {
+            prevMondayLastWeek = document.getElementById(`${dayTag}${rep}`).id.replace('day', '');
+            prevMonthHHMM = Date.parse(document.getElementById('CalendarDate').value);
+            calendarDatesFillIn(
+              new Date(prevMonthHHMM),
+              document.getElementById('DaysSelect').value,
+              prevMondayLastWeek
+            );
+            return lastEdittedContact;
+          }
+        }
       }
-      // console.log(lastEdittedContact);
-      // console.log(document.getElementById(`_id`).value);
     });
   }, 1000);
   console.log(document.getElementById(`_id`).value);

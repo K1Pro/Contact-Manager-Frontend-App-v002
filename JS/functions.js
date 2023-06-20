@@ -72,10 +72,11 @@ function loadSidePanel(URL, slctdCalTask) {
   });
 }
 
-function calendarDatesFillIn(chosenDate, DaysSelected) {
-  let calRep = 0;
+function calendarDatesFillIn(chosenDate, DaysSelected, noDateChange) {
   document.getElementById('DaysSelect').value == 7 ? (daysInWeek = 0) : (daysInWeek = 7);
-  prevMondayLastWeek = 1 - chosenDate.getDay() - daysInWeek;
+
+  noDateChange ? (prevMondayLastWeek = -noDateChange) : (prevMondayLastWeek = 1 - chosenDate.getDay() - daysInWeek);
+
   if (document.getElementById('DaysSelect').value == 3) prevMondayLastWeek = -1;
   if (document.getElementById('DaysSelect').value == 1) prevMondayLastWeek = 0;
 
@@ -91,16 +92,10 @@ function calendarDatesFillIn(chosenDate, DaysSelected) {
     if (TodaysDate.toJSON().slice(0, 10) == calDates.toJSON().slice(0, 10))
       document.getElementById(`${dayTag}${rep}`).classList.add(calTodaysDayTag);
 
-    if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10))
+    if (calDates.toJSON().slice(0, 10) == chosenDate.toJSON().slice(0, 10)) {
       document.getElementById(`${dayTag}${rep}`).classList.add(calSelectedDayTag);
+    }
 
-    // if (document.getElementById(`${dayTag}${rep}`).innerHTML.replace(/\s+/g, '').length < 4) {
-    //   TodaysDate.toJSON().slice(0, 10) == calDates.toJSON().slice(0, 10)
-    //     ? (document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)} (Today)`)
-    //     : (document.getElementById(`${dayTag}${rep}`).innerHTML = `${calDates.toJSON().slice(5, 10)}`);
-    // }
-    console.log(calDates.toJSON().slice(5, 10));
-    console.log(document.getElementById(`${dayTag}${rep}`).innerHTML.replace(/\s+/g, '').slice(0, 5));
     if (
       calDates.toJSON().slice(5, 10) !=
       document.getElementById(`${dayTag}${rep}`).innerHTML.replace(/\s+/g, '').slice(0, 5)
@@ -127,38 +122,42 @@ function calendarDatesFillIn(chosenDate, DaysSelected) {
         rnwlCntcts.map((rnwlCntct) => {
           rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
           cntctCreatedDate = rnwlCntct.CreateDate;
+          // Checks if contact already has an event on date
 
-          if (!document.getElementById(`${dayTag}${rep}`).innerHTML.includes(rnwlCntct.id)) {
-            // Below if statement checks if contact was created earlier than chosen calendar date and does not replicate it at all
-            if (rtrvdCalDateSlctr >= cntctCreatedDate) {
-              let calCntct = document.createElement('div');
-              calCntct.classList.add(rnwlCntct.Type);
-              if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
-              calCntct.classList.add(`_${rnwlCntct._id}`);
-              // calCntct.classList.add(textlightTag);
-              calCntct.classList.add(calTaskTag);
-              calCntct.classList.add(rnwlCntct.Status);
-              calCntct.classList.add(rnwlCntct.Source);
-              calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
-              lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
-              // Sorting calendar events if they exist, not used for renewals or recurring
-              let sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
-                return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
-              });
-              // Last Edit By or Event Author added to class name
-              rnwlCntct.Type == 'event'
-                ? calCntct.classList.add(sortedCalEvents[0].EventAuthor)
-                : calCntct.classList.add(rnwlCntct.LastEditedBy);
-              // Completed or Not Completed Styling
-              if (
-                (rnwlCntct.Type != 'event' && lastReviewDateNoDash >= calDateNoDash) ||
-                (rnwlCntct.Type == 'event' && sortedCalEvents[0]?.Completed)
-              ) {
-                calCntct.classList.add(`Cmpltd`);
-              }
+          // Below if statement checks if contact was created earlier than chosen calendar date and does not replicate it at all
+          if (rtrvdCalDateSlctr >= cntctCreatedDate) {
+            let calCntct;
+            document.getElementById(`${dayTag}${rep}`).innerHTML.includes(rnwlCntct.id)
+              ? (calCntct = document.getElementById(`id_${rnwlCntct._id}_${calDates.toJSON().slice(8, 10)}`))
+              : (calCntct = document.createElement('div'));
+            calCntct.className = '';
+            calCntct.classList.add(rnwlCntct.Type);
+            if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
+            calCntct.classList.add(`_${rnwlCntct._id}`);
+            calCntct.classList.add(calTaskTag);
+            calCntct.classList.add(rnwlCntct.Status);
+            calCntct.classList.add(rnwlCntct.Source);
+            calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
+            lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
+            // Sorting calendar events if they exist, not used for renewals or recurring
+            let sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
+              return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;
+            });
+            // Last Edit By or Event Author added to class name
+            rnwlCntct.Type == 'event'
+              ? calCntct.classList.add(sortedCalEvents[0].EventAuthor)
+              : calCntct.classList.add(rnwlCntct.LastEditedBy);
+            // Completed or Not Completed Styling
+            if (
+              (rnwlCntct.Type != 'event' && lastReviewDateNoDash >= calDateNoDash) ||
+              (rnwlCntct.Type == 'event' && sortedCalEvents[0]?.Completed)
+            ) {
+              calCntct.classList.add(`Cmpltd`);
+            }
+            if (!document.getElementById(`${dayTag}${rep}`).innerHTML.includes(rnwlCntct.id)) {
               // Adding text content, ID and Event Listener to each event
               calCntct.textContent = `${rnwlCntct.LastName}`;
-              calCntct.setAttribute('id', `_${rnwlCntct._id}_${calDates.toJSON().slice(8, 10)}`);
+              calCntct.setAttribute('id', `id_${rnwlCntct._id}_${calDates.toJSON().slice(8, 10)}`);
               calCntct.addEventListener('click', () => {
                 emailBody.value = '';
                 emailSubject.value = 'choose-email-template';
@@ -184,6 +183,7 @@ function calendarDatesFillIn(chosenDate, DaysSelected) {
               }
             }
           }
+          // }
         });
       }
     });
