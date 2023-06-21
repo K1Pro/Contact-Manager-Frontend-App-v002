@@ -67,36 +67,40 @@ function listSidePanelModule() {
   // Custom First Indexes to Side Panel Selects ^^^^^^^^
 
   listAddCntctBtn.addEventListener('click', function (e) {
-    document.getElementById('CreateDateInput').value = TodaysDate.toISOString().slice(0, 10);
-    document.getElementById('LastEditDateInput').value = TodaysDate.toISOString().slice(0, 10);
+    // document.getElementById('CreateDateInput').value = TodaysDate.toISOString();
+    // document.getElementById('LastEditDateInput').value = TodaysDate.toISOString();
     allContctKeysInputArray = [...allContctKeysInput].filter((el) => el.value != '');
     inputArray = allContctKeysInputArray.map((element) => {
       return [element.id.slice(0, -5), element.value];
     });
-    inputArray.push(['LastReviewDate', TodaysDate.toISOString().slice(0, 10)]);
-    fetch(`${srvrURL}`, {
-      method: 'POST',
-      body: JSON.stringify(Object.fromEntries(inputArray)),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((response) => {
-      response.text();
-      snackbar(`Successfully added new contact!`);
-      [...allContctKeysInput].forEach((element) => {
-        document.getElementById(element.id).value = '';
-      });
 
-      document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
-        localStorage.setItem(`BundleContactList-${cntctCheckBox.id.slice(0, -5)}`, cntctCheckBox.checked);
-      });
+    inputArray.push(['CreateDate', TodaysDate.toISOString()]);
+    inputArray.push(['LastEditDate', TodaysDate.toISOString()]);
+    inputArray.push(['LastReviewDate', TodaysDate.toISOString()]);
+    console.log(inputArray);
+    // fetch(`${srvrURL}`, {
+    //   method: 'POST',
+    //   body: JSON.stringify(Object.fromEntries(inputArray)),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // }).then((response) => {
+    //   response.text();
+    //   snackbar(`Successfully added new contact!`);
+    //   [...allContctKeysInput].forEach((element) => {
+    //     document.getElementById(element.id).value = '';
+    //   });
 
-      document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
-        localStorage.setItem(`BundleContactList-${cntctCheckBox.id}`, cntctCheckBox.value);
-      });
+    //   document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
+    //     localStorage.setItem(`BundleContactList-${cntctCheckBox.id.slice(0, -5)}`, cntctCheckBox.checked);
+    //   });
 
-      populateListTable();
-    });
+    //   document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
+    //     localStorage.setItem(`BundleContactList-${cntctCheckBox.id}`, cntctCheckBox.value);
+    //   });
+
+    //   populateListTable();
+    // });
   });
 
   resetCntctInptBtn.addEventListener('click', function (e) {
