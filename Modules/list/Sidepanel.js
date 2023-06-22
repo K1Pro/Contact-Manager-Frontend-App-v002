@@ -74,33 +74,33 @@ function listSidePanelModule() {
       return [element.id.slice(0, -5), element.value];
     });
 
-    inputArray.push(['CreateDate', TodaysDate.toISOString()]);
-    inputArray.push(['LastEditDate', TodaysDate.toISOString()]);
-    inputArray.push(['LastReviewDate', TodaysDate.toISOString()]);
+    inputArray.push(['CreateDate', new Date().toISOString()]);
+    inputArray.push(['LastEditDate', new Date().toISOString()]);
+    inputArray.push(['LastReviewDate', new Date().toISOString()]);
     console.log(inputArray);
-    // fetch(`${srvrURL}`, {
-    //   method: 'POST',
-    //   body: JSON.stringify(Object.fromEntries(inputArray)),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // }).then((response) => {
-    //   response.text();
-    //   snackbar(`Successfully added new contact!`);
-    //   [...allContctKeysInput].forEach((element) => {
-    //     document.getElementById(element.id).value = '';
-    //   });
+    fetch(`${srvrURL}`, {
+      method: 'POST',
+      body: JSON.stringify(Object.fromEntries(inputArray)),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+      response.text();
+      snackbar(`Successfully added new contact!`);
+      [...allContctKeysInput].forEach((element) => {
+        document.getElementById(element.id).value = '';
+      });
 
-    //   document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
-    //     localStorage.setItem(`BundleContactList-${cntctCheckBox.id.slice(0, -5)}`, cntctCheckBox.checked);
-    //   });
+      document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
+        localStorage.setItem(`BundleContactList-${cntctCheckBox.id.slice(0, -5)}`, cntctCheckBox.checked);
+      });
 
-    //   document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
-    //     localStorage.setItem(`BundleContactList-${cntctCheckBox.id}`, cntctCheckBox.value);
-    //   });
+      document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
+        localStorage.setItem(`BundleContactList-${cntctCheckBox.id}`, cntctCheckBox.value);
+      });
 
-    //   populateListTable();
-    // });
+      populateListTable();
+    });
   });
 
   resetCntctInptBtn.addEventListener('click', function (e) {

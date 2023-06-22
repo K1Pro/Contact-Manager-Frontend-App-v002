@@ -4,25 +4,53 @@ function sidePanelModule() {
   populateSlctWObj(StatusObj, Status);
   populateSlctWObj(SourceObj, Source);
   loadSidePanel(`${srvrURL}${lastEdittedContactPath}`);
+
+  // Populates a dataset into the main search bar
   getJSON(`${srvrURL}${sortedContactsPath}`).then((data) => {
-    // Populates a dataset into the main search bar
-    for (const [key, value] of Object.entries(data.data.contacts)) {
-      let FullName = `${value.FirstName} ${value.LastName}`;
-      let searchDataSet = document.createElement('option');
-      searchDataSet.label = FullName;
-      searchDataSet.innerHTML = value.Phone;
-      contactsList.appendChild(searchDataSet);
-      if (value.SpouseName && value.SpouseLastName) {
-        // console.log(`${value.SpouseName} ${value.SpouseLastName}`);
-        let SpouseFullName = `${value.SpouseName} ${value.SpouseLastName}`;
-        let spouseSearchDataSet = document.createElement('option');
-        spouseSearchDataSet.label = SpouseFullName;
-        spouseSearchDataSet.innerHTML = value.Phone;
-        contactsList.appendChild(spouseSearchDataSet);
-      }
-    }
-    // return data;
+    populateSearchBar(data);
   });
+
+  // Retrieves the last created contact once page is loaded
+  getJSON(`${srvrURL}${lastCreatedContactPath}`).then((data) => {
+    lastCreatedContact = data.data.contacts[0].CreateDate;
+    return lastCreatedContact;
+  });
+
+  // Detects the last created contact in an interval and repopulates the search bar upon detection, there is a very weird bug here
+  setInterval(function () {
+    getJSON(`${srvrURL}${lastCreatedContactPath}`).then((data) => {
+      if (lastCreatedContact == data.data.contacts[0].CreateDate) {
+        // console.log(`Last created: ${data.data.contacts[0].LastName}`);
+      } else {
+        console.log(`Last created: ${data.data.contacts[0].LastName}`);
+        lastCreatedContact = data.data.contacts[0].CreateDate;
+
+        // contactSearch.removeEventListener('change', function (e) {
+        //   contactSearchChange(e);
+        // });
+        // contactSearch.removeEventListener('keyup', function (e) {
+        //   contactSearchKeyUp(e);
+        // });
+        // This removes existing Search datalist and populates a new one if newly created contact is detected
+        contactsList.remove();
+        contactsList = document.createElement('datalist');
+        contactsList.id = 'contactsList';
+        contactSearch.appendChild(contactsList);
+        getJSON(`${srvrURL}${sortedContactsPath}`).then((newData) => {
+          populateSearchBar(newData);
+        });
+        // contactSearch.addEventListener('change', function (e) {
+        //   contactSearchChange(e);
+        // });
+        // contactSearch.addEventListener('keyup', function (e) {
+        //   contactSearchKeyUp(e);
+        // });
+
+        return lastCreatedContact;
+      }
+    });
+  }, 1000);
+
   // window.addEventListener('load', limitFunc);
   // document.addEventListener('DOMContentLoaded', limitFunc);
   window.addEventListener('resize', limitFunc);

@@ -372,21 +372,21 @@ function loadContactTasks(dailyTask, slctdCalTask) {
 }
 
 function matchDatalist(searchInput) {
-  let dataList = document.getElementById('contactsList');
-  let totalSearchCntcts = dataList.childNodes.length;
-  let searchCncttracker = 1;
-  let uniquePhoneSet = new Set();
-  let firstSearchCntct;
+  dataList = document.getElementById('contactsList');
+  totalSearchCntcts = dataList.childNodes.length - 3; //compensates for 1 text node being found in datalist and 2 additional entries that cause a bug
+  searchCncttracker = 0;
+  uniquePhoneSet = new Set();
   Array.from(document.getElementById('contactsList').options).forEach(function (option_element) {
     searchCncttracker++;
-    let dataListLabel = option_element.label.toLowerCase();
-    let dataListvalue = option_element.value;
+    dataListLabel = option_element.label.toLowerCase();
+    dataListvalue = option_element.value;
     if (dataListLabel.includes(searchInput) || dataListvalue.includes(searchInput)) {
       uniquePhoneSet.add(dataListvalue);
       [firstSearchCntct] = uniquePhoneSet;
       return firstSearchCntct;
     }
-    if (firstSearchCntct && searchCncttracker == totalSearchCntcts) {
+
+    if (firstSearchCntct && searchCncttracker >= totalSearchCntcts) {
       loadSidePanel(`${srvrURL}${phonePath}${firstSearchCntct}`);
       contactSearch.value = '';
     } else if (!firstSearchCntct && searchCncttracker == totalSearchCntcts) {

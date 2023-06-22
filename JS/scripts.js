@@ -63,6 +63,24 @@ function updateContactTasks(contactTask, inputChanged) {
     });
 }
 ///////////////////////////////////////////////////////////
+////// vvv Populates dataset into main search bar vvv ///////
+function populateSearchBar(data) {
+  for (const [key, value] of Object.entries(data.data.contacts)) {
+    let FullName = `${value.FirstName} ${value.LastName}`;
+    let searchDataSet = document.createElement('option');
+    searchDataSet.label = FullName;
+    searchDataSet.innerHTML = value.Phone;
+    contactsList.appendChild(searchDataSet);
+    if (value.SpouseName && value.SpouseLastName) {
+      SpouseFullName = `${value.SpouseName} ${value.SpouseLastName}`;
+      spouseSearchDataSet = document.createElement('option');
+      spouseSearchDataSet.label = SpouseFullName;
+      spouseSearchDataSet.innerHTML = value.Phone;
+      contactsList.appendChild(spouseSearchDataSet);
+    }
+  }
+}
+///////////////////////////////////////////////////////////
 /////////// vvv Delete All Recurring Tasks vvv ////////////
 function deleteRecurTasks() {
   fetch(`${srvrURL}${deleteEmptyFieldPath}${_id.value}`, {
@@ -296,6 +314,42 @@ let limitFunc = function () {
   prevWidth = window.innerWidth;
   return prevWidth;
 };
+///////////////////////////////////////////////////////////
+////////// vvv Calendar Search Event Listeners vvv ////////
+function contactSearchChange(e) {
+  // This populates the Side Panel Input Fields following a Contact Search
+  let searchInput = e.target.value.toLowerCase();
+  // phonenumber(e.target.value);
+  if (e.target.value) {
+    matchDatalist(searchInput);
+  }
+}
+
+//REFACTOR AND CLEAN THIS UP A BIT
+function contactSearchKeyUp(e) {
+  if (e.key !== 'Backspace') {
+    let searchInput = e.target.value.toLowerCase();
+    // checks a phone number for example 773
+    let phNoBegin = /^\d{3}$/;
+    // checks a phone number for example 773-853
+    let phNoMiddle = /^\+?([0-9]{3})\)?[-]?([0-9]{3})$/;
+    // checks a phone number for example 773-853-2731
+    let phNoLast = /^\+?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$/;
+    if (searchInput.match(phNoBegin)) {
+      this.value = `${searchInput}-`;
+    } else if (searchInput.match(phNoMiddle)) {
+      this.value = `${searchInput}-`;
+    } else if (searchInput.match(phNoLast)) {
+      matchDatalist(searchInput);
+      contactSearch.blur();
+    }
+    if (e.key === 'Enter') {
+      matchDatalist(searchInput);
+      contactSearch.blur();
+    }
+  }
+}
+
 ///////////////////////////////////////////////////////////
 ///////////// vvv Calendar Events styling vvv ///////////
 function calEventStyle(calCntct, rnwlCntct) {

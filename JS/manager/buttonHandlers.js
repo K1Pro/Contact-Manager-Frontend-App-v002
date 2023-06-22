@@ -244,38 +244,12 @@ function buttonHandlers() {
     }
   });
 
-  // This populates the Side Panel Input Fields following a Contact Search
   contactSearch.addEventListener('change', function (e) {
-    let searchInput = e.target.value.toLowerCase();
-    // phonenumber(e.target.value);
-    if (e.target.value) {
-      matchDatalist(searchInput);
-    }
+    contactSearchChange(e);
   });
 
-  //REFACTOR AND CLEAN THIS UP A BIT
   contactSearch.addEventListener('keyup', function (e) {
-    if (e.key !== 'Backspace') {
-      let searchInput = e.target.value.toLowerCase();
-      // checks a phone number for example 773
-      let phNoBegin = /^\d{3}$/;
-      // checks a phone number for example 773-853
-      let phNoMiddle = /^\+?([0-9]{3})\)?[-]?([0-9]{3})$/;
-      // checks a phone number for example 773-853-2731
-      let phNoLast = /^\+?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$/;
-      if (searchInput.match(phNoBegin)) {
-        this.value = `${searchInput}-`;
-      } else if (searchInput.match(phNoMiddle)) {
-        this.value = `${searchInput}-`;
-      } else if (searchInput.match(phNoLast)) {
-        matchDatalist(searchInput);
-        contactSearch.blur();
-      }
-      if (e.key === 'Enter') {
-        matchDatalist(searchInput);
-        contactSearch.blur();
-      }
-    }
+    contactSearchKeyUp(e);
   });
 
   document.querySelectorAll('.eventTemplates').forEach((dynamicEvent) => {
