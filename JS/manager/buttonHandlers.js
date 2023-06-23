@@ -133,11 +133,13 @@ function buttonHandlers() {
   // Review Button in Side Panel
   reviewContact.addEventListener('click', function () {
     if (_id.value) {
-      let reviewDate = TodaysDate.toJSON().slice(0, 10);
+      reviewDate = new Date().toJSON().slice(0, 10);
+      lastEditDate = new Date().toJSON();
       fetch(`${srvrURL}/${_id.value}`, {
         method: 'PATCH',
         body: JSON.stringify({
           LastReviewDate: reviewDate,
+          LastEditDate: lastEditDate,
         }),
         headers: {
           'Content-Type': 'application/json',

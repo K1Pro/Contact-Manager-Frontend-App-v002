@@ -17,9 +17,13 @@ function calendarModule() {
     calendarDatesFillIn(TodaysDate, 3);
     document.getElementById('DaysSelect').classList.add(hiddenContactTag);
   } else {
-    dayShowHide(21);
-    document.getElementById('DaysSelect').value = 21;
-    calendarDatesFillIn(TodaysDate, 21);
+    localStorage.getItem(`DaysSelect`)
+      ? (daysFirstLoaded = localStorage.getItem(`DaysSelect`))
+      : (daysFirstLoaded = 21);
+
+    dayShowHide(daysFirstLoaded);
+    document.getElementById('DaysSelect').value = daysFirstLoaded;
+    calendarDatesFillIn(TodaysDate, daysFirstLoaded);
     document.getElementById('DaysSelect').classList.remove(hiddenContactTag);
   }
 
