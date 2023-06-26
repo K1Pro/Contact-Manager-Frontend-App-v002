@@ -17,9 +17,20 @@ function buttonHandlers() {
   CalendarHTML_PrevWeekBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
     removePolicyInfoHighlight();
+    for (let rep = 0; rep < document.getElementById('DaysSelect').value; rep++) {
+      if (document.getElementById(`${dayTag}${rep}`).classList.contains(calSelectedDayTag)) {
+        console.log(document.getElementById(`${dayTag}${rep}`));
+      }
+    }
+    retrievedDate = Date.parse(document.getElementById('CalendarDate').value);
+    console.log(retrievedDate);
+    console.log(new Date(retrievedDate + 1000 * 60 * 60 * 24 * -7));
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
+    console.log(retrievedDate);
     prevWeek = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime() + 1000 * 60 * 60 * 24 * -7;
+    console.log(prevWeek);
     prevWeekHHMM = new Date(prevWeek).setHours(TodaysHour, TodaysMinutes);
+    console.log(prevWeekHHMM);
     changeCalendarHTML_Date(new Date(prevWeekHHMM));
     calendarDatesFillIn(new Date(prevWeekHHMM), document.getElementById('DaysSelect').value);
   });
