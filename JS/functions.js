@@ -168,7 +168,10 @@ function calendarDatesFillIn(chosenDate, DaysSelected, noDateChange) {
             }
             if (!document.getElementById(`${dayTag}${rep}`).innerHTML.includes(rnwlCntct.id)) {
               // Adding text content, ID and Event Listener to each event
-              calCntct.textContent = `${rnwlCntct.LastName}`;
+              rnwlCntct.Type == 'event'
+                ? (calCntct.textContent = `${sortedCalEvents[0].DateHHMMSS.replace('T', '')} ${rnwlCntct.LastName}`)
+                : (calCntct.textContent = `${rnwlCntct.LastName}`);
+
               calCntct.setAttribute('id', `id_${rnwlCntct._id}_${calDates.toJSON().slice(8, 10)}`);
               calCntct.addEventListener('click', () => {
                 emailBody.value = '';
