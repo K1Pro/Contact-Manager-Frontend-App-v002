@@ -172,6 +172,14 @@ function calendarDatesFillIn(chosenDate, DaysSelected, noDateChange) {
                 ? (calCntct.textContent = `${sortedCalEvents[0].DateHHMMSS.replace('T', '')} ${rnwlCntct.LastName}`)
                 : (calCntct.textContent = `${rnwlCntct.LastName}`);
 
+              if (document.getElementById('DaysSelect').value == 1) {
+                rnwlCntct.Type == 'event'
+                  ? (calCntct.textContent = `${sortedCalEvents[0].DateHHMMSS.replace('T', '')} ${rnwlCntct.FirstName} ${
+                      rnwlCntct.LastName
+                    }: ${sortedCalEvents[0].Description}`)
+                  : (calCntct.textContent = `${rnwlCntct.LastName}`);
+              }
+
               calCntct.setAttribute('id', `id_${rnwlCntct._id}_${calDates.toJSON().slice(8, 10)}`);
               calCntct.addEventListener('click', () => {
                 emailBody.value = '';
