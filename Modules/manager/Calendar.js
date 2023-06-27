@@ -44,11 +44,14 @@ function calendarModule() {
           if (document.getElementById(`${dayTag}${rep}`).classList.contains(calSelectedDayTag)) {
             prevMondayLastWeek = document.getElementById(`${dayTag}${rep}`).id.replace('day', '');
             prevMonthHHMM = Date.parse(document.getElementById('CalendarDate').value);
-            calendarDatesFillIn(
-              new Date(prevMonthHHMM),
-              document.getElementById('DaysSelect').value,
-              prevMondayLastWeek
-            );
+            console.log(new Date(prevMonthHHMM));
+            console.log(document.getElementById('DaysSelect').value);
+            console.log(prevMondayLastWeek);
+            // calendarDatesFillIn(
+            //   new Date(prevMonthHHMM),
+            //   document.getElementById('DaysSelect').value,
+            //   prevMondayLastWeek
+            // );
             return lastEdittedContact;
           }
         }
