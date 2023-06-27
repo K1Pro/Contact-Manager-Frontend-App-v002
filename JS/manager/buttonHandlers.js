@@ -5,12 +5,18 @@ function buttonHandlers() {
   CalendarHTML_PrevMonthBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
     removePolicyInfoHighlight();
+    findcalSlctdDay = document
+      .getElementById('calendarDates')
+      .getElementsByClassName(calSelectedDayTag)[0]
+      .id.replace('day', '');
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
+    document.getElementById('DaysSelect').value >= 7 ? (numberOfDays = 28) : (numberOfDays = 7);
     prevMonth =
-      new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime() + 1000 * 60 * 60 * 24 * -28;
+      new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime() +
+      1000 * 60 * 60 * 24 * -numberOfDays;
     prevMonthHHMM = new Date(prevMonth).setHours(TodaysHour, TodaysMinutes);
     changeCalendarHTML_Date(new Date(prevMonthHHMM));
-    calendarDatesFillIn(new Date(prevMonthHHMM), document.getElementById('DaysSelect').value);
+    calendarDatesFillIn(new Date(prevMonthHHMM), document.getElementById('DaysSelect').value, findcalSlctdDay);
   });
 
   // Previous Week Button in Calendar Module
@@ -22,7 +28,6 @@ function buttonHandlers() {
       .getElementsByClassName(calSelectedDayTag)[0]
       .id.replace('day', '');
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
-    document.getElementById('DaysSelect').value;
     document.getElementById('DaysSelect').value >= 7
       ? (numberOfDays = 7)
       : (numberOfDays = document.getElementById('DaysSelect').value);
@@ -38,22 +43,36 @@ function buttonHandlers() {
   CalendarHTML_NextWeekBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
     removePolicyInfoHighlight();
+    findcalSlctdDay = document
+      .getElementById('calendarDates')
+      .getElementsByClassName(calSelectedDayTag)[0]
+      .id.replace('day', '');
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
-    nextWeek = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime() + 1000 * 60 * 60 * 24 * 7;
+    document.getElementById('DaysSelect').value >= 7
+      ? (numberOfDays = 7)
+      : (numberOfDays = document.getElementById('DaysSelect').value);
+    nextWeek =
+      new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime() + 1000 * 60 * 60 * 24 * numberOfDays;
     nextWeekHHMM = new Date(nextWeek).setHours(TodaysHour, TodaysMinutes);
     changeCalendarHTML_Date(new Date(nextWeekHHMM));
-    calendarDatesFillIn(new Date(nextWeekHHMM), document.getElementById('DaysSelect').value);
+    calendarDatesFillIn(new Date(nextWeekHHMM), document.getElementById('DaysSelect').value, findcalSlctdDay);
   });
 
   // Next Month Button in Calendar Module
   CalendarHTML_NextMonthBtn.addEventListener('click', function () {
     abortCalendarDatesFillIn();
     removePolicyInfoHighlight();
+    findcalSlctdDay = document
+      .getElementById('calendarDates')
+      .getElementsByClassName(calSelectedDayTag)[0]
+      .id.replace('day', '');
     retrievedDate = document.getElementById('CalendarDate').value.split('-');
-    nextMonth = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime() + 1000 * 60 * 60 * 24 * 28;
+    document.getElementById('DaysSelect').value >= 7 ? (numberOfDays = 28) : (numberOfDays = 7);
+    nextMonth =
+      new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime() + 1000 * 60 * 60 * 24 * numberOfDays;
     nextMonthHHMM = new Date(nextMonth).setHours(TodaysHour, TodaysMinutes);
     changeCalendarHTML_Date(new Date(nextMonthHHMM));
-    calendarDatesFillIn(new Date(nextMonthHHMM), document.getElementById('DaysSelect').value);
+    calendarDatesFillIn(new Date(nextMonthHHMM), document.getElementById('DaysSelect').value, findcalSlctdDay);
   });
 
   Status.addEventListener('change', function (e) {
