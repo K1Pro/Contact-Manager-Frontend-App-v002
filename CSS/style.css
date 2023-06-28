@@ -65,11 +65,12 @@
   background-color: #ebccff;
 }
 .calTodaysDay {
-  background-color: #ccffcc;
+  /* background-color: #ccffcc; */
+  font-weight: bold;
 }
-.calTodaysDay:hover {
+/* .calTodaysDay:hover {
   background-color: #ccffcc;
-}
+} */
 .calSelectedDay {
   background-color: #ccffff;
 }
@@ -108,6 +109,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
   color: #cccccc !important;
 }
 .uniqueday {
+  padding-left: 4px;
   white-space: nowrap;
 }
 
@@ -260,7 +262,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
   border-style: solid;
   border-color: white;
   border-width: thin;
-  /* font-weight: bold; */
+  font-weight: normal;
   /* text-shadow: 0px 0px 2px grey; */
 }
 
@@ -299,7 +301,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
   /* border-radius: 10px !important; */
   border-style: solid;
   border-width: thin;
-  /* font-weight: bold; */
+  font-weight: normal;
   text-shadow: 0px 0px 2px grey;
   color: white;
 }
@@ -337,7 +339,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
   /* border-radius: 10px !important; */
   border-style: solid;
   border-width: thin;
-  /* font-weight: bold; */
+  font-weight: normal;
   text-shadow: 0px 0px 2px grey;
   color: white;
 }
@@ -369,7 +371,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
   border-color: white;
   border-width: thin;
   color: white !important;
-  /* font-weight: bold; */
+  font-weight: normal;
   text-shadow: 0px 0px 2px grey;
 }
 .active:hover {
