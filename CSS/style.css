@@ -110,7 +110,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
 }
 .uniqueday {
   padding-left: 4px;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 
 .paddingZero {
@@ -286,13 +286,14 @@ input[type='date']:invalid::-webkit-datetime-edit {
 }
 
 .event,
-.recurring,
+.recurring
+/* ,
 .NotCmpltd,
 .eNotCmpltd,
 .wNotCmpltd,
 .mNotCmpltd,
 .saNotCmpltd,
-.aNotCmpltd {
+.aNotCmpltd */ {
   background-color: #009966;
   margin-left: -12px;
   padding-left: 12px;
