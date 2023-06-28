@@ -83,6 +83,11 @@ function calendarDatesFillIn(chosenDate, DaysSelected, noDateChange) {
   for (let rep = 0; rep < DaysSelected; rep++) {
     document.getElementById(`${dayTag}${rep}`).classList.remove(calSelectedDayTag);
     document.getElementById(`${dayTag}${rep}`).classList.remove(calTodaysDayTag);
+    if (document.getElementById('DaysSelect').value == 1 && window.innerWidth >= 768) {
+      document.getElementById(`${dayTag}${rep}`).style.whiteSpace = 'pre-wrap';
+    } else {
+      document.getElementById(`${dayTag}${rep}`).style.whiteSpace = 'nowrap';
+    }
 
     let calDates = new Date(
       chosenDate.getTime() +
@@ -165,6 +170,8 @@ function calendarDatesFillIn(chosenDate, DaysSelected, noDateChange) {
               (rnwlCntct.Type == 'event' && sortedCalEvents[0]?.Completed)
             ) {
               calCntct.classList.add(`Cmpltd`);
+            } else {
+              calCntct.classList.add(`NotCmpltd`);
             }
             if (!document.getElementById(`${dayTag}${rep}`).innerHTML.includes(rnwlCntct.id)) {
               // Adding text content, ID and Event Listener to each event
@@ -172,12 +179,12 @@ function calendarDatesFillIn(chosenDate, DaysSelected, noDateChange) {
                 ? (calCntct.textContent = `${sortedCalEvents[0].DateHHMMSS.replace('T', '')} ${rnwlCntct.LastName}`)
                 : (calCntct.textContent = `${rnwlCntct.LastName}`);
 
-              if (document.getElementById('DaysSelect').value == 1) {
+              if (document.getElementById('DaysSelect').value == 1 && window.innerWidth >= 768) {
                 rnwlCntct.Type == 'event'
                   ? (calCntct.textContent = `${sortedCalEvents[0].DateHHMMSS.replace('T', '')} ${rnwlCntct.FirstName} ${
                       rnwlCntct.LastName
-                    }: ${sortedCalEvents[0].Description}`)
-                  : (calCntct.textContent = `${rnwlCntct.LastName}`);
+                    }:\r\n ${sortedCalEvents[0].Description}`)
+                  : (calCntct.textContent = `${rnwlCntct.LastName}\r\n${rnwlCntct.Type}`);
               }
 
               calCntct.setAttribute('id', `id_${rnwlCntct._id}_${calDates.toJSON().slice(8, 10)}`);
@@ -359,7 +366,7 @@ function addRecurEvntsToCal(e, recurEvntInptFld, MM) {
       calCntct.classList.add(Status.value);
       calCntct.classList.add(Source.value);
       calCntct.classList.add(LastEditedBy.value);
-      calCntct.classList.add(`mNotCmpltd`);
+      calCntct.classList.add(`NotCmpltd`);
       calCntct.id = Date.now();
       let savedPhone = Phone.value;
       calCntct.textContent = `${LastName.value}`;

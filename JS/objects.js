@@ -12,12 +12,14 @@ const PolicyTypeObj = {
 
 const TasksObj = {
   renewal: 'All Renewals',
-  rCmpltd: 'Completed Renewals',
-  rNotCmpltd: 'Not Completed Renewals',
-  event: 'All Tasks',
-  eCmpltd: 'Completed Tasks',
-  eNotCmpltd: 'Not Completed Tasks',
+  // rCmpltd: 'Completed Renewals',
+  // rNotCmpltd: 'Not Completed Renewals',
+  event: 'All Contact Tasks',
+  // eCmpltd: 'Completed Tasks',
+  // eNotCmpltd: 'Not Completed Tasks',
   recurring: 'All Recurring Tasks',
+  Cmpltd: 'All Completed',
+  NotCmpltd: 'All Not Completed',
 };
 
 const StatusObj = {
