@@ -141,8 +141,8 @@ function calendarDatesFillIn(chosenDate, DaysSelected, noDateChange) {
         rnwlCntcts.map((rnwlCntct) => {
           rtrvdCalDateSlctr = document.getElementById('CalendarDate').value;
           cntctCreatedDate = rnwlCntct.CreateDate;
-          // Below if statement checks if contact was created earlier than chosen calendar date and does not replicate it at all
-          if (rtrvdCalDateSlctr >= cntctCreatedDate) {
+          // Below if statement checks if contact was created earlier than calendar date that is being filled in
+          if (calDates.toJSON().slice(0, 10) >= cntctCreatedDate.slice(0, 10)) {
             let calCntct;
             document.getElementById(`${dayTag}${rep}`).innerHTML.includes(rnwlCntct.id)
               ? (calCntct = document.getElementById(`id_${rnwlCntct._id}_${calDates.toJSON().slice(8, 10)}`))
