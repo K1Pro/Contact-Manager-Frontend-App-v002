@@ -87,16 +87,30 @@
   }
   #createEventTime {
     border: 0px;
-    width: 12vw !important;
+    width: 100vw !important;
     /* padding-right: 5vw !important; */
     padding-right: 0.5vw !important;
     border-left: 0px solid green;
     border-left-width: 0.5vw;
     padding-left: 1vw;
     padding-top: 8px;
+    padding-bottom: 8px;
   }
   #EventAuthor {
     /* padding-right: 5vw !important; */
+    margin-left: 0vw;
+    border-left: 0px solid green;
+    border-left-width: 0.5vw;
+    padding-left: 1vw;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  #createEventTime {
+    width: auto !important;
+  }
+
+  #EventAuthor {
     margin-left: 0;
     border-left: 0;
     border-left-width: 0;
