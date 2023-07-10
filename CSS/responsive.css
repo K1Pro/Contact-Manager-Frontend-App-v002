@@ -116,4 +116,10 @@
     border-left-width: 0;
     padding-left: 12px;
   }
+  #BirthDate,
+  #SpouseBirthDate {
+    margin-left: -20px;
+    /* margin-right: 20px !important;
+    padding-right: 50px !important; */
+  }
 }
