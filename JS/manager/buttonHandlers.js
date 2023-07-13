@@ -283,18 +283,15 @@ function buttonHandlers() {
     contactSearchKeyUp(e);
   });
 
-  document.querySelectorAll('.eventTemplates').forEach((dynamicEvent) => {
-    dynamicEvent.addEventListener('click', function (e) {
-      e.preventDefault();
-      console.log(eventTemplatesObj[e.target.id]);
-      // contactTasksTextArea.value = `${e.target.innerHTML.replaceAll('...', ',')} `;
-      contactTasksTextArea.value = `${eventTemplatesObj[e.target.id]} `;
-    });
-  });
-
   // This dynamically creates various events within the "Create Task" button of the contact tasks module
   for (const [key, value] of Object.entries(eventTemplatesObj)) {
-    console.log(`${key}: ${value}`);
+    let eventTemplate = document.createElement('li');
+    eventTemplate.classList.add('dropdown-item');
+    eventTemplate.innerHTML = key.replaceAll('_', ' ');
+    eventTemplate.addEventListener('click', function (e) {
+      contactTasksTextArea.value = value;
+    });
+    cntctTasksTxtAreaList.appendChild(eventTemplate);
   }
 
   document.querySelectorAll('.yearlyEventInput').forEach((yearlyEvntInpt) => {

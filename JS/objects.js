@@ -67,4 +67,12 @@ const eventTemplatesObj = {
     .slice(5, 7)}/${new Date(Date.now() + 1000 /*sec*/ * -300 /*min*/ * 60 /*hour*/)
     .toJSON()
     .slice(8, 10)}, left a message, sent text and email `,
+  Zadzwonilem_do_potencjalnego_klienta: `Zadzwonilem ${new Date(Date.now() + 1000 /*sec*/ * -300 /*min*/ * 60 /*hour*/)
+    .toJSON()
+    .slice(5, 7)}/${new Date(Date.now() + 1000 /*sec*/ * -300 /*min*/ * 60 /*hour*/)
+    .toJSON()
+    .slice(8, 10)}, zostawilem wiadomosc, wyslalem SMSa i email `,
+  Made_a_payment: 'Made a payment ',
+  Endorsement_created: 'Endorsement created ',
+  Request_a_quote: 'Request a quote ',
 };
