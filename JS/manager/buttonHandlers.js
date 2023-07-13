@@ -286,9 +286,16 @@ function buttonHandlers() {
   document.querySelectorAll('.eventTemplates').forEach((dynamicEvent) => {
     dynamicEvent.addEventListener('click', function (e) {
       e.preventDefault();
-      contactTasksTextArea.value = `${e.target.innerHTML.replaceAll('...', ',')} `;
+      console.log(eventTemplatesObj[e.target.id]);
+      // contactTasksTextArea.value = `${e.target.innerHTML.replaceAll('...', ',')} `;
+      contactTasksTextArea.value = `${eventTemplatesObj[e.target.id]} `;
     });
   });
+
+  // This dynamically creates various events within the "Create Task" button of the contact tasks module
+  for (const [key, value] of Object.entries(eventTemplatesObj)) {
+    console.log(`${key}: ${value}`);
+  }
 
   document.querySelectorAll('.yearlyEventInput').forEach((yearlyEvntInpt) => {
     yearlyEvntInpt.addEventListener('change', function (e) {

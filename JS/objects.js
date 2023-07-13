@@ -60,3 +60,11 @@ const DaysObj = {
   number3: 'Days (3)',
   number1: 'Day (1)',
 };
+
+const eventTemplatesObj = {
+  Called_to_prospect: `Called ${new Date(Date.now() + 1000 /*sec*/ * -300 /*min*/ * 60 /*hour*/)
+    .toJSON()
+    .slice(5, 7)}/${new Date(Date.now() + 1000 /*sec*/ * -300 /*min*/ * 60 /*hour*/)
+    .toJSON()
+    .slice(8, 10)}, left a message, sent text and email `,
+};
