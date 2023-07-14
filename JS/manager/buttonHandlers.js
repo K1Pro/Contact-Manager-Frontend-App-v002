@@ -189,7 +189,9 @@ function buttonHandlers() {
   // Email module send email button using SMPTJS
   sendEmail.addEventListener('click', function () {
     let cntctEmail = document.getElementById('Email');
-    if (cntctEmail.value) {
+    console.log(cntctEmail);
+    console.log(cntctEmail.value.length);
+    if (cntctEmail.value.length > 4) {
       Email.send({
         SecureToken: SMTP[LastEditedBy.value][0],
         To: cntctEmail.value,
@@ -201,6 +203,8 @@ function buttonHandlers() {
         emailBody.value = '';
         emailSubject.selectedIndex = 0;
       });
+    } else {
+      snackbar(`Please provide an email`);
     }
   });
 
