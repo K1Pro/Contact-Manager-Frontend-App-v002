@@ -155,7 +155,8 @@ function calendarDatesFillIn(chosenDate, DaysSelected, noDateChange) {
             calCntct.classList.add(rnwlCntct.Status);
             calCntct.classList.add(rnwlCntct.Source);
             calDateNoDash = `${calDates.toJSON().slice(0, 10).replaceAll('-', '')}`;
-            lastReviewDateNoDash = `${rnwlCntct.LastReviewDate.replaceAll('-', '')}`;
+            const plus14Days = new Date(rnwlCntct.LastReviewDate).addDays(14).toJSON().slice(0, 10);
+            lastReviewDateNoDash = `${plus14Days.replaceAll('-', '')}`;
             // Sorting calendar events if they exist, not used for renewals or recurring
             let sortedCalEvents = rnwlCntct.CalendarEvents.filter((obj) => {
               return obj.DateYYYYMMDD === `${calDates.toJSON().slice(0, 10)}`;

@@ -366,3 +366,10 @@ function calEventStyle(calCntct, rnwlCntct) {
   //   calCntct.classList.add(hiddenContactTag);
   // calCntct.textContent = `${rnwlCntct.LastName}`;
 }
+///////////////////////////////////////////////////////////
+///////////// vvv Adding days to date vvv ///////////
+Date.prototype.addDays = function (days) {
+  const date = new Date(this.valueOf());
+  date.setDate(date.getDate() + days);
+  return date;
+};
