@@ -196,7 +196,11 @@ function buttonHandlers() {
         From: SMTP[LastEditedBy.value][1],
         Subject: emailSubject.options[emailSubject.selectedIndex].text,
         Body: emailBody.value,
-      }).then(() => snackbar(`Email successfully sent to: ${cntctEmail.value}`));
+      }).then(() => {
+        snackbar(`Email successfully sent to: ${cntctEmail.value}`);
+        emailBody.value = '';
+        emailSubject.selectedIndex = 0;
+      });
     }
   });
 
