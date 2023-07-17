@@ -27,12 +27,8 @@ function loadSidePanel(URL, slctdCalTask) {
           }
         });
       }
-      if (
-        ContactFieldsIDs == 'Policy1RenewDate' ||
-        ContactFieldsIDs == 'Policy2RenewDate' ||
-        ContactFieldsIDs == 'Policy3RenewDate' ||
-        ContactFieldsIDs == 'Policy4RenewDate'
-      ) {
+      if (ContactFieldsIDs.includes('RenewDate')) {
+        console.log(ContactFieldsIDs.slice(0, 7));
         let slctdPolicyGroup = ContactFieldsIDs.slice(0, 7);
         let slctdPolicy1RenewDate = document.getElementById(ContactFieldsIDs);
         let slctdPolicyType = document.getElementById(`${slctdPolicyGroup}Type`);

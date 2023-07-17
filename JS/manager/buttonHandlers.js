@@ -189,8 +189,6 @@ function buttonHandlers() {
   // Email module send email button using SMPTJS
   sendEmail.addEventListener('click', function () {
     let cntctEmail = document.getElementById('Email');
-    console.log(cntctEmail);
-    console.log(cntctEmail.value.length);
     if (cntctEmail.value.length > 4) {
       Email.send({
         SecureToken: SMTP[LastEditedBy.value][0],
