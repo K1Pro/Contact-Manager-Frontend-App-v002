@@ -33,9 +33,9 @@ function loadSidePanel(URL, slctdCalTask) {
       if (ContactFieldsIDs.includes('MonthlyEvent') && ContactFieldsIDs.includes('DD')) {
         wiggleMonthlyInput(dateSelector, ContactFieldsIDs);
       }
-      // if (ContactFieldsIDs.includes('MM') && ContactFieldsIDs.includes('DD')) {
-      //   console.log('includes MM & DD');
-      // }
+      if (ContactFieldsIDs.includes('YearlyEvent') && ContactFieldsIDs.includes('DD')) {
+        wiggleYearlyInput(dateSelector, ContactFieldsIDs);
+      }
     }
   });
 }
