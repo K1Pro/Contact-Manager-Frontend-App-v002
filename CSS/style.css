@@ -414,11 +414,11 @@ input[type='date']:invalid::-webkit-datetime-edit {
   width: 100%;
 }
 
-.selectedRenewDate {
+.selectedEvent {
   background-color: rgb(255, 218, 237);
 }
 
-.selectedRenewDateWiggle {
+.selectedEventWiggle {
   animation: horizontal-shaking 2s;
 }
 

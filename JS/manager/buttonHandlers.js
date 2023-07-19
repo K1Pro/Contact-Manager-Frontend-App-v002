@@ -203,9 +203,9 @@ function buttonHandlers() {
       });
     } else {
       snackbar(`Please provide an email`);
-      cntctEmail.classList.add('selectedRenewDateWiggle');
+      cntctEmail.classList.add('selectedEventWiggle');
       setTimeout(function () {
-        cntctEmail.classList.remove('selectedRenewDateWiggle');
+        cntctEmail.classList.remove('selectedEventWiggle');
       }, 2000);
     }
   });

@@ -252,7 +252,7 @@ function snackbar(message) {
 ////////// vvv Removes highlighted fields vvv /////////////
 function removePolicyInfoHighlight() {
   document.querySelectorAll('.policyInfo').forEach((policyInfoInput) => {
-    document.getElementById(`${policyInfoInput.id}`).classList.remove('selectedRenewDate');
+    document.getElementById(`${policyInfoInput.id}`).classList.remove('selectedEvent');
   });
 }
 ///////////////////////////////////////////////////////////
@@ -384,20 +384,20 @@ function wiggleInput(dateSelector, ContactFieldsIDs) {
   let slctdPolicy1RenewDate = document.getElementById(ContactFieldsIDs);
   let slctdPolicyType = document.getElementById(`${slctdPolicyGroup}Type`);
   let slctdPolicyNo = document.getElementById(`${slctdPolicyGroup}Number`);
-  slctdPolicy1RenewDate.classList.remove('selectedRenewDate');
-  slctdPolicyNo.classList.remove('selectedRenewDate');
-  slctdPolicyType.classList.remove('selectedRenewDate');
-  slctdPolicy1RenewDate.classList.remove('selectedRenewDateWiggle');
-  slctdPolicyNo.classList.remove('selectedRenewDateWiggle');
-  slctdPolicyType.classList.remove('selectedRenewDateWiggle');
+  slctdPolicy1RenewDate.classList.remove('selectedEvent');
+  slctdPolicyNo.classList.remove('selectedEvent');
+  slctdPolicyType.classList.remove('selectedEvent');
+  slctdPolicy1RenewDate.classList.remove('selectedEventWiggle');
+  slctdPolicyNo.classList.remove('selectedEventWiggle');
+  slctdPolicyType.classList.remove('selectedEventWiggle');
   setTimeout(function () {
-    slctdPolicy1RenewDate.classList.remove('selectedRenewDateWiggle');
+    slctdPolicy1RenewDate.classList.remove('selectedEventWiggle');
   }, 2000);
   setTimeout(function () {
-    slctdPolicyNo.classList.remove('selectedRenewDateWiggle');
+    slctdPolicyNo.classList.remove('selectedEventWiggle');
   }, 2000);
   setTimeout(function () {
-    slctdPolicyType.classList.remove('selectedRenewDateWiggle');
+    slctdPolicyType.classList.remove('selectedEventWiggle');
   }, 2000);
   cnvrtdDateSelector = new Date(dateSelector);
   dateSelectorRenewal = new Date(
@@ -407,11 +407,11 @@ function wiggleInput(dateSelector, ContactFieldsIDs) {
     .slice(5, 10);
 
   if (dateSelectorRenewal == slctdPolicy1RenewDate.value.slice(5, 10)) {
-    slctdPolicy1RenewDate.classList.add('selectedRenewDate');
-    slctdPolicyNo.classList.add('selectedRenewDate');
-    slctdPolicyType.classList.add('selectedRenewDate');
-    slctdPolicy1RenewDate.classList.add('selectedRenewDateWiggle');
-    slctdPolicyNo.classList.add('selectedRenewDateWiggle');
-    slctdPolicyType.classList.add('selectedRenewDateWiggle');
+    slctdPolicy1RenewDate.classList.add('selectedEvent');
+    slctdPolicyNo.classList.add('selectedEvent');
+    slctdPolicyType.classList.add('selectedEvent');
+    slctdPolicy1RenewDate.classList.add('selectedEventWiggle');
+    slctdPolicyNo.classList.add('selectedEventWiggle');
+    slctdPolicyType.classList.add('selectedEventWiggle');
   }
 }
