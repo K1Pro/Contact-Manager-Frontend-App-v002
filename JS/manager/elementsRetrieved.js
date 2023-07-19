@@ -60,7 +60,7 @@ function elementsRequired() {
                   fetchMethod: 'DELETE',
                   value: '',
                 };
-                if (renewDateKeys.includes(this.id)) {
+                if (renewDateKeysArray.includes(this.id)) {
                   updateThis.key = this.id;
                   updateDB(updateThis);
                   // Inserts a PolicyXRenewMMDD value for the calendar fillin function
@@ -78,16 +78,19 @@ function elementsRequired() {
                   updateURL: `${srvrURL}/${_id.value}`,
                   fetchMethod: 'PATCH',
                 };
-                if (renewDateKeys.includes(this.id)) {
+                if (renewDateKeysArray.includes(this.id)) {
+                  Status;
                   updateThis.key = this.id;
                   updateThis.value = this.value;
                   updateDB(updateThis);
-                  // Inserts a PolicyXRenewMMDD value for the calendar fillin function
-                  let changedInputMMDD = this.id.replace('Date', 'MMDD');
-                  let MMDD = this.value.slice(5, 10);
-                  updateThis.key = changedInputMMDD;
-                  updateThis.value = MMDD;
-                  updateDB(updateThis);
+                  // Inserts a PolicyXRenewMMDD value for the calendar fillin function if they are not on "Do-Not-Renew" List
+                  if (document.getElementById(`Status`).value != 'Do-Not-Renew') {
+                    let changedInputMMDD = this.id.replace('Date', 'MMDD');
+                    let MMDD = this.value.slice(5, 10);
+                    updateThis.key = changedInputMMDD;
+                    updateThis.value = MMDD;
+                    updateDB(updateThis);
+                  }
                   contactEditDate();
                 } else {
                   updateThis.key = this.id;

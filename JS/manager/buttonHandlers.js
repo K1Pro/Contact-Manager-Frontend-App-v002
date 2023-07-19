@@ -75,13 +75,38 @@ function buttonHandlers() {
     calendarDatesFillIn(new Date(nextMonthHHMM), document.getElementById('DaysSelect').value, findcalSlctdDay);
   });
 
+  Status.addEventListener('click', function (e) {
+    oldStatus = e.target.value;
+    return oldStatus;
+  });
+
   Status.addEventListener('change', function (e) {
+    // oldStatus requires a return value when Status is clicked (located above)
+    if (oldStatus == 'Do-Not-Renew') {
+      inputArray = [];
+      renewDateKeysArray.forEach((renewDate) => {
+        if (document.getElementById(renewDate).value)
+          inputArray.push([
+            `${document.getElementById(renewDate).id.slice(0, 12)}MMDD`,
+            `${document.getElementById(renewDate).value.slice(5)}`,
+          ]);
+      });
+      fetch(`${srvrURL}/${_id.value}`, {
+        method: 'PATCH',
+        body: JSON.stringify(Object.fromEntries(inputArray)),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .catch((error) => {
+          alert('Please enter a unique phone number');
+        });
+      snackbar(`${FirstName.value} removed from "Do Not Renew" List`);
+      contactEditDate();
+    }
+
     if (e.target.value == 'Do-Not-Renew') {
-      console.log('Hi there, status was changed');
-      Policy1RenewDate.value = '';
-      Policy2RenewDate.value = '';
-      Policy3RenewDate.value = '';
-      Policy4RenewDate.value = '';
       fetch(`${srvrURL}${deleteEmptyFieldPath}${_id.value}`, {
         method: 'DELETE',
         body: JSON.stringify({
@@ -98,7 +123,7 @@ function buttonHandlers() {
         .catch((error) => {
           alert('Please enter a unique phone number');
         });
-      snackbar(`Updated ${FirstName.value} placed on "Do Not Renew" List`);
+      snackbar(`${FirstName.value} placed on "Do Not Renew" List`);
       contactEditDate();
     }
   });
