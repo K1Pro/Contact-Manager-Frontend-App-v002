@@ -75,59 +75,6 @@ function buttonHandlers() {
     calendarDatesFillIn(new Date(nextMonthHHMM), document.getElementById('DaysSelect').value, findcalSlctdDay);
   });
 
-  Status.addEventListener('click', function (e) {
-    oldStatus = e.target.value;
-    return oldStatus;
-  });
-
-  Status.addEventListener('change', function (e) {
-    // oldStatus requires a return value when Status is clicked (located above)
-    if (oldStatus == 'Do-Not-Renew') {
-      inputArray = [];
-      renewDateKeysArray.forEach((renewDate) => {
-        if (document.getElementById(renewDate).value)
-          inputArray.push([
-            `${document.getElementById(renewDate).id.slice(0, 12)}MMDD`,
-            `${document.getElementById(renewDate).value.slice(5)}`,
-          ]);
-      });
-      fetch(`${srvrURL}/${_id.value}`, {
-        method: 'PATCH',
-        body: JSON.stringify(Object.fromEntries(inputArray)),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => response.json())
-        .catch((error) => {
-          alert('Please enter a unique phone number');
-        });
-      snackbar(`${FirstName.value} removed from "Do Not Renew" List`);
-      contactEditDate();
-    }
-
-    if (e.target.value == 'Do-Not-Renew') {
-      fetch(`${srvrURL}${deleteEmptyFieldPath}${_id.value}`, {
-        method: 'DELETE',
-        body: JSON.stringify({
-          Policy1RenewMMDD: '',
-          Policy2RenewMMDD: '',
-          Policy3RenewMMDD: '',
-          Policy4RenewMMDD: '',
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => response.json())
-        .catch((error) => {
-          alert('Please enter a unique phone number');
-        });
-      snackbar(`${FirstName.value} placed on "Do Not Renew" List`);
-      contactEditDate();
-    }
-  });
-
   CalendarHTML_Date.addEventListener('click', function (e) {
     dateSelector = e.target.value;
     return dateSelector;
@@ -355,16 +302,22 @@ function buttonHandlers() {
     });
   });
 
-  // Agent Information Input changed calendar event status
+  // Agent Information Input changed calendar event status....need to refactor this further
   document.querySelectorAll('.dynamicInputs').forEach((dynamicInput) => {
     dynamicInput.addEventListener('click', function (e) {
       oldDynamicInput = e.target.value;
       return oldDynamicInput;
     });
     dynamicInput.addEventListener('change', function (e) {
+      if (oldDynamicInput == 'Do-Not-Renew') {
+        snackbar(`${FirstName.value} removed from "Do Not Renew" List`);
+      }
+      if (e.target.value == 'Do-Not-Renew') {
+        snackbar(`${FirstName.value} placed on "Do Not Renew" List`);
+      }
       let retrievedTasksEvents = document.getElementsByClassName(calTaskTag);
       for (key in retrievedTasksEvents) {
-        if (retrievedTasksEvents[key].className && retrievedTasksEvents[key].className.includes(_id.value)) {
+        if (retrievedTasksEvents[key].className && retrievedTasksEvents[key].id.includes(_id.value)) {
           let cntctEvents = document.getElementById(retrievedTasksEvents[key].id);
           cntctEvents.classList.remove(oldDynamicInput);
           cntctEvents.classList.add(e.target.value);
