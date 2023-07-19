@@ -327,14 +327,6 @@ function buttonHandlers() {
         updateDB(updateThis);
         contactEditDate();
       }
-      addRecurEvntsToCal(e, `${MM}-${DD}`, 0);
-    });
-  });
-
-  // there is still one bug with this solution, sometimes after choosing another week in the calendar the task does not show up
-  document.querySelectorAll('.monthlyEventInput').forEach((dynamicInput) => {
-    dynamicInput.addEventListener('change', function (e) {
-      addRecurEvntsToCal(e, e.target.value, 3);
     });
   });
 
