@@ -28,8 +28,14 @@ function loadSidePanel(URL, slctdCalTask) {
         });
       }
       if (ContactFieldsIDs.includes('RenewDate')) {
-        wiggleInput(dateSelector, ContactFieldsIDs);
+        wiggleRenewalInput(dateSelector, ContactFieldsIDs);
       }
+      if (ContactFieldsIDs.includes('MonthlyEvent') && ContactFieldsIDs.includes('DD')) {
+        wiggleMonthlyInput(dateSelector, ContactFieldsIDs);
+      }
+      // if (ContactFieldsIDs.includes('MM') && ContactFieldsIDs.includes('DD')) {
+      //   console.log('includes MM & DD');
+      // }
     }
   });
 }
@@ -216,7 +222,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
             'class',
             `form-control ${cntctTasks.CSSstyle}Dates border-bottom-0 respHeight`
           );
-          if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Dated.classList.add('contactTaskSelected');
+          if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Dated.classList.add('selectedContactTask');
           contactTask.Dated.addEventListener('change', (inputChanged) => {
             updateContactTasks(contactTask, inputChanged);
           });
@@ -230,7 +236,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
           });
           contactTask.Author.setAttribute('name', `TasksAgentSelector`);
           contactTask.Author.setAttribute('class', `respHeight`);
-          if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Author.classList.add('contactTaskSelected');
+          if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Author.classList.add('selectedContactTask');
           ContactTaskGroup.appendChild(contactTask.Author);
           cntctTasks.dropDownArray.forEach((dropDownOpt) => {
             let CntctTskAuthors = document.createElement('option');
@@ -247,14 +253,14 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         contactTask.CheckBox.type = 'checkbox';
         contactTask.CheckBox.checked = value.Completed;
         contactTask.CheckBox.setAttribute('class', `form-check-input mt-0 ${bartkaCheckboxTag} respHeight`);
-        if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.CheckBox.classList.add('contactTaskSelected');
+        if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.CheckBox.classList.add('selectedContactTask');
         contactTask.CheckBox.addEventListener('click', (inputChanged) => {
           cntctTasks.checkBoxCMD ? updateContactTasks(contactTask, inputChanged) : deleteRecurTasks();
         });
         contactTask.CheckBoxLabel.appendChild(contactTask.CheckBox);
         contactTask.CheckBoxSpan.setAttribute('class', `${cntctTasks.CSSstyle}checkBoxSpan`);
         if (slctdCalTask && slctdCalTask == contactTask.UID)
-          contactTask.CheckBoxSpan.classList.add('contactTaskSelected');
+          contactTask.CheckBoxSpan.classList.add('selectedContactTask');
         contactTask.CheckBoxLabel.appendChild(contactTask.CheckBoxSpan);
 
         // Creates a text input for the description
@@ -265,7 +271,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
           `form-control ${cntctTasks.CSSstyle}Descriptions border-top-0 respHeight`
         );
         if (slctdCalTask && slctdCalTask == contactTask.UID)
-          contactTask.Description.classList.add('contactTaskSelected');
+          contactTask.Description.classList.add('selectedContactTask');
         contactTask.Description.addEventListener('change', (inputChanged) => {
           updateContactTasks(contactTask, inputChanged);
         });

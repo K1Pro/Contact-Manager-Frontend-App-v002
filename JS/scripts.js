@@ -375,11 +375,9 @@ Date.prototype.addDays = function (days) {
   return date;
 };
 
-///////////////////////////////////////////////////////////
-////// vvv Wiggle inputs that match selected date vvv //////
-
-function wiggleInput(dateSelector, ContactFieldsIDs) {
-  // console.log(ContactFieldsIDs.slice(0, 7));
+////////////////////////////////////////////////////////////////
+//// vvv Wiggle renewal inputs that match selected date vvv ///
+function wiggleRenewalInput(dateSelector, ContactFieldsIDs) {
   let slctdPolicyGroup = ContactFieldsIDs.slice(0, 7);
   let slctdPolicy1RenewDate = document.getElementById(ContactFieldsIDs);
   let slctdPolicyType = document.getElementById(`${slctdPolicyGroup}Type`);
@@ -415,3 +413,53 @@ function wiggleInput(dateSelector, ContactFieldsIDs) {
     slctdPolicyType.classList.add('selectedEventWiggle');
   }
 }
+
+////////////////////////////////////////////////////////////////
+/// vvv Wiggle monthly inputs that match selected date vvv ///
+function wiggleMonthlyInput(dateSelector, ContactFieldsIDs) {
+  let slctdPolicyGroup = ContactFieldsIDs.slice(0, 13);
+  let slctdPolicy1RenewDate = document.getElementById(ContactFieldsIDs);
+  let slctdPolicyNote = document.getElementById(`${slctdPolicyGroup}Note`);
+  let slctdPolicyAt = document.getElementById(`${slctdPolicyGroup}At`);
+  slctdPolicy1RenewDate.classList.remove('selectedEvent');
+  slctdPolicyAt.classList.remove('selectedEvent');
+  slctdPolicyNote.classList.remove('selectedEvent');
+  slctdPolicy1RenewDate.classList.remove('selectedEventWiggle');
+  slctdPolicyAt.classList.remove('selectedEventWiggle');
+  slctdPolicyNote.classList.remove('selectedEventWiggle');
+  setTimeout(function () {
+    slctdPolicy1RenewDate.classList.remove('selectedEventWiggle');
+  }, 2000);
+  setTimeout(function () {
+    slctdPolicyAt.classList.remove('selectedEventWiggle');
+  }, 2000);
+  setTimeout(function () {
+    slctdPolicyNote.classList.remove('selectedEventWiggle');
+  }, 2000);
+  cnvrtdDateSelector = new Date(dateSelector).toJSON().slice(8, 10);
+
+  if (cnvrtdDateSelector == slctdPolicy1RenewDate.value) {
+    slctdPolicy1RenewDate.classList.add('selectedEvent');
+    slctdPolicyAt.classList.add('selectedEvent');
+    slctdPolicyNote.classList.add('selectedEvent');
+    slctdPolicy1RenewDate.classList.add('selectedEventWiggle');
+    slctdPolicyAt.classList.add('selectedEventWiggle');
+    slctdPolicyNote.classList.add('selectedEventWiggle');
+  }
+}
+
+// #MonthlyEvent1Note
+// #MonthlyEvent1DD
+
+// #MonthlyEvent2Note
+// #MonthlyEvent2DD
+
+// #YearlyEvent1Note
+// #YearlyEvent1MM
+// #YearlyEvent1DD
+
+// #YearlyEvent2Note
+// #YearlyEvent2MM
+// #YearlyEvent2DD
+
+// #Policy1RenewDate

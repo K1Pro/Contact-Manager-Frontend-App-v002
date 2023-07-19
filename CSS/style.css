@@ -414,6 +414,11 @@ input[type='date']:invalid::-webkit-datetime-edit {
   width: 100%;
 }
 
+.selectedContactTask {
+  background-color: rgb(255, 218, 237);
+  animation: horizontal-shaking 2s;
+}
+
 .selectedEvent {
   background-color: rgb(255, 218, 237);
 }
@@ -493,10 +498,6 @@ input[type='date']:invalid::-webkit-datetime-edit {
 #DaysSelect {
   width: 0vw;
   display: none;
-}
-.contactTaskSelected {
-  background-color: rgb(255, 218, 237);
-  animation: horizontal-shaking 2s;
 }
 
 .dropdown-item:hover {

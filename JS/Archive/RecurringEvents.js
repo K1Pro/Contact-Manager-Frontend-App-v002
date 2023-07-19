@@ -111,7 +111,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
           contactTask.Dated.type = 'datetime-local';
           contactTask.Dated.value = `${value.DateYYYYMMDD}${value.DateHHMMSS}`;
           contactTask.Dated.setAttribute('class', `form-control ${cntctTasks.CSSstyle}Dates border-bottom-0`);
-          if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Dated.classList.add('contactTaskSelected');
+          if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Dated.classList.add('selectedContactTask');
           contactTask.Dated.addEventListener('change', (inputChanged) => {
             updateContactTasks(contactTask, inputChanged);
           });
@@ -133,7 +133,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
             updateContactTasks(contactTask, inputChanged);
           });
           contactTask.Author.setAttribute('name', `TasksAgentSelector`);
-          if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Author.classList.add('contactTaskSelected');
+          if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.Author.classList.add('selectedContactTask');
           ContactTaskGroup.appendChild(contactTask.Author);
           cntctTasks.dropDownArray.forEach((dropDownOpt) => {
             let CntctTskAuthors = document.createElement('option');
@@ -155,7 +155,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         contactTask.CheckBox.type = 'checkbox';
         contactTask.CheckBox.checked = value.Completed;
         contactTask.CheckBox.setAttribute('class', `form-check-input mt-0 ${bartkaCheckboxTag}`);
-        if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.CheckBox.classList.add('contactTaskSelected');
+        if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.CheckBox.classList.add('selectedContactTask');
         contactTask.CheckBox.addEventListener('click', (inputChanged) => {
           cntctTasks.checkBoxCMD ? updateContactTasks(contactTask, inputChanged) : deleteRecurTasks();
         });
@@ -168,7 +168,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         contactTask.Description.spellcheck = 'false';
         contactTask.Description.setAttribute('class', `form-control ${cntctTasks.CSSstyle}Descriptions border-top-0`);
         if (slctdCalTask && slctdCalTask == contactTask.UID)
-          contactTask.Description.classList.add('contactTaskSelected');
+          contactTask.Description.classList.add('selectedContactTask');
         contactTask.Description.addEventListener('change', (inputChanged) => {
           updateContactTasks(contactTask, inputChanged);
         });
