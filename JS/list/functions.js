@@ -53,7 +53,23 @@ function populateListTable(contactData) {
 
   let filteredData = contactData.data.contacts.filter(function (item) {
     for (let key in checkAndInputObject) {
-      if (!item[key]?.toLowerCase().includes(checkAndInputObject[key].toLowerCase())) return false;
+      if (
+        !item[key]
+          ?.replaceAll(' ', '')
+          .replaceAll('-', '')
+          .replaceAll('(', '')
+          .replaceAll(')', '')
+          .toLowerCase()
+          .includes(
+            checkAndInputObject[key]
+              .replaceAll(' ', '')
+              .replaceAll('-', '')
+              .replaceAll('(', '')
+              .replaceAll(')', '')
+              .toLowerCase()
+          )
+      )
+        return false;
     }
     return true;
   });
