@@ -7,20 +7,26 @@ function listSidePanelModule() {
   populateSlctWObj(SourceObj, SourceInput);
 
   document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
+    storedCheckBoxValue = localStorage.getItem(`BundleContactList-${cntctCheckBox.id.slice(0, -5)}`);
+    if (storedCheckBoxValue == 'true') document.getElementById(cntctCheckBox.id).checked = true;
     cntctCheckBox.addEventListener('click', function (e) {
       localStorage.setItem(`BundleContactList-${e.target.id.slice(0, -5)}`, e.target.checked);
       abortCalendarDatesFillIn();
-      populateListTable();
+      populateListTable(contactData);
     });
   });
 
-  document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
-    storedInputValue = localStorage.getItem(`BundleContactList-${cntctCheckBox.id}`);
-    cntctCheckBox.value = storedInputValue;
-    cntctCheckBox.addEventListener('change', function (e) {
+  document.querySelectorAll('.contctKeysInput').forEach((cntctInput) => {
+    storedInputValue = localStorage.getItem(`BundleContactList-${cntctInput.id}`);
+    cntctInput.value = storedInputValue;
+    cntctInput.addEventListener('keyup', function (e) {
+      if (document.getElementById(`${cntctInput.id.slice(0, -5)}Check`).checked == false) {
+        document.getElementById(`${cntctInput.id.slice(0, -5)}Check`).checked = true;
+        localStorage.setItem(`BundleContactList-${cntctInput.id.slice(0, -5)}`, true);
+      }
       localStorage.setItem(`BundleContactList-${e.target.id}`, e.target.value);
       abortCalendarDatesFillIn();
-      populateListTable();
+      populateListTable(contactData, e.target.id.slice(0, -5), e.target.value);
     });
   });
 
@@ -95,8 +101,8 @@ function listSidePanelModule() {
         localStorage.setItem(`BundleContactList-${cntctCheckBox.id.slice(0, -5)}`, cntctCheckBox.checked);
       });
 
-      document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
-        localStorage.setItem(`BundleContactList-${cntctCheckBox.id}`, cntctCheckBox.value);
+      document.querySelectorAll('.contctKeysInput').forEach((cntctInput) => {
+        localStorage.setItem(`BundleContactList-${cntctInput.id}`, cntctInput.value);
       });
 
       populateListTable();
@@ -112,8 +118,8 @@ function listSidePanelModule() {
       localStorage.setItem(`BundleContactList-${cntctCheckBox.id.slice(0, -5)}`, cntctCheckBox.checked);
     });
 
-    document.querySelectorAll('.contctKeysInput').forEach((cntctCheckBox) => {
-      localStorage.setItem(`BundleContactList-${cntctCheckBox.id}`, cntctCheckBox.value);
+    document.querySelectorAll('.contctKeysInput').forEach((cntctInput) => {
+      localStorage.setItem(`BundleContactList-${cntctInput.id}`, cntctInput.value);
     });
 
     populateListTable();

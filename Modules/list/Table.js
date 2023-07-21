@@ -4,7 +4,13 @@ function tableModule() {
   if (!localStorage.getItem(`BundleContactList-LastSortFilter`)) {
     localStorage.setItem(`BundleContactList-LastSortFilter`, 'LastName');
   }
-  populateListTable();
+  getJSON(`${srvrURL}`).then((data) => {
+    contactData = data;
+    populateListTable(contactData, 'FirstName', '');
+    return contactData;
+  });
+
+  // populateListTable();
 
   // [...contactListHeaders.querySelectorAll('*')].forEach((header) =>
   //   header.addEventListener('click', () => {
