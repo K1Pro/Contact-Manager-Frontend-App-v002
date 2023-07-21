@@ -16,7 +16,6 @@ let DOMElements,
   contactListHeaders,
   contactList,
   checkAndInputObject,
-  filteredData,
   eventListenerAction,
   allContctKeysCheck,
   allContctKeysInput,
@@ -27,8 +26,7 @@ let DOMElements,
   valueArray,
   allContctKeysCheckedArray,
   storedCheckBoxValue,
-  storedInputValue,
-  lastSortFilter;
+  storedInputValue;
 // ^^^ All retrieved elements should be declared here ^^^
 
 // vvv This scans for all separate HTML Modules vvv
