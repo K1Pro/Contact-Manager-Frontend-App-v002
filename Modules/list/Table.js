@@ -6,7 +6,7 @@ function tableModule() {
   }
   getJSON(`${srvrURL}`).then((data) => {
     contactData = data;
-    populateListTable(contactData, 'FirstName', '');
+    populateListTable(contactData);
     return contactData;
   });
 

@@ -1,7 +1,7 @@
 console.log('retrieved contact list functions');
 ///////////////////////////////////////////////
 
-function populateListTable(contactData, newInputType, newInputValue) {
+function populateListTable(contactData) {
   allContctKeysCheck = document.querySelectorAll('.contctKeysCheck');
   allContctKeysCheck.forEach((CheckBox) => {
     storedCheckBoxValue = localStorage.getItem(`BundleContactList-${CheckBox.id.slice(0, -5)}`);
@@ -10,7 +10,11 @@ function populateListTable(contactData, newInputType, newInputValue) {
   allContctKeysCheckedArray = [...allContctKeysCheck].filter((el) => el.checked == true);
   checkBoxSlctdArray = [];
   inputFilledInArray = [];
+  checkAndInputObject = {};
+
   allContctKeysCheckedArray.forEach((element) => {
+    if (document.getElementById(`${element.id.slice(0, -5)}Input`).value)
+      checkAndInputObject[element.id.slice(0, -5)] = document.getElementById(`${element.id.slice(0, -5)}Input`).value;
     checkBoxSlctdArray.push(element.id.slice(0, -5));
     if (document.getElementById(`${element.id.slice(0, -5)}Input`).value) {
       inputValue = document.getElementById(`${element.id.slice(0, -5)}Input`).value;
@@ -47,17 +51,15 @@ function populateListTable(contactData, newInputType, newInputValue) {
     }
   });
 
-  console.log(checkBoxSlctdArray);
-  console.log(inputFilledInArray);
-
-  var filter = {
-    FirstName: 'Bar',
-    LastName: 'Ka',
-  };
+  console.log(checkAndInputObject);
+  // console.log(checkBoxSlctdArray);
+  // console.log(inputFilledInArray);
 
   let trial = contactData.data.contacts.filter(function (item) {
-    for (var key in filter) {
-      if (!item[key].includes(filter[key])) return false;
+    for (var key in checkAndInputObject) {
+      console.log(item[key]);
+      console.log(checkAndInputObject[key]);
+      if (!item[key]?.includes(checkAndInputObject[key])) return false;
     }
     return true;
   });

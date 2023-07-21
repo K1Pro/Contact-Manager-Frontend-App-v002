@@ -26,7 +26,7 @@ function listSidePanelModule() {
       }
       localStorage.setItem(`BundleContactList-${e.target.id}`, e.target.value);
       abortCalendarDatesFillIn();
-      populateListTable(contactData, e.target.id.slice(0, -5), e.target.value);
+      populateListTable(contactData);
     });
   });
 
