@@ -9,11 +9,11 @@ async function isElementLoaded(selector) {
 ///////////////////////////////////////////////////////////
 ///////////// vvv Compare Function vvv ////////////////////
 function compare(a, b) {
-  if (a.DateYYYYMMDD < b.DateYYYYMMDD) {
-    return 1;
+  if (a[sortKey] < b[sortKey]) {
+    return 1 * sortAscDesc;
   }
-  if (a.DateYYYYMMDD > b.DateYYYYMMDD) {
-    return -1;
+  if (a[sortKey] > b[sortKey]) {
+    return -1 * sortAscDesc;
   }
   return 0;
 }

@@ -115,6 +115,10 @@ function listSidePanelModule() {
       document.getElementById(element.id).value = '';
     });
 
+    [...allContctKeysCheck].forEach((element) => {
+      document.getElementById(element.id).checked = false;
+    });
+
     document.querySelectorAll('.contctKeysCheck').forEach((cntctCheckBox) => {
       localStorage.setItem(`BundleContactList-${cntctCheckBox.id.slice(0, -5)}`, cntctCheckBox.checked);
     });

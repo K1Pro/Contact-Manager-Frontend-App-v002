@@ -17,13 +17,16 @@ function populateListTable(contactData) {
     document.getElementById('SourceCheck').checked = true;
     document.getElementById('StatusCheck').checked = true;
     document.getElementById('LastEditDateCheck').checked = true;
+    document.getElementById('LastEditedByCheck').checked = true;
     localStorage.setItem(`BundleContactList-FirstName`, `true`);
     localStorage.setItem(`BundleContactList-LastName`, `true`);
     localStorage.setItem(`BundleContactList-Phone`, `true`);
     localStorage.setItem(`BundleContactList-Source`, `true`);
     localStorage.setItem(`BundleContactList-Status`, `true`);
     localStorage.setItem(`BundleContactList-LastEditDate`, `true`);
-    localStorage.setItem(`BundleContactList-LastSortFilter`, `-LastEditDate`);
+    localStorage.setItem(`BundleContactList-LastEditedBy`, `true`);
+    localStorage.setItem(`BundleContactList-LastSortFilter`, `LastEditDate`);
+    localStorage.setItem(`BundleContactList-LastSortType`, 1);
     populateListTable(contactData);
     return;
   }
@@ -41,13 +44,12 @@ function populateListTable(contactData) {
     //   inputFilledInArray.push(inputValue);
     // }
   });
-  lastSortFilter = localStorage.getItem(`BundleContactList-LastSortFilter`);
 
   contactListHeaders.innerHTML = '';
   contactList.innerHTML = '';
 
   // This below getJSON function demonstrates how to use an array to query
-  // getJSON(`${srvrURL}?fields=${checkBoxSlctdArray.toString()}${inputFilledInArrayQuery.length ? inputFilledInArrayQuery.join('') : ''}&sort=${lastSortFilter}`).then((data) => {})
+  // getJSON(`${srvrURL}?fields=${checkBoxSlctdArray.toString()}${inputFilledInArrayQuery.length ? inputFilledInArrayQuery.join('') : ''}&sort=${sortKey}`).then((data) => {})
 
   // This populates the main table header based on localstorage
   allContctKeysCheck.forEach((CheckBox) => {
@@ -57,12 +59,21 @@ function populateListTable(contactData) {
       tableHeader.scope = 'row';
       tableHeader.innerHTML = CheckBox.id.slice(0, -5);
       tableHeader.addEventListener('click', () => {
-        if (CheckBox.id.slice(0, -5) == lastSortFilter) {
-          localStorage.setItem(`BundleContactList-LastSortFilter`, `-${CheckBox.id.slice(0, -5)}`);
-        } else if (`-${CheckBox.id.slice(0, -5)}` == `${lastSortFilter}`) {
+        if (
+          CheckBox.id.slice(0, -5) == localStorage.getItem(`BundleContactList-LastSortFilter`) &&
+          localStorage.getItem(`BundleContactList-LastSortType`) == '1'
+        ) {
           localStorage.setItem(`BundleContactList-LastSortFilter`, `${CheckBox.id.slice(0, -5)}`);
+          localStorage.setItem(`BundleContactList-LastSortType`, '-1');
+        } else if (
+          CheckBox.id.slice(0, -5) == localStorage.getItem(`BundleContactList-LastSortFilter`) &&
+          localStorage.getItem(`BundleContactList-LastSortType`) == '-1'
+        ) {
+          localStorage.setItem(`BundleContactList-LastSortFilter`, `${CheckBox.id.slice(0, -5)}`);
+          localStorage.setItem(`BundleContactList-LastSortType`, '1');
         } else {
           localStorage.setItem(`BundleContactList-LastSortFilter`, `${CheckBox.id.slice(0, -5)}`);
+          localStorage.setItem(`BundleContactList-LastSortType`, '-1');
         }
         // populateListTable(localStorage.getItem(`BundleContactList-LastSortFilter`));
         populateListTable(contactData);
@@ -71,32 +82,37 @@ function populateListTable(contactData) {
     }
   });
 
+  sortKey = localStorage.getItem(`BundleContactList-LastSortFilter`);
+  sortAscDesc = localStorage.getItem(`BundleContactList-LastSortType`);
+
   // compares two objects, the database and the dynamically populated one by the inputs
-  let filteredData = contactData.data.contacts.filter(function (item) {
-    for (let key in checkAndInputObject) {
-      if (
-        !item[key]
-          ?.replaceAll(' ', '')
-          .replaceAll('-', '')
-          .replaceAll('(', '')
-          .replaceAll(')', '')
-          .toLowerCase()
-          .includes(
-            checkAndInputObject[key]
-              .replaceAll(' ', '')
-              .replaceAll('-', '')
-              .replaceAll('(', '')
-              .replaceAll(')', '')
-              .toLowerCase()
-          )
-      )
-        return false;
-    }
-    return true;
-  });
+  let filteredData = contactData?.data.contacts
+    .filter(function (item) {
+      for (let key in checkAndInputObject) {
+        if (
+          !item[key]
+            ?.replaceAll(' ', '')
+            .replaceAll('-', '')
+            .replaceAll('(', '')
+            .replaceAll(')', '')
+            .toLowerCase()
+            .includes(
+              checkAndInputObject[key]
+                .replaceAll(' ', '')
+                .replaceAll('-', '')
+                .replaceAll('(', '')
+                .replaceAll(')', '')
+                .toLowerCase()
+            )
+        )
+          return false;
+      }
+      return true;
+    })
+    .sort(compare);
 
   // This populates the main table body based on stored contacts database
-  filteredData.forEach((contact) => {
+  filteredData?.forEach((contact) => {
     tableRow = document.createElement('tr');
     contactList.appendChild(tableRow);
     checkBoxSlctdArray.forEach((value) => {

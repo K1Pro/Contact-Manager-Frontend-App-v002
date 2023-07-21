@@ -1,22 +1,37 @@
 function tableModule() {
   // vvv Start coding here for Calendar Module vvv
 
-  if (!localStorage.getItem(`BundleContactList-LastSortFilter`)) {
-    localStorage.setItem(`BundleContactList-LastSortFilter`, 'LastName');
-  }
   getJSON(`${srvrURL}`).then((data) => {
     contactData = data;
     populateListTable(contactData);
     return contactData;
   });
 
-  // populateListTable();
+  // function populateListTableFunction() {
+  //   console.log(contactData);
+  //   // Detects the last editted contact in an interval and repopulates the calendar upon detection
+  //   if (contactData) {
+  //     sortKey = 'LastEditDate';
+  //     sortAscDesc = 1;
+  //     let sortedContactData = contactData;
+  //     sortedContactData = sortedContactData.data.contacts.sort(compare);
+  //     let lastSortedContact = sortedContactData?.[0].LastEditDate;
+  //     // Retrieves the last editted contact once page is loaded
+  //     getJSON(`${srvrURL}${lastEdittedContactPath}`).then((data) => {
+  //       lastEdittedContact = data?.data.contacts[0].LastEditDate;
+  //       if (lastEdittedContact == lastSortedContact) {
+  //         console.log('test');
+  //       } else {
+  //         getJSON(`${srvrURL}`).then((data) => {
+  //           contactData = data;
+  //           return contactData;
+  //         });
+  //       }
+  //     });
+  //   }
+  // }
 
-  // [...contactListHeaders.querySelectorAll('*')].forEach((header) =>
-  //   header.addEventListener('click', () => {
-  //     console.log(header.innerHTML);
-  //   })
-  // );
+  // setInterval(populateListTableFunction, 1000);
 
   // ^^^ End coding here for Calendar Module ^^^
 }

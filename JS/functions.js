@@ -196,6 +196,8 @@ function loadContactTasks(dailyTask, slctdCalTask) {
       taskList.innerHTML = '';
       // sorts the array in reverse chronological order
       let CalendarEventsArray = data.data[cntctTasks.taskType];
+      sortAscDesc = 1;
+      sortKey = 'DateYYYYMMDD';
       CalendarEventsArray.sort(compare);
 
       for (const [key, value] of Object.entries(CalendarEventsArray)) {
