@@ -9,18 +9,18 @@ function populateListTable(contactData) {
   });
   allContctKeysCheckedArray = [...allContctKeysCheck].filter((el) => el.checked == true);
   checkBoxSlctdArray = [];
-  inputFilledInArray = [];
+  // inputFilledInArray = [];
   checkAndInputObject = {};
 
   allContctKeysCheckedArray.forEach((element) => {
     if (document.getElementById(`${element.id.slice(0, -5)}Input`).value)
       checkAndInputObject[element.id.slice(0, -5)] = document.getElementById(`${element.id.slice(0, -5)}Input`).value;
     checkBoxSlctdArray.push(element.id.slice(0, -5));
-    if (document.getElementById(`${element.id.slice(0, -5)}Input`).value) {
-      inputValue = document.getElementById(`${element.id.slice(0, -5)}Input`).value;
-      // inputFilledInArrayQuery.push(`&${element.id.slice(0, -5)}=${inputValue}`);
-      inputFilledInArray.push(inputValue);
-    }
+    // if (document.getElementById(`${element.id.slice(0, -5)}Input`).value) {
+    //   inputValue = document.getElementById(`${element.id.slice(0, -5)}Input`).value;
+    //   // inputFilledInArrayQuery.push(`&${element.id.slice(0, -5)}=${inputValue}`);
+    //   inputFilledInArray.push(inputValue);
+    // }
   });
   lastSortFilter = localStorage.getItem(`BundleContactList-LastSortFilter`);
 
@@ -51,24 +51,15 @@ function populateListTable(contactData) {
     }
   });
 
-  console.log(checkAndInputObject);
-  // console.log(checkBoxSlctdArray);
-  // console.log(inputFilledInArray);
-
-  let trial = contactData.data.contacts.filter(function (item) {
-    for (var key in checkAndInputObject) {
-      console.log(item[key]);
-      console.log(checkAndInputObject[key]);
-      if (!item[key]?.includes(checkAndInputObject[key])) return false;
+  let filteredData = contactData.data.contacts.filter(function (item) {
+    for (let key in checkAndInputObject) {
+      if (!item[key]?.toLowerCase().includes(checkAndInputObject[key].toLowerCase())) return false;
     }
     return true;
   });
 
-  console.log(trial);
-
   // This populates the main table body based on stored contacts database
-  trial.forEach((contact) => {
-    // if (contact[newInputType].includes(localStorage.getItem(`BundleContactList-${newInputType}Input`))) {
+  filteredData.forEach((contact) => {
     tableRow = document.createElement('tr');
     contactList.appendChild(tableRow);
     checkBoxSlctdArray.forEach((value) => {
@@ -76,6 +67,5 @@ function populateListTable(contactData) {
       contact[value] ? (tableData.innerHTML = contact[value]) : (tableData.innerHTML = '');
       tableRow.appendChild(tableData);
     });
-    // }
   });
 }

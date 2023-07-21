@@ -17,9 +17,10 @@ function listSidePanelModule() {
   });
 
   document.querySelectorAll('.contctKeysInput').forEach((cntctInput) => {
+    cntctInput.type == 'text' ? (eventListenerAction = 'keyup') : (eventListenerAction = 'change');
     storedInputValue = localStorage.getItem(`BundleContactList-${cntctInput.id}`);
     cntctInput.value = storedInputValue;
-    cntctInput.addEventListener('keyup', function (e) {
+    cntctInput.addEventListener(eventListenerAction, function (e) {
       if (document.getElementById(`${cntctInput.id.slice(0, -5)}Check`).checked == false) {
         document.getElementById(`${cntctInput.id.slice(0, -5)}Check`).checked = true;
         localStorage.setItem(`BundleContactList-${cntctInput.id.slice(0, -5)}`, true);
