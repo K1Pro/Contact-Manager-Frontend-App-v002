@@ -8,6 +8,25 @@ function populateListTable(contactData) {
     if (storedCheckBoxValue == 'true') document.getElementById(CheckBox.id).checked = true;
   });
   allContctKeysCheckedArray = [...allContctKeysCheck].filter((el) => el.checked == true);
+
+  // If there is nothing checked, these defaults are implemented
+  if (allContctKeysCheckedArray.length < 1) {
+    document.getElementById('FirstNameCheck').checked = true;
+    document.getElementById('LastNameCheck').checked = true;
+    document.getElementById('PhoneCheck').checked = true;
+    document.getElementById('SourceCheck').checked = true;
+    document.getElementById('StatusCheck').checked = true;
+    document.getElementById('LastEditDateCheck').checked = true;
+    localStorage.setItem(`BundleContactList-FirstName`, `true`);
+    localStorage.setItem(`BundleContactList-LastName`, `true`);
+    localStorage.setItem(`BundleContactList-Phone`, `true`);
+    localStorage.setItem(`BundleContactList-Source`, `true`);
+    localStorage.setItem(`BundleContactList-Status`, `true`);
+    localStorage.setItem(`BundleContactList-LastEditDate`, `true`);
+    localStorage.setItem(`BundleContactList-LastSortFilter`, `-LastEditDate`);
+    populateListTable(contactData);
+    return;
+  }
   checkBoxSlctdArray = [];
   // inputFilledInArray = [];
   checkAndInputObject = {};
@@ -45,12 +64,14 @@ function populateListTable(contactData) {
         } else {
           localStorage.setItem(`BundleContactList-LastSortFilter`, `${CheckBox.id.slice(0, -5)}`);
         }
-        populateListTable(localStorage.getItem(`BundleContactList-LastSortFilter`));
+        // populateListTable(localStorage.getItem(`BundleContactList-LastSortFilter`));
+        populateListTable(contactData);
       });
       contactListHeaders.appendChild(tableHeader);
     }
   });
 
+  // compares two objects, the database and the dynamically populated one by the inputs
   let filteredData = contactData.data.contacts.filter(function (item) {
     for (let key in checkAndInputObject) {
       if (

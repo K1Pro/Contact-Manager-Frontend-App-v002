@@ -123,7 +123,7 @@ function listSidePanelModule() {
       localStorage.setItem(`BundleContactList-${cntctInput.id}`, cntctInput.value);
     });
 
-    populateListTable();
+    populateListTable(contactData);
   });
 
   // ^^^ End coding here for Calendar Module ^^^
