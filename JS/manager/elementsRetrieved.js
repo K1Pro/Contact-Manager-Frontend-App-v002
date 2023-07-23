@@ -10,6 +10,7 @@ function elementsRequired() {
   EventAuthor = document.getElementById('EventAuthor');
   // Side Panel Module Elements
   contactSearch = document.getElementById('contactSearch');
+  contactSearchList = document.getElementById('contactSearchList');
   contactsList = document.getElementById('contactsList');
   phoneInput = document.getElementById('Phone');
   // IDinput = document.getElementById('_id'); Delete this sooner or later if it is not needed
@@ -128,6 +129,7 @@ let DOMElements,
   contactTasksTextArea,
   cntctTasksTxtAreaList,
   contactSearch,
+  contactSearchList,
   contactsList,
   ContactFields,
   CalendarDates,

@@ -1,5 +1,6 @@
 <div class="input-group mb-3">
   <img src="images/BundleWhite.png" alt="Bundle" />
+  <!-- <span class="contactSearchGroup"> -->
   <input
     list="contactsList"
     name="contact"
@@ -9,6 +10,30 @@
     placeholder="Search name or phone"
   />
   <datalist id="contactsList"> </datalist>
+  <button
+    type="button"
+    class="btn btn-dark dropdown-toggle dropdown-toggle-split"
+    id="contactSearchBtn"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <span class="visually-hidden">Toggle Dropdown</span>
+  </button>
+  <ul id="contactSearchList" class="dropdown-menu dropdown-menu-end" data-bs-theme="dark">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><hr class="dropdown-divider" /></li>
+    <li><a class="dropdown-item" href="#">Separated link</a></li>
+  </ul>
+  <!-- <select
+    id="contactSearchSelect"
+    class="form-select"
+    onchange="this.previousElementSibling.value=this.options[this.selectedIndex].text; this.previousElementSibling.focus()"
+  >
+    <option value="">Choose business name</option>
+  </select> -->
+  <!-- </span> -->
 </div>
 <form id="ContactFields">
   <input type="text" placeholder="Contact ID" class="form-control" id="_id" disabled />

@@ -8,7 +8,7 @@ async function isElementLoaded(selector) {
 }
 ///////////////////////////////////////////////////////////
 ///////////// vvv Compare Function vvv ////////////////////
-function compare(a= 0, b= 0) {
+function compare(a = 0, b = 0) {
   if (a[sortKey] < b[sortKey]) {
     return 1 * sortAscDesc;
   }

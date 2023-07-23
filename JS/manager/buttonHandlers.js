@@ -265,6 +265,21 @@ function buttonHandlers() {
     contactSearchKeyUp(e);
   });
 
+  contactSearch.addEventListener('focusin', function (e) {
+    contactSearchList.classList.add('show');
+    contactSearchList.style.position = 'absolute';
+    contactSearchList.style.inset = '0px 0px auto auto';
+    contactSearchList.style.margin = '0px';
+    contactSearchList.style.transform = 'translate(0px, 62.6667px)';
+    contactSearchList.setAttribute('data-popper-placement', 'bottom-end');
+  });
+
+  contactSearch.addEventListener('focusout', function (e) {
+    contactSearchList.classList.remove('show');
+    contactSearchList.removeAttribute('style');
+    contactSearchList.removeAttribute('data-popper-placement');
+  });
+
   // This dynamically creates various events within the "Create Task" button of the contact tasks module
   for (const [key, value] of Object.entries(eventTemplatesObj)) {
     let eventTemplate = document.createElement('li');

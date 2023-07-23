@@ -126,6 +126,20 @@ input[type='date']:invalid::-webkit-datetime-edit {
 #contactsList {
   height: 10px;
 }
+
+/* original */
+/* #contactSearch {
+  margin-top: 15px;
+  height: 46px;
+  border-left: 0px solid black;
+  border-left-width: 0.5vw; */
+/* padding-left: 0.5vw; */
+/* border-top: 1px solid grey;
+  border-right: 1px solid grey;
+  border-bottom: 1px solid grey;
+  background-color: white;
+} */
+
 #contactSearch {
   margin-top: 15px;
   height: 46px;
@@ -136,7 +150,41 @@ input[type='date']:invalid::-webkit-datetime-edit {
   border-right: 1px solid grey;
   border-bottom: 1px solid grey;
   background-color: white;
+  /* position: absolute;
+  margin-left: -18px; */
+  /* width: calc(100% - 18px); */
+  /* margin-right: 18px; */
 }
+#contactSearchBtn {
+  margin-top: 15px;
+  height: 46px;
+}
+
+/* .contactSearchGroup { */
+/* position: relative; */
+/* width: 200px; */
+/* } */
+
+/* .contactSearchGroup select { */
+/* width: 100%; */
+/* margin-top: 15px;
+  height: 46px;
+  border-width: 2px !important;
+  width: 100%; */
+/* } */
+
+/* .contactSearchGroup > * { */
+/* box-sizing: border-box; */
+/* height: 1.5em; */
+/* } */
+
+/* .contactSearchGroup input {
+  position: absolute;
+  width: calc(100% - 20px);
+  margin-top: 1px; */
+/* border-right: none; */
+/* } */
+
 .searchicon[type='text'] {
   background-image: url('../icons/search-icon.png') !important;
   background-position: 10px 9px;
@@ -578,6 +626,7 @@ input[type='date']:invalid::-webkit-datetime-edit {
   background-color: #e78a2d;
   color: black;
 }
+
 /* .eventDates { */
 /* position: absolute; */
 /* padding-right: 5vw !important;
