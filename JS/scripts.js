@@ -85,6 +85,7 @@ function populateSearchBar(data) {
 function populateSearchBarDropDownFunction(data, searchQuery) {
   contactSearchList.innerHTML = '';
   if (searchQuery) {
+    uniqueIDSet = new Set();
     data.data.contacts.forEach((contact) => {
       for (const info in contact) {
         if (
@@ -95,8 +96,10 @@ function populateSearchBarDropDownFunction(data, searchQuery) {
             .toLowerCase()
             .includes(
               searchQuery.replaceAll(' ', '').replaceAll('-', '').replaceAll('(', '').replaceAll(')', '').toLowerCase()
-            )
+            ) &&
+          !uniqueIDSet.has(contact._id)
         ) {
+          uniqueIDSet.add(contact._id);
           let searchBarDropDownOpt = document.createElement('li');
           searchBarDropDownOpt.innerHTML = `${contact.FirstName} ${contact.LastName}`;
           searchBarDropDownOpt.id = `_${contact._id}`;
