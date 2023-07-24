@@ -81,6 +81,36 @@ function populateSearchBar(data) {
   }
 }
 ///////////////////////////////////////////////////////////
+////////// vvv Populates searchbar dropdown vvv ///////////
+function populateSearchBarDropDownFunction(data, searchQuery) {
+  contactSearchList.innerHTML = '';
+  if (searchQuery) {
+    data.data.contacts.forEach((contact) => {
+      for (const info in contact) {
+        if (
+          contact[info]
+            .replaceAll('-', '')
+            .replaceAll('(', '')
+            .replaceAll(')', '')
+            .toLowerCase()
+            .includes(
+              searchQuery.replaceAll(' ', '').replaceAll('-', '').replaceAll('(', '').replaceAll(')', '').toLowerCase()
+            )
+        ) {
+          let searchBarDropDownOpt = document.createElement('li');
+          searchBarDropDownOpt.innerHTML = `${contact.FirstName} ${contact.LastName}`;
+          searchBarDropDownOpt.id = `_${contact._id}`;
+          searchBarDropDownOpt.classList.add('dropdown-item');
+          searchBarDropDownOpt.addEventListener('click', (e) => {
+            console.log(e.target.id);
+          });
+          contactSearchList.appendChild(searchBarDropDownOpt);
+        }
+      }
+    });
+  }
+}
+///////////////////////////////////////////////////////////
 /////////// vvv Delete All Recurring Tasks vvv ////////////
 function deleteRecurTasks() {
   fetch(`${srvrURL}${deleteEmptyFieldPath}${_id.value}`, {

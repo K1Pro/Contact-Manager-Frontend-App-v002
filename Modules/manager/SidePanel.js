@@ -10,6 +10,18 @@ function sidePanelModule() {
     populateSearchBar(data);
   });
 
+  // This will replace the above function entires replacing the dataset entirely
+  getJSON(`${srvrURL}${searchBarPath}`).then((data) => {
+    contactData = data;
+    return contactData;
+  });
+
+  // Populates a unordered list into the main search bar dropdown
+  getJSON(`${srvrURL}${lastEditted10ContactsPath}${loggedInUser}`).then((data) => {
+    contactData = data;
+    populateSearchBarDropDownFunction(contactData);
+  });
+
   // Retrieves the last created contact once page is loaded
   getJSON(`${srvrURL}${lastCreatedContactPath}`).then((data) => {
     lastCreatedContact = data.data.contacts[0].CreateDate;

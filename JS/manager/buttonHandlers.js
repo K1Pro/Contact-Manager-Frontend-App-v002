@@ -133,6 +133,7 @@ function buttonHandlers() {
 
   // Review Button in Side Panel
   reviewContact.addEventListener('click', function () {
+    LastEditedBy.value = loggedInUser;
     if (_id.value) {
       reviewDate = new Date().toJSON().slice(0, 10);
       lastEditDate = new Date().toJSON();
@@ -141,6 +142,7 @@ function buttonHandlers() {
         body: JSON.stringify({
           LastReviewDate: reviewDate,
           LastEditDate: lastEditDate,
+          LastEditedBy: loggedInUser,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -165,7 +167,7 @@ function buttonHandlers() {
       Email.send({
         SecureToken: SMTP[LastEditedBy.value][0],
         To: cntctEmail.value,
-        From: SMTP[LastEditedBy.value][1],
+        From: SMTP[loggedInUser][1],
         Subject: emailSubject.options[emailSubject.selectedIndex].text,
         Body: emailBody.value,
       }).then(() => {
@@ -189,7 +191,7 @@ function buttonHandlers() {
     console.log('==========================================');
     let cntctEmail = document.getElementById('Email');
     console.log(cntctEmail.value);
-    console.log(SMTP[LastEditedBy.value][1]);
+    console.log(SMTP[loggedInUser][1]);
     console.log(emailSubject.options[emailSubject.selectedIndex].text);
     console.log(emailBody.value);
     console.log('==========================================');
@@ -266,13 +268,20 @@ function buttonHandlers() {
     contactSearchKeyUp(e);
   });
 
-  contactSearch.addEventListener('focusin', function (e) {
-    contactSearchList.classList.add('show');
-    contactSearchList.style.position = 'absolute';
-    contactSearchList.style.inset = '0px 0px auto auto';
-    contactSearchList.style.margin = '0px';
-    contactSearchList.style.transform = 'translate(0px, 62.6667px)';
-    contactSearchList.setAttribute('data-popper-placement', 'bottom-end');
+  contactSearch.addEventListener('keyup', function (e) {
+    if (e.target.value.length > 2) {
+      populateSearchBarDropDownFunction(contactData, e.target.value);
+      contactSearchList.classList.add('show');
+      contactSearchList.style.position = 'absolute';
+      contactSearchList.style.inset = '0px 0px auto auto';
+      contactSearchList.style.margin = '0px';
+      contactSearchList.style.transform = 'translate(0px, 62.6667px)';
+      contactSearchList.setAttribute('data-popper-placement', 'bottom-end');
+    } else {
+      contactSearchList.classList.remove('show');
+      contactSearchList.removeAttribute('style');
+      contactSearchList.removeAttribute('data-popper-placement');
+    }
   });
 
   contactSearch.addEventListener('focusout', function (e) {

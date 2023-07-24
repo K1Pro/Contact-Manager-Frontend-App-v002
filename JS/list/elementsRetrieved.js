@@ -12,7 +12,6 @@ function elementsRequired() {
 }
 // vvv All retrieved elements should be declared here vvv
 let DOMElements,
-  contactData,
   contactListHeaders,
   contactList,
   checkAndInputObject,
