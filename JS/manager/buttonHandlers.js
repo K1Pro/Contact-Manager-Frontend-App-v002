@@ -260,13 +260,14 @@ function buttonHandlers() {
     }
   });
 
-  contactSearch.addEventListener('change', function (e) {
-    contactSearchChange(e);
-  });
+  // get rid of this after refactoring
+  // contactSearch.addEventListener('change', function (e) {
+  //   contactSearchChange(e);
+  // });
 
-  contactSearch.addEventListener('keyup', function (e) {
-    contactSearchKeyUp(e);
-  });
+  // contactSearch.addEventListener('keyup', function (e) {
+  //   contactSearchKeyUp(e);
+  // });
 
   contactSearch.addEventListener('keyup', function (e) {
     if (e.target.value.length > 2) {

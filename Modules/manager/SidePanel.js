@@ -6,62 +6,64 @@ function sidePanelModule() {
   loadSidePanel(`${srvrURL}${lastEdittedContactPath}`);
 
   // Populates a dataset into the main search bar
-  getJSON(`${srvrURL}${sortedContactsPath}`).then((data) => {
-    populateSearchBar(data);
-  });
+  // getJSON(`${srvrURL}${sortedContactsPath}`).then((data) => {
+  //   populateSearchBar(data);
+  // });
 
-  // This will replace the above function entires replacing the dataset entirely
+  // Saves the current database to be used in populating the search bar primarily
   getJSON(`${srvrURL}${searchBarPath}`).then((data) => {
     contactData = data;
     return contactData;
   });
 
-  // Populates a unordered list into the main search bar dropdown
+  // Populates an unordered list into the main search bar dropdown upon page load
   getJSON(`${srvrURL}${lastEditted10ContactsPath}${loggedInUser}`).then((data) => {
     contactData = data;
-    populateSearchBarDropDownFunction(contactData);
-  });
-
-  // Retrieves the last created contact once page is loaded
-  getJSON(`${srvrURL}${lastCreatedContactPath}`).then((data) => {
-    lastCreatedContact = data.data.contacts[0].CreateDate;
-    return lastCreatedContact;
+    localStorage.setItem('BundleContactList-MostRecentContactID', data.data.contacts[0]._id);
+    localStorage.setItem('BundleContactList-MostRecentContactLastName', data.data.contacts[0].LastName);
+    localStorage.setItem('BundleContactList-MostRecentContactEditDate', data.data.contacts[0].LastEditDate);
+    console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactID')}`);
+    console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactLastName')}`);
+    console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')}`);
+    populateSearchBarDropDownFunction(contactData, '');
   });
 
   // Detects the last created contact in an interval and repopulates the search bar upon detection, there is a very weird bug here
-  setInterval(function () {
-    getJSON(`${srvrURL}${lastCreatedContactPath}`).then((data) => {
-      if (lastCreatedContact == data.data.contacts[0].CreateDate) {
-        // console.log(`Last created: ${data.data.contacts[0].LastName}`);
-      } else {
-        console.log(`Last created: ${data.data.contacts[0].LastName}`);
-        lastCreatedContact = data.data.contacts[0].CreateDate;
+  function autoPopulateSearchBarDropDown() {
+    // Retrieves the last editted contact once page is loaded
+    getJSON(`${srvrURL}${lastEdittedContactPath}`).then((data) => {
+      if (
+        localStorage.getItem('BundleContactList-MostRecentContactEditDate') != data.data.contacts[0].LastEditDate ||
+        localStorage.getItem('BundleContactList-MostRecentContactID') != data.data.contacts[0]._id
+      ) {
+        localStorage.setItem('BundleContactList-MostRecentContactID', data.data.contacts[0]._id);
+        localStorage.setItem('BundleContactList-MostRecentContactLastName', data.data.contacts[0].LastName);
+        localStorage.setItem('BundleContactList-MostRecentContactEditDate', data.data.contacts[0].LastEditDate);
+        console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactID')}`);
+        console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactLastName')}`);
+        console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')}`);
+        getJSON(`${srvrURL}${searchBarPath}`).then((data) => {
+          for (let rep = 0; rep < document.getElementById('DaysSelect').value; rep++) {
+            if (document.getElementById(`${dayTag}${rep}`).classList.contains(calSelectedDayTag)) {
+              prevMondayLastWeek = document.getElementById(`${dayTag}${rep}`).id.replace('day', '');
+              prevMonthHHMM = Date.parse(document.getElementById('CalendarDate').value);
+              calendarDatesFillIn(
+                new Date(prevMonthHHMM),
+                document.getElementById('DaysSelect').value,
+                prevMondayLastWeek
+              );
+              // return lastEdittedContact;
+            }
+          }
 
-        // contactSearch.removeEventListener('change', function (e) {
-        //   contactSearchChange(e);
-        // });
-        // contactSearch.removeEventListener('keyup', function (e) {
-        //   contactSearchKeyUp(e);
-        // });
-        // This removes existing Search datalist and populates a new one if newly created contact is detected
-        contactsList.remove();
-        contactsList = document.createElement('datalist');
-        contactsList.id = 'contactsList';
-        contactSearch.appendChild(contactsList);
-        getJSON(`${srvrURL}${sortedContactsPath}`).then((newData) => {
-          populateSearchBar(newData);
+          contactData = data;
+          return contactData;
         });
-        // contactSearch.addEventListener('change', function (e) {
-        //   contactSearchChange(e);
-        // });
-        // contactSearch.addEventListener('keyup', function (e) {
-        //   contactSearchKeyUp(e);
-        // });
-
-        return lastCreatedContact;
       }
     });
-  }, 1000);
+  }
+
+  setInterval(autoPopulateSearchBarDropDown, 1000);
 
   // window.addEventListener('load', limitFunc);
   // document.addEventListener('DOMContentLoaded', limitFunc);

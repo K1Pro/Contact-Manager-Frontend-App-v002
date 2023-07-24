@@ -64,53 +64,65 @@ function updateContactTasks(contactTask, inputChanged) {
 }
 ///////////////////////////////////////////////////////////
 ////// vvv Populates dataset into main search bar vvv ///////
-function populateSearchBar(data) {
-  for (const [key, value] of Object.entries(data.data.contacts)) {
-    let FullName = `${value.FirstName} ${value.LastName}`;
-    let searchDataSet = document.createElement('option');
-    searchDataSet.label = FullName;
-    searchDataSet.innerHTML = value.Phone;
-    contactsList.appendChild(searchDataSet);
-    if (value.SpouseName && value.SpouseLastName) {
-      SpouseFullName = `${value.SpouseName} ${value.SpouseLastName}`;
-      spouseSearchDataSet = document.createElement('option');
-      spouseSearchDataSet.label = SpouseFullName;
-      spouseSearchDataSet.innerHTML = value.Phone;
-      contactsList.appendChild(spouseSearchDataSet);
-    }
-  }
-}
+// deleting this sooner or later after refactoring!!!!!!!!!!!!!!!!!!!!!
+// function populateSearchBar(data) {
+//   for (const [key, value] of Object.entries(data.data.contacts)) {
+//     let FullName = `${value.FirstName} ${value.LastName}`;
+//     let searchDataSet = document.createElement('option');
+//     searchDataSet.label = FullName;
+//     searchDataSet.innerHTML = value.Phone;
+//     contactsList.appendChild(searchDataSet);
+//     if (value.SpouseName && value.SpouseLastName) {
+//       SpouseFullName = `${value.SpouseName} ${value.SpouseLastName}`;
+//       spouseSearchDataSet = document.createElement('option');
+//       spouseSearchDataSet.label = SpouseFullName;
+//       spouseSearchDataSet.innerHTML = value.Phone;
+//       contactsList.appendChild(spouseSearchDataSet);
+//     }
+//   }
+// }
 ///////////////////////////////////////////////////////////
 ////////// vvv Populates searchbar dropdown vvv ///////////
 function populateSearchBarDropDownFunction(data, searchQuery) {
   contactSearchList.innerHTML = '';
-  if (searchQuery) {
-    uniqueIDSet = new Set();
-    data.data.contacts.forEach((contact) => {
-      for (const info in contact) {
-        if (
-          contact[info]
-            .replaceAll('-', '')
-            .replaceAll('(', '')
-            .replaceAll(')', '')
-            .toLowerCase()
-            .includes(
-              searchQuery.replaceAll(' ', '').replaceAll('-', '').replaceAll('(', '').replaceAll(')', '').toLowerCase()
-            ) &&
-          !uniqueIDSet.has(contact._id)
-        ) {
-          uniqueIDSet.add(contact._id);
-          let searchBarDropDownOpt = document.createElement('li');
+  rep = 0;
+  uniqueIDSet = new Set();
+  data.data.contacts.forEach((contact) => {
+    for (const info in contact) {
+      if (
+        contact[info]
+          .replaceAll('-', '')
+          .replaceAll('(', '')
+          .replaceAll(')', '')
+          .toLowerCase()
+          .includes(
+            searchQuery.replaceAll(' ', '').replaceAll('-', '').replaceAll('(', '').replaceAll(')', '').toLowerCase()
+          ) &&
+        !uniqueIDSet.has(contact._id) &&
+        rep < 16
+      ) {
+        rep++;
+        uniqueIDSet.add(contact._id);
+        let searchBarDropDownOpt = document.createElement('li');
+        if (rep == 16) {
+          searchBarDropDownOpt.innerHTML = `More results...`;
+        } else {
           searchBarDropDownOpt.innerHTML = `${contact.FirstName} ${contact.LastName}`;
-          searchBarDropDownOpt.id = `_${contact._id}`;
-          searchBarDropDownOpt.classList.add('dropdown-item');
-          searchBarDropDownOpt.addEventListener('click', (e) => {
-            console.log(e.target.id);
+          searchBarDropDownOpt.addEventListener('mousedown', (e) => {
+            loadSidePanel(`${srvrURL}${phonePath}${contact.Phone}`);
+            contactSearch.value = '';
           });
-          contactSearchList.appendChild(searchBarDropDownOpt);
         }
+        searchBarDropDownOpt.classList.add('dropdown-item');
+        contactSearchList.appendChild(searchBarDropDownOpt);
       }
-    });
+    }
+  });
+  if (!uniqueIDSet.size) {
+    let searchBarDropDownOpt = document.createElement('li');
+    searchBarDropDownOpt.innerHTML = `No contact found`;
+    searchBarDropDownOpt.classList.add('dropdown-item');
+    contactSearchList.appendChild(searchBarDropDownOpt);
   }
 }
 ///////////////////////////////////////////////////////////
@@ -351,39 +363,40 @@ let limitFunc = function () {
 };
 ///////////////////////////////////////////////////////////
 ////////// vvv Calendar Search Event Listeners vvv ////////
-function contactSearchChange(e) {
-  // This populates the Side Panel Input Fields following a Contact Search
-  let searchInput = e.target.value.toLowerCase();
-  // phonenumber(e.target.value);
-  if (e.target.value) {
-    matchDatalist(searchInput);
-  }
-}
+// get rid of this after refactoring
+// function contactSearchChange(e) {
+//   // This populates the Side Panel Input Fields following a Contact Search
+//   let searchInput = e.target.value.toLowerCase();
+//   // phonenumber(e.target.value);
+//   if (e.target.value) {
+//     matchDatalist(searchInput);
+//   }
+// }
 
-//REFACTOR AND CLEAN THIS UP A BIT
-function contactSearchKeyUp(e) {
-  if (e.key !== 'Backspace') {
-    let searchInput = e.target.value.toLowerCase();
-    // checks a phone number for example 773
-    let phNoBegin = /^\d{3}$/;
-    // checks a phone number for example 773-853
-    let phNoMiddle = /^\+?([0-9]{3})\)?[-]?([0-9]{3})$/;
-    // checks a phone number for example 773-853-2731
-    let phNoLast = /^\+?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$/;
-    if (searchInput.match(phNoBegin)) {
-      this.value = `${searchInput}-`;
-    } else if (searchInput.match(phNoMiddle)) {
-      this.value = `${searchInput}-`;
-    } else if (searchInput.match(phNoLast)) {
-      matchDatalist(searchInput);
-      contactSearch.blur();
-    }
-    if (e.key === 'Enter') {
-      matchDatalist(searchInput);
-      contactSearch.blur();
-    }
-  }
-}
+// get rid of this after refactoring
+// function contactSearchKeyUp(e) {
+//   if (e.key !== 'Backspace') {
+//     let searchInput = e.target.value.toLowerCase();
+//     // checks a phone number for example 773
+//     let phNoBegin = /^\d{3}$/;
+//     // checks a phone number for example 773-853
+//     let phNoMiddle = /^\+?([0-9]{3})\)?[-]?([0-9]{3})$/;
+//     // checks a phone number for example 773-853-2731
+//     let phNoLast = /^\+?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$/;
+//     if (searchInput.match(phNoBegin)) {
+//       this.value = `${searchInput}-`;
+//     } else if (searchInput.match(phNoMiddle)) {
+//       this.value = `${searchInput}-`;
+//     } else if (searchInput.match(phNoLast)) {
+//       matchDatalist(searchInput);
+//       contactSearch.blur();
+//     }
+//     if (e.key === 'Enter') {
+//       matchDatalist(searchInput);
+//       contactSearch.blur();
+//     }
+//   }
+// }
 
 ///////////////////////////////////////////////////////////
 ///////////// vvv Calendar Events styling vvv ///////////
