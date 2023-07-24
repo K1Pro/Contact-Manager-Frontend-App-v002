@@ -201,12 +201,14 @@ function phonenumber(inputtxt) {
 ///////////////////////////////////////////////////////////
 //// vvv Patches date that contact was last editted vvv ///
 function contactEditDate() {
+  LastEditedBy.value = loggedInUser;
   if (_id.value) {
     lastEditDate = new Date().toJSON(); //.slice(0, 16);
     fetch(`${srvrURL}/${_id.value}`, {
       method: 'PATCH',
       body: JSON.stringify({
         LastEditDate: lastEditDate,
+        LastEditedBy: loggedInUser,
       }),
       headers: {
         'Content-Type': 'application/json',

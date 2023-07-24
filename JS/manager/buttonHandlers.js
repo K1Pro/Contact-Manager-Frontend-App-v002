@@ -249,6 +249,7 @@ function buttonHandlers() {
             //     }
             //   }
             // }
+            EventAuthor.value = loggedInUser;
             contactTasksTextArea.value = '';
           });
       });

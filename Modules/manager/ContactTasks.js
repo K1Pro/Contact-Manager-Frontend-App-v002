@@ -18,6 +18,8 @@ function contactTasksModule() {
   }, 60000);
 
   populateSlctWObj(LastEditedByObj, EventAuthor);
+  EventAuthor.value = loggedInUser;
+
   // ^^^ End coding here for Contact Tasks Module ^^^
 }
 
