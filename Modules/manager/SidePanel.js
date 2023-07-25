@@ -20,6 +20,7 @@ function sidePanelModule() {
     console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactID')}`);
     console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactLastName')}`);
     console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')}`);
+    console.log(`===============`);
     populateSearchBarDropDownFunction(contactData, '');
     loadSidePanel(`${srvrURL}/${localStorage.getItem('BundleContactList-MostRecentContactID')}`);
   });
@@ -29,34 +30,38 @@ function sidePanelModule() {
   function autoPopulateSearchBarDropDown() {
     // Retrieves the last editted contact once page is loaded
     getJSON(`${srvrURL}${lastEdittedContactPath}`).then((data) => {
-      if (
-        localStorage.getItem('BundleContactList-MostRecentContactEditDate') != data.data.contacts[0].LastEditDate ||
-        localStorage.getItem('BundleContactList-MostRecentContactID') != data.data.contacts[0]._id
-      ) {
-        localStorage.setItem('BundleContactList-MostRecentContactID', data.data.contacts[0]._id);
-        localStorage.setItem('BundleContactList-MostRecentContactLastName', data.data.contacts[0].LastName);
-        localStorage.setItem('BundleContactList-MostRecentContactEditDate', data.data.contacts[0].LastEditDate);
-        console.log(`===============`);
-        console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactID')}`);
-        console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactLastName')}`);
-        console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')}`);
-        getJSON(`${srvrURL}${searchBarPath}`).then((data) => {
-          for (let rep = 0; rep < document.getElementById('DaysSelect').value; rep++) {
-            if (document.getElementById(`${dayTag}${rep}`).classList.contains(calSelectedDayTag)) {
-              prevMondayLastWeek = document.getElementById(`${dayTag}${rep}`).id.replace('day', '');
-              prevMonthHHMM = Date.parse(document.getElementById('CalendarDate').value);
-              calendarDatesFillIn(
-                new Date(prevMonthHHMM),
-                document.getElementById('DaysSelect').value,
-                prevMondayLastWeek
-              );
-              // return lastEdittedContact;
+      if (data) {
+        console.log(`No change, most recent edit: ${data?.data.contacts[0].LastName}`);
+        if (
+          localStorage.getItem('BundleContactList-MostRecentContactEditDate') != data?.data.contacts[0].LastEditDate ||
+          localStorage.getItem('BundleContactList-MostRecentContactID') != data?.data.contacts[0]._id
+        ) {
+          localStorage.setItem('BundleContactList-MostRecentContactID', data.data.contacts[0]._id);
+          localStorage.setItem('BundleContactList-MostRecentContactLastName', data.data.contacts[0].LastName);
+          localStorage.setItem('BundleContactList-MostRecentContactEditDate', data.data.contacts[0].LastEditDate);
+          console.log(`===============`);
+          console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactID')}`);
+          console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactLastName')}`);
+          console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')}`);
+          console.log(`===============`);
+          getJSON(`${srvrURL}${searchBarPath}`).then((data) => {
+            for (let rep = 0; rep < document.getElementById('DaysSelect').value; rep++) {
+              if (document.getElementById(`${dayTag}${rep}`).classList.contains(calSelectedDayTag)) {
+                prevMondayLastWeek = document.getElementById(`${dayTag}${rep}`).id.replace('day', '');
+                prevMonthHHMM = Date.parse(document.getElementById('CalendarDate').value);
+                calendarDatesFillIn(
+                  new Date(prevMonthHHMM),
+                  document.getElementById('DaysSelect').value,
+                  prevMondayLastWeek
+                );
+                // return lastEdittedContact;
+              }
             }
-          }
 
-          contactData = data;
-          return contactData;
-        });
+            contactData = data;
+            return contactData;
+          });
+        }
       }
     });
   }
