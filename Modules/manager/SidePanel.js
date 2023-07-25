@@ -22,6 +22,7 @@ function sidePanelModule() {
     localStorage.setItem('BundleContactList-MostRecentContactID', data.data.contacts[0]._id);
     localStorage.setItem('BundleContactList-MostRecentContactLastName', data.data.contacts[0].LastName);
     localStorage.setItem('BundleContactList-MostRecentContactEditDate', data.data.contacts[0].LastEditDate);
+    console.log(`===============`);
     console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactID')}`);
     console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactLastName')}`);
     console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')}`);
@@ -39,6 +40,7 @@ function sidePanelModule() {
         localStorage.setItem('BundleContactList-MostRecentContactID', data.data.contacts[0]._id);
         localStorage.setItem('BundleContactList-MostRecentContactLastName', data.data.contacts[0].LastName);
         localStorage.setItem('BundleContactList-MostRecentContactEditDate', data.data.contacts[0].LastEditDate);
+        console.log(`===============`);
         console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactID')}`);
         console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactLastName')}`);
         console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')}`);

@@ -160,16 +160,6 @@ function highlghtActvEvnt(cntctID) {
   });
 }
 ///////////////////////////////////////////////////////////
-////////////// vvv Populates selects vvv //////////////////
-function populateSelect(calArray, SelectElement) {
-  calArray.forEach((calArrayItems) => {
-    let calOption = document.createElement('option');
-    calOption.value = calArrayItems;
-    calOption.innerHTML = calArrayItems;
-    SelectElement.appendChild(calOption);
-  });
-}
-///////////////////////////////////////////////////////////
 //////// vvv Populates selects with objects vvv ///////////
 function populateSlctWObj(calArray, SelectElement, firstBlankEl) {
   storedFilter = localStorage.getItem(SelectElement.id);

@@ -1,7 +1,6 @@
 function calendarModule() {
   // vvv Start coding here for Calendar Module vvv
   CalendarHTML_Date.value = TodaysDate.toJSON().slice(0, 10);
-  // populateSelect(LastEditedByS, LastEditedBySelect);
   populateSlctWObj(TasksObj, TasksSelect);
   populateSlctWObj(LastEditedByObj, LastEditedBySelect);
   populateSlctWObj(StatusObj, StatusSelect);
@@ -26,35 +25,6 @@ function calendarModule() {
     calendarDatesFillIn(TodaysDate, daysFirstLoaded);
     document.getElementById('DaysSelect').classList.remove(hiddenContactTag);
   }
-
-  // Retrieves the last editted contact once page is loaded
-  // getJSON(`${srvrURL}${lastEdittedContactPath}`).then((data) => {
-  //   lastEdittedContact = data.data.contacts[0].LastEditDate;
-  //   return lastEdittedContact;
-  // });
-  // // Detects the last editted contact in an interval and repopulates the calendar upon detection
-  // setInterval(function () {
-  //   getJSON(`${srvrURL}${lastEdittedContactPath}`).then((data) => {
-  //     if (lastEdittedContact == data.data.contacts[0].LastEditDate) {
-  //       // console.log(`Last edited: ${data.data.contacts[0].LastName}`);
-  //     } else {
-  //       console.log(`Last edited: ${data.data.contacts[0].LastName}`);
-  //       lastEdittedContact = data.data.contacts[0].LastEditDate;
-  //       for (let rep = 0; rep < document.getElementById('DaysSelect').value; rep++) {
-  //         if (document.getElementById(`${dayTag}${rep}`).classList.contains(calSelectedDayTag)) {
-  //           prevMondayLastWeek = document.getElementById(`${dayTag}${rep}`).id.replace('day', '');
-  //           prevMonthHHMM = Date.parse(document.getElementById('CalendarDate').value);
-  //           calendarDatesFillIn(
-  //             new Date(prevMonthHHMM),
-  //             document.getElementById('DaysSelect').value,
-  //             prevMondayLastWeek
-  //           );
-  //           return lastEdittedContact;
-  //         }
-  //       }
-  //     }
-  //   });
-  // }, 1000);
   // ^^^ End coding here for Calendar Module ^^^
 }
 

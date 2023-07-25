@@ -284,32 +284,6 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         contactTask.Description.style.height = '1px';
         contactTask.Description.style.height = contactTask.Description.scrollHeight + 2 + 'px';
       }
-      return data; //probably does nothing
     });
   });
 }
-
-// remove this after refactoring
-// function matchDatalist(searchInput) {
-//   dataList = document.getElementById('contactsList');
-//   totalSearchCntcts = dataList.childNodes.length - 3; //compensates for 1 text node being found in datalist and 2 additional entries that cause a bug
-//   searchCncttracker = 0;
-//   uniquePhoneSet = new Set();
-//   Array.from(document.getElementById('contactsList').options).forEach(function (option_element) {
-//     searchCncttracker++;
-//     dataListLabel = option_element.label.toLowerCase();
-//     dataListvalue = option_element.value;
-//     if (dataListLabel.includes(searchInput) || dataListvalue.includes(searchInput)) {
-//       uniquePhoneSet.add(dataListvalue);
-//       [firstSearchCntct] = uniquePhoneSet;
-//       return firstSearchCntct;
-//     }
-
-//     if (firstSearchCntct && searchCncttracker >= totalSearchCntcts) {
-//       loadSidePanel(`${srvrURL}${phonePath}${firstSearchCntct}`);
-//       contactSearch.value = '';
-//     } else if (!firstSearchCntct && searchCncttracker == totalSearchCntcts) {
-//       snackbar('Please enter either a valid name (First name, Last Name) or phone.');
-//     }
-//   });
-// }
