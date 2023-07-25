@@ -63,25 +63,6 @@ function updateContactTasks(contactTask, inputChanged) {
     });
 }
 ///////////////////////////////////////////////////////////
-////// vvv Populates dataset into main search bar vvv ///////
-// deleting this sooner or later after refactoring!!!!!!!!!!!!!!!!!!!!!
-// function populateSearchBar(data) {
-//   for (const [key, value] of Object.entries(data.data.contacts)) {
-//     let FullName = `${value.FirstName} ${value.LastName}`;
-//     let searchDataSet = document.createElement('option');
-//     searchDataSet.label = FullName;
-//     searchDataSet.innerHTML = value.Phone;
-//     contactsList.appendChild(searchDataSet);
-//     if (value.SpouseName && value.SpouseLastName) {
-//       SpouseFullName = `${value.SpouseName} ${value.SpouseLastName}`;
-//       spouseSearchDataSet = document.createElement('option');
-//       spouseSearchDataSet.label = SpouseFullName;
-//       spouseSearchDataSet.innerHTML = value.Phone;
-//       contactsList.appendChild(spouseSearchDataSet);
-//     }
-//   }
-// }
-///////////////////////////////////////////////////////////
 ////////// vvv Populates searchbar dropdown vvv ///////////
 function populateSearchBarDropDownFunction(data, searchQuery) {
   contactSearchList.innerHTML = '';
@@ -109,7 +90,7 @@ function populateSearchBarDropDownFunction(data, searchQuery) {
         } else {
           searchBarDropDownOpt.innerHTML = `${contact.FirstName} ${contact.LastName}`;
           searchBarDropDownOpt.addEventListener('mousedown', (e) => {
-            loadSidePanel(`${srvrURL}${phonePath}${contact.Phone}`);
+            loadSidePanel(`${srvrURL}/${contact._id}`);
             contactSearch.value = '';
           });
         }
@@ -351,60 +332,6 @@ let limitFunc = function () {
   prevWidth = window.innerWidth;
   return prevWidth;
 };
-///////////////////////////////////////////////////////////
-////////// vvv Calendar Search Event Listeners vvv ////////
-// get rid of this after refactoring
-// function contactSearchChange(e) {
-//   // This populates the Side Panel Input Fields following a Contact Search
-//   let searchInput = e.target.value.toLowerCase();
-//   // phonenumber(e.target.value);
-//   if (e.target.value) {
-//     matchDatalist(searchInput);
-//   }
-// }
-
-// get rid of this after refactoring
-// function contactSearchKeyUp(e) {
-//   if (e.key !== 'Backspace') {
-//     let searchInput = e.target.value.toLowerCase();
-//     // checks a phone number for example 773
-//     let phNoBegin = /^\d{3}$/;
-//     // checks a phone number for example 773-853
-//     let phNoMiddle = /^\+?([0-9]{3})\)?[-]?([0-9]{3})$/;
-//     // checks a phone number for example 773-853-2731
-//     let phNoLast = /^\+?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$/;
-//     if (searchInput.match(phNoBegin)) {
-//       this.value = `${searchInput}-`;
-//     } else if (searchInput.match(phNoMiddle)) {
-//       this.value = `${searchInput}-`;
-//     } else if (searchInput.match(phNoLast)) {
-//       matchDatalist(searchInput);
-//       contactSearch.blur();
-//     }
-//     if (e.key === 'Enter') {
-//       matchDatalist(searchInput);
-//       contactSearch.blur();
-//     }
-//   }
-// }
-
-///////////////////////////////////////////////////////////
-///////////// vvv Calendar Events styling vvv ///////////
-function calEventStyle(calCntct, rnwlCntct) {
-  // if (rnwlCntct._id == _id.value) calCntct.classList.add(activeTag);
-  // calCntct.classList.add(textlightTag);
-  // calCntct.classList.add(calTaskTag);
-  // calCntct.classList.add(rnwlCntct.Status);
-  // calCntct.classList.add(rnwlCntct.Source);
-  // if (TasksSelect.value == eventTag || TasksSelect.value == eCmpltdTag || TasksSelect.value == eNotCmpltdTag)
-  //   calCntct.classList.add(hiddenContactTag);
-  // if (StatusSelect.value != calTaskTag && StatusSelect.value != rnwlCntct.Status)
-  //   calCntct.classList.add(hiddenContactTag);
-  // if (SourceSelect.value != calTaskTag && SourceSelect.value != rnwlCntct.Source)
-  //   calCntct.classList.add(hiddenContactTag);
-  // calCntct.textContent = `${rnwlCntct.LastName}`;
-}
-
 ///////////////////////////////////////////////////////////
 ///////////// vvv Adding days to date vvv ///////////
 Date.prototype.addDays = function (days) {

@@ -3,12 +3,6 @@ function sidePanelModule() {
   populateSlctWObj(LastEditedByObj, LastEditedBy);
   populateSlctWObj(StatusObj, Status);
   populateSlctWObj(SourceObj, Source);
-  loadSidePanel(`${srvrURL}${lastEdittedContactPath}`);
-
-  // Populates a dataset into the main search bar
-  // getJSON(`${srvrURL}${sortedContactsPath}`).then((data) => {
-  //   populateSearchBar(data);
-  // });
 
   // Saves the current database to be used in populating the search bar primarily
   getJSON(`${srvrURL}${searchBarPath}`).then((data) => {
@@ -27,9 +21,11 @@ function sidePanelModule() {
     console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactLastName')}`);
     console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')}`);
     populateSearchBarDropDownFunction(contactData, '');
+    loadSidePanel(`${srvrURL}/${localStorage.getItem('BundleContactList-MostRecentContactID')}`);
   });
 
   // Detects the last created contact in an interval and repopulates the search bar upon detection, there is a very weird bug here
+  // This actually was refactored and calendardatesfillin was placed here
   function autoPopulateSearchBarDropDown() {
     // Retrieves the last editted contact once page is loaded
     getJSON(`${srvrURL}${lastEdittedContactPath}`).then((data) => {

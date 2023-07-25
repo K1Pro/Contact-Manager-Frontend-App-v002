@@ -30,7 +30,7 @@ getJSON(`${srvrURL}${rnwlPath}${rnwlDates.toJSON().slice(5, 10)}`).then((data) =
           emailBody.value = '';
           emailSubject.value = 'choose-email-template';
           removeActiveCalCntct();
-          loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`, false);
+          loadSidePanel(`${srvrURL}/${rnwlCntct._id}`, false);
           calCntct.classList.add(activeTag);
         });
         // document.getElementById(`${dayTag}${rep}`).appendChild(calCntct);
@@ -72,7 +72,7 @@ getJSON(`${srvrURL}${contactsWithCalEventsPath}${calDates.toJSON().slice(0, 10)}
           emailBody.value = '';
           removeActiveCalCntct();
           loadSidePanel(
-            `${srvrURL}${phonePath}${rnwlCntct.Phone}`, // Phone URL
+            `${srvrURL}/${rnwlCntct._id}`,
             `${sortedCalEvents[0]._id}` // Specific Contact Task ID
           );
           calCntct.classList.add(activeTag);
@@ -118,7 +118,7 @@ getJSON(`${srvrURL}${MonthlyEventsPath}${calDates.toJSON().slice(8, 10)}`).then(
         emailBody.value = '';
         removeActiveCalCntct();
         loadSidePanel(
-          `${srvrURL}${phonePath}${rnwlCntct.Phone}`, // Phone URL
+          `${srvrURL}/${rnwlCntct._id}`, // Phone URL
           `${sortedCalEvents[0]._id}` // Specific Contact Task ID
         );
         calCntct.classList.add(activeTag);

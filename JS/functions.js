@@ -4,22 +4,23 @@ console.log('retrieved contact manager functions');
 function loadSidePanel(URL, slctdCalTask) {
   // This populates the Side Panel Input Fields following certain actions
   getJSON(URL).then((data) => {
+    console.log(data);
     dateSelector = document.getElementById(`CalendarDate`).value;
     for (let rep = 0; rep < ContactFields.length; rep++) {
       let ContactFieldsIDs = ContactFields[rep].id;
       // console.log(ContactFieldsIDs);
       if (ContactFieldsIDs) {
-        document.getElementById(`${ContactFieldsIDs}`).value = data.data.contacts[0][ContactFieldsIDs]
-          ? `${data.data.contacts[0][ContactFieldsIDs]}`
+        document.getElementById(`${ContactFieldsIDs}`).value = data.data.contact[ContactFieldsIDs]
+          ? `${data.data.contact[ContactFieldsIDs]}`
           : '';
       }
       if (ContactFieldsIDs == '_id') {
         let contactID = document.getElementById(`${ContactFieldsIDs}`);
         loadContactTasks(contactID.value, slctdCalTask);
         // Highlights each renewal and event active in the calendar
-        calID = data.data.contacts[0]._id;
+        calID = data.data.contact._id;
         highlghtActvEvnt(calID);
-        calEvnts = data.data.contacts[0].CalendarEvents;
+        calEvnts = data.data.contact.CalendarEvents;
         calEvnts.forEach((calEvent) => {
           let cntctCalEvnt = document.getElementById(`Event${calEvent._id}`);
           if (cntctCalEvnt) {
@@ -160,7 +161,7 @@ function calendarDatesFillIn(chosenDate, DaysSelected, noDateChange) {
               calCntct.addEventListener('click', () => {
                 emailBody.value = '';
                 emailSubject.value = 'choose-email-template';
-                loadSidePanel(`${srvrURL}${phonePath}${rnwlCntct.Phone}`, `${sortedCalEvents[0]?._id}`);
+                loadSidePanel(`${srvrURL}/${rnwlCntct._id}`, `${sortedCalEvents[0]?._id}`);
                 calCntct.classList.add(activeTag);
                 highlghtActvEvnt(rnwlCntct._id);
               });

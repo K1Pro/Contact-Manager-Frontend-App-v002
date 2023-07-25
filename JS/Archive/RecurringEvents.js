@@ -54,9 +54,9 @@ document.querySelectorAll('#RecurEvents').forEach((recurEvents) => {
         .then((response) => response.text())
         .then(() => {
           contactEditDate();
-          PhoneInput = document.getElementById('Phone');
+          IDInput = document.getElementById('_id');
           snackbar(`Event created for ${FirstName.value}`);
-          loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
+          loadSidePanel(`${srvrURL}/${IDInput.value}`);
           // This reloads the calender with events
           retrievedDate = document.getElementById('CalendarDate').value.split('-');
           nextWeek = new Date(retrievedDate[0], retrievedDate[1] - 1, retrievedDate[2]).getTime();

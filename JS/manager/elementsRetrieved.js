@@ -12,7 +12,7 @@ function elementsRequired() {
   contactSearch = document.getElementById('contactSearch');
   contactSearchList = document.getElementById('contactSearchList');
   contactsList = document.getElementById('contactsList');
-  phoneInput = document.getElementById('Phone');
+  IDInput = document.getElementById('_id');
   // IDinput = document.getElementById('_id'); Delete this sooner or later if it is not needed
   ContactFields = document.getElementById('ContactFields').querySelectorAll('*');
   reviewContact = document.getElementById('reviewContact');
@@ -91,7 +91,7 @@ let DOMElements,
   ContactTaskList,
   newCntctTaskList,
   IDinput,
-  phoneInput,
+  IDInput,
   CalendarHTML_Date,
   rtrvdCalDateSlctr,
   CalendarHTML_PrevMonthBtn,

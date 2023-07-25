@@ -224,9 +224,9 @@ function buttonHandlers() {
           .then((response) => response.text())
           .then(() => {
             contactEditDate();
-            PhoneInput = document.getElementById('Phone');
+            IDInput = document.getElementById('_id');
             snackbar(`Event created for ${FirstName.value}`);
-            loadSidePanel(`${srvrURL}${phonePath}${PhoneInput.value}`);
+            loadSidePanel(`${srvrURL}/${IDInput.value}`);
             // let retrievedUniqueDays = document.getElementsByClassName('uniqueday');
             // rtrvdCalDateSlctr = document.getElementById('CalendarDate');
             // // This adds an event to the calendar once the event is created, work on this further
