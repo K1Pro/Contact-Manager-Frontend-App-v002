@@ -4,7 +4,6 @@ console.log('retrieved contact manager functions');
 function loadSidePanel(URL, slctdCalTask) {
   // This populates the Side Panel Input Fields following certain actions
   getJSON(URL).then((data) => {
-    console.log(data);
     dateSelector = document.getElementById(`CalendarDate`).value;
     for (let rep = 0; rep < ContactFields.length; rep++) {
       let ContactFieldsIDs = ContactFields[rep].id;
@@ -258,7 +257,7 @@ function loadContactTasks(dailyTask, slctdCalTask) {
         contactTask.CheckBox.setAttribute('class', `form-check-input mt-0 ${bartkaCheckboxTag} respHeight`);
         if (slctdCalTask && slctdCalTask == contactTask.UID) contactTask.CheckBox.classList.add('selectedContactTask');
         contactTask.CheckBox.addEventListener('click', (inputChanged) => {
-          cntctTasks.checkBoxCMD ? updateContactTasks(contactTask, inputChanged) : deleteRecurTasks();
+          updateContactTasks(contactTask, inputChanged);
         });
         contactTask.CheckBoxLabel.appendChild(contactTask.CheckBox);
         contactTask.CheckBoxSpan.setAttribute('class', `${cntctTasks.CSSstyle}checkBoxSpan`);

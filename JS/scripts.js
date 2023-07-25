@@ -69,9 +69,11 @@ function populateSearchBarDropDownFunction(data, searchQuery) {
   rep = 0;
   uniqueIDSet = new Set();
   data.data.contacts.forEach((contact) => {
+    // console.log(data.data.contacts);
     for (const info in contact) {
       if (
         contact[info]
+          .replaceAll(' ', '')
           .replaceAll('-', '')
           .replaceAll('(', '')
           .replaceAll(')', '')
@@ -88,7 +90,7 @@ function populateSearchBarDropDownFunction(data, searchQuery) {
         if (rep == 16) {
           searchBarDropDownOpt.innerHTML = `More results...`;
         } else {
-          searchBarDropDownOpt.innerHTML = `${contact.FirstName} ${contact.LastName}`;
+          searchBarDropDownOpt.innerHTML = `${contact.FullName}`;
           searchBarDropDownOpt.addEventListener('mousedown', (e) => {
             loadSidePanel(`${srvrURL}/${contact._id}`);
             contactSearch.value = '';
@@ -105,31 +107,6 @@ function populateSearchBarDropDownFunction(data, searchQuery) {
     searchBarDropDownOpt.classList.add('dropdown-item');
     contactSearchList.appendChild(searchBarDropDownOpt);
   }
-}
-///////////////////////////////////////////////////////////
-/////////// vvv Delete All Recurring Tasks vvv ////////////
-function deleteRecurTasks() {
-  fetch(`${srvrURL}${deleteEmptyFieldPath}${_id.value}`, {
-    method: 'DELETE',
-    body: JSON.stringify({
-      WeeklyEvents: '',
-      MonthlyEvents: '',
-      SemiAnnualEvents: '',
-      AnnualEvents: '',
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => {
-      loadContactTasks(_id.value);
-      snackbar(`Event updated for ${FirstName.value}`);
-      contactEditDate();
-      response.json();
-    })
-    .catch((error) => {
-      alert('Please connect to server');
-    });
 }
 ///////////////////////////////////////////////////////////
 //// vvv Highlights active events from calendar vvv ///////
