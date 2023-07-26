@@ -31,7 +31,15 @@ function sidePanelModule() {
     // Retrieves the last editted contact once page is loaded
     getJSON(`${srvrURL}${lastEdittedContactPath}`).then((data) => {
       if (data) {
-        console.log(`No change, most recent edit: ${data?.data.contacts[0].LastName}`);
+        console.log(
+          `No changes, local: ${localStorage.getItem(
+            'BundleContactList-MostRecentContactLastName'
+          )} & ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')} & ${localStorage.getItem(
+            'BundleContactList-MostRecentContactID'
+          )}. Retrieved: ${data?.data.contacts[0].LastName} & ${data?.data.contacts[0].LastEditDate} &  ${
+            data?.data.contacts[0]._id
+          }`
+        );
         if (
           localStorage.getItem('BundleContactList-MostRecentContactEditDate') != data?.data.contacts[0].LastEditDate ||
           localStorage.getItem('BundleContactList-MostRecentContactID') != data?.data.contacts[0]._id
