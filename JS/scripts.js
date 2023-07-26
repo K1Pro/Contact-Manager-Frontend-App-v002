@@ -90,7 +90,29 @@ function populateSearchBarDropDownFunction(data, searchQuery) {
         if (rep == 16) {
           searchBarDropDownOpt.innerHTML = `More results...`;
         } else {
-          searchBarDropDownOpt.innerHTML = `${contact.FullName}`;
+          if (contact.SpouseFullName) {
+            if (
+              contact.SpouseFullName.replaceAll(' ', '')
+                .replaceAll('-', '')
+                .replaceAll('(', '')
+                .replaceAll(')', '')
+                .toLowerCase()
+                .includes(
+                  searchQuery
+                    .replaceAll(' ', '')
+                    .replaceAll('-', '')
+                    .replaceAll('(', '')
+                    .replaceAll(')', '')
+                    .toLowerCase()
+                )
+            ) {
+              searchBarDropDownOpt.innerHTML = `${contact.SpouseFullName}`;
+            } else {
+              searchBarDropDownOpt.innerHTML = `${contact.FullName}`;
+            }
+          } else {
+            searchBarDropDownOpt.innerHTML = `${contact.FullName}`;
+          }
           searchBarDropDownOpt.addEventListener('mousedown', (e) => {
             loadSidePanel(`${srvrURL}/${contact._id}`);
             contactSearch.value = '';
