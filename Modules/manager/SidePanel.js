@@ -22,6 +22,7 @@ function sidePanelModule() {
     console.log(`Last Editted: ${localStorage.getItem('BundleContactManager-MostRecentContactEditDate')}`);
     console.log(`===============`);
     populateSearchBarDropDownFunction(contactData, '');
+    contactSearch.disabled = false;
     loadSidePanel(`${srvrURL}/${localStorage.getItem('BundleContactManager-MostRecentContactID')}`);
   });
 
