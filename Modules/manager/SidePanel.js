@@ -13,16 +13,16 @@ function sidePanelModule() {
   // Populates an unordered list into the main search bar dropdown upon page load
   getJSON(`${srvrURL}${lastEditted10ContactsPath}${loggedInUser}`).then((data) => {
     contactData = data;
-    localStorage.setItem('BundleContactList-MostRecentContactID', data.data.contacts[0]._id);
-    localStorage.setItem('BundleContactList-MostRecentContactLastName', data.data.contacts[0].LastName);
-    localStorage.setItem('BundleContactList-MostRecentContactEditDate', data.data.contacts[0].LastEditDate);
+    localStorage.setItem('BundleContactManager-MostRecentContactID', data.data.contacts[0]._id);
+    localStorage.setItem('BundleContactManager-MostRecentContactLastName', data.data.contacts[0].LastName);
+    localStorage.setItem('BundleContactManager-MostRecentContactEditDate', data.data.contacts[0].LastEditDate);
     console.log(`===============`);
-    console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactID')}`);
-    console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactLastName')}`);
-    console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')}`);
+    console.log(`Last Editted: ${localStorage.getItem('BundleContactManager-MostRecentContactID')}`);
+    console.log(`Last Editted: ${localStorage.getItem('BundleContactManager-MostRecentContactLastName')}`);
+    console.log(`Last Editted: ${localStorage.getItem('BundleContactManager-MostRecentContactEditDate')}`);
     console.log(`===============`);
     populateSearchBarDropDownFunction(contactData, '');
-    loadSidePanel(`${srvrURL}/${localStorage.getItem('BundleContactList-MostRecentContactID')}`);
+    loadSidePanel(`${srvrURL}/${localStorage.getItem('BundleContactManager-MostRecentContactID')}`);
   });
 
   // Detects the last created contact in an interval and repopulates the search bar upon detection, there is a very weird bug here
@@ -33,24 +33,25 @@ function sidePanelModule() {
       if (data) {
         console.log(
           `No changes, local: ${localStorage.getItem(
-            'BundleContactList-MostRecentContactLastName'
-          )} & ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')} & ${localStorage.getItem(
-            'BundleContactList-MostRecentContactID'
+            'BundleContactManager-MostRecentContactLastName'
+          )} & ${localStorage.getItem('BundleContactManager-MostRecentContactEditDate')} & ${localStorage.getItem(
+            'BundleContactManager-MostRecentContactID'
           )}. Retrieved: ${data?.data.contacts[0].LastName} & ${data?.data.contacts[0].LastEditDate} &  ${
             data?.data.contacts[0]._id
           }`
         );
         if (
-          localStorage.getItem('BundleContactList-MostRecentContactEditDate') != data?.data.contacts[0].LastEditDate ||
-          localStorage.getItem('BundleContactList-MostRecentContactID') != data?.data.contacts[0]._id
+          localStorage.getItem('BundleContactManager-MostRecentContactEditDate') !=
+            data?.data.contacts[0].LastEditDate ||
+          localStorage.getItem('BundleContactManager-MostRecentContactID') != data?.data.contacts[0]._id
         ) {
-          localStorage.setItem('BundleContactList-MostRecentContactID', data.data.contacts[0]._id);
-          localStorage.setItem('BundleContactList-MostRecentContactLastName', data.data.contacts[0].LastName);
-          localStorage.setItem('BundleContactList-MostRecentContactEditDate', data.data.contacts[0].LastEditDate);
+          localStorage.setItem('BundleContactManager-MostRecentContactID', data.data.contacts[0]._id);
+          localStorage.setItem('BundleContactManager-MostRecentContactLastName', data.data.contacts[0].LastName);
+          localStorage.setItem('BundleContactManager-MostRecentContactEditDate', data.data.contacts[0].LastEditDate);
           console.log(`===============`);
-          console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactID')}`);
-          console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactLastName')}`);
-          console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')}`);
+          console.log(`Last Editted: ${localStorage.getItem('BundleContactManager-MostRecentContactID')}`);
+          console.log(`Last Editted: ${localStorage.getItem('BundleContactManager-MostRecentContactLastName')}`);
+          console.log(`Last Editted: ${localStorage.getItem('BundleContactManager-MostRecentContactEditDate')}`);
           console.log(`===============`);
           getJSON(`${srvrURL}${searchBarPath}`).then((data) => {
             for (let rep = 0; rep < document.getElementById('DaysSelect').value; rep++) {
