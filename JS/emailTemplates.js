@@ -23,8 +23,16 @@ We look forward to working with you and offering you outstanding customer servic
 Our office hours are 9am-6pm Monday-Friday, Saturday by appointment.<br>
 Please do not hesitate to call us at any time. Thank you.<br><br><br>
 
-${SMTP[LastEditedBy.value] ? SMTP[LastEditedBy.value][2] : 'Hanna Kwasniewska'}<br>
-${SMTP[LastEditedBy.value] ? SMTP[LastEditedBy.value][1] : 'Hanna@Bundle-Insurance.com'}<br>
+${
+  SMTP[document.getElementById('LastEditedBy').value]
+    ? SMTP[document.getElementById('LastEditedBy').value][2]
+    : 'Hanna Kwasniewska'
+}<br>
+${
+  SMTP[document.getElementById('LastEditedBy').value]
+    ? SMTP[document.getElementById('LastEditedBy').value][1]
+    : 'Hanna@Bundle-Insurance.com'
+}<br>
 PH: (331) 330-8430<br>
 FAX: (773) 853-2980<br>
 `,
@@ -49,8 +57,16 @@ Cieszymy sie ze bedziemy mogli wspolpracowac z Panstwem i zaoferowac wyjatkowa o
 Nasze godziny pracy to 9:00-18:00 od poniedzialku do piatku, sobota po wczesniejszym umowieniu.<br>
 Mozna zadzwonic do nas w kazdej chwili. Dziekujemy i serdecznie pozdrawiamy.<br><br><br>
 
-${SMTP[LastEditedBy.value] ? SMTP[LastEditedBy.value][2] : 'Hanna Kwasniewska'}<br>
-${SMTP[LastEditedBy.value] ? SMTP[LastEditedBy.value][1] : 'Hanna@Bundle-Insurance.com'}<br>
+${
+  SMTP[document.getElementById('LastEditedBy').value]
+    ? SMTP[document.getElementById('LastEditedBy').value][2]
+    : 'Hanna Kwasniewska'
+}<br>
+${
+  SMTP[document.getElementById('LastEditedBy').value]
+    ? SMTP[document.getElementById('LastEditedBy').value][1]
+    : 'Hanna@Bundle-Insurance.com'
+}<br>
 PH: (331) 330-8430<br>
 FAX: (773) 853-2980<br>
     `,

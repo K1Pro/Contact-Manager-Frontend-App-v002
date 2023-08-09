@@ -191,6 +191,7 @@ function buttonHandlers() {
     console.log('==========================================');
     let cntctEmail = document.getElementById('Email');
     console.log(cntctEmail.value);
+    console.log(SMTP[loggedInUser]);
     console.log(SMTP[loggedInUser][1]);
     console.log(emailSubject.options[emailSubject.selectedIndex].text);
     console.log(emailBody.value);
