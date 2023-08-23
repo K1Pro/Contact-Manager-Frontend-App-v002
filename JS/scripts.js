@@ -90,8 +90,24 @@ function populateSearchBarDropDownFunction(data, searchQuery) {
         if (rep == 16) {
           searchBarDropDownOpt.innerHTML = `More results...`;
         } else {
-          if (contact.SpouseFullName) {
+          if (contact.SpouseName) {
             if (
+              contact.LastName.replaceAll(' ', '')
+                .replaceAll('-', '')
+                .replaceAll('(', '')
+                .replaceAll(')', '')
+                .toLowerCase()
+                .includes(
+                  searchQuery
+                    .replaceAll(' ', '')
+                    .replaceAll('-', '')
+                    .replaceAll('(', '')
+                    .replaceAll(')', '')
+                    .toLowerCase()
+                )
+            ) {
+              searchBarDropDownOpt.innerHTML = `${contact.FirstName} & ${contact.SpouseName} ${contact.LastName}`;
+            } else if (
               contact.FullName.replaceAll(' ', '')
                 .replaceAll('-', '')
                 .replaceAll('(', '')
