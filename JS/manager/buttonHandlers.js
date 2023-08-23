@@ -238,6 +238,7 @@ function buttonHandlers() {
 
   contactSearch.addEventListener('keyup', function (e) {
     if (e.target.value.length > 2) {
+      console.log(contactData);
       populateSearchBarDropDownFunction(contactData, e.target.value);
       contactSearchList.classList.add('show');
       contactSearchList.style.position = 'absolute';

@@ -92,6 +92,22 @@ function populateSearchBarDropDownFunction(data, searchQuery) {
         } else {
           if (contact.SpouseFullName) {
             if (
+              contact.FullName.replaceAll(' ', '')
+                .replaceAll('-', '')
+                .replaceAll('(', '')
+                .replaceAll(')', '')
+                .toLowerCase()
+                .includes(
+                  searchQuery
+                    .replaceAll(' ', '')
+                    .replaceAll('-', '')
+                    .replaceAll('(', '')
+                    .replaceAll(')', '')
+                    .toLowerCase()
+                )
+            ) {
+              searchBarDropDownOpt.innerHTML = `${contact.FullName}`;
+            } else if (
               contact.SpouseFullName.replaceAll(' ', '')
                 .replaceAll('-', '')
                 .replaceAll('(', '')
