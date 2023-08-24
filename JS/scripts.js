@@ -140,7 +140,7 @@ function populateSearchBarDropDownFunction(data, searchQuery) {
             ) {
               searchBarDropDownOpt.innerHTML = `${contact.SpouseFullName}`;
             } else {
-              searchBarDropDownOpt.innerHTML = `${contact.FullName}`;
+              searchBarDropDownOpt.innerHTML = `${contact.FirstName} & ${contact.SpouseName} ${contact.LastName}`;
             }
           } else {
             searchBarDropDownOpt.innerHTML = `${contact.FullName}`;
