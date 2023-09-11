@@ -1,0 +1,326 @@
+<div
+  class="d-flex flex-column flex-shrink-0 p-3 text-bg-secondary"
+  style="overflow-y: scroll; overflow-x: hidden; width: 20vw; height: 100vh"
+>
+  <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+    <!-- <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg> -->
+    <img src="images/BundleWhite.png" alt="Bundle" width="24" height="30" />
+    <span class="fs-5 fw-semibold">Bundle Contact List</span>
+  </a>
+  <ul class="list-unstyled ps-0">
+    <li class="mb-1">
+      <button
+        class="btn btn-toggle align-items-center rounded collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#primary-collapse"
+        aria-expanded="true"
+      >
+        Primary Insured
+      </button>
+      <div class="collapse show" id="primary-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li class="filterInputGroup"></li>
+          <li>
+            <input type="checkbox" id="FirstNameCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="First Name" id="FirstNameInput" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup"></li>
+          <li>
+            <input type="checkbox" id="LastNameCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Last Name" id="LastNameInput" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup"></li>
+          <li>
+            <input type="checkbox" id="BirthDateCheck" class="form-check-input contctKeysCheck" />
+            <input type="date" placeholder="Birth Date" id="BirthDateInput" class="contctKeysInput" />
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      <button
+        class="btn btn-toggle align-items-center rounded collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#spouse-collapse"
+        aria-expanded="false"
+      >
+        Spouse
+      </button>
+      <div class="collapse" id="spouse-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li class="filterInputGroup">
+            <input type="checkbox" id="SpouseNameCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Spouse Name" id="SpouseNameInput" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="SpouseLastNameCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Spouse Last Name" id="SpouseLastNameInput" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="SpouseBirthDateCheck" class="form-check-input contctKeysCheck" />
+            <input type="date" placeholder="Spouse Birth Date" id="SpouseBirthDateInput" class="contctKeysInput" />
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      <button
+        class="btn btn-toggle align-items-center rounded collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#contact-collapse"
+        aria-expanded="false"
+      >
+        Contact Info
+      </button>
+      <div class="collapse" id="contact-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li class="filterInputGroup">
+            <input type="checkbox" id="AddressCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Address" id="AddressInput" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Address2Check" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Address 2" id="Address2Input" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="CityCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="City" id="CityInput" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="StateCheck" class="form-check-input contctKeysCheck" />
+            <select id="StateInput" class="contctKeysInput" w3-include-html="./HTML/StateDropDown01.html"></select>
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="ZipCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Zip" id="ZipInput" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="PhoneCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Phone" id="PhoneInput" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="EmailCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Email" id="EmailInput" class="contctKeysInput" />
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      <button
+        class="btn btn-toggle align-items-center rounded collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#home-properties-collapse"
+        aria-expanded="false"
+      >
+        Car & Home Info
+      </button>
+      <div class="collapse" id="home-properties-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li class="filterInputGroup">
+            <input type="checkbox" id="EHVCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="EHV" id="EHVInput" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Car1Check" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Car 1" id="Car1Input" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Car2Check" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Car 2" id="Car2Input" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Car3Check" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Car 3" id="Car3Input" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Car4Check" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Car 4" id="Car4Input" class="contctKeysInput" />
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      <button
+        class="btn btn-toggle align-items-center rounded collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#agent-collapse"
+        aria-expanded="false"
+      >
+        Agent Info
+      </button>
+      <div class="collapse" id="agent-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li class="filterInputGroup">
+            <input type="checkbox" id="SourceCheck" class="form-check-input contctKeysCheck" />
+            <select id="SourceInput" class="contctKeysInput">
+              <option selected value="" disabled="disabled">Source</option>
+              <option></option>
+            </select>
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="StatusCheck" class="form-check-input contctKeysCheck" />
+            <select id="StatusInput" class="contctKeysInput">
+              <option selected value="" disabled="disabled">Status</option>
+              <option></option>
+            </select>
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="CreatedByCheck" class="form-check-input contctKeysCheck" />
+            <select id="CreatedByInput" class="contctKeysInput">
+              <option selected value="" disabled="disabled">Created By</option>
+              <option></option>
+            </select>
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="CreateDateCheck" class="form-check-input contctKeysCheck" />
+            <input type="date" placeholder="Created Date" id="CreateDateInput" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="LastEditedByCheck" class="form-check-input contctKeysCheck" />
+            <select id="LastEditedByInput" class="contctKeysInput">
+              <option selected value="" disabled="disabled">Last Edited By</option>
+              <option></option>
+            </select>
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="LastEditDateCheck" class="form-check-input contctKeysCheck" />
+            <input type="date" placeholder="Last Edit Date" id="LastEditDateInput" class="contctKeysInput" />
+          </li>
+          <li class="filterInputGroup">
+            <input type="checkbox" id="NotesCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Notes" id="NotesInput" class="contctKeysInput" />
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      <button
+        class="btn btn-toggle align-items-center rounded collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#policy-collapse"
+        aria-expanded="false"
+      >
+        Policy Info
+      </button>
+      <div class="collapse" id="policy-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy1TypeCheck" class="form-check-input contctKeysCheck" />
+            <select
+              id="Policy1TypeInput"
+              class="contctKeysInput"
+              w3-include-html="./HTML/PolicyTypeDropDown.html"
+            ></select>
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy1NumberCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Policy 1 Number" class="contctKeysInput" id="Policy1NumberInput" />
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy1RenewDateCheck" class="form-check-input contctKeysCheck" />
+            <input type="date" id="Policy1RenewDateInput" class="contctKeysInput" min="1900-01-01" max="2050-12-31" />
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy2TypeCheck" class="form-check-input contctKeysCheck" />
+            <select
+              id="Policy2TypeInput"
+              class="contctKeysInput"
+              w3-include-html="./HTML/PolicyTypeDropDown.html"
+            ></select>
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy2NumberCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Policy 2 Number" class="contctKeysInput" id="Policy2NumberInput" />
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy2RenewDateCheck" class="form-check-input contctKeysCheck" />
+            <input type="date" id="Policy2RenewDateInput" class="contctKeysInput" min="1900-01-01" max="2050-12-31" />
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy3TypeCheck" class="form-check-input contctKeysCheck" />
+            <select
+              id="Policy3TypeInput"
+              class="contctKeysInput"
+              w3-include-html="./HTML/PolicyTypeDropDown.html"
+            ></select>
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy3NumberCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Policy 3 Number" class="contctKeysInput" id="Policy3NumberInput" />
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy3RenewDateCheck" class="form-check-input contctKeysCheck" />
+            <input type="date" id="Policy3RenewDateInput" class="contctKeysInput" min="1900-01-01" max="2050-12-31" />
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy4TypeCheck" class="form-check-input contctKeysCheck" />
+            <select
+              id="Policy4TypeInput"
+              class="contctKeysInput"
+              w3-include-html="./HTML/PolicyTypeDropDown.html"
+            ></select>
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy4NumberCheck" class="form-check-input contctKeysCheck" />
+            <input type="text" placeholder="Policy 4 Number" class="contctKeysInput" id="Policy4NumberInput" />
+          </li>
+
+          <li class="filterInputGroup">
+            <input type="checkbox" id="Policy4RenewDateCheck" class="form-check-input contctKeysCheck" />
+            <input type="date" id="Policy4RenewDateInput" class="contctKeysInput" min="1900-01-01" max="2050-12-31" />
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- <li class="mb-1">
+      <button
+        class="btn btn-toggle align-items-center rounded collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#create-collapse"
+        aria-expanded="false"
+      >
+        Create Contact
+      </button>
+      <div class="collapse" id="create-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li class="filterInputGroup"> -->
+    <button type="button" id="resetCntctInptBtn" class="btn btn-warning">Reset</button>
+    <button type="button" id="listAddCntctBtn" class="btn btn-success border border-white">Add Contact</button>
+    <!-- </li>
+        </ul>
+      </div>
+    </li> -->
+
+    <li class="border-top my-3"></li>
+    <li class="mb-1">
+      <button
+        class="btn btn-toggle align-items-center rounded collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#account-collapse"
+        aria-expanded="false"
+      >
+        Account
+      </button>
+      <div class="collapse" id="account-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a href="#" class="link-dark rounded">New...</a></li>
+          <li><a href="#" class="link-dark rounded">Profile</a></li>
+          <li><a href="#" class="link-dark rounded">Settings</a></li>
+          <li><a href="#" class="link-dark rounded">Sign out</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>
+<div id="ListSidePanelHTMLModule"></div>
