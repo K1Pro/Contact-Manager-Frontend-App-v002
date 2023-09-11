@@ -1,7 +1,6 @@
 function tableModule() {
   // vvv Start coding here for Calendar Module vvv
 
-  console.log('test');
   // Stores most recently editted user info in browser storage
   getJSON(`${srvrURL}${lastEdittedContactPath}`).then((data) => {
     contactData = data;
