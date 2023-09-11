@@ -14,7 +14,7 @@ function tableModule() {
     console.log(`===============`);
   });
 
-  getJSON(`${srvrURL}`).then((data) => {
+  getJSON(`${srvrURL}${renewalsPath}`).then((data) => {
     contactData = data;
     populateListTable(contactData);
     return contactData;
@@ -38,7 +38,7 @@ function tableModule() {
           console.log(`Last Editted: ${localStorage.getItem('BundleContactList-MostRecentContactEditDate')}`);
           console.log(`===============`);
           snackbar('Updating contacts, please wait...');
-          getJSON(`${srvrURL}`).then((data) => {
+          getJSON(`${srvrURL}${renewalsPath}`).then((data) => {
             snackbar('Updated!');
             contactData = data;
             populateListTable(contactData);

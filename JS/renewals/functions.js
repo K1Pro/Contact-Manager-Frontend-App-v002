@@ -2,7 +2,69 @@ console.log('retrieved contact list functions');
 ///////////////////////////////////////////////
 
 function populateListTable(contactData) {
-  console.log(contactData);
+  console.log(contactData.data.contacts);
+  let renewalCntcts = contactData.data.contacts;
+
+  renewalCntcts.forEach((element) => {
+    console.log(element);
+    tableRow = document.createElement('tr');
+    contactList.appendChild(tableRow);
+    // checkBoxSlctdArray.forEach((value) => {
+    tableData1 = document.createElement('td');
+    element['FirstName'] ? (tableData1.innerHTML = element['FirstName']) : (tableData1.innerHTML = '');
+    tableRow.appendChild(tableData1);
+
+    tableData2 = document.createElement('td');
+    element['LastName'] ? (tableData2.innerHTML = element['LastName']) : (tableData2.innerHTML = '');
+    tableRow.appendChild(tableData2);
+
+    tableData3 = document.createElement('td');
+    element['SpouseName'] ? (tableData3.innerHTML = element['SpouseName']) : (tableData3.innerHTML = '');
+    tableRow.appendChild(tableData3);
+
+    tableData4 = document.createElement('td');
+    element['SpouseLastName'] ? (tableData4.innerHTML = element['SpouseLastName']) : (tableData4.innerHTML = '');
+    tableRow.appendChild(tableData4);
+
+    tableData5 = document.createElement('td');
+    element['Address'] ? (tableData5.innerHTML = element['Address']) : (tableData5.innerHTML = '');
+    tableRow.appendChild(tableData5);
+
+    tableData6 = document.createElement('td');
+    element['Phone'] ? (tableData6.innerHTML = element['Phone']) : (tableData6.innerHTML = '');
+    tableRow.appendChild(tableData6);
+
+    tableData7 = document.createElement('td');
+    element['Source'] ? (tableData7.innerHTML = element['Source']) : (tableData7.innerHTML = '');
+    tableRow.appendChild(tableData7);
+
+    tableData8 = document.createElement('td');
+    element['LastEditedBy'] ? (tableData8.innerHTML = element['LastEditedBy']) : (tableData8.innerHTML = '');
+    tableRow.appendChild(tableData8);
+
+    tableData9 = document.createElement('td');
+    element['LastReviewDate']
+      ? (tableData9.innerHTML = element['LastReviewDate'].slice(0, 10))
+      : (tableData9.innerHTML = '');
+    tableRow.appendChild(tableData9);
+
+    tableData10 = document.createElement('td');
+    element[`Policy${element['RenewNumber']}Type`]
+      ? (tableData10.innerHTML = element[`Policy${element['RenewNumber']}Type`])
+      : (tableData10.innerHTML = '');
+    tableRow.appendChild(tableData10);
+
+    tableData11 = document.createElement('td');
+    element[`Policy${element['RenewNumber']}Number`]
+      ? (tableData11.innerHTML = element[`Policy${element['RenewNumber']}Number`])
+      : (tableData11.innerHTML = '');
+    tableRow.appendChild(tableData11);
+
+    tableData12 = document.createElement('td');
+    element['RenewDate'] ? (tableData12.innerHTML = element['RenewDate']) : (tableData12.innerHTML = '');
+    tableRow.appendChild(tableData12);
+    // });
+  });
   // allContctKeysCheck = document.querySelectorAll('.contctKeysCheck');
   // allContctKeysCheck.forEach((CheckBox) => {
   //   storedCheckBoxValue = localStorage.getItem(`BundleContactList-${CheckBox.id.slice(0, -5)}`);
